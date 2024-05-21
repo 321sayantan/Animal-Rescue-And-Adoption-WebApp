@@ -1,129 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/apple-touch-icon.png" />
+    <link rel="manifest" href="%PUBLIC_URL%/site.webmanifest" />
+    <title>Adopet | An animal-care and pet adoption app</title>
+    <!-- google font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- slick slider css -->
+    <!-- Template CSS Style link -->
+    <link rel="stylesheet" href="assets/css/style-starter.css" />
+  </head>
 
-<head>
-  <meta charset="utf-8" />
-  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Web site created using create-react-app" />
-  <link rel="apple-touch-icon" href="%PUBLIC_URL%/apple-touch-icon.png" />
-  <link rel="manifest" href="%PUBLIC_URL%/site.webmanifest" />
-  <title>Adopet | An animal-care and pet adoption app</title>
-  <!-- google font -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap"
-    rel="stylesheet">
-  <!-- slick slider css -->
-  <!-- Template CSS Style link -->
-  <link rel="stylesheet" href="assets/css/style-starter.css">
-</head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <!-- overlays and modals div -->
+    <div id="overlays"></div>
+    <!-- main content holding div is this root -->
+    <div id="root"></div>
 
-<body>
-  <noscript>You need to enable JavaScript to run this app.</noscript>
-  <!-- main content holding div is this root -->
-  <div id="root"></div>
+    <script>
+      // When the user scrolls down 20px from the top of the document, show the button
+      window.onscroll = function () {
+        scrollFunction();
+      };
 
-
-  <script>
-    // When the user scrolls down 20px from the top of the document, show the button
-    window.onscroll = function () {
-      scrollFunction()
-    };
-
-    function scrollFunction() {
-      // console.log(window.pageYOffset)
-      if (document.body.scrollTop < 800 || document.documentElement.scrollTop < 800) {
-        document.getElementById("movetop").style.display = "block";
-      } else {
-        document.getElementById("movetop").style.display = "none";
+      function scrollFunction() {
+        // console.log(window.pageYOffset)
+        if (
+          document.body.scrollTop < 800 ||
+          document.documentElement.scrollTop < 800
+        ) {
+          document.getElementById("movetop").style.display = "block";
+        } else {
+          document.getElementById("movetop").style.display = "none";
+        }
       }
-    }
-  </script>
-  <!-- //move top -->
+    </script>
+    <!-- //move top -->
 
-  <!-- common jquery plugin -->
-  <script src="assets/js/jquery-3.7.1.min.js"></script>
-  <!-- //common jquery plugin -->
+    <!-- common jquery plugin -->
+    <script src="assets/js/jquery-3.7.1.min.js"></script>
+    <!-- //common jquery plugin -->
 
-  <!-- font awesome icons plugin -->
-  <script src="https://kit.fontawesome.com/f646768ea2.js" crossorigin="anonymous"></script>
-  <!-- //font awesome icons plugin -->
+    <!-- font awesome icons plugin -->
+    <script
+      src="https://kit.fontawesome.com/f646768ea2.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- //font awesome icons plugin -->
 
-  <!-- magnific popup -->
-  <script src="assets/js/jquery.magnific-popup.min.js"></script>
-  <script>
-    $(document).ready(function () {
-      $('.popup-with-zoom-anim').magnificPopup({
-        type: 'inline',
-        fixedContentPos: false,
-        fixedBgPos: true,
-        overflowY: 'auto',
-        closeBtnInside: true,
-        preloader: false,
-        midClick: true,
-        removalDelay: 300,
-        mainClass: 'my-mfp-zoom-in'
+    <!-- magnific popup -->
+    <script src="assets/js/jquery.magnific-popup.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $(".popup-with-zoom-anim").magnificPopup({
+          type: "inline",
+          fixedContentPos: false,
+          fixedBgPos: true,
+          overflowY: "auto",
+          closeBtnInside: true,
+          preloader: false,
+          midClick: true,
+          removalDelay: 300,
+          mainClass: "my-mfp-zoom-in",
+        });
+
+        $(".popup-with-move-anim").magnificPopup({
+          type: "inline",
+          fixedContentPos: false,
+          fixedBgPos: true,
+          overflowY: "auto",
+          closeBtnInside: true,
+          preloader: false,
+          midClick: true,
+          removalDelay: 300,
+          mainClass: "my-mfp-slide-bottom",
+        });
+      });
+    </script>
+    <!-- //magnific popup -->
+
+    <!-- MENU-JS -->
+    <script>
+      $(window).on("scroll", function () {
+        var scroll = $(window).scrollTop();
+
+        if (scroll >= 80) {
+          $("#site-header").addClass("nav-fixed");
+        } else {
+          $("#site-header").removeClass("nav-fixed");
+        }
       });
 
-      $('.popup-with-move-anim').magnificPopup({
-        type: 'inline',
-        fixedContentPos: false,
-        fixedBgPos: true,
-        overflowY: 'auto',
-        closeBtnInside: true,
-        preloader: false,
-        midClick: true,
-        removalDelay: 300,
-        mainClass: 'my-mfp-slide-bottom'
+      //Main navigation Active Class Add Remove
+      $(".navbar-toggler").on("click", function () {
+        $("header").toggleClass("active");
       });
-    });
-  </script>
-  <!-- //magnific popup -->
-
-  <!-- MENU-JS -->
-  <script>
-    $(window).on("scroll", function () {
-      var scroll = $(window).scrollTop();
-
-      if (scroll >= 80) {
-        $("#site-header").addClass("nav-fixed");
-      } else {
-        $("#site-header").removeClass("nav-fixed");
-      }
-    });
-
-    //Main navigation Active Class Add Remove
-    $(".navbar-toggler").on("click", function () {
-      $("header").toggleClass("active");
-    });
-    $(document).on("ready", function () {
-      if ($(window).width() > 991) {
-        $("header").removeClass("active");
-      }
-      $(window).on("resize", function () {
+      $(document).on("ready", function () {
         if ($(window).width() > 991) {
           $("header").removeClass("active");
         }
+        $(window).on("resize", function () {
+          if ($(window).width() > 991) {
+            $("header").removeClass("active");
+          }
+        });
       });
-    });
-  </script>
-  <!-- //MENU-JS -->
+    </script>
+    <!-- //MENU-JS -->
 
-  <!-- disable body scroll which navbar is in active -->
-  <script>
-    $(function () {
-      $('.navbar-toggler').click(function () {
-        $('body').toggleClass('noscroll');
-      })
-    });
-  </script>
-  <!-- //disable body scroll which navbar is in active -->
+    <!-- disable body scroll which navbar is in active -->
+    <script>
+      $(function () {
+        $(".navbar-toggler").click(function () {
+          $("body").toggleClass("noscroll");
+        });
+      });
+    </script>
+    <!-- //disable body scroll which navbar is in active -->
 
-
-  <!-- bootstrap -->
-  <script src="assets/js/bootstrap.min.js"></script>
-  <!-- //bootstrap -->
-  <!-- //Js scripts -->
-</body>
-
+    <!-- bootstrap -->
+    <script src="assets/js/bootstrap.min.js"></script>
+    <!-- //bootstrap -->
+    <!-- //Js scripts -->
+  </body>
 </html>
