@@ -37,10 +37,10 @@ const LoginPage = () => {
                                     <hr /><span id="or-text">Or</span>
                                 </div>
                                 <div className="form-input mt-4">
-                                    <input type="email" name="w3lSender" id="w3lSender" placeholder="Your email address" required />
+                                    <input type="email" name="useremail" id="w3lSender" placeholder="Your email address" required />
                                 </div>
                                 <div className="form-input">
-                                    <input type="password" name="w3lPasswrd" id="w3lPasswrd" placeholder="Your Password" />
+                                    <input type="password" name="userpassword" id="w3lPasswrd" placeholder="Your Password" />
                                 </div>
                                 <div className="text-right">
                                     <button type="submit" className="btn btn-style btn-primary">Submit</button>
