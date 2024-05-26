@@ -1,10 +1,8 @@
-import { Link, useRouteError } from "react-router-dom";
-import './vendors.css';
+import { Link } from "react-router-dom";
 
-function MainErrorFallback() {
-  const error = useRouteError();
+const MainErrorFallback = () => {
   return (
-    <div className="error-wrapper">
+    <div className="error-wrapper noscroll">
       <div>
         <svg
           width={1123}
@@ -321,12 +319,11 @@ function MainErrorFallback() {
         <h1>404 Error</h1>
         <h2>Couldn't launch :(</h2>
         <h3>
-          Page Not Found - lets take you{" "}
-          <Link to="..">BACK</Link>
+          Page Not Found - lets take you <Link to="..">BACK</Link>
         </h3>
       </div>
     </div>
   );
-}
+};
 
 export default MainErrorFallback;

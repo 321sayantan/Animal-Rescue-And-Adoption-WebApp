@@ -1,36 +1,74 @@
-const variants = {
-    open: { opacity: 1, scale: 1 },
-    closed: { opacity: 0, scale: 0 },
+// FormComponent.jsx
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { sendFormData } from './api'; // Assume this is your external action function
+import { toast } from 'react-toastify'; // For the toaster notifications
+import 'react-toastify/dist/ReactToastify.css';
+
+const FormComponent = () => {
+  const [formData, setFormData] = useState({ name: '', email: '' });
+  const history = useHistory();
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const list = {
-    open: {
-      clipPath: "inset(0% 0% 0% 0% round 0px)",
-      transition: {
-        type: "spring",
-        bounce: 0,
-        duration: 0.7,
-        delayChildren: 0.3,
-        staggerChildren: 0.05,
-      },
-    },
-    closed: {
-      clipPath: "inset(10% 50% 90% 50% round 0px)",
-      transition: {
-        type: "spring",
-        bounce: 0,
-        duration: 0.3,
-      },
-    },
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await sendFormData(formData); // Send data to backend
+      toast.success('Form submitted successfully!');
+      history.push('/success-page'); // Redirect to a different page
+    } catch (error) {
+      toast.error('Failed to submit the form.');
+    }
   };
 
-  const item = {
-    hidden: {
-      opacity: 1,
-      y: 0,
-      transition: { type: "spring", stiffness: 300, damping: 24 },
-    },
-    visible: { opacity: 0, y: 20, transition: { duration: 0.2 } },
-  };
+  return (
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        name="name"
+        value={formData.name}
+        onChange={handleChange}
+        placeholder="Name"
+      />
+      <input
+        type="email"
+        name="email"
+        value={formData.email}
+        onChange={handleChange}
+        placeholder="Email"
+      />
+      <button type="submit">Submit</button>
+    </form>
+  );
+};
+
+export default FormComponent;
+
+
+
+
+// api.js
+import axios from 'axios';
+
+export const sendFormData = async (formData) => {
+  try {
+    const response = await axios.post('https://your-backend-api.com/submit', formData);
+    return response.data;
+  } catch (error) {
+    throw new Error('Error submitting form data');
+  }
+};
+
+
+
+import 'react-toastify/dist/ReactToastify.css';
+
+
+
+https://adopet-54d51-default-rtdb.firebaseio.com/
 
   

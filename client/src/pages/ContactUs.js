@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-const ContactUs = () => {
+function ContactUs() {
   return (
     <>
       {/* inner banner */}

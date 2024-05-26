@@ -1,13 +1,12 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import AuthUserPopup from "./AuthUserPopup";
+import { AuthContext } from "../../store/AuthContext";
 
 const Navbar = (props) => {
-  const [isUserToggled, setIsUserToggled] = useState(false);
-
-  // function showUserPopup() {}
-  // function closeUserPopup() {}
+  const { isAuthenticated } = useContext(AuthContext);
+  const [showProfile, setShowProfile] = useState(false);
 
   // <!-- theme switch js (light and dark)-->
   function switchTheme(e) {
@@ -88,37 +87,33 @@ const Navbar = (props) => {
                   </NavLink>
                 </li>
               </ul>
-              <form
-                action="#error"
-                method="GET"
-                className="d-flex search-header"
-              >
-                <input
-                  className="form-control"
-                  type="search"
-                  placeholder="Enter Keyword..."
-                  aria-label="Search"
-                  required
-                />
-                <button className="btn btn-style" type="submit">
-                  Search
-                </button>
-              </form>
 
               <div className="togglers d-flex align-items-center">
                 {/* user badge */}
-                <motion.div
-                  whileTap={{ scale: 0.8 }}
-                  className="auth-user"
-                  onClick={() => setIsUserToggled(true)}
-                >
-                  <button
-                    type="button"
-                    className="profile-icon d-flex justify-content-center align-items-center"
-                  >
-                    <i className="fa-solid fa-user"></i>
-                  </button>
-                </motion.div>
+                {!isAuthenticated && (
+                  <div className="auth-user">
+                    <motion.button
+                      whileTap={{ scale: 0.7 }}
+                      type="button"
+                      className="profile-icon d-flex justify-content-center align-items-center"
+                      onClick={() => setShowProfile(true)}
+                    >
+                      <i className="fa-solid fa-user"></i>
+                    </motion.button>
+                  </div>
+                )}
+                {isAuthenticated && (
+                  <div className="auth-user authenticated">
+                    <motion.button
+                      whileTap={{ scale: 0.7 }}
+                      type="button"
+                      className="profile-icon d-flex justify-content-center align-items-center"
+                      onClick={() => setShowProfile(true)}
+                    >
+                      <i className="fa-solid fa-user"></i>
+                    </motion.button>
+                  </div>
+                )}
                 {/* //user badge */}
                 {/* toggle switch for light and dark theme */}
                 <div className="cont-ser-position">
@@ -146,9 +141,7 @@ const Navbar = (props) => {
       </header>
 
       <AnimatePresence>
-        {isUserToggled && (
-          <AuthUserPopup onClose={() => setIsUserToggled(false)} />
-        )}
+        {showProfile && <AuthUserPopup onClose={() => setShowProfile(false)} />}
       </AnimatePresence>
     </>
   );

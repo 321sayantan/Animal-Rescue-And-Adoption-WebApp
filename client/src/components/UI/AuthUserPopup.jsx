@@ -1,10 +1,13 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
+import { AuthContext } from "../../store/AuthContext";
 
-import "./vendors.css";
+// import "./vendors.css";
 
-function AuthUserPopup({ children, onClose, className }) {
+const AuthUserPopup = ({ children, onClose, className }) => {
+  const authCtx = useContext(AuthContext);
   const menuClasses = className
     ? "auth-user-menu " + className
     : "auth-user-menu";
@@ -51,6 +54,12 @@ function AuthUserPopup({ children, onClose, className }) {
     closed: { opacity: 0, scale: 0 },
   };
 
+  function logoutHandler() {
+    authCtx.logout();
+    onClose();
+    window.addEventListener("load");
+  }
+
   return createPortal(
     <>
       <div className="menu-backdrop" onClick={onClose}></div>
@@ -69,31 +78,65 @@ function AuthUserPopup({ children, onClose, className }) {
             className="inner-container d-flex flex-column"
           >
             <motion.div className="user-thumbnail d-flex" variants={item}>
-              <div className="thumbnail-icon d-flex justify-content-center align-items-center">
-                <span>SD</span>
-              </div>
-              <p>
-                Hi, <strong>Snehodipto Das</strong>
-              </p>
+              {!authCtx.isAuthenticated ? (
+                <>
+                  <div className="thumbnail-icon d-flex justify-content-center align-items-center">
+                    <img src="assets/images/user-not-found.png" alt="" />
+                  </div>
+                  <p>
+                    <strong>User Not Found!</strong>
+                  </p>
+                </>
+              ) : (
+                <>
+                  <div className="thumbnail-icon authenticated d-flex justify-content-center align-items-center">
+                    <img src="assets/images/testi1.jpg" alt="" />
+                  </div>
+                  <p>
+                    Hi, <strong>Milly Jhonson</strong>..
+                  </p>
+                </>
+              )}
             </motion.div>
             <motion.div
               variants={item}
               className="redirect-grp d-flex flex-column"
             >
-              <Link
-                to="login"
-                className="btn btn-style btn-outline-primary"
-                onClick={onClose}
-              >
-                Login
-              </Link>
-              <div className="seperator">
-                <hr />
-                <span id="or-text">Or</span>
-              </div>
-              <Link to="signup" className="btn btn-style" onClick={onClose}>
-                Signup
-              </Link>
+              {!authCtx.isAuthenticated ? (
+                <>
+                  <Link
+                    to="login"
+                    className="btn btn-style btn-outline-primary"
+                    onClick={onClose}
+                  >
+                    Login
+                  </Link>
+                  <div className="seperator">
+                    <hr />
+                    <span id="or-text">Or</span>
+                  </div>
+                  <Link to="signup" className="btn btn-style" onClick={onClose}>
+                    Signup
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <Link
+                    to="edit"
+                    className="btn btn-style btn-outline-primary"
+                    onClick={onClose}
+                  >
+                    Edit Profile
+                  </Link>
+                  <div className="seperator">
+                    <hr />
+                    <span id="or-text">Or</span>
+                  </div>
+                  <button className="btn btn-style" onClick={logoutHandler}>
+                    Logout
+                  </button>
+                </>
+              )}
             </motion.div>
           </motion.div>
         </div>
@@ -101,6 +144,6 @@ function AuthUserPopup({ children, onClose, className }) {
     </>,
     document.getElementById("overlays")
   );
-}
+};
 
 export default AuthUserPopup;

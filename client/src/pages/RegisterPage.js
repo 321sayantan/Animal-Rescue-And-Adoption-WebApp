@@ -1,22 +1,20 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import LoginForm from "../components/LoginForm";
+import SignupForm from "../components/SignupForm";
 import { toast } from "react-toastify";
 import Alert from "../components/UI/Alert";
 import { toasterVariants } from "../utils/misc";
-import { AuthContext } from "../store/AuthContext";
-import { motion } from "framer-motion";
 
-function LoginPage() {
+
+function RegisterPage() {
   const navigate = useNavigate()
-  const authCtx = useContext(AuthContext);
   const [errors, setErrors] = useState()
 
-  const LogInFormHandler = async (userLoginData) => {
+  const SignUpHandler = async (userData) => {
     try {
       const response = await fetch('https://adopet-54d51-default-rtdb.firebaseio.com/users.json', {
         method: 'POST',
-        body: JSON.stringify(userLoginData),
+        body: JSON.stringify(userData),
         headers: {
           'Content-Type': 'application/json',
         }
@@ -25,17 +23,16 @@ function LoginPage() {
       const result = await response.json();
 
       if (response.ok) {
-        authCtx.login(result.token) // authCtx.login(result.token)
-        toast.success('Welcome back..!', toasterVariants);
+        toast.success('Registration Successful.', toasterVariants);
         setErrors(null);
       } else {
-        setErrors(result.errors);
+        setErrors(result.errors || {});
       }
     } catch (error) {
       console.error('Error submitting form:', error);
     }
 
-    console.log(userLoginData);
+    console.log(userData);
     navigate('..');
   }
 
@@ -58,11 +55,11 @@ function LoginPage() {
         </div>
       </section>
       {/* //inner banner */}
-      {/* login section */}
-      <section className="homeblock-stats py-5" id="login">
+      {/* signup section */}
+      <section className="register-section py-5" id="signup">
         <div className="container py-md-5 py-4">
           <div className="position-relative mb-lg-5 mb-4">
-            <h3 className="title-style mb-2 text-center">Login</h3>
+            <h3 className="title-style mb-2 text-center">Sign Up</h3>
             <div className="title-paw-style">
               <i className="fas fa-paw" />
               <i className="fas fa-paw paw-2" />
@@ -70,8 +67,7 @@ function LoginPage() {
             </div>
           </div>
           <div className="row align-items-start">
-            <div className="col-lg-6 mt-4" data-aos="fade-right">
-              {/* login form */}
+            <div className="col-lg-7 mt-4 px-4" data-aos="fade-right">
               {errors && <Alert className="alert-danger">
                 <ul>
                   {Object.values(errors).map((err, i) => (
@@ -79,33 +75,14 @@ function LoginPage() {
                   ))}
                 </ul>
               </Alert>}
-
-              <LoginForm onSubmit={LogInFormHandler} />
-              {/* //login form */}
-              <div className="seperator">
-                <hr />
-                <span id="or-text">Or</span>
-              </div>
-              <div className="form-input mb-4">
-                <motion.button
-                  whileTap={{ scale: 0.8 }}
-                  type="button"
-                  className="btn btn-style btn-outline-primary d-flex"
-                  id="googleLogin"
-                >
-                  <div className="link-icon">
-                    <img src="assets/images/google-icon.png" alt="" />
-                  </div>
-                  <span>Login with Google</span>
-                </motion.button>
-              </div>
+              <SignupForm onSubmit={SignUpHandler} />
             </div>
             <div
-              className="col-xl-5 col-lg-6 offset-xl-1 ps-xl-0 mt-lg-0 mt-5 tab-hide"
+              className="col-xl-5 col-lg-5 mt-5 tab-hide"
               data-aos="fade-left"
             >
               <img
-                src="assets/images/about1.jpg"
+                src="assets/images/about4.jpg"
                 className="img-fluid radius-image"
                 alt=""
               />
@@ -113,9 +90,10 @@ function LoginPage() {
           </div>
         </div>
       </section>
-      {/* //stats section */}
+      {/* //signup section */}
+
     </>
   );
-};
+}
 
-export default LoginPage;
+export default RegisterPage;
