@@ -1,6 +1,17 @@
-import { Link } from "react-router-dom"
+import { useLoaderData, defer, Await } from 'react-router-dom';
+import { Suspense } from 'react';
+import DonorDetailSkeleton from "../components/Adopts/DonorDetailSkeleton"
+import DonorDetailsSection from "../components/Adopts/DonorDetailsSection"
+import PetDetailSection from "../components/Adopts/PetDetailSection"
+import PetDetailSkeleton from "../components/Adopts/PetDetailSkeleton"
+
 
 function PetDetailsPage() {
+    const { postData } = useLoaderData();
+
+    const fallback1 = <PetDetailSkeleton />,
+        fallback2 = <DonorDetailSkeleton />
+
     return (
         <>
             {/* inner banner */}
@@ -20,62 +31,58 @@ function PetDetailsPage() {
                 </div>
             </section>
             {/* //inner banner */}
+
             {/* pet and owner details */}
-            <section className="w3l-homeblock1 py-5">
-                <div
-                    className="col-xl-5 col-lg-6 offset-xl-1 ps-xl-0 mt-lg-0 mt-5 tab-hide"
-                    data-aos="fade-left"
-                >
-                    <img
-                        src="assets/images/about1.jpg"
-                        className="img-fluid radius-image"
-                        alt=""
-                    />
-                </div>
-                <div
-                    className="col-lg-6 ps-lg-5 mb-lg-0 mb-5 order-lg-last order-first"
-                    data-aos="fade-left"
-                >
+            <section className="py-5" id="pet-details">
+                {/* pet-details */}
+                <div className="container">
                     <div className="position-relative">
-                        <h3 className="title-style mb-3">
-                            We will make them truly happy
-                        </h3>
+                        <h3 className="title-style text-center mb-2">Pet Details</h3>
                         <div className="title-paw-style">
                             <i className="fas fa-paw" />
                             <i className="fas fa-paw paw-2" />
                             <i className="fas fa-paw paw-3" />
                         </div>
                     </div>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                        eiusmod tempor incididunt ut labore.{" "}
-                    </p>
-                    <div className="mt-4">
-                        <ul className="service-list">
-                            <li className="service-link">
-                                <Link to="about">
-                                    <i className="fas fa-check-circle" />
-                                    certified groomer
-                                </Link>
-                            </li>
-                            <li className="service-link">
-                                <Link to="about">
-                                    <i className="fas fa-check-circle" />
-                                    20 years of experience
-                                </Link>
-                            </li>
-                            <li className="service-link">
-                                <Link to="about">
-                                    <i className="fas fa-check-circle" />
-                                    Animal Lover
-                                </Link>
-                            </li>
-                        </ul>
+                    <div className="container py-md-1">
+                        <div className="row align-items-center">
+                            <div className="container">
+                                <Suspense fallback={fallback1}>
+                                    <Await resolve={postData}>
+                                        {postData => <PetDetailSection postDetails={postData} />}
+                                    </Await>
+                                </Suspense>
+                            </div>
+                        </div>
                     </div>
-                    <Link to="about" className="btn btn-style mt-4">
-                        Learn More
-                    </Link>
                 </div>
+                {/* //pet-details */}
+                {/* donor-details */}
+                <div className="container">
+                    <div className="row align-items-center mt-5 py-4 py-md-5">
+                        <div className="position-relative">
+                            <h3 className="title-style text-center mb-2">Owner Details</h3>
+                            <div className="title-paw-style">
+                                <i className="fas fa-paw" />
+                                <i className="fas fa-paw paw-2" />
+                                <i className="fas fa-paw paw-3" />
+                            </div>
+                        </div>
+                        <div className="container">
+                            <Suspense fallback={fallback2}>
+                                <Await resolve={postData}>
+                                    {postData => <DonorDetailsSection postDetails={postData} />}
+                                </Await>
+                            </Suspense>
+                            <div className="text-center mt-5">
+                                <button type="button" className="btn btn-style btn-primary">
+                                    Get this Pet
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {/* ///donor-details */}
             </section>
             {/* //pet and owner details */}
         </>
@@ -83,3 +90,21 @@ function PetDetailsPage() {
 }
 
 export default PetDetailsPage
+
+
+async function postDetailsLoader(params) {
+    const id = params.id;
+    const response = await fetch(`https://freetestapi.com/api/v1/animals/${id}`);
+    if (!response.ok) {
+        throw new Error('Failed to load post detalis!');
+    } else {
+        const data = await response.json();
+        return data;
+    }
+}
+
+export function loader({ params }) {
+    return defer({
+        postData: postDetailsLoader(params)
+    })
+}

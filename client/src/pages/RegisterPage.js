@@ -25,6 +25,7 @@ function RegisterPage() {
       if (response.ok) {
         toast.success('Registration Successful.', toasterVariants);
         setErrors(null);
+        navigate('..');
       } else {
         setErrors(result.errors || {});
       }
@@ -33,7 +34,7 @@ function RegisterPage() {
     }
 
     console.log(userData);
-    navigate('..');
+    // navigate('..');
   }
 
   return (

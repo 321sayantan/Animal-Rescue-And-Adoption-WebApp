@@ -10,8 +10,10 @@ import MainErrorFallback from './components/UI/MainErrorFallback';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import AdoptPet from './pages/AdoptPet';
+import PetDetailsPage from './pages/PetDetailsPage';
 
 import { loader as loadPetPosts } from './pages/AdoptPet';
+import { loader as loadPostDetails } from './pages/PetDetailsPage';
 
 const router = createBrowserRouter([
   {
@@ -30,7 +32,7 @@ const router = createBrowserRouter([
         path: 'adopt',
         children: [
           { index: true, element: <AdoptPet />, loader: loadPetPosts },
-          { path: ':id', element: '' }
+          { path: ':id', element: <PetDetailsPage />, loader: loadPostDetails }
         ]
       }
     ]

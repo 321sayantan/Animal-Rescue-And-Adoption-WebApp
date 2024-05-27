@@ -44,11 +44,17 @@
   }
 }
 
-/* [data-theme="light"] #site-header .mode-container i,
-[data-theme="light"] #site-header nav a, 
-[data-theme="light"] #site-header nav span {
-  color: #000
-}  */
+hr {
+  margin: 1rem 0;
+  color: inherit;
+  background-color: currentColor;
+  border: 0;
+  opacity: 0.25;
+}
+
+hr:not([size]) {
+  height: 1px;
+}
 
 /* error boundary */
 @import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Fira+Mono:wght@500&display=swap");

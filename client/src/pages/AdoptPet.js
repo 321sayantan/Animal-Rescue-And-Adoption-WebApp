@@ -1,4 +1,4 @@
-import { useState, Suspense, useEffect } from "react";
+import { useState, Suspense } from "react";
 import { Await, defer, useLoaderData } from "react-router-dom";
 import PostsSkeleton from "../components/Adopts/PostsSkeleton"
 import PostsList from "../components/Adopts/PostsList";
@@ -74,7 +74,7 @@ async function loadPosts() {
     const response = await fetch('https://freetestapi.com/api/v1/animals');
 
     if (!response.ok) {
-        throw new Error('Failed to load previous notes!')
+        throw new Error('Failed to fetch available posts!')
     }
     else {
         const data = await response.json();
