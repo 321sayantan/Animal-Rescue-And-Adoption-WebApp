@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigation } from "react-router-dom";
 import useInput from "../hooks/use-input";
 import Alert from "./UI/Alert";
+import axios from "axios"
 
 const pattern = /^(?=.*\d.*)(?=.*[a-zA-Z].*)(?=.*[\W]).{8,}$/;
 const pattern2 = /^\d{5,8}(?:[-\s]\d{4})?$/;
@@ -92,7 +93,7 @@ const SignupForm = (props) => {
     formIsValid = true;
   }
 
-  const submitHandler = (event) => {
+  const submitHandler = async (event) => {
     event.preventDefault();
 
     if (
@@ -106,7 +107,7 @@ const SignupForm = (props) => {
     ) {
       return;
     }
-
+    
     const userData = {
       username: enteredName,
       email: enteredMail,
@@ -135,6 +136,7 @@ const SignupForm = (props) => {
     addressClasses = addressisInvalid ? "is-invalid" : "",
     cityClasses = cityisInvalid ? "is-invalid" : "",
     zipClasses = zipisInvalid ? "is-invalid" : "";
+
 
   return (
     <>

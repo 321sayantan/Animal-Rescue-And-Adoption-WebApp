@@ -7,16 +7,17 @@ const router = express.Router();
 
 router.post("/register", async (req, res) => {
   const data = new User({
-    name: req.body.name,
+    name: req.body.username,
     email: req.body.email,
     password: req.body.password,
+    street: req.body.address.street,
+    city: req.body.address.city,
+    zip_code: req.body.address.zip_code,
   });
-
-  const existinguser = await User.findOne({
-    $or: [{ name: data.name }, { email: data.email }],
-  });
+console.log("inside register route")
+  const existinguser = await User.findOne({ email: data.email });
   if (existinguser) {
-    res.send("This email is already taken");
+    res.status(401).json({ errors:["This email is already taken"] });
   } else {
     bcrypt
       .hash(req.body.password, 10)
@@ -25,45 +26,59 @@ router.post("/register", async (req, res) => {
         data
           .save()
           .then((result) => {
-            res.json({ message: "User created successfully", result });
+            res.status(200).json({ message: ["User created successfully"], result });
             console.log(result);
           })
           .catch((err) => {
-            res.json({ message: "Error!! Try after some time" });
+            res.status(401).json({ errors: ["Error!! Try after some time"] });
           });
       })
       .catch((err) => {
-        res.send("Password is not hashed successfully");
+        res.status(401).json({ errors: ["Password is not hashed successfully"] });
       });
   }
 });
 
-router.post("/login", (req, res, next) => {
-  console.log(1, "login route")
-  passport.authenticate("local", (err, user) => {
-    console.log(6, user);
-    if (err) {
-      console.log(7,"error inside route")
-      res.send(err);
-    }
-    else if (!user) {
-      res.status(200).json("Wrong Password");
-    } else {
-      console.log(8,"login")
-      req.logIn(user, (err) => {
-        console.log(9,"inside login")
-        console.log(9,user)
-        if (err) {
-          console.log(10,"inside login error")
-          return next(err);
-        }
-        res.status(200).json("authentication successful");
-      });
-    }
-  })(req, res, next);
+// router.post("/login", (req, res, next) => {
+//   console.log(1, "login route")
+//   passport.authenticate("local", (err, user) => {
+//     console.log(6, user);
+//     if(err) {
+//       console.log(7,"error inside route")
+//       res.status(401).json({ errors: [err] });
+//     }
+//     else if (!user) {
+//       res.status(401).json({ errors:["Wrong Password"]});
+//     } else {
+//       console.log(8,"login")
+
+//       req.logIn(user, (err) => {
+//         console.log(9,"inside login")
+//         console.log(9,user)
+//         if (err) {
+//           console.log(10,"inside login error")
+//           return next(err);
+//         }
+
+//         // res.cookie("sayantan", "sdkfhskfhksf")
+//         console.log(req.session)
+//         console.log(req.user)
+
+//         res.status(200).json("authentication successful");
+//       });
+//     }
+//   })(req, res, next);
+// });
+
+
+
+router.post("/login", passport.authenticate("local"), (req, res) => {
+  res.status(200).json({ message: "Login successful" });
 });
 
-router.post("/logout", (req, res) => {
+
+router.get("/logout", (req, res) => {
+  console.log("inside logout function")
   req.logout((err) => {
     if (err) {
       console.log(err);

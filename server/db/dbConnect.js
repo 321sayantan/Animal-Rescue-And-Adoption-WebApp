@@ -1,9 +1,12 @@
 const mongoose = require("mongoose");
+const env = require("dotenv");
+
+env.config();
 
 async function dbconnect(){
 mongoose
   .connect(
-    "mongodb+srv://Sayantan:mongosayantan@cluster0.ugzrshy.mongodb.net/AdoPet?retryWrites=true&w=majority&appName=Cluster0"
+    process.env.MONGO_URL
   )
   .then(() => {
     console.log("Database connection successful");

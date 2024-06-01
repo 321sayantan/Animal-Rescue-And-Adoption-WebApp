@@ -10,24 +10,54 @@ import { motion } from "framer-motion";
 function LoginPage() {
   const navigate = useNavigate()
   const authCtx = useContext(AuthContext);
-  const [errors, setErrors] = useState()
+  const [errors, setErrors] = useState();
+
+
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
+
+  const google = () => {
+    window.open("http://localhost:5000/auth/google", "_self");
+  };
+
+  // const loginn = async (event) => {
+  //   event.preventDefault();
+  //   console.log(email);
+  //   console.log(password);
+  //   const data = {
+  //     email: email,
+  //     password: password,
+  //   };
+  //   const response = await axios.post("http://localhost:5000/user/login", data);
+  //   console.log("Post response:", response);
+  // };
+
+
+
+
+
+
+
 
   const LogInFormHandler = async (userLoginData) => {
     try {
-      const response = await fetch('https://adopet-54d51-default-rtdb.firebaseio.com/users.json', {
-        method: 'POST',
+      const response = await fetch("http://localhost:5000/user/login", {
+        method: "POST",
         body: JSON.stringify(userLoginData),
         headers: {
-          'Content-Type': 'application/json',
-        }
+          "Content-Type": "application/json",
+        },
       });
 
       const result = await response.json();
+      console.log(response)
+      console.log(result)
 
       if (response.ok) {
         authCtx.login(result.token) // authCtx.login(result.token)
         toast.success('Welcome back..!', toasterVariants);
         setErrors(null);
+        navigate("..");
       } else {
         setErrors(result.errors);
       }
@@ -35,8 +65,8 @@ function LoginPage() {
       console.error('Error submitting form:', error);
     }
 
-    console.log(userLoginData);
-    navigate('..');
+    // console.log(userLoginData);
+    
   }
 
   return (
@@ -92,6 +122,7 @@ function LoginPage() {
                   type="button"
                   className="btn btn-style btn-outline-primary d-flex"
                   id="googleLogin"
+                  onClick={google}
                 >
                   <div className="link-icon">
                     <img src="assets/images/google-icon.png" alt="" />
