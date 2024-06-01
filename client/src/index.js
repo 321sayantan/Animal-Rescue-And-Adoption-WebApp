@@ -9,7 +9,17 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <AuthContextProvider>
     <App />
-    <ToastContainer />
+    <ToastContainer
+      position="top-right"
+      autoClose={3000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      draggable
+      pauseOnHover
+      theme="dark"
+      transition='Bounce'
+    />
   </AuthContextProvider>
 );
 

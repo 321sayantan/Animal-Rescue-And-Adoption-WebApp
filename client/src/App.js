@@ -5,15 +5,16 @@ import Home from "./pages/Home";
 import About from './pages/About';
 import Services from './pages/Services';
 import ContactUs from './pages/ContactUs';
-import { loader as rootLoader } from './pages/Root';
 import MainErrorFallback from './components/UI/MainErrorFallback';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import AdoptPet from './pages/AdoptPet';
 import PetDetailsPage from './pages/PetDetailsPage';
-
+import AddNewVetPost from './pages/AddNewVetPost';
+import { loader as rootLoader } from './pages/Root';
 import { loader as loadPetPosts } from './pages/AdoptPet';
 import { loader as loadPostDetails } from './pages/PetDetailsPage';
+
 
 const router = createBrowserRouter([
   {
@@ -32,7 +33,8 @@ const router = createBrowserRouter([
         path: 'adopt',
         children: [
           { index: true, element: <AdoptPet />, loader: loadPetPosts },
-          { path: ':id', element: <PetDetailsPage />, loader: loadPostDetails }
+          { path: ':id', element: <PetDetailsPage />, loader: loadPostDetails },
+          { path: 'register-new-vet', element: <AddNewVetPost /> }
         ]
       }
     ]

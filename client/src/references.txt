@@ -12,3 +12,19 @@ Dummy post url:
 https://adopet-54d51-default-rtdb.firebaseio.com/
 
   
+close menu on click anywhere outside menu:
+
+useEffect(() => {
+    const handler = (e) => {
+        if(e.target)
+            setOpen(false)
+    }
+
+    document.addEventListener('mousedown', handler)
+})
+
+
+
+
+
+

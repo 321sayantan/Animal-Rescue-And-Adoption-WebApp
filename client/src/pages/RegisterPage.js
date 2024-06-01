@@ -92,7 +92,6 @@ function RegisterPage() {
         </div>
       </section>
       {/* //signup section */}
-
     </>
   );
 }

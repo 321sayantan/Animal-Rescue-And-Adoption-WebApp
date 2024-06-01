@@ -1,12 +1,14 @@
 import { useState, Suspense } from "react";
-import { Await, defer, useLoaderData } from "react-router-dom";
+import { Await, Link, defer, useLoaderData } from "react-router-dom";
 import PostsSkeleton from "../components/Adopts/PostsSkeleton"
 import PostsList from "../components/Adopts/PostsList";
 import SearchByLocationPanel from "../components/Adopts/SearchByLocationPanel";
+import { petCategList as categories } from "../utils/misc";
 
 
 function AdoptPet() {
     const [showMap, setShowMap] = useState(false)
+    const [selectedVal, setSelectedVal] = useState('')
     const { posts } = useLoaderData()
 
     const fallback = <PostsSkeleton />
@@ -19,6 +21,8 @@ function AdoptPet() {
         setShowMap(true);
         console.log(locData)
     }
+
+    const filterHandler = (e) => setSelectedVal(e.target.value)
 
     return (
         <>
@@ -38,8 +42,25 @@ function AdoptPet() {
                             <SearchByLocationPanel onSubmit={searchPostsHandler} />
                         </div>
                         <div className="posts-list col-lg-9 px-4 mb-lg-0 mb-5" data-aos="fade-left">
-                            <div className="add-post-btn column d-flex align-items-center justify-content-end">
-                                <button type="button" className="btn btn-style btn-secondary">Add a pet</button>
+                            <div className="add-post-btn column d-flex align-items-end justify-content-between">
+                                <div className="col-sm-3">
+                                    <select
+                                        className="form-select"
+                                        id="filter-posts"
+                                        onChange={filterHandler}
+                                        value={selectedVal}
+                                    >
+                                        <option value="" disabled>
+                                            Sort By :-
+                                        </option>
+                                        {categories.map((option, i) => (
+                                            <option key={i} value={option}>
+                                                {option}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
+                                <Link to="register-new-vet" className="btn btn-style btn-secondary">Donate a vet</Link>
                             </div>
                             {/* list of available pets */}
                             {posts && !showMap && <Suspense fallback={fallback}>
@@ -60,7 +81,6 @@ function AdoptPet() {
                             }
                             {/* map showing available locations */}
                         </div>
-
                     </div>
                 </div>
             </section>

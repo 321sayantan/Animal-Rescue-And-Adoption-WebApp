@@ -118,7 +118,7 @@ const Footer = () => {
           </div>
           <div className="below-section text-center pt-lg-4 mt-5">
             <p className="copy-text">
-              © 2021 Adopet | All rights reserved. 
+              © 2023-24 Adopet | All rights reserved. 
             </p>
           </div>
         </div>
