@@ -10,6 +10,18 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
   },
+  street: {
+    type: String,
+  },
+  city: {
+    type: String,
+  },
+  zip_code: {
+    type: String,
+  },
+  image: {
+    type: String,
+  }  
 });
 
 module.exports = mongoose.model("Users", userSchema);

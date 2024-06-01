@@ -12,20 +12,22 @@ function RegisterPage() {
 
   const SignUpHandler = async (userData) => {
     try {
-      const response = await fetch('https://adopet-54d51-default-rtdb.firebaseio.com/users.json', {
-        method: 'POST',
+      const response = await fetch("http://localhost:5000/user/register", {
+        method: "POST",
         body: JSON.stringify(userData),
         headers: {
-          'Content-Type': 'application/json',
-        }
+          "Content-Type": "application/json",
+        },
       });
 
       const result = await response.json();
+      console.log(response);
+      console.log(result);
 
       if (response.ok) {
         toast.success('Registration Successful.', toasterVariants);
         setErrors(null);
-        navigate('..');
+        navigate("..");
       } else {
         setErrors(result.errors || {});
       }
@@ -33,8 +35,8 @@ function RegisterPage() {
       console.error('Error submitting form:', error);
     }
 
-    console.log(userData);
-    // navigate('..');
+    // console.log(result);
+    
   }
 
   return (
