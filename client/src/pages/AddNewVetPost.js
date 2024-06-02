@@ -10,7 +10,7 @@ function AddNewVetPost() {
     const navigate = useNavigate();
     const postDataHandler = async (postVetData) => {
         try {
-            const response = await toast.promise(fetch('https://adopet-54d51-default-rtdb.firebaseio.com/adopt.json', {
+            const response = await toast.promise(fetch('http://localhost:5000/adopt/post', {
                 method: 'POST',
                 body: JSON.stringify(postVetData),
                 headers: {
@@ -36,7 +36,7 @@ function AddNewVetPost() {
             console.error('Failed to post:', error);
         }
 
-        console.log(postVetData);
+        // console.log(69,postVetData);
     }
 
     return (

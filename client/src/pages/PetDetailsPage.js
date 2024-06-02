@@ -94,7 +94,7 @@ export default PetDetailsPage
 
 async function postDetailsLoader(params) {
     const id = params.id;
-    const response = await fetch(`https://freetestapi.com/api/v1/animals/${id}`);
+    const response = await fetch(`http://localhost:5000/adopt/getpost/${id}`);
     if (!response.ok) {
         throw new Error('Failed to load post detalis!');
     } else {
