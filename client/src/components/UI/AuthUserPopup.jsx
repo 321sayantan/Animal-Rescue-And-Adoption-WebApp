@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import { AuthContext } from "../../store/AuthContext";
 import axios from "axios"
 
-// import "./vendors.css";
 
 const AuthUserPopup = ({ children, onClose, className }) => {
   const authCtx = useContext(AuthContext);

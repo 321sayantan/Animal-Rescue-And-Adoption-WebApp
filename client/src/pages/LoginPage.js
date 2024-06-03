@@ -16,7 +16,8 @@ function LoginPage() {
   // const [email, setEmail] = useState("");
   // const [password, setPassword] = useState("");
 
-  const google = () => {
+  const googleLoginHandler = () => {
+    // navigate('http://localhost:5000/auth/google', { state: '_self' })
     window.open("http://localhost:5000/auth/google", "_self");
   };
 
@@ -66,7 +67,7 @@ function LoginPage() {
     }
 
     // console.log(userLoginData);
-    
+
   }
 
   return (
@@ -122,7 +123,7 @@ function LoginPage() {
                   type="button"
                   className="btn btn-style btn-outline-primary d-flex"
                   id="googleLogin"
-                  onClick={google}
+                  onClick={googleLoginHandler}
                 >
                   <div className="link-icon">
                     <img src="assets/images/google-icon.png" alt="" />
