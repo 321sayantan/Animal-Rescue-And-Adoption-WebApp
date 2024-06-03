@@ -5,9 +5,10 @@ const User = require("./db/userModel");
 const bcrypt = require("bcrypt");
 const session = require("express-session");
 const user_route = require("./routes/auth.js");
+const adoptPost_route = require("./routes/adoptPost.js");
 const googleStrategy = require("passport-google-oauth20").Strategy;
 const cors = require("cors");
-const MongoStore = require("connect-mongo");
+// const MongoStore = require("connect-mongo");
 const env = require("dotenv");
 
 const app = express();
@@ -50,6 +51,7 @@ app.use(
   app.use(passport.session());
   
   app.use("/user", user_route);
+  app.use("/adopt", adoptPost_route);
 
 
 app.get(

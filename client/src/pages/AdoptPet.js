@@ -90,7 +90,8 @@ export default GoogleApiWrapper({
 })(AdoptPet)
 
 async function loadPosts() {
-    const response = await fetch('https://freetestapi.com/api/v1/animals');
+    // const response = await fetch('https://freetestapi.com/api/v1/animals');
+    const response = await fetch('http://localhost:5000/adopt/getallpost');
 
     if (!response.ok) {
         throw new Error('Failed to fetch available posts!')

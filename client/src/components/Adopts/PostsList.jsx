@@ -7,23 +7,23 @@ const PostsList = ({ posts }) => {
         <div
           className="py-4 col-md-4 col-6 post-cards"
           data-aos="fade-left"
-          key={post.id}
+          key={post._id}
         >
           <div className="posts-grids text-center">
             <img src={post.image} className="img-fluid" alt="" />
             <div className="pet-info">
               <div className="caption">
                 <div className="short-descr text-center">
-                  <h4>{post.name}</h4>
-                  <h6>{post.family}</h6>
+                  <h4>{post.vet_name}</h4>
+                  <h6>{post.vet_breed}</h6>
                   <hr />
-                  <span>{post.place_of_found}</span>
+                  <span>{post.donor_address.split(',')[3]}</span>
                 </div>
               </div>
             </div>
           </div>
           <Link
-            to={`${post.id}`}
+            to={`${post._id}`}
             className="btn btn-style btn-outline-primary details-btn"
           >
             See Details

@@ -144,7 +144,7 @@ const NewPostForm = (props) => {
         description: enteredDescription,
       },
     };
-
+console.log(postVetData)
     props.onSubmit(postVetData);
     resetDonorName();
     resetMob();

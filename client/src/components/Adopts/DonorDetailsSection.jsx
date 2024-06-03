@@ -6,19 +6,19 @@ const DonorDetailsSection = ({ postDetails }) => {
           <div className="mb-4 owner-detail-item">
             <div className="owner-info align-items-center">
               <p className="owner-info-heading">Name </p>
-              <span>John Doe</span> {/* postDetails.donor_name */}
+              <span>{postDetails.donor_name}</span>
             </div>
           </div>
           <div className="mb-4 owner-detail-item">
             <div className="owner-info align-items-center">
               <p className="owner-info-heading">Contact </p>
-              <span>+191 26659192</span> {/* postDetails.phone */}
+              <span>{ postDetails.donor_phone }</span>
             </div>
           </div>
           <div className="mb-4 owner-detail-item">
             <div className="owner-info align-items-center">
               <p className="owner-info-heading">Location </p>
-              <span>{postDetails.place_of_found}</span>{" "}
+              <span>{postDetails.donor_address}</span>{" "}
               {/* postDetails.location */}
             </div>
           </div>
@@ -29,7 +29,7 @@ const DonorDetailsSection = ({ postDetails }) => {
           <p>
             <br />
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{" "}
-            {postDetails.description}
+            {postDetails.vet_description}
           </p>
           <cite className="d-flex justify-content-end blockquote-footer">
             <em>By Owner</em>
