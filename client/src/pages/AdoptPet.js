@@ -1,13 +1,15 @@
 import { useState, Suspense } from "react";
 import { Await, Link, defer, useLoaderData } from "react-router-dom";
+import { GoogleApiWrapper } from "google-maps-react";
 import PostsSkeleton from "../components/Adopts/PostsSkeleton"
 import PostsList from "../components/Adopts/PostsList";
 import SearchByLocationPanel from "../components/Adopts/SearchByLocationPanel";
 import { petCategList as categories } from "../utils/misc";
+import MapContainer from "../components/MapContainer";
 
 
 function AdoptPet() {
-    const [showMap, setShowMap] = useState(false)
+    const [searchTerm, setSearchTerm] = useState();
     const [selectedVal, setSelectedVal] = useState('')
     const { posts } = useLoaderData()
 
@@ -17,9 +19,8 @@ function AdoptPet() {
     //     setShowMap(false)
     // }, [])
 
-    const searchPostsHandler = (locData) => {
-        setShowMap(true);
-        console.log(locData)
+    const setSearchQueryHandler = (locData) => {
+        setSearchTerm(locData)
     }
 
     const filterHandler = (e) => setSelectedVal(e.target.value)
@@ -39,7 +40,7 @@ function AdoptPet() {
 
                     <div className="row d-flex justify-content-center py-4">
                         <div className="left-column col-lg-3">
-                            <SearchByLocationPanel onSubmit={searchPostsHandler} />
+                            <SearchByLocationPanel onSubmit={setSearchQueryHandler} />
                         </div>
                         <div className="posts-list col-lg-9 px-4 mb-lg-0 mb-5" data-aos="fade-left">
                             <div className="add-post-btn column d-flex align-items-end justify-content-between">
@@ -63,20 +64,16 @@ function AdoptPet() {
                                 <Link to="register-new-vet" className="btn btn-style btn-secondary">Donate a vet</Link>
                             </div>
                             {/* list of available pets */}
-                            {posts && !showMap && <Suspense fallback={fallback}>
+                            {posts && !searchTerm && <Suspense fallback={fallback}>
                                 <Await resolve={posts}>
                                     {posts => <PostsList posts={posts} />}
                                 </Await>
                             </Suspense>}
                             {/* //list of available pets */}
                             {/* map showing available locations */}
-                            {showMap &&
+                            {searchTerm &&
                                 <div className="container col-lg-12 md-6 py-5">
-                                    <iframe
-                                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3001161.424489281!2d-78.01909140705047!3d42.72866436845163!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4ccc4bf0f123a5a9%3A0xddcfc6c1de189567!2sNew%20York%2C%20USA!5e0!3m2!1sen!2sin!4v1570786994395!5m2!1sen!2sin"
-                                        title='available-locations'
-                                        allowFullScreen
-                                    />
+                                    <MapContainer google={window.google} />
                                 </div>
                             }
                             {/* map showing available locations */}
@@ -88,7 +85,9 @@ function AdoptPet() {
     )
 }
 
-export default AdoptPet
+export default GoogleApiWrapper({
+    apiKey: process.env.REACT_APP_AUTOCOMPLETE_API_KEY
+})(AdoptPet)
 
 async function loadPosts() {
     // const response = await fetch('https://freetestapi.com/api/v1/animals');

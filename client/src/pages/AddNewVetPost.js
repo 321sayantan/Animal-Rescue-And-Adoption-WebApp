@@ -18,7 +18,7 @@ function AddNewVetPost() {
                 }
             }),
                 {
-                    pending: 'Saving your Post...',
+                    pending: 'Creating Post...',
                     success: 'Post added successfully',
                     error: 'Failed to add Post!'
                 }

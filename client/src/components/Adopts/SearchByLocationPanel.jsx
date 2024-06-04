@@ -50,7 +50,7 @@ const SearchByLocationPanel = ({ onSubmit }) => {
         </button>
       </form>
       {locationIsInvalid && (
-        <p className="invalid-feedback">Invalid location!</p>
+        <p className="invalid-feedback">Invalid Query!</p>
       )}
     </aside>
   );
