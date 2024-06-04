@@ -6,6 +6,7 @@ import Alert from "../components/UI/Alert";
 import { toasterVariants } from "../utils/misc";
 import { AuthContext } from "../store/AuthContext";
 import { motion } from "framer-motion";
+import axios from "axios"
 
 function LoginPage() {
   const navigate = useNavigate()
@@ -16,7 +17,7 @@ function LoginPage() {
   // const [email, setEmail] = useState("");
   // const [password, setPassword] = useState("");
 
-  const google = () => {
+  const google = async () => {
     window.open("http://localhost:5000/auth/google", "_self");
   };
 
@@ -54,7 +55,8 @@ function LoginPage() {
       console.log(result)
 
       if (response.ok) {
-        authCtx.login(result.token) // authCtx.login(result.token)
+        // authCtx.login(result.token) // authCtx.login(result.token)
+        // authCtx.setIsAuthenticated(true);
         toast.success('Welcome back..!', toasterVariants);
         setErrors(null);
         navigate("..");
