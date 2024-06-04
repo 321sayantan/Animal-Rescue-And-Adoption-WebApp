@@ -1,11 +1,11 @@
 import { useState, Suspense } from "react";
 import { Await, Link, defer, useLoaderData } from "react-router-dom";
-import { GoogleApiWrapper } from "google-maps-react";
 import PostsSkeleton from "../components/Adopts/PostsSkeleton"
 import PostsList from "../components/Adopts/PostsList";
 import SearchByLocationPanel from "../components/Adopts/SearchByLocationPanel";
 import { petCategList as categories } from "../utils/misc";
 import MapContainer from "../components/MapContainer";
+import { location } from "../utils/misc";
 
 
 function AdoptPet() {
@@ -71,9 +71,11 @@ function AdoptPet() {
                             </Suspense>}
                             {/* //list of available pets */}
                             {/* map showing available locations */}
-                            {searchTerm &&
+                            {searchTerm && location &&
                                 <div className="container col-lg-12 md-6 py-5">
-                                    <MapContainer google={window.google} />
+                                    <div className="position-relative map-wrapper">
+                                        <MapContainer google={window.google} filteredPosts={location} />
+                                    </div>
                                 </div>
                             }
                             {/* map showing available locations */}
@@ -85,9 +87,11 @@ function AdoptPet() {
     )
 }
 
-export default GoogleApiWrapper({
-    apiKey: process.env.REACT_APP_AUTOCOMPLETE_API_KEY
-})(AdoptPet)
+export default AdoptPet
+
+// export default GoogleApiWrapper({
+//     apiKey: process.env.REACT_APP_AUTOCOMPLETE_API_KEY
+// })(AdoptPet)
 
 async function loadPosts() {
     // const response = await fetch('https://freetestapi.com/api/v1/animals');

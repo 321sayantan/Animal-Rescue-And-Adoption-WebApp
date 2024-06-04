@@ -2,7 +2,7 @@ import { Outlet, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-
+import { GoogleApiWrapper } from 'google-map-react'
 import Footer from '../components/UI/Footer';
 import Navbar from '../components/UI/Navbar';
 
@@ -53,6 +53,10 @@ const Root = () => {
     )
 }
 
+
+// export default GoogleApiWrapper({
+//     apiKey: process.env.REACT_APP_AUTOCOMPLETE_API_KEY
+// })(Root)
 export default Root
 
 export function loader() {

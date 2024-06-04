@@ -56,7 +56,6 @@ const AutoComplete = ({ id, onComplete, onCheck }) => {
         ref={inputRef}
         className={"form-control " + addrClasses}
         placeholder="Location (location of the vet...)"
-        // onChange={onChange}
         onChange={addrChangeHandler}
         // value={value}
       />

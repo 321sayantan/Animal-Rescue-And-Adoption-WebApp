@@ -6874,15 +6874,13 @@ hr:not([size]) {
 
   /* // Used when no type is provided */
   /* // toast("**hello**") */
-  --toastify-color-progress-light: linear-gradient(
-    to right,
-    #4cd964,
-    #5ac8fa,
-    #007aff,
-    #34aadc,
-    #5856d6,
-    #ff2d55
-  );
+  --toastify-color-progress-light: linear-gradient(to right,
+      #4cd964,
+      #5ac8fa,
+      #007aff,
+      #34aadc,
+      #5856d6,
+      #ff2d55);
   /* // Used when no type is provided */
   --toastify-color-progress-dark: #bb86fc;
   --toastify-color-progress-info: var(--toastify-color-info);
@@ -7013,3 +7011,42 @@ hr:not([size]) {
   word-wrap: break-word;
 }
 
+.map-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 33rem;
+  overflow: hidden;
+  border-radius: var(--border-radius);
+}
+
+.pin {
+  position: relative;
+  width: 5rem;
+  height: 6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.pin .pin-icon {
+  height: 3.5rem;
+  width: 3.5rem;
+  font-weight: 900;
+  color: #000;
+  cursor: pointer;
+}
+
+.pin .pin-text {
+  top: -0.5rem;
+  left: 0;
+  padding: 0.1rem 0.4rem;
+  background: var(--bs-danger);
+  color: var(--bs-white);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: .2px;
+  line-height: 1.5rem;
+}

@@ -1,5 +1,5 @@
-import axios from "axios";
-import { useState, useContext, useEffect } from "react";
+// import axios from "axios";
+import { useState, useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import AuthUserPopup from "./AuthUserPopup";
@@ -21,31 +21,23 @@ const Navbar = (props) => {
   }
   // <!-- //theme switch js (light and dark)-->
 
+  // const getuser = async ()=>{
+  //   try{
+  //     console.log("inside getuser")
+  //     const response = await axios.get('http://localhost:5000/login/success', { withCredentials: true });
+  //     const data = JSON.stringify(response)
 
+  //     console.log("user 222244444:" + data);
+  //   }
+  //   catch(err){
+  //     console.log("error inside getuser")
+  //     console.log(err);
+  //   }
+  // }
 
-
-  const getuser = async ()=>{
-    try{
-      console.log("inside getuser")
-      const response = await axios.get('http://localhost:5000/login/success', { withCredentials: true });
-      const data = JSON.stringify(response)
-
-      console.log("user 222244444:" + data);
-    }
-    catch(err){
-      console.log("error inside getuser")
-      console.log(err);
-    }
-  }
-
-  useEffect(()=>{
-    // getuser();
-  },[])
-
-
-
-
-
+  // useEffect(()=>{
+  //  getuser();
+  // },[])
 
   return (
     <>

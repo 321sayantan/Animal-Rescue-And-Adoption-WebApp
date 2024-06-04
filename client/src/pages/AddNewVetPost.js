@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { toasterVariants } from "../utils/misc";
 import Alert from '../components/UI/Alert';
 import NewPostForm from "../components/NewPostForm";
 
@@ -10,23 +11,18 @@ function AddNewVetPost() {
     const navigate = useNavigate();
     const postDataHandler = async (postVetData) => {
         try {
-            const response = await toast.promise(fetch('http://localhost:5000/adopt/post', {
+            const response = await fetch('http://localhost:5000/adopt/post', {
                 method: 'POST',
                 body: JSON.stringify(postVetData),
                 headers: {
                     'Content-Type': 'application/json',
                 }
-            }),
-                {
-                    pending: 'Creating Post...',
-                    success: 'Post added successfully',
-                    error: 'Failed to add Post!'
-                }
-            );
+            });
 
             const result = await response.json();
 
             if (response.ok) {
+                toast.success(result.message, toasterVariants)
                 setErrors(null);
                 navigate('..');
             } else {

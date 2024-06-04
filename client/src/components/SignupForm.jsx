@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useNavigation } from "react-router-dom";
 import useInput from "../hooks/use-input";
 import Alert from "./UI/Alert";
-import axios from "axios"
 
 const pattern = /^(?=.*\d.*)(?=.*[a-zA-Z].*)(?=.*[\W]).{8,}$/;
 const pattern2 = /^\d{5,8}(?:[-\s]\d{4})?$/;
