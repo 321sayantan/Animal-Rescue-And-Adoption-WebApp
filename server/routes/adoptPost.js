@@ -24,7 +24,7 @@ router.post('/post', async(req, res)=>{
     }).catch((err)=>{
         res.status(500).json({errors: err})
     })
-    console.log(data)
+    // console.log(data)
 });
 
 router.get('/getallpost', async(req, res)=>{
@@ -36,9 +36,25 @@ router.get('/getallpost', async(req, res)=>{
 
 
 router.get('/getpost/:id', async(req, res)=>{
-    const allposts = await Post.findOne({ _id: req.params.id });
+    const posts = await Post.findOne({ _id: req.params.id });
     setTimeout(()=>{
-        res.status(200).json(allposts);
+        res.status(200).json(posts);
+    },3000)
+})
+
+router.get('/filter/address/:address', async(req, res)=>{
+    const address = req.params.address;
+    const posts = await Post.find({ donor_address: {$regex: address, $options: "i"} });
+    setTimeout(()=>{
+        res.status(200).json(posts);
+    },3000)
+});
+
+router.get('/filter/category/:category', async(req, res)=>{
+    const category = req.params.category;
+    const posts = await Post.find({ vet_category: { $regex: category, $options: "i" } });
+    setTimeout(()=>{
+        res.status(200).json(posts);
     },3000)
 })
 
