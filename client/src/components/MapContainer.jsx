@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import GoogleMapReact from "google-map-react";
 import { Icon } from "@iconify/react";
 import locationIcon from "@iconify/icons-mdi/map-marker";
@@ -23,8 +23,9 @@ export const LocationPin = ({ text, onViewDetails, isActive }) => {
   );
 };
 
-const MapContainer = ({ google, filteredPosts }) => {
+const MapContainer = ({ isError, error, filteredPosts }) => {
   const [activeMarker, setActiveMarker] = useState(null);
+  const mapRef = useRef();
 
   function handleActiveMarker(id) {
     setActiveMarker((prevId) => {
@@ -34,51 +35,43 @@ const MapContainer = ({ google, filteredPosts }) => {
       return id;
     });
   }
-  // const handleActiveMarker = (marker) => {
-  //   if (marker === activeMarker) {
-  //     return;
-  //   }
-  //   setActiveMarker(marker);
-  // };
+
+  useEffect(() => {
+    // const map = mapRef.current;
+    // map.current();
+    console.log(filteredPosts);
+  });
 
   return (
     <>
-      {/* {isLoaded && ( */}
-      {/* <Map
-        google={google}
-        containerStyle={containerStyle}
-        initialCenter={filteredPosts[0].donor_position}
-        zoom={10}
-        onClick={() => setActiveMarker(null)}
-        ref={mapRef}
-      >
-        {filteredPosts.map((marker) => (
-          <Fragment key={marker._id}>
-            <Marker position={marker.donor_position} />
-            <InfoWindow >
-              <div>{marker.donor_address}</div>
-            </InfoWindow>
-          </Fragment>
-        ))}
-      </Map> */}
-      {/* )} */}
-      <GoogleMapReact
-        bootstrapURLKeys={{ key: process.env.REACT_APP_GMAP_API_KEY }}
-        style={containerStyle}
-        defaultCenter={filteredPosts[0]}
-        defaultZoom={10}
-      >
-        {filteredPosts.map((pins) => (
-          <LocationPin
-            key={pins._id}
-            lat={pins.lat}
-            lng={pins.lng}
-            text={pins.address}
-            isActive={activeMarker === pins._id}
-            onViewDetails={() => handleActiveMarker(pins._id)}
-          />
-        ))}
-      </GoogleMapReact>
+      {filteredPosts.length > 0 ? (
+        <GoogleMapReact
+          ref={mapRef}
+          bootstrapURLKeys={{ key: process.env.REACT_APP_GMAP_API_KEY }}
+          style={containerStyle}
+          defaultCenter={filteredPosts[0]}
+          defaultZoom={10}
+        >
+          {filteredPosts.map((pins) => (
+            <LocationPin
+              key={pins._id}
+              // lat={pins.donor_latitude}
+              // lng={pins.donor_longitude}
+              // text={pins.donor_address}
+              lat={pins.lat}
+              lng={pins.lng}
+              text={pins.address}
+              isActive={activeMarker === pins._id}
+              onViewDetails={() => handleActiveMarker(pins._id)}
+            />
+          ))}
+        </GoogleMapReact>
+      ) : (
+        <div className="container py-4">
+          <h2>No Match found!</h2>
+        </div>
+      )}
+
       {/* {activeMarker && <div className="container">{activeMarker}</div>} */}
     </>
   );

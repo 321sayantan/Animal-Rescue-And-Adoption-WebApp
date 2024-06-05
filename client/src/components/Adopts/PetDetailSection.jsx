@@ -30,7 +30,14 @@ const PetDetailSection = ({ postDetails }) => {
           <div className="col-6 mb-4 pet-specs">
             <div className="specs-container align-items-center color-bg-4">
               <p className="specs-text">Vaccinated </p>
-              <span>{postDetails.is_vaccinated} cm</span>{" "}
+              <span>
+                {postDetails.is_vaccinated === "Yes" ? (
+                  <i className="fas fa-check" />
+                ) : (
+                  <i className="fas fa-xmark" />
+                )}{" "}
+                {postDetails.is_vaccinated}{" "}
+              </span>
               {/* to be conv to feet-inch */}
             </div>
           </div>

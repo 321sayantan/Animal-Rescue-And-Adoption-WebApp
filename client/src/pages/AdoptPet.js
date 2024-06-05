@@ -1,29 +1,52 @@
 import { useState, Suspense } from "react";
 import { Await, Link, defer, useLoaderData } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 import PostsSkeleton from "../components/Adopts/PostsSkeleton"
 import PostsList from "../components/Adopts/PostsList";
 import SearchByLocationPanel from "../components/Adopts/SearchByLocationPanel";
 import { petCategList as categories } from "../utils/misc";
 import MapContainer from "../components/MapContainer";
 import { location } from "../utils/misc";
+import { fetchFilteredPosts } from "../utils/httpRequests";
 
 
 function AdoptPet() {
-    const [searchTerm, setSearchTerm] = useState();
+    const [searchTerm, setSearchTerm] = useState('');
     const [selectedVal, setSelectedVal] = useState('')
     const { posts } = useLoaderData()
 
     const fallback = <PostsSkeleton />
+    let content;
 
-    // useEffect(() => {
-    //     setShowMap(false)
-    // }, [])
+    const { data, isLoading, isError, error } = useQuery({
+        queryKey: ["posts", { searchTerm }],
+        queryFn: ({ signal, queryKey }) => fetchFilteredPosts({ signal, ...queryKey[1] }),
+        enabled: searchTerm !== undefined,
+    });
 
     const setSearchQueryHandler = (locData) => {
         setSearchTerm(locData)
     }
 
     const filterHandler = (e) => setSelectedVal(e.target.value)
+
+    if (isLoading) {
+        content = <p>Getting related posts...</p>;
+    }
+
+    if (isError) {
+        content = (
+            <div className="py-5 px-4 bg-danger">
+                <h2>An error occured!</h2>
+                <p>{error.info?.message || "Failed to fetch posts!"}</p>
+            </div>
+        );
+    }
+
+    if (data) {
+        // content = <MapContainer filteredPosts={data} />;
+        content = <MapContainer filteredPosts={location} />;
+    }
 
     return (
         <>
@@ -71,10 +94,10 @@ function AdoptPet() {
                             </Suspense>}
                             {/* //list of available pets */}
                             {/* map showing available locations */}
-                            {searchTerm && location &&
+                            {searchTerm &&
                                 <div className="container col-lg-12 md-6 py-5">
                                     <div className="position-relative map-wrapper">
-                                        <MapContainer google={window.google} filteredPosts={location} />
+                                        {content}
                                     </div>
                                 </div>
                             }

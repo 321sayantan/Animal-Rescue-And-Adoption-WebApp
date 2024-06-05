@@ -1,28 +1,25 @@
-import { useState, useContext } from "react";
+import { useState, 
+  // useContext 
+} from "react";
 import { useNavigate } from "react-router-dom";
 import LoginForm from "../components/LoginForm";
 import { toast } from "react-toastify";
 import Alert from "../components/UI/Alert";
 import { toasterVariants } from "../utils/misc";
-import { AuthContext } from "../store/AuthContext";
+// import { AuthContext } from "../store/AuthContext";
 import { motion } from "framer-motion";
-import axios from "axios"
+// import axios from "axios"
 
 function LoginPage() {
   const navigate = useNavigate()
-  const authCtx = useContext(AuthContext);
+  // const authCtx = useContext(AuthContext);
   const [errors, setErrors] = useState();
 
 
   // const [email, setEmail] = useState("");
   // const [password, setPassword] = useState("");
 
-<<<<<<< HEAD
-  const google = async () => {
-=======
-  const googleLoginHandler = () => {
-    // navigate('http://localhost:5000/auth/google', { state: '_self' })
->>>>>>> 2f7ac6f683c36e74328e372515c0dd711c9a3a2d
+  const googleLoginHandler = async () => {
     window.open("http://localhost:5000/auth/google", "_self");
   };
 
