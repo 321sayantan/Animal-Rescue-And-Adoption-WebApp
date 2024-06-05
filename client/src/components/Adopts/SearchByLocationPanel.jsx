@@ -7,7 +7,7 @@ const SearchByLocationPanel = ({ onSubmit }) => {
     hasError: locationIsInvalid,
     valueInputBlurHandler: locationBlurHandler,
     valueChangeHandler: locationChangeHandler,
-    resetHandler: resetLocation,
+    // resetHandler: resetLocation,
   } = useInput((value) => value.trim().length >= 3);
 
   let formIsValid = false;
@@ -25,7 +25,7 @@ const SearchByLocationPanel = ({ onSubmit }) => {
     const locData = enteredLocation;
 
     onSubmit(locData);
-    resetLocation();
+    // resetLocation();
   };
 
   const locClasses = locationIsInvalid ? "is-invalid" : "";

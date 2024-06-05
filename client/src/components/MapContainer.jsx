@@ -1,47 +1,93 @@
-// // import { useState } from "react";
-// import { Map, Marker } from "google-maps-react";
+import { Fragment, useEffect, useRef, useState } from "react";
+import GoogleMapReact from "google-map-react";
+import { Icon } from "@iconify/react";
+import locationIcon from "@iconify/icons-mdi/map-marker";
+// import {
+//   GoogleMap,
+//   AdvancedMarkerElement,
+//   useJsApiLoader,
+// } from "@react-google-maps/api";
 
-// const MapContainer = ({ google, posts }) => {
-// //   const [map, setMap] = useState(null);
+const containerStyle = {
+  width: "100%",
+  height: "100%",
+  position: "absolute",
+};
 
-// //   const onMapReady = (mapProps, map) => {
-// //     setMap(map);
-// //   };
+// const location = [
+//   {
+//     address: "1600 Amphitheatre Parkway, Mountain View, california.",
+//     lat: 22.9003959,
+//     lng: 88.39645999999999,
+//   },
+// ];
 
-//   return (
-//     <Map
-//       google={google}
-//       zoom={14}
-//     //   onReady={onMapReady}
-//       initialCenter={{
-//         lat: 37.774929,
-//         lng: -122.419416, // Default to San Francisco
-//       }}
-//     >
-//       {posts.map((post) => (
-//         <Marker
-//           key={post.id}
-//           position={{ lat: post.latitude, lng: post.longitude }}
-//           name={post.title}
-//         />
-//       ))}
-//       {/* 
-//         <Marker
-//           onClick={this.onMarkerClick}
-//           name={'Kenyatta International Convention Centre'}
-//         />
-//         <InfoWindow
-//           marker={this.state.activeMarker}
-//           visible={this.state.showingInfoWindow}
-//           onClose={this.onClose}
-//         >
-//           <div>
-//             <h4>{this.state.selectedPlace.name}</h4>
-//           </div>
-//         </InfoWindow>
-//       */}
-//     </Map>
-//   );
-// };
+export const LocationPin = ({ text, onViewDetails, isActive }) => {
+  return (
+    <div className="pin">
+      {isActive && <div className="position-absolute pin-text">{text}</div>}
+      <Icon icon={locationIcon} className="pin-icon" onClick={onViewDetails} />
+    </div>
+  );
+};
 
-// export default MapContainer
+const MapContainer = ({ isError, error, filteredPosts }) => {
+  const [activeMarker, setActiveMarker] = useState(null);
+  const mapRef = useRef();
+  
+  function handleActiveMarker(id) {
+    setActiveMarker((prevId) => {
+      if (prevId === id) {
+        return null;
+      }
+      return id;
+    });
+  }
+  const location = [{...filteredPosts[0]}];
+
+  useEffect(() => {
+    // const map = mapRef.current;
+    // map.current();
+    // console.log(69,JSON.stringify(filteredPosts[0]));
+    console.log(69,filteredPosts[0]);
+    console.log(9,location);
+  });
+
+
+  return (
+    <>
+      {filteredPosts.length > 0 ? (
+        <GoogleMapReact
+          ref={mapRef}
+          bootstrapURLKeys={{ key: process.env.REACT_APP_GMAP_API_KEY }}
+          style={containerStyle}
+          defaultCenter={location[0]}
+          defaultZoom={5}
+        >
+          {/* {location.map((pins) => ( */}
+          {filteredPosts.map((pins) => (
+            <LocationPin
+              key={pins._id}
+              // lat={pins.donor_latitude}
+              // lng={pins.donor_longitude}
+              // text={pins.donor_address}
+              lat={pins.lat}
+              lng={pins.lng}
+              text={pins.address}
+              isActive={activeMarker === pins._id}
+              onViewDetails={() => handleActiveMarker(pins._id)}
+            />
+          ))}
+        </GoogleMapReact>
+      ) : (
+        <div className="container py-4">
+          <h2>No Match found!</h2>
+        </div>
+      )}
+
+      {/* {activeMarker && <div className="container">{activeMarker}</div>} */}
+    </>
+  );
+};
+
+export default MapContainer;

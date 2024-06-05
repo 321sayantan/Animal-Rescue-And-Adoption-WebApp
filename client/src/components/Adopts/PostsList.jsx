@@ -17,7 +17,7 @@ const PostsList = ({ posts }) => {
                   <h4>{post.vet_name}</h4>
                   <h6>{post.vet_breed}</h6>
                   <hr />
-                  <span>{post.donor_address.split(',')[3]}</span>
+                  <span>{post.address.split(',')[3]}</span>
                 </div>
               </div>
             </div>

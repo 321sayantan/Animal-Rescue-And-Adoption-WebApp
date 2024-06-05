@@ -16911,7 +16911,9 @@ h4.inner-text-title {
 }
 
 .posts-list .post-cards {
-  height: 26rem;
+  /* position: relative; */
+  /* width: 100%; */
+  overflow: hidden;
 }
 
 .posts-list .add-post-btn {
@@ -16923,7 +16925,22 @@ h4.inner-text-title {
   padding: 10px 19px;
 }
 
-.posts-list .posts-grids,
+.posts-list .posts-grids {
+  position: relative;
+  overflow: hidden;
+  width: 100% !important;
+  height: 19rem !important;
+}
+
+.posts-list .posts-grids .img-fluid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .w3l-team .team-grids {
   position: relative;
   overflow: hidden;

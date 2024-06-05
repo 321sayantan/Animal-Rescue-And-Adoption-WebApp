@@ -4,8 +4,9 @@ import useInput from "../hooks/use-input";
 import AutoComplete from "./UI/AutoComplete";
 import RadioButton from "./UI/RadioButton";
 
-import { petCategList as categories } from "../utils/misc";
+import { petCategList as categories, toasterVariants } from "../utils/misc";
 import ImageUploader from "./ImageUploader";
+import { toast } from "react-toastify";
 
 const pattern = /^\+?\d[\d -]{8,12}\d$/,
   pattern2 = /^\d{4,6}(?:[-\s]\d{4})?$/;
@@ -24,6 +25,7 @@ const NewPostForm = (props) => {
 
   let isSubmitting = false;
   if (navigation.state === "submitting") {
+    toast.loading("Creating Post", toasterVariants);
     isSubmitting = true;
   }
 
@@ -144,7 +146,7 @@ const NewPostForm = (props) => {
         description: enteredDescription,
       },
     };
-console.log(postVetData)
+    console.log(postVetData);
     props.onSubmit(postVetData);
     resetDonorName();
     resetMob();
