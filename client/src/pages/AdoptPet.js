@@ -1,6 +1,6 @@
 import { useState, Suspense } from "react";
 import { Await, Link, defer, useLoaderData } from "react-router-dom";
-import { GoogleApiWrapper } from "google-maps-react";
+// import { GoogleApiWrapper } from "google-maps-react";
 import PostsSkeleton from "../components/Adopts/PostsSkeleton"
 import PostsList from "../components/Adopts/PostsList";
 import SearchByLocationPanel from "../components/Adopts/SearchByLocationPanel";
@@ -85,21 +85,22 @@ function AdoptPet() {
     )
 }
 
-export default GoogleApiWrapper({
-    apiKey: process.env.REACT_APP_AUTOCOMPLETE_API_KEY
-})(AdoptPet)
+// export default GoogleApiWrapper({
+//     apiKey: process.env.REACT_APP_AUTOCOMPLETE_API_KEY
+// })(AdoptPet)
+
+export default AdoptPet;
 
 async function loadPosts() {
-    // const response = await fetch('https://freetestapi.com/api/v1/animals');
-    const response = await fetch('http://localhost:5000/adopt/getallpost');
+  // const response = await fetch('https://freetestapi.com/api/v1/animals');
+  const response = await fetch("http://localhost:5000/adopt/getallpost");
 
-    if (!response.ok) {
-        throw new Error('Failed to fetch available posts!')
-    }
-    else {
-        const data = await response.json();
-        return data;
-    }
+  if (!response.ok) {
+    throw new Error("Failed to fetch available posts!");
+  } else {
+    const data = await response.json();
+    return data;
+  }
 }
 
 export function loader() {
