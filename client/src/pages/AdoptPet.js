@@ -6,11 +6,11 @@ import PostsList from "../components/Adopts/PostsList";
 import SearchByLocationPanel from "../components/Adopts/SearchByLocationPanel";
 import { petCategList as categories } from "../utils/misc";
 import MapContainer from "../components/MapContainer";
-import { location } from "../utils/misc";
 import { fetchFilteredPosts } from "../utils/httpRequests";
 import ErrorToFetch from "../components/UI/ErrorToFetch";
 import MapPreLoader from "../components/UI/MapPreLoader";
 import PostsFilteredList from "../components/PostsByQueryList";
+// import { location } from "../utils/misc";
 
 
 
