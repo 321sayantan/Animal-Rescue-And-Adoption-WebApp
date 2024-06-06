@@ -25,7 +25,6 @@ export const LocationPin = ({ text, onViewDetails, isActive }) => {
 
 const MapContainer = ({ isError, error, filteredPosts }) => {
   const [activeMarker, setActiveMarker] = useState(null);
-  const mapRef = useRef();
 
   function handleActiveMarker(id) {
     setActiveMarker((prevId) => {
@@ -46,7 +45,7 @@ const MapContainer = ({ isError, error, filteredPosts }) => {
     <>
       {filteredPosts.length > 0 ? (
         <GoogleMapReact
-          ref={mapRef}
+          // ref={mapRef}
           bootstrapURLKeys={{ key: process.env.REACT_APP_GMAP_API_KEY }}
           style={containerStyle}
           defaultCenter={filteredPosts[0]}
@@ -55,20 +54,20 @@ const MapContainer = ({ isError, error, filteredPosts }) => {
           {filteredPosts.map((pins) => (
             <LocationPin
               key={pins._id}
-              // lat={pins.donor_latitude}
-              // lng={pins.donor_longitude}
-              // text={pins.donor_address}
-              lat={pins.lat}
-              lng={pins.lng}
-              text={pins.address}
+              lat={parseFloat(pins.donor_latitude)}
+              lng={parseFloat(pins.donor_longitude)}
+              text={pins.donor_address}
+              // lat={pins.lat}
+              // lng={pins.lng}
+              // text={pins.address}
               isActive={activeMarker === pins._id}
               onViewDetails={() => handleActiveMarker(pins._id)}
             />
           ))}
         </GoogleMapReact>
       ) : (
-        <div className="container py-4">
-          <h2>No Match found!</h2>
+        <div className="text-center mt-2">
+          <h2>Sorry, No Match found! :(</h2>
         </div>
       )}
 

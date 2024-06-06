@@ -18,13 +18,12 @@ const PetDetailSection = ({ postDetails }) => {
             <div className="specs-container align-items-center color-bg-2">
               <p className="specs-text">Category </p>
               <span>{postDetails.vet_category}</span>{" "}
-              {/* postDetails.category */}
             </div>
           </div>
           <div className="col-6 mb-4 pet-specs">
             <div className="specs-container align-items-center color-bg-3">
               <p className="specs-text">Breed </p>
-              <span>{postDetails.vet_breed}</span> {/* postDetails.breed */}
+              <span>{postDetails.vet_breed}</span>
             </div>
           </div>
           <div className="col-6 mb-4 pet-specs">
@@ -38,14 +37,6 @@ const PetDetailSection = ({ postDetails }) => {
                 )}{" "}
                 {postDetails.is_vaccinated}{" "}
               </span>
-              {/* to be conv to feet-inch */}
-            </div>
-          </div>
-          <div className="col-6 mb-4 pet-specs">
-            <div className="specs-container align-items-center color-bg-5">
-              <p className="specs-text">Weight </p>
-              {/* <span>{postDetails.weight_kg} kg</span>{" "} */}
-              {/* to be conv to pounds(lbs) */}
             </div>
           </div>
         </div>

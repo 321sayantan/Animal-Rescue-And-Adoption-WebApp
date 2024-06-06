@@ -27,25 +27,31 @@ router.post('/post', async (req, res) => {
     // console.log(data)
 });
 
-router.get('/getallpost', async (req, res) => {
-    const allposts = await Post.find();
-    setTimeout(() => {
-        res.status(200).json(allposts);
-    }, 3000)
+router.get('/getallpost', async (req, res, next) => {
+    try {
+        const allposts = await Post.find();
+        setTimeout(() => {
+            res.status(200).json(allposts);
+        }, 3000)
+    } catch (error) {
+        next(error)
+    }
 })
 
 
-router.get('/getpost/:id', async (req, res) => {
-    const posts = await Post.findOne({ _id: req.params.id });
-    setTimeout(() => {
-        res.status(200).json(posts);
-    }, 3000)
+router.get('/getpost/:id', async (req, res, next) => {
+    try {
+        const posts = await Post.findOne({ _id: req.params.id });
+        setTimeout(() => {
+            res.status(200).json(posts);
+        }, 3000)
+    } catch (error) {
+        next(error)
+    }
 })
 
-// router.get('/filter/address/:address', async (req, res, next) => {
 router.get('/filter', async (req, res, next) => {
     try {
-        // const address = req.params.address;
         const query = req.query.search
         let posts = await Post.find({ donor_address: { $regex: query, $options: "i" } });
         // let posts = await Post.aggregate($filter: {$search: query})

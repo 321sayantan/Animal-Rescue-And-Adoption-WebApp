@@ -17410,60 +17410,6 @@ h4.inner-text-title {
 
 /* //contact */
 
-/* error boundary container */
-.error-container {
-  position: relative;
-  margin: 10rem;
-}
-
-.error-container .gif {
-  position: relative;
-  width: 25rem;
-  height: 25rem;
-  overflow: hidden;
-}
-
-.error-container .gif img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.error-container .content {
-  text-align: center;
-  margin: 3rem 0;
-}
-
-.error-container .content .main-heading {
-  font-size: 2.5rem;
-  font-weight: 800;
-}
-
-.error-container .content p {
-  font-size: 1.3rem;
-  padding: 0.7rem 0;
-  font-weight: 600;
-}
-
-.error-container .content a {
-  text-decoration: none !important;
-}
-
-.error-container .content a button {
-  padding: 1rem;
-  border-radius: 15px;
-  outline: none;
-  border: none;
-  background: #0046d4 !important;
-  color: #fff !important;
-  font-size: 1.3rem;
-  cursor: pointer;
-}
-
-/* // error boundary container */
 
 /* navbar user-badge */
 .navbar .auth-user {
@@ -17690,6 +17636,20 @@ h4.inner-text-title {
 
 .pet-specs .specs-container p {
   color: var(--bs-gray-dark) !important;
+}
+
+.pet-specs .specs-container span i {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-inline: 0.3rem;
+}
+
+.pet-specs .specs-container span i.fa-check {
+  color: var(--bs-green);
+}
+
+.pet-specs .specs-container span i.fa-xmark {
+  color: var(--bs-danger);
 }
 
 p.owner-info-heading,

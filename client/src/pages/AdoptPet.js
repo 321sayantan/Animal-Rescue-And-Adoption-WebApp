@@ -6,8 +6,10 @@ import PostsList from "../components/Adopts/PostsList";
 import SearchByLocationPanel from "../components/Adopts/SearchByLocationPanel";
 import { petCategList as categories } from "../utils/misc";
 import MapContainer from "../components/MapContainer";
+import MapPreLoader from "../components/UI/MapPreLoader";
 import { location } from "../utils/misc";
 import { fetchFilteredPosts } from "../utils/httpRequests";
+import ErrorToFetch from "../components/UI/ErrorToFetch";
 
 
 function AdoptPet() {
@@ -19,7 +21,7 @@ function AdoptPet() {
     let content;
 
     const { data, isLoading, isError, error } = useQuery({
-        queryKey: ["posts", { searchTerm }],
+        queryKey: ["filteredPosts", { searchTerm }],
         queryFn: ({ signal, queryKey }) => fetchFilteredPosts({ signal, ...queryKey[1] }),
         enabled: searchTerm !== undefined,
     });
@@ -31,16 +33,11 @@ function AdoptPet() {
     const filterHandler = (e) => setSelectedVal(e.target.value)
 
     if (isLoading) {
-        content = <p>Getting related posts...</p>;
+        content = <MapPreLoader msg='Gathering related posts...' />;
     }
 
     if (isError) {
-        content = (
-            <div className="py-5 px-4 bg-danger">
-                <h2>An error occured!</h2>
-                <p>{error.info?.message || "Failed to fetch posts!"}</p>
-            </div>
-        );
+        content = <ErrorToFetch error={error} />
     }
 
     if (data) {
@@ -96,9 +93,13 @@ function AdoptPet() {
                             {/* map showing available locations */}
                             {searchTerm &&
                                 <div className="container col-lg-12 md-6 py-5">
+                                    {/* {data.length > 0 ? ( */}
                                     <div className="position-relative map-wrapper">
                                         {content}
                                     </div>
+                                    {/* ) : ( */}
+
+                                    {/* )} */}
                                 </div>
                             }
                             {/* map showing available locations */}
@@ -117,8 +118,8 @@ export default AdoptPet
 // })(AdoptPet)
 
 async function loadPosts() {
-    // const response = await fetch('https://freetestapi.com/api/v1/animals');
-    const response = await fetch('http://localhost:5000/adopt/getallpost');
+    const response = await fetch('https://freetestapi.com/api/v1/animals');
+    // const response = await fetch('http://localhost:5000/adopt/getallpost');
 
     if (!response.ok) {
         throw new Error('Failed to fetch available posts!')
