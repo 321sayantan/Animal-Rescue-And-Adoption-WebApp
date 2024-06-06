@@ -1,12 +1,7 @@
-import { Fragment, useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import GoogleMapReact from "google-map-react";
 import { Icon } from "@iconify/react";
 import locationIcon from "@iconify/icons-mdi/map-marker";
-// import {
-//   GoogleMap,
-//   AdvancedMarkerElement,
-//   useJsApiLoader,
-// } from "@react-google-maps/api";
 
 const containerStyle = {
   width: "100%",
@@ -23,7 +18,7 @@ export const LocationPin = ({ text, onViewDetails, isActive }) => {
   );
 };
 
-const MapContainer = ({ isError, error, filteredPosts }) => {
+const MapContainer = ({ filteredPosts }) => {
   const [activeMarker, setActiveMarker] = useState(null);
 
   function handleActiveMarker(id) {
@@ -34,32 +29,24 @@ const MapContainer = ({ isError, error, filteredPosts }) => {
       return id;
     });
   }
-
-  useEffect(() => {
-    // const map = mapRef.current;
-    // map.current();
-    console.log(filteredPosts);
-  });
+  const location = [{ ...filteredPosts[0] }];
 
   return (
     <>
       {filteredPosts.length > 0 ? (
         <GoogleMapReact
-          // ref={mapRef}
           bootstrapURLKeys={{ key: process.env.REACT_APP_GMAP_API_KEY }}
           style={containerStyle}
-          defaultCenter={filteredPosts[0]}
-          defaultZoom={10}
+          defaultCenter={location[0]}
+          defaultZoom={5}
         >
+          {/* {location.map((pins) => ( */}
           {filteredPosts.map((pins) => (
             <LocationPin
               key={pins._id}
-              lat={parseFloat(pins.donor_latitude)}
-              lng={parseFloat(pins.donor_longitude)}
-              text={pins.donor_address}
-              // lat={pins.lat}
-              // lng={pins.lng}
-              // text={pins.address}
+              lat={pins.lat}
+              lng={pins.lng}
+              text={pins.address.split(",")[2]}
               isActive={activeMarker === pins._id}
               onViewDetails={() => handleActiveMarker(pins._id)}
             />
@@ -70,8 +57,6 @@ const MapContainer = ({ isError, error, filteredPosts }) => {
           <h2>Sorry, No Match found! :(</h2>
         </div>
       )}
-
-      {/* {activeMarker && <div className="container">{activeMarker}</div>} */}
     </>
   );
 };

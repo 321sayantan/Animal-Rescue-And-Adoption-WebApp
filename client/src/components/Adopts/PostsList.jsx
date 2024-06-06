@@ -14,13 +14,10 @@ const PostsList = ({ posts }) => {
             <div className="pet-info">
               <div className="caption">
                 <div className="short-descr text-center">
-                  {/* <h4>{post.vet_name}</h4>
-                  <h6>{post.vet_breed}</h6> */}
-                  <h4>{post.name}</h4>
-                  <h6>{post.breed}</h6>
+                  <h4>{post.vet_name}</h4>
+                  <h6>{post.vet_breed}</h6>
                   <hr />
-                  {/* <span>{post.donor_address.split(',')[3]}</span> */}
-                  <span>{post.places_of_found}</span>
+                  <span>{post.address.split(',')[3]}</span>
                 </div>
               </div>
             </div>

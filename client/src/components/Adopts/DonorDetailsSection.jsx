@@ -18,7 +18,7 @@ const DonorDetailsSection = ({ postDetails }) => {
           <div className="mb-4 owner-detail-item">
             <div className="owner-info align-items-center">
               <p className="owner-info-heading">Location </p>
-              <span>{postDetails.donor_address}</span>{" "}
+              <span>{postDetails.address}</span>{" "}
               {/* postDetails.location */}
             </div>
           </div>

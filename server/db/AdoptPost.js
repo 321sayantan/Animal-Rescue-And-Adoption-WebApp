@@ -7,14 +7,14 @@ const AdoptPostSchema = new mongoose.Schema({
   donor_phone: {
     type: String,
   },
-  donor_address: {
+  address: {
     type: String,
   },
-  donor_latitude: {
-    type: String,
+  lat: {
+    type: Number,
   },
-  donor_longitude: {
-    type: String,
+  lng: {
+    type: Number,
   },
   zip_code: {
     type: String,

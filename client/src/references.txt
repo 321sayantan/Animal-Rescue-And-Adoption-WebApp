@@ -11,9 +11,12 @@ Dummy post url:
 
 https://adopet-54d51-default-rtdb.firebaseio.com/
 
-  
-close menu on click anywhere outside menu:
+Dummy animals api:
 
+https://freetestapi.com/api/v1/animals
+  
+
+close menu on click anywhere outside menu:
 useEffect(() => {
     const handler = (e) => {
         if(e.target)
@@ -22,107 +25,6 @@ useEffect(() => {
 
     document.addEventListener('mousedown', handler)
 })
-
-
-
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
-
-const MapContainer = ({ google, posts }) => {
-  const [map, setMap] = useState(null);
-
-  const onMapReady = (mapProps, map) => {
-    setMap(map);
-  };
-
-  return (
-    <Map
-      google={google}
-      zoom={14}
-      onReady={onMapReady}
-      initialCenter={{
-        lat: 37.774929,
-        lng: -122.419416 // Default to San Francisco
-      }}
-    >
-      {posts.map(post => (
-        <Marker
-          key={post.id}
-          position={{ lat: post.latitude, lng: post.longitude }}
-          name={post.title}
-        />
-      ))}
-      {/* 
-        <Marker
-          onClick={this.onMarkerClick}
-          name={'Kenyatta International Convention Centre'}
-        />
-        <InfoWindow
-          marker={this.state.activeMarker}
-          visible={this.state.showingInfoWindow}
-          onClose={this.onClose}
-        >
-          <div>
-            <h4>{this.state.selectedPlace.name}</h4>
-          </div>
-        </InfoWindow>
-      */}
-    </Map>
-  );
-};
-
-
-
-const App = () => {
-  const [searchTerm, setSearchTerm] = useState('');
-  
-  const handleSearch = (event) => {
-    setSearchTerm(event.target.value);
-  };
-
-  return (
-    <div>
-      <input type="text" value={searchTerm} onChange={handleSearch} />
-      <PostsComponent searchTerm={searchTerm} />
-      <MapContainer google={google} posts={posts} />
-    </div>
-  );
-};
-
-export default GoogleApiWrapper({
-  apiKey: 'YOUR_GOOGLE_MAPS_API_KEY'
-})(App);
-
-
-
-
-
-
-
-state = {
-    showingInfoWindow: false,  // Hides or shows the InfoWindow
-    activeMarker: {},          // Shows the active marker upon click
-    selectedPlace: {}          // Shows the InfoWindow to the selected place upon a marker
-};
-
- onMarkerClick = (props, marker, e) =>
-    this.setState({
-      selectedPlace: props,
-      activeMarker: marker,
-      showingInfoWindow: true
-    });
-
-  onClose = props => {
-    if (this.state.showingInfoWindow) {
-      this.setState({
-        showingInfoWindow: false,
-        activeMarker: null
-      });
-    }
-  };
-
-
 
   app.get('/events', async (req, res) => {
   const { max, search } = req.query;
@@ -152,51 +54,3 @@ state = {
 });
 
 
-import React from 'react'
-import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
-
-const containerStyle = {
-  width: '400px',
-  height: '400px'
-};
-
-const center = {
-  lat: -3.745,
-  lng: -38.523
-};
-
-function MyComponent() {
-  const { isLoaded } = useJsApiLoader({
-    id: 'google-map-script',
-    googleMapsApiKey: "YOUR_API_KEY"
-  })
-
-  const [map, setMap] = React.useState(null)
-
-  const onLoad = React.useCallback(function callback(map) {
-    // This is just an example of getting and using the map instance!!! don't just blindly copy!
-    const bounds = new window.google.maps.LatLngBounds(center);
-    map.fitBounds(bounds);
-
-    setMap(map)
-  }, [])
-
-  const onUnmount = React.useCallback(function callback(map) {
-    setMap(null)
-  }, [])
-
-  return isLoaded ? (
-      <GoogleMap
-        mapContainerStyle={containerStyle}
-        center={center}
-        zoom={10}
-        onLoad={onLoad}
-        onUnmount={onUnmount}
-      >
-        { /* Child components, such as markers, info windows, etc. */ }
-        <></>
-      </GoogleMap>
-  ) : <></>
-}
-
-export default React.memo(MyComponent)

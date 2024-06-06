@@ -29,7 +29,7 @@ const AboutBlock1 = () => {
                 data-aos="fade-right"
               >
                 <Link to="adopt" className="btn btn-style ">
-                  Get your pet
+                  Adopt a pet
                 </Link>
                 <Link to="rescue" className="btn btn-style btn-outline-primary">
                   Rescue a stray
