@@ -54,7 +54,7 @@ catch(error){
 
 router.get('/filter', async (req, res, next) => {
     try {
-        const query = req.query.search
+        const query = req.query.search;
         let posts = await Post.find({ address: { $regex: query, $options: "i" } });
         setTimeout(() => {
             res.status(200).json(posts);
@@ -63,44 +63,6 @@ router.get('/filter', async (req, res, next) => {
         next(error)
     }
 });
-
-
-// router.get('/filter', async (req, res, next) => {
-//     try {
-//         const { max, search } = req.query;
-//         const allposts = await Post.find();
-//         let filteredPosts = JSON.parse(allposts);
-
-//         if (search) {
-//             filteredPosts = filteredPosts.filter((item) => {
-//                 const searchableText = `${item.donor_address} ${item.vet_category} ${item.vet_description}`;
-//                 return searchableText.toLowerCase().includes(search.toLowerCase());
-//             });
-//         }
-
-//         if (max) {
-//             filteredPosts = filteredPosts.slice(filteredPosts.length - max, filteredPosts.length);
-//         }
-
-//         filteredPosts = filteredPosts.map((post) => ({
-//             _id: post._id,
-//             vet_name: post.title,
-//             category: post.vet_category,
-//             breed: post.vet_breed,
-//             address: post.donor_address,
-//             coords: {
-//                 lat: post.donor_latitude,
-//                 lng: post.donor_longitude
-//             }
-//         }))
-
-//         setTimeout(() => {
-//             res.status(200).json(filteredPosts);
-//         }, 2500)
-//     } catch (error) {
-//         next(error)
-//     }
-// });
 
 
 module.exports = router;
