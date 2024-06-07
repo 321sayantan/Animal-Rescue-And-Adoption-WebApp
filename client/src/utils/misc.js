@@ -54,3 +54,36 @@ export const location = [
     lng: 30.0801211,
   },
 ];
+
+const filteredPosts = [
+  {
+    _id: '1',
+    vet_name: 'Molly',
+    vet_category: 'Fish',
+    address: 'ABC Street, Rampurnagar, Delhi'
+  },
+  {
+    _id: '1',
+    vet_name: 'Molly',
+    vet_category: 'Fish',
+    address: 'ABC Street, Rampurnagar, Delhi'
+  },
+  {
+    _id: '1',
+    vet_name: 'Molly',
+    vet_category: 'Fish',
+    address: 'ABC Street, Rampurnagar, Delhi'
+  },
+  {
+    _id: '1',
+    vet_name: 'Molly',
+    vet_category: 'Fish',
+    address: 'ABC Street, Rampurnagar, Delhi'
+  },
+  {
+    _id: '1',
+    vet_name: 'Molly',
+    vet_category: 'Fish',
+    address: 'ABC Street, Rampurnagar, Delhi'
+  },
+]
