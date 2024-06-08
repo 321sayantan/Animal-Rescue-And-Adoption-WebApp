@@ -2,6 +2,7 @@ const express = require("express");
 const User = require("../db/userModel");
 const bcrypt = require("bcrypt");
 const passport = require("passport");
+const mailTransporter = require("../utils/mailServer");
 
 const router = express.Router();
 
@@ -26,6 +27,30 @@ console.log("inside register route")
         data
           .save()
           .then((result) => {
+
+            let mailDetails = {
+              from: "AdoPet2024@gmail.com",
+              to: data.email,
+              // to: "123sayantandas@gmail.com",
+              subject: "Welcome to Adopet! Your Registration is Complete! 🐾",
+              html: `Hi ${data.name}, <br><br>
+                    Welcome to Adopet! Your registration is successful. 🎉 <br><br>
+                    Start exploring adoptable pets <a href="http:localhost:3000">here</a>. If you need help, contact us at AdoPet2024@gmail.com.
+                    <br><br>
+                    Happy adopting and rescue!
+                    <br><br>
+                    Best,<br>
+                    The Adopet Team`,
+              };
+
+            mailTransporter.sendMail(mailDetails, function (err, data) {
+              if (err) {
+                console.log("Error Occurs");
+              } else {
+                console.log("Email sent successfully");
+              }
+            });
+
             res.status(200).json({ message: ["User created successfully"], result });
             console.log(result);
           })
