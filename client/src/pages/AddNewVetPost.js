@@ -32,6 +32,7 @@ function AddNewVetPost() {
             console.error('Failed to post:', error);
         }
 
+        toast.dismiss()
         // console.log(69,postVetData);
     }
 

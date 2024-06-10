@@ -633,7 +633,7 @@ progress {
 }
 
 .blockquote-footer::before {
-  content: "— ";
+  content: "-- ";
 }
 
 .img-fluid {
@@ -7011,6 +7011,11 @@ textarea.form-control-lg {
   appearance: none;
 }
 
+select.form-select option,
+.form-select option {
+  background: #fff !important;
+}
+
 select.form-select {
   cursor: pointer !important;
 }
@@ -12608,6 +12613,11 @@ h3.title-style {
   background-size: cover;
 }
 
+/* .bg2 {
+  background: url(../images/rescue-banner.jpg) no-repeat top;
+  background-size: cover;
+} */
+
 .slick-initialized .banner-slide {
   position: relative;
   min-height: 800px;
@@ -12636,6 +12646,7 @@ h3.title-style {
   color: #ffffff;
 }
 
+.rescue-posts-redirect p,
 .hero-content p {
   font-size: 22px;
   line-height: 32px;
@@ -12643,6 +12654,11 @@ h3.title-style {
   font-weight: 300;
   text-transform: uppercase;
   letter-spacing: 1px;
+}
+
+.rescue-posts-redirect p {
+  letter-spacing: 0.5px !important;
+  text-transform: none !important;
 }
 
 .hero-content h5 {
@@ -12675,6 +12691,7 @@ h3.title-style {
   margin-left: 6px;
 }
 
+.rescue-posts-redirect h1,
 .hero-content h1 {
   font-size: 65px;
   line-height: 75px;
@@ -12682,6 +12699,10 @@ h3.title-style {
   color: #fff;
   max-width: 700px;
   font-weight: 800;
+}
+
+.rescue-posts-redirect h1 {
+  color: var(--heading-color) !important;
 }
 
 @media (max-width: 1280px) {
@@ -16358,6 +16379,7 @@ p.count-text {
 /* //stats section */
 
 /* blog section */
+.rescue-works_bg-sec,
 .blog-bg-sec {
   background: var(--bg-grey);
 }
@@ -16802,6 +16824,12 @@ ul.page-pagination li a.next:hover {
   }
 }
 
+@media screen and (max-width: 1100px) {
+  .medium-hide {
+    display: none;
+  }
+}
+
 @media screen and (max-width: 991px) {
   .w3l-footer-16 h3 {
     margin-bottom: 30px;
@@ -16861,6 +16889,10 @@ ul.page-pagination li a.next:hover {
   background: var(--layer);
 }
 
+#rescue.inner-banner {
+  background: url(../images/rescue-banner.jpg) no-repeat top !important;
+}
+
 h4.inner-text-title {
   color: #fff;
   font-weight: 800;
@@ -16911,13 +16943,20 @@ h4.inner-text-title {
 }
 
 .posts-list .post-cards {
-  /* position: relative; */
-  /* width: 100%; */
   overflow: hidden;
 }
 
+.posts-list .filter-categ_btn, 
 .posts-list .add-post-btn {
   margin-block: -1.5rem 0.5rem;
+}
+
+.filter-categ_btn .form-select, 
+.add-post-btn .form-select {
+  color: #fff !important;
+  background-color: #286cc2 !important;
+  outline: none !important;
+  border: 2px solid var(--bs-light) !important;
 }
 
 .posts-list .details-btn {
@@ -17276,6 +17315,8 @@ h4.inner-text-title {
 .add-new-post input,
 .add-new-post textarea,
 .add-new-post select,
+.rescue-section input,
+.rescue-section textarea,
 .register-section input,
 .register-section textarea,
 .w3l-contact-info .form-inner-cont input,
@@ -17301,6 +17342,8 @@ h4.inner-text-title {
 .add-new-post input:focus,
 .add-new-post textarea:focus,
 .add-new-post select:focus,
+.rescue-section input:focus,
+.rescue-section textarea:focus,
 .register-section input:focus,
 .register-section textarea:focus,
 .w3l-contact-info .form-inner-cont input:focus,
@@ -17546,17 +17589,20 @@ h4.inner-text-title {
 
 
 /* adopt-pet */
+#rescue-pet,
 #adopt-pet {
   position: relative;
   margin-top: 6rem;
 }
 
+#rescue-pet .left-column,
 #adopt-pet .left-column {
   /* margin-left: -1rem; */
   padding-left: 0;
   border-right: 1px solid var(--bs-warning);
 }
 
+#rescue-pet .left-column aside,
 #adopt-pet .left-column aside {
   width: 100%;
 }
@@ -17573,6 +17619,7 @@ h4.inner-text-title {
 
 
 @media screen and (max-width: 991px) {
+  #rescue-pet .left-column,
   #adopt-pet .left-column {
     border: none;
     padding: 0 0 1.5rem 0;
@@ -17587,6 +17634,11 @@ h4.inner-text-title {
     display: flex;
     align-items: center;
     justify-content: space-between;
+  }
+
+  #rescue-pet .left-column aside {
+    margin-top: 1.4rem;
+    padding-inline: 1.5rem;
   }
 
   .left-column aside .location-search {

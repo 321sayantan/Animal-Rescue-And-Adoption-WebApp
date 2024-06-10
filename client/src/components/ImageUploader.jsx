@@ -1,11 +1,19 @@
 import { useState } from "react";
 import axios from "axios";
 
-function ImageUploader({ id, onUploaded, onCheck }) {
+function ImageUploader({ id, multiple, onUploaded, onCheck }) {
   const [isInvalid, setIsInvalid] = useState(false);
+  // const [images, setImages] = useState();
 
+  let file = [];
   const handleImageUpload = async (e) => {
-    const file = e.target.files[0];
+    if (multiple === true) {
+      for (let i = 0; i < e.target.files.length; i++) {
+        file.push(e.target.files[i]);
+      }
+    } else {
+      file = e.target.files[0];
+    }
 
     if (file.length === 0) {
       console.log("path is invalid");
@@ -15,9 +23,12 @@ function ImageUploader({ id, onUploaded, onCheck }) {
       console.log("path is valid");
       setIsInvalid(false);
     }
+    // console.log(file);
+    console.log(...file);
 
     const formData = new FormData();
-    formData.append("file", file);
+    // formData.append("file", file);
+    formData.append("file", ...file);
     formData.append("upload_preset", process.env.REACT_APP_UPLOAD_PRESET);
 
     try {
@@ -49,8 +60,9 @@ function ImageUploader({ id, onUploaded, onCheck }) {
         className={"form-control " + fileSelectClasses}
         type="file"
         id={id}
+        text="Photo of your vet"
         onChange={handleImageUpload}
-        // multiple
+        multiple={multiple}
       />
     </>
   );

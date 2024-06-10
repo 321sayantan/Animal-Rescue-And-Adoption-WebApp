@@ -204,6 +204,7 @@ const NewPostForm = (props) => {
         <div className="col-md-8">
           <AutoComplete
             id="location-input"
+            placeholder="Location (location of the vet...)"
             onCheck={() => setAddrIsInvalid(true)}
             onComplete={setDonorAddress}
           />

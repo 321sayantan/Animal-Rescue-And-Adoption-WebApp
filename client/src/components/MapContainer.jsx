@@ -1,7 +1,9 @@
 import { useState } from "react";
+// import { Loader } from "@googlemaps/js-api-loader"
 import GoogleMapReact from "google-map-react";
 import { Icon } from "@iconify/react";
 import locationIcon from "@iconify/icons-mdi/map-marker";
+import NoResult from "./UI/NoResult";
 
 const containerStyle = {
   width: "100%",
@@ -38,9 +40,8 @@ const MapContainer = ({ filteredPosts }) => {
           bootstrapURLKeys={{ key: process.env.REACT_APP_GMAP_API_KEY }}
           style={containerStyle}
           defaultCenter={location[0]}
-          defaultZoom={5}
+          defaultZoom={8}
         >
-          {/* {location.map((pins) => ( */}
           {filteredPosts.map((pins) => (
             <LocationPin
               key={pins._id}
@@ -53,9 +54,7 @@ const MapContainer = ({ filteredPosts }) => {
           ))}
         </GoogleMapReact>
       ) : (
-        <div className="text-center mt-2">
-          <h2>Sorry, No Match found! :(</h2>
-        </div>
+        <NoResult />
       )}
     </>
   );

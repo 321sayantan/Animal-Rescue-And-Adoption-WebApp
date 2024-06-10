@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState } from "react";
 
-const AutoComplete = ({ id, onComplete, onCheck }) => {
+const AutoComplete = ({ id, placeholder, onComplete, onCheck }) => {
   const [isInvalid, setIsInvalid] = useState(false);
   const autoCompleteRef = useRef();
   const inputRef = useRef();
@@ -55,7 +55,7 @@ const AutoComplete = ({ id, onComplete, onCheck }) => {
         type="text"
         ref={inputRef}
         className={"form-control " + addrClasses}
-        placeholder="Location (location of the vet...)"
+        placeholder={placeholder}
         onChange={addrChangeHandler}
         // value={value}
       />

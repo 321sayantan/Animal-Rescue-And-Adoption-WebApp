@@ -6,6 +6,7 @@ const bcrypt = require("bcrypt");
 const session = require("express-session");
 const user_route = require("./routes/auth.js");
 const adoptPost_route = require("./routes/adoptPost.js");
+const rescue_route = require('./routes/rescuePost.js')
 const googleStrategy = require("passport-google-oauth20").Strategy;
 const cors = require("cors");
 // const MongoStore = require("connect-mongo");
@@ -43,15 +44,16 @@ app.use(
     // },
   })
 );
-  
-  app.use(express.urlencoded({ extended: true }));
-  app.use(express.json());
-  
-  app.use(passport.initialize());
-  app.use(passport.session());
-  
-  app.use("/user", user_route);
-  app.use("/adopt", adoptPost_route);
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use("/user", user_route);
+app.use("/adopt", adoptPost_route);
+app.use("/rescue", rescue_route);
 
 
 app.get(
@@ -67,7 +69,7 @@ app.get(
     successRedirect: "http://localhost:3000/",
     failureRedirect: "http://localhost:3000/login",
   }),
-  (req,res)=>{
+  (req, res) => {
     res.status(200).json("login successful")
   }
 );
@@ -97,15 +99,15 @@ passport.use(
           bcrypt.compare(password, logged_user.password, (err, result) => {
             if (err) {
               return cb(err);
-            } 
+            }
             // else {
-              if (result) {
-                console.log(30,"password matched")
-                return cb(null, logged_user);
-              } else {
-                console.log(30, "password didnot match");
-                return cb(null, false);
-              }
+            if (result) {
+              console.log(30, "password matched")
+              return cb(null, logged_user);
+            } else {
+              console.log(30, "password didnot match");
+              return cb(null, false);
+            }
             // }
           });
         } else {
@@ -136,7 +138,7 @@ passport.use(
         var newuser = await User.findOne({ email: profile._json.email });
 
         if (!newuser) {
-           newuser = new User({
+          newuser = new User({
             name: profile.displayName,
             email: profile._json.email,
             image: profile._json.picture,

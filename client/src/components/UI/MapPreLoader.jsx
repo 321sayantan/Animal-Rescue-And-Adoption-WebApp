@@ -2,7 +2,7 @@ const MapPreLoader = ({ msg }) => {
   return (
     <>
       <div className="container flex-column preloader">
-        <div class="spinner">
+        <div className="spinner">
           <div></div>
           <div></div>
           <div></div>

@@ -1,31 +1,30 @@
 import { useState, Suspense } from "react";
-import { Await, Link, defer, useLoaderData } from "react-router-dom";
+import { useLoaderData, Await, defer } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import PostsSkeleton from "../components/Adopts/PostsSkeleton"
-import PostsList from "../components/Adopts/PostsList";
-import SearchByLocationPanel from "../components/Adopts/SearchByLocationPanel";
-import { petCategList as categories } from "../utils/misc";
-import MapContainer from "../components/MapContainer";
-import { fetchFilteredPosts } from "../utils/httpRequests";
-import ErrorToFetch from "../components/UI/ErrorToFetch";
+import { fetchRescueFilteredPosts } from "../utils/httpRequests";
+import SearchByLocationPanel from "../components/Adopts/SearchByLocationPanel"
+import { rescueCategList as categories } from "../utils/misc";
+import RescueList from "../components/Rescue/RescueList";
 import MapPreLoader from "../components/UI/MapPreLoader";
-import PostsFilteredList from "../components/PostsByQueryList";
-// import { location } from "../utils/misc";
+import ErrorToFetch from "../components/UI/ErrorToFetch";
+import MapContainer from "../components/MapContainer";
+import RescueListSkeleton from "../components/Rescue/RescueListSkeleton";
+import RescueFilteredList from "../components/RescuePostsByQueryList";
+// import { rescuePosts as posts } from "../utils/misc";
 
 
-
-function AdoptPet() {
-    const { posts } = useLoaderData()
+function RescueListPage() {
+    const { rescuePosts } = useLoaderData()
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedVal, setSelectedVal] = useState('')
-    const [postsData, setPostsData] = useState(posts)
+    const [postsData, setPostsData] = useState(rescuePosts)
 
-    const fallback = <PostsSkeleton />
+    const fallback = <RescueListSkeleton />
     let content, postcontent;
 
     const { data, isLoading, isError, error } = useQuery({
-        queryKey: ["filteredPosts", { searchTerm }],
-        queryFn: ({ signal, queryKey }) => fetchFilteredPosts({ signal, ...queryKey[1] }),
+        queryKey: ["filteredRescuePosts", { searchTerm }],
+        queryFn: ({ signal, queryKey }) => fetchRescueFilteredPosts({ signal, ...queryKey[1] }),
         enabled: searchTerm !== undefined,
     });
 
@@ -36,11 +35,11 @@ function AdoptPet() {
     const filterHandler = async (e) => {
         setSelectedVal(e.target.value)
         if (e.target.value === '') {
-            setPostsData(posts)
+            setPostsData(rescuePosts)
             return
         }
-        // console.log(posts)
-        const res = await posts.then(result => result)
+        // console.log(rescuePosts)
+        const res = await rescuePosts.then(result => result)
         const newItems = res.filter((item) => item.vet_category === e.target.value)
         setPostsData(newItems)
         console.log(newItems)
@@ -57,16 +56,15 @@ function AdoptPet() {
 
     if (data) {
         content = <MapContainer filteredPosts={data} />;
-        postcontent = <PostsFilteredList posts={data} />;
+        postcontent = <RescueFilteredList posts={data} />;
     }
-
     return (
         <>
-            <section className="pt-5" id="adopt-pet">
+            <section className="pt-5" id="rescue-pet">
                 <div className="container pt-md-5">
                     <div className="position-relative mb-lg-5 mb-4" data-aos="fade-up">
                         <h3 className="title-style mb-2 text-center">
-                            Choose your buddy!
+                            Save a life..
                         </h3>
                         <div className="title-paw-style">
                             <i className="fas fa-paw" />
@@ -83,7 +81,7 @@ function AdoptPet() {
                             className="posts-list col-lg-9 px-4 mb-lg-0 mb-5"
                             data-aos="fade-left"
                         >
-                            <div className="add-post-btn column d-flex align-items-end justify-content-between">
+                            <div className="filter-categ_btn column d-flex align-items-end justify-content-end mt-1">
                                 <div className="col-sm-3">
                                     <select
                                         className="form-select"
@@ -101,25 +99,19 @@ function AdoptPet() {
                                         ))}
                                     </select>
                                 </div>
-                                <Link
-                                    to="register-new-vet"
-                                    className="btn btn-style btn-secondary"
-                                >
-                                    Donate a vet
-                                </Link>
                             </div>
-                            {/* list of available pets */}
-                            {posts && !searchTerm && (
+                            {/* list of available rescue animals */}
+                            {rescuePosts && !searchTerm && (
                                 <Suspense fallback={fallback}>
                                     <Await resolve={postsData}>
-                                        {(posts) => <PostsList posts={posts} />}
+                                        {(posts) => <RescueList posts={posts} />}
                                     </Await>
                                 </Suspense>
                             )}
-                            {/* //list of available pets */}
+                            {/* //list of available rescue animals */}
                             {/* map showing available locations */}
                             {searchTerm && (
-                                <div className="container col-lg-12 md-6 py-5">
+                                <div className="mx-3 col-lg-12 md-6 py-5">
                                     <div className="position-relative map-wrapper">
                                         {content}
                                     </div>
@@ -132,14 +124,14 @@ function AdoptPet() {
                 </div>
             </section>
         </>
-    );
+    )
 }
 
-export default AdoptPet
+export default RescueListPage
 
 
-async function loadPosts() {
-    const response = await fetch("http://localhost:5000/adopt/getallpost");
+async function loadRescuePosts() {
+    const response = await fetch("http://localhost:5000/rescue/getallrescues");
 
     if (!response.ok) {
         throw new Error("Failed to fetch available posts!");
@@ -151,6 +143,6 @@ async function loadPosts() {
 
 export function loader() {
     return defer({
-        posts: loadPosts()
+        rescuePosts: loadRescuePosts()
     });
 }

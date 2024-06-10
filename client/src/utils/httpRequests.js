@@ -3,6 +3,7 @@ import { QueryClient } from '@tanstack/react-query';
 export const queryClient = new QueryClient();
 
 
+// for adopt requests
 export async function fetchFilteredPosts({ signal, searchTerm, max }) {
   let url = `http://localhost:5000/adopt/filter`;
 
@@ -14,6 +15,37 @@ export async function fetchFilteredPosts({ signal, searchTerm, max }) {
   }
   else if (max) {
     url = `http://localhost:5000/adopt/filter?max=${max}`;
+  }
+
+  const response = await fetch(url, {
+    signal: signal
+  });
+
+  if (!response.ok) {
+    const error = new Error('failed fetching the events!');
+    error.code = response.status;
+    error.info = await response.json();
+    throw error;
+  }
+
+  const result = await response.json();
+  // console.log(result)
+  return result;
+}
+
+
+// for rescue requests
+export async function fetchRescueFilteredPosts({ signal, searchTerm, max }) {
+  let url = `http://localhost:5000/rescue/filter`;
+
+  if (searchTerm && max) {
+    url = `http://localhost:5000/rescue/filter?search=${searchTerm}&max=${max}`;
+  }
+  else if (searchTerm) {
+    url = `http://localhost:5000/rescue/filter?search=${searchTerm}`;
+  }
+  else if (max) {
+    url = `http://localhost:5000/rescue/filter?max=${max}`;
   }
 
   const response = await fetch(url, {
