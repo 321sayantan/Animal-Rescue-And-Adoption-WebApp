@@ -12,31 +12,34 @@ function RegisterPage() {
 
   const SignUpHandler = async (userData) => {
     try {
-      const response = await fetch("http://localhost:5000/user/register", {
-        method: "POST",
-        body: JSON.stringify(userData),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
+      const response = await toast.promise(
+        fetch("http://localhost:5000/user/register", {
+          method: "POST",
+          body: JSON.stringify(userData),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }),
+        {
+          pending: 'Processing...',
+          success: 'Registration Successful',
+          error: 'Failed to register!'
+        }
+      )
       const result = await response.json();
       console.log(response);
       console.log(result);
 
-      if (response.ok) {
-        toast.success('Registration Successful.', toasterVariants);
-        setErrors(null);
+      if (response.status === 200 ) {
         navigate("..");
+        setErrors(null);
       } else {
+        toast.error('Failed to register!', toasterVariants)
         setErrors(result.errors || {});
       }
     } catch (error) {
       console.error('Error submitting form:', error);
     }
-
-    // console.log(result);
-    
   }
 
   return (
@@ -73,7 +76,7 @@ function RegisterPage() {
             <div className="col-lg-7 mt-4 px-4" data-aos="fade-right">
               {errors && <Alert className="alert-danger">
                 <ul>
-                  {Object.values(errors).map((err, i) => (
+                  {Object.values(errors[0]).map((err, i) => (
                     <li key={i}>{err}</li>
                   ))}
                 </ul>

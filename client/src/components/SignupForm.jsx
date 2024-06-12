@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigation } from "react-router-dom";
 import useInput from "../hooks/use-input";
 import Alert from "./UI/Alert";
+import AutoComplete from "./UI/AutoComplete";
+import RadioButton from "./UI/RadioButton";
 
 const pattern = /^(?=.*\d.*)(?=.*[a-zA-Z].*)(?=.*[\W]).{8,}$/;
 const pattern2 = /^\d{5,8}(?:[-\s]\d{4})?$/;
@@ -9,6 +11,9 @@ const pattern2 = /^\d{5,8}(?:[-\s]\d{4})?$/;
 const SignupForm = (props) => {
   const [showPswrd, setShowPswrd] = useState(false);
   const [showConfPswrd, setShowConfPswrd] = useState(false);
+  const [userAddress, setUserAddress] = useState();
+  const [addrIsInvalid, setAddrIsInvalid] = useState(false);
+  const [isVolunteer, setIsVolunteer] = useState("No");
   const navigation = useNavigation();
 
   let isSubmitting = false;
@@ -53,24 +58,6 @@ const SignupForm = (props) => {
   } = useInput((value) => value === enteredPswrd);
 
   const {
-    value: enteredAddress,
-    isValid: addressisValid,
-    hasError: addressisInvalid,
-    valueInputBlurHandler: addressBlurHandler,
-    valueChangeHandler: addressChangeHandler,
-    resetHandler: resetAddress,
-  } = useInput((value) => value.trim().length >= 8);
-
-  const {
-    value: enteredCity,
-    isValid: cityisValid,
-    hasError: cityisInvalid,
-    valueInputBlurHandler: cityBlurHandler,
-    valueChangeHandler: cityChangeHandler,
-    resetHandler: resetCity,
-  } = useInput((value) => value.trim().length >= 3);
-
-  const {
     value: enteredZip,
     isValid: zipisValid,
     hasError: zipisInvalid,
@@ -79,14 +66,17 @@ const SignupForm = (props) => {
     resetHandler: resetZip,
   } = useInput((value) => pattern2.test(value));
 
+  const onChangeRadio = (e) => {
+    setIsVolunteer(e.target.value);
+  };
+
   let formIsValid = false;
   if (
     nameisValid &&
     mailIsValid &&
     pswrdIsValid &&
     confPswrdMatched &&
-    addressisValid &&
-    cityisValid &&
+    // !addrIsInvalid &&
     zipisValid
   ) {
     formIsValid = true;
@@ -100,20 +90,19 @@ const SignupForm = (props) => {
       mailIsInvalid &&
       pswrdIsInvalid &&
       confpswrdNotMatched &&
-      addressisInvalid &&
-      cityisInvalid &&
+      // addrIsInvalid &&
       zipisInvalid
     ) {
       return;
     }
-    
+
     const userData = {
       username: enteredName,
       email: enteredMail,
       password: enteredPswrd,
+      is_volunteer: isVolunteer,
       address: {
-        street: enteredAddress,
-        city: enteredCity,
+        ...userAddress,
         zip_code: enteredZip,
       },
     };
@@ -123,8 +112,8 @@ const SignupForm = (props) => {
     resetMail();
     resetPswrd();
     resetConfPswrd();
-    resetAddress();
-    resetCity();
+    document.getElementById("user-address").value = "";
+    setIsVolunteer("No");
     resetZip();
   };
 
@@ -132,10 +121,7 @@ const SignupForm = (props) => {
     mailClasses = mailIsInvalid ? "is-invalid" : "",
     passwrdClasses = pswrdIsInvalid ? "is-invalid" : "",
     confPswrdClasses = confpswrdNotMatched ? "is-invalid" : "",
-    addressClasses = addressisInvalid ? "is-invalid" : "",
-    cityClasses = cityisInvalid ? "is-invalid" : "",
     zipClasses = zipisInvalid ? "is-invalid" : "";
-
 
   return (
     <>
@@ -216,29 +202,23 @@ const SignupForm = (props) => {
           )}
         </div>
         <div className="col-12">
-          <textarea
+          <AutoComplete
+            id="user-address"
+            placeholder="Your Address (House No. / Building / street)"
+            onCheck={() => setAddrIsInvalid(true)}
+            onComplete={setUserAddress}
+          />
+          {/* <textarea
             id="address"
             className={"form-control " + addressClasses}
             placeholder="Your Address (House No. / Building / street)"
             onChange={addressChangeHandler}
             onBlur={addressBlurHandler}
             value={enteredAddress}
-          />
-          {addressisInvalid && (
+          /> */}
+          {addrIsInvalid && (
             <p className="invalid-feedback">Invalid Address!</p>
           )}
-        </div>
-        <div className="col-md-8">
-          <input
-            type="text"
-            className={"form-control " + cityClasses}
-            id="city"
-            placeholder="City"
-            onChange={cityChangeHandler}
-            onBlur={cityBlurHandler}
-            value={enteredCity}
-          />
-          {cityisInvalid && <p className="invalid-feedback">Invalid City!</p>}
         </div>
         <div className="col-md-4">
           <input
@@ -253,6 +233,28 @@ const SignupForm = (props) => {
           {zipisInvalid && (
             <p className="invalid-feedback">Invalid Zip-code!</p>
           )}
+        </div>
+        <div className="col-md-8 d-flex align-items-center justify-content-between select-volntr">
+          <p>Are you a Caretaker of Vets?</p>
+          <div className="d-flex gap-4 radio-btn-group">
+            <RadioButton
+              id="yes"
+              name="volunteer"
+              value="Yes"
+              text="Yes"
+              onChange={onChangeRadio}
+              // checked={theme.dark}
+            />
+            <RadioButton
+              id="no"
+              name="volunteer"
+              value="No"
+              text="No"
+              onChange={onChangeRadio}
+              setDefault={true}
+              // checked={theme.light}
+            />
+          </div>
         </div>
         <div className="col-12 mt-4">
           <button

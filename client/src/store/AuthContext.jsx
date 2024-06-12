@@ -44,6 +44,7 @@ const AuthContextProvider = ({ children }) => {
   }
 
   function getCookie(cname) {
+    console.log(47,document.cookie)
     let name = cname + "=";
     let decodedCookie = decodeURIComponent(document.cookie);
     let ca = decodedCookie.split(";");

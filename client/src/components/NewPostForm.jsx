@@ -3,7 +3,6 @@ import { useState } from "react";
 import useInput from "../hooks/use-input";
 import AutoComplete from "./UI/AutoComplete";
 import RadioButton from "./UI/RadioButton";
-
 import { petCategList as categories, toasterVariants } from "../utils/misc";
 import ImageUploader from "./ImageUploader";
 import { toast } from "react-toastify";

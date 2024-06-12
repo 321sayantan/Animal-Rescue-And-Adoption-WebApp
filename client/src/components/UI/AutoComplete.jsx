@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState } from "react";
 
-const AutoComplete = ({ id, placeholder, onComplete, onCheck }) => {
+const AutoComplete = ({ id, placeholder, onComplete, onCheck, elemType }) => {
   const [isInvalid, setIsInvalid] = useState(false);
   const autoCompleteRef = useRef();
   const inputRef = useRef();
