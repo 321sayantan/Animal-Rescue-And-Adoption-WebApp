@@ -137,7 +137,7 @@ const RescueForm = (props) => {
       description: enteredDescription,
       rescuer_name: enteredName,
       rescuer_mob: enteredMob,
-      ...vetImage,
+      images: [...vetImage],
       loc_of_found: {
         ...rescLoc,
         zip_code: enteredZip,

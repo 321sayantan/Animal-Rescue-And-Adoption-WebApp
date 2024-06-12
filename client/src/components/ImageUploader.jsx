@@ -3,32 +3,18 @@ import axios from "axios";
 
 function ImageUploader({ id, multiple, onUploaded, onCheck }) {
   const [isInvalid, setIsInvalid] = useState(false);
-  // const [images, setImages] = useState();
-
+  const [images, setImages] = useState([]);
+  
   let file = [];
   const handleImageUpload = async (e) => {
-    if (multiple === true) {
-      for (let i = 0; i < e.target.files.length; i++) {
-        file.push(e.target.files[i]);
-      }
-    } else {
-      file = e.target.files[0];
-    }
-
-    if (file.length === 0) {
-      console.log("path is invalid");
-      onCheck(isInvalid);
-      setIsInvalid(true);
-    } else {
-      console.log("path is valid");
-      setIsInvalid(false);
-    }
-    // console.log(file);
-    console.log(...file);
-
+    const files = e.target.files;
+    
+    setImages(images,[]);
+           console.log(images);
+    for (const file of files) {
     const formData = new FormData();
     // formData.append("file", file);
-    formData.append("file", ...file);
+    formData.append("file", file);
     formData.append("upload_preset", process.env.REACT_APP_UPLOAD_PRESET);
 
     try {
@@ -42,14 +28,19 @@ function ImageUploader({ id, multiple, onUploaded, onCheck }) {
           image: res.data.secure_url,
           image_id: res.data.public_id,
         };
-        onUploaded(imageData);
+
+        // setImages(imageData)
+        images.push(imageData);
         // console.log(imageData);
-      } else {
-        throw new Error("Error uploading image");
-      }
-    } catch (error) {
-      console.error(error);
+         console.log(69,images);
+        } else {
+          throw new Error("Error uploading image");
+          }
+          } catch (error) {
+            console.error(error);
+            }
     }
+  onUploaded(images);
   };
 
   const fileSelectClasses = isInvalid ? "is-invalid" : "";
@@ -69,3 +60,23 @@ function ImageUploader({ id, multiple, onUploaded, onCheck }) {
 }
 
 export default ImageUploader;
+
+
+// if (multiple === true) {
+//   for (let i = 0; i < e.target.files.length; i++) {
+//     file.push(e.target.files[i]);
+//   }
+// } else {
+//   file = e.target.files[0];
+// }
+
+// if (file.length === 0) {
+//   console.log("path is invalid");
+//   onCheck(isInvalid);
+//   setIsInvalid(true);
+// } else {
+//   console.log("path is valid");
+//   setIsInvalid(false);
+// }
+// // console.log(file);
+// console.log(...file);
