@@ -12,7 +12,6 @@ const SignupForm = (props) => {
   const [showPswrd, setShowPswrd] = useState(false);
   const [showConfPswrd, setShowConfPswrd] = useState(false);
   const [userAddress, setUserAddress] = useState();
-  const [addrIsInvalid, setAddrIsInvalid] = useState(false);
   const [isVolunteer, setIsVolunteer] = useState("No");
   const navigation = useNavigation();
 
@@ -76,7 +75,6 @@ const SignupForm = (props) => {
     mailIsValid &&
     pswrdIsValid &&
     confPswrdMatched &&
-    // !addrIsInvalid &&
     zipisValid
   ) {
     formIsValid = true;
@@ -90,7 +88,6 @@ const SignupForm = (props) => {
       mailIsInvalid &&
       pswrdIsInvalid &&
       confpswrdNotMatched &&
-      // addrIsInvalid &&
       zipisInvalid
     ) {
       return;
@@ -205,20 +202,8 @@ const SignupForm = (props) => {
           <AutoComplete
             id="user-address"
             placeholder="Your Address (House No. / Building / street)"
-            onCheck={() => setAddrIsInvalid(true)}
             onComplete={setUserAddress}
           />
-          {/* <textarea
-            id="address"
-            className={"form-control " + addressClasses}
-            placeholder="Your Address (House No. / Building / street)"
-            onChange={addressChangeHandler}
-            onBlur={addressBlurHandler}
-            value={enteredAddress}
-          /> */}
-          {addrIsInvalid && (
-            <p className="invalid-feedback">Invalid Address!</p>
-          )}
         </div>
         <div className="col-md-4">
           <input

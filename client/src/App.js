@@ -14,10 +14,12 @@ import PetDetailsPage from './pages/PetDetailsPage';
 import AddNewVetPost from './pages/AddNewVetPost';
 import RescueVet from './pages/RescueVet';
 import RescueListPage from './pages/RescueListPage';
+import RescueDetailsPage from './pages/RescueDetailsPage';
 import { loader as rootLoader } from './pages/Root';
 import { loader as loadPetPosts } from './pages/AdoptPet';
 import { loader as loadRescuePosts } from './pages/RescueListPage';
 import { loader as loadPostDetails } from './pages/PetDetailsPage';
+import { loader as loadRescueDetalis } from './pages/RescueDetailsPage';
 
 
 const router = createBrowserRouter([
@@ -46,7 +48,7 @@ const router = createBrowserRouter([
         children: [
           { index: true, element: <RescueVet /> },
           { path: 'rescue-list', element: <RescueListPage />, loader: loadRescuePosts },
-          { path: ':id', element: '', loader: '' }
+          { path: ':id', element: <RescueDetailsPage />, loader: loadRescueDetalis }
         ]
       },
     ]

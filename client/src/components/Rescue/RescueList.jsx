@@ -15,7 +15,7 @@ const RescueList = ({ posts }) => {
               >
                 <div className="d-flex content">
                   <div className="thumbnail-img">
-                    <img src={post.image} alt="" />
+                    <img src={post.images[0].image} alt="" />
                   </div>
                   <div className="mx-2 info">
                     <h3>{post.vet_category}</h3>
@@ -31,7 +31,7 @@ const RescueList = ({ posts }) => {
                     <p>{post.address}</p>
                   </div>
                 </div>
-                <Link to={`${post._id}`}>Details</Link>
+                <Link to={`../${post._id}`}>Details</Link>
               </li>
             ))}
           </ul>

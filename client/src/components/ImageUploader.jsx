@@ -1,54 +1,52 @@
 import { useState } from "react";
 import axios from "axios";
 
-function ImageUploader({ id, multiple, onUploaded, onCheck }) {
-  const [isInvalid, setIsInvalid] = useState(false);
+function ImageUploader({ id, multiple, onUploaded, label }) {
   const [images, setImages] = useState([]);
-  
-  let file = [];
+
+  // let file = [];
   const handleImageUpload = async (e) => {
     const files = e.target.files;
     
-    setImages(images,[]);
-           console.log(images);
+    setImages(images, []);
+    
     for (const file of files) {
-    const formData = new FormData();
-    // formData.append("file", file);
-    formData.append("file", file);
-    formData.append("upload_preset", process.env.REACT_APP_UPLOAD_PRESET);
+      const formData = new FormData();
 
-    try {
-      const res = await axios.post(
-        `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUD_NAME}/image/upload`,
-        formData
-      );
+      formData.append("file", file);
+      formData.append("upload_preset", process.env.REACT_APP_UPLOAD_PRESET);
 
-      if (res.status === 200) {
-        const imageData = {
-          image: res.data.secure_url,
-          image_id: res.data.public_id,
-        };
+      try {
+        const res = await axios.post(
+          `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUD_NAME}/image/upload`,
+          formData
+        );
 
-        // setImages(imageData)
-        images.push(imageData);
-        // console.log(imageData);
-         console.log(69,images);
+        if (res.status === 200) {
+          const imageData = {
+            image: res.data.secure_url,
+            image_id: res.data.public_id,
+          };
+
+          images.push(imageData);
+          console.log(69, images);
         } else {
           throw new Error("Error uploading image");
-          }
-          } catch (error) {
-            console.error(error);
-            }
+        }
+      } catch (error) {
+        console.error(error);
+      }
     }
-  onUploaded(images);
+    onUploaded(images);
   };
 
-  const fileSelectClasses = isInvalid ? "is-invalid" : "";
+  // const fileSelectClasses = isInvalid ? "is-invalid" : "";
 
   return (
     <>
       <input
-        className={"form-control " + fileSelectClasses}
+        // className={"form-control " + fileSelectClasses}
+        className="form-control"
         type="file"
         id={id}
         text="Photo of your vet"
@@ -61,22 +59,3 @@ function ImageUploader({ id, multiple, onUploaded, onCheck }) {
 
 export default ImageUploader;
 
-
-// if (multiple === true) {
-//   for (let i = 0; i < e.target.files.length; i++) {
-//     file.push(e.target.files[i]);
-//   }
-// } else {
-//   file = e.target.files[0];
-// }
-
-// if (file.length === 0) {
-//   console.log("path is invalid");
-//   onCheck(isInvalid);
-//   setIsInvalid(true);
-// } else {
-//   console.log("path is valid");
-//   setIsInvalid(false);
-// }
-// // console.log(file);
-// console.log(...file);

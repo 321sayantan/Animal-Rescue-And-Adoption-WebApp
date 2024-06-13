@@ -1,14 +1,16 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import SignupForm from "../components/SignupForm";
 import { toast } from "react-toastify";
 import Alert from "../components/UI/Alert";
 import { toasterVariants } from "../utils/misc";
+import { AuthContext } from "../store/AuthContext";
 
 
 function RegisterPage() {
   const navigate = useNavigate()
   const [errors, setErrors] = useState()
+  const authCtx = useContext(AuthContext);
 
   const SignUpHandler = async (userData) => {
     try {
@@ -22,19 +24,21 @@ function RegisterPage() {
         }),
         {
           pending: 'Processing...',
-          success: 'Registration Successful',
-          error: 'Failed to register!'
+          // success: 'Registration Successful',
+          // error: 'Failed to register!'
         }
-      )
+      );
       const result = await response.json();
       console.log(response);
-      console.log(result);
 
-      if (response.status === 200 ) {
+      if (response.ok) {
+        // console.log(result);
+        authCtx.register()
         navigate("..");
+        toast.success(result.message, toasterVariants)
         setErrors(null);
       } else {
-        toast.error('Failed to register!', toasterVariants)
+        toast.error(`${result.errors[0]}`, toasterVariants)
         setErrors(result.errors || {});
       }
     } catch (error) {
@@ -76,7 +80,7 @@ function RegisterPage() {
             <div className="col-lg-7 mt-4 px-4" data-aos="fade-right">
               {errors && <Alert className="alert-danger">
                 <ul>
-                  {Object.values(errors[0]).map((err, i) => (
+                  {Object.values(errors).map((err, i) => (
                     <li key={i}>{err}</li>
                   ))}
                 </ul>

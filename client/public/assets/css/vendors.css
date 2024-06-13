@@ -30,6 +30,11 @@
   --bs-gradient: linear-gradient(180deg,
       rgba(255, 255, 255, 0.15),
       rgba(255, 255, 255, 0));
+  --color-1: #6168ff;
+  --color-2: #0abf53;
+  --color-3: #ff4f81;
+  --color-4: #ffbc42;
+  --color-5: coral;
 }
 
 *,
@@ -7085,6 +7090,7 @@ hr:not([size]) {
   padding-inline: 0;
 }
 
+.health-status_header,
 .rescue-posts_list h4,
 .filtered-posts_list h4 {
   font-size: 1.3rem;
@@ -7280,4 +7286,41 @@ hr:not([size]) {
 .marquee-container::after {
   right: 0;
   background-image: linear-gradient(to left, var(--bg-clr) 0%, transparent 50%);
+}
+
+
+.health-status_header {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--bs-gray);
+}
+
+.status-list {
+  color: var(--bs-danger);
+  font-weight: 600;
+  font-size: 1.3rem;
+  padding-left: 0.8rem;
+  line-height: 2.2rem;
+}
+
+.status-list::marker {
+  content: '\f6d3';
+  font-family: fontAwesome;
+  color: var(--font-color);
+  font-size: 1rem;
+}
+
+.vet-images {
+  height: 26rem;
+  align-items: center;
+  overflow: hidden;
+}
+
+.vet-images img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }

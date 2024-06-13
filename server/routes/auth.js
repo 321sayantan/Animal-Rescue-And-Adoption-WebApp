@@ -53,7 +53,9 @@ router.post("/register", async (req, res) => {
               }
             });
 
-            res.status(200).json({ message: "User registered successfully", result });
+            setTimeout(() => {
+              res.status(200).json({ message: "Registration successfull", result });
+            }, 1500);
             console.log(result);
           })
           .catch((err) => {
@@ -99,8 +101,9 @@ router.post("/register", async (req, res) => {
 
 
 
-router.post("/login", passport.authenticate("local"), (req, res) => {
-  res.status(200).json({ message: "Login successful" });
+router.post("/login", (req, res) => {
+  const token = Math.random().toString(16).substring(4, 12)
+  res.status(200).json({ message: "Login successful", token });
 });
 
 

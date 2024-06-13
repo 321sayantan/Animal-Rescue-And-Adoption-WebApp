@@ -1,18 +1,19 @@
-import { useState, 
-  // useContext 
+import {
+  useState,
+  useContext
 } from "react";
 import { useNavigate } from "react-router-dom";
 import LoginForm from "../components/LoginForm";
 import { toast } from "react-toastify";
 import Alert from "../components/UI/Alert";
 import { toasterVariants } from "../utils/misc";
-// import { AuthContext } from "../store/AuthContext";
+import { AuthContext } from "../store/AuthContext";
 import { motion } from "framer-motion";
 // import axios from "axios"
 
 function LoginPage() {
   const navigate = useNavigate()
-  // const authCtx = useContext(AuthContext);
+  const authCtx = useContext(AuthContext);
   const [errors, setErrors] = useState();
 
 
@@ -44,33 +45,32 @@ function LoginPage() {
 
   const LogInFormHandler = async (userLoginData) => {
     try {
-      const response = await fetch("http://localhost:5000/user/login", {
-        method: "POST",
-        body: JSON.stringify(userLoginData),
-        headers: {
-          "Content-Type": "application/json",
-        },
+      const response = await toast.promise(
+        fetch("http://localhost:5000/user/login", {
+          method: "POST",
+          body: JSON.stringify(userLoginData),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }), {
+        pending: 'Signing in...',
       });
 
       const result = await response.json();
       console.log(response)
-      console.log(result)
 
       if (response.ok) {
-        // authCtx.login(result.token) // authCtx.login(result.token)
-        // authCtx.setIsAuthenticated(true);
-        toast.success('Welcome back..!', toasterVariants);
-        setErrors(null);
+        toast.success(result.message, toasterVariants)
+        authCtx.login(result.token)
         navigate("..");
+        setErrors(null);
       } else {
-        setErrors(result.errors);
+        toast.error(result.errors[0], toasterVariants)
+        setErrors(result.errors || {});
       }
     } catch (error) {
       console.error('Error submitting form:', error);
     }
-
-    // console.log(userLoginData);
-
   }
 
   return (

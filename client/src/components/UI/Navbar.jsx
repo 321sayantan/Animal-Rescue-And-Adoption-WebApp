@@ -6,7 +6,7 @@ import AuthUserPopup from "./AuthUserPopup";
 import { AuthContext } from "../../store/AuthContext";
 
 const Navbar = (props) => {
-  const { isAuthenticated, authCookie } = useContext(AuthContext);
+  const { isAuthenticated } = useContext(AuthContext);
   const [showProfile, setShowProfile] = useState(false);
 
   // <!-- theme switch js (light and dark)-->
@@ -121,7 +121,7 @@ const Navbar = (props) => {
                     </motion.button>
                   </div>
                 )}
-                {(isAuthenticated || authCookie) && (
+                {(isAuthenticated) && (
                   <div className="auth-user authenticated">
                     <motion.button
                       whileTap={{ scale: 0.7 }}

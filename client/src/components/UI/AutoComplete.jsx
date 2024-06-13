@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState } from "react";
 
-const AutoComplete = ({ id, placeholder, onComplete, onCheck, elemType }) => {
+const AutoComplete = ({ id, placeholder, onComplete, onCheck }) => {
   const [isInvalid, setIsInvalid] = useState(false);
   const autoCompleteRef = useRef();
   const inputRef = useRef();
@@ -37,16 +37,15 @@ const AutoComplete = ({ id, placeholder, onComplete, onCheck, elemType }) => {
     });
   });
 
-  const addrClasses = isInvalid ? "is-invalid" : "";
-
   const addrChangeHandler = (e) => {
     if (e.target.value === "") {
       setIsInvalid(true);
-      onCheck(isInvalid);
     } else {
       setIsInvalid(false);
     }
   };
+
+  const addrClasses = isInvalid ? "is-invalid" : "";
 
   return (
     <>
@@ -59,6 +58,7 @@ const AutoComplete = ({ id, placeholder, onComplete, onCheck, elemType }) => {
         onChange={addrChangeHandler}
         // value={value}
       />
+      {isInvalid && <p className="invalid-feedback">Improper Location!</p>}
     </>
   );
 };
