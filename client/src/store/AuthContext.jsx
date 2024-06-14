@@ -5,22 +5,18 @@ const AuthContext = createContext();
 const AuthContextProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [jwt, setJwt] = useState(null);
-  const [authCookie, setAuthCookie] = useState(null);
   const [isRegistered, setIsRegistered] = useState(null);
 
   useEffect(() => {
     const storedJwt = localStorage.getItem("jwt");
-    const cookie = getCookie("connect.sid");
     const storedRegToken = localStorage.getItem("reg-token");
-    if (storedJwt === null || cookie === null) {
+    if (storedJwt === null) {
       setIsAuthenticated(false);
     } else {
       setIsAuthenticated(true);
     }
     setJwt(storedJwt);
-    setAuthCookie(cookie);
     setIsRegistered(storedRegToken);
-    // console.log(cookie);
   }, []);
 
   function login(token) {
@@ -43,28 +39,27 @@ const AuthContextProvider = ({ children }) => {
     localStorage.setItem("reg-token", token);
   }
 
-  function getCookie(cname) {
-    let name = cname + "=";
-    let decodedCookie = decodeURIComponent(document.cookie);
-    let ca = decodedCookie.split(";");
-    for (let i = 0; i < ca.length; i++) {
-      let c = ca[i];
-      while (c.charAt(0) === " ") {
-        c = c.substring(1);
-      }
-      if (c.indexOf(name) === 0) {
-        return c.substring(name.length, c.length);
-      }
-    }
-    console.log(cname);
-    return "";
-  }
+  // function getCookie(cname) {
+  //   console.log(47,document.cookie)
+  //   let name = cname + "=";
+  //   let decodedCookie = decodeURIComponent(document.cookie);
+  //   let ca = decodedCookie.split(";");
+  //   for (let i = 0; i < ca.length; i++) {
+  //     let c = ca[i];
+  //     while (c.charAt(0) === " ") {
+  //       c = c.substring(1);
+  //     }
+  //     if (c.indexOf(name) === 0) {
+  //       return c.substring(name.length, c.length);
+  //     }
+  //   }
+  //   return "";
+  // }
 
   const authValue = {
     isAuthenticated,
     isRegistered,
     jwt,
-    authCookie,
     login,
     logout,
     register,

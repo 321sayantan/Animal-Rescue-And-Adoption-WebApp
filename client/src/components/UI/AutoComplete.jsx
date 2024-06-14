@@ -37,16 +37,15 @@ const AutoComplete = ({ id, placeholder, onComplete, onCheck }) => {
     });
   });
 
-  const addrClasses = isInvalid ? "is-invalid" : "";
-
   const addrChangeHandler = (e) => {
     if (e.target.value === "") {
       setIsInvalid(true);
-      onCheck(isInvalid);
     } else {
       setIsInvalid(false);
     }
   };
+
+  const addrClasses = isInvalid ? "is-invalid" : "";
 
   return (
     <>
@@ -59,6 +58,7 @@ const AutoComplete = ({ id, placeholder, onComplete, onCheck }) => {
         onChange={addrChangeHandler}
         // value={value}
       />
+      {isInvalid && <p className="invalid-feedback">Improper Location!</p>}
     </>
   );
 };

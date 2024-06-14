@@ -11,14 +11,13 @@ root.render(
     <App />
     <ToastContainer
       position="top-right"
-      // autoClose={3000}
+      autoClose={4000}
       hideProgressBar={false}
       newestOnTop={false}
       closeOnClick
       draggable
       pauseOnHover
       theme="dark"
-      transition='Bounce'
     />
   </AuthContextProvider>
 );

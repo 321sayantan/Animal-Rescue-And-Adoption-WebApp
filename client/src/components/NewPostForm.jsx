@@ -3,10 +3,8 @@ import { useState } from "react";
 import useInput from "../hooks/use-input";
 import AutoComplete from "./UI/AutoComplete";
 import RadioButton from "./UI/RadioButton";
-
-import { petCategList as categories, toasterVariants } from "../utils/misc";
+import { petCategList as categories } from "../utils/misc";
 import ImageUploader from "./ImageUploader";
-import { toast } from "react-toastify";
 
 const pattern = /^\+?\d[\d -]{8,12}\d$/,
   pattern2 = /^\d{4,6}(?:[-\s]\d{4})?$/;
@@ -14,18 +12,11 @@ const pattern = /^\+?\d[\d -]{8,12}\d$/,
 const NewPostForm = (props) => {
   const [donorAddress, setDonorAddress] = useState();
   const [vetImage, setVetImage] = useState();
-  const [addrIsInvalid, setAddrIsInvalid] = useState(false);
-  const [imgIsInvalid, setImgIsInvalid] = useState(false);
   const [isVaccinated, setIsVaccinated] = useState("Yes");
   const navigation = useNavigation();
 
-  // useEffect(() => {
-  //   console.log(isVaccinated)
-  // })
-
   let isSubmitting = false;
   if (navigation.state === "submitting") {
-    toast.loading("Creating Post", toasterVariants);
     isSubmitting = true;
   }
 
@@ -99,9 +90,7 @@ const NewPostForm = (props) => {
     petNameIsValid &&
     categoryIsValid &&
     breedIsValid &&
-    !addrIsInvalid &&
     zipisValid &&
-    !imgIsInvalid &&
     descrisValid
   ) {
     formIsValid = true;
@@ -119,11 +108,9 @@ const NewPostForm = (props) => {
       mobIsInvalid &&
       petNameIsInvalid &&
       categoryIsInvalid &&
-      addrIsInvalid &&
       breedInvalid &&
       zipisInvalid &&
-      descrisInvalid &&
-      imgIsInvalid
+      descrisInvalid
     ) {
       return;
     }
@@ -152,7 +139,6 @@ const NewPostForm = (props) => {
     resetMob();
     document.getElementById("location-input").value = "";
     document.getElementById("pet_image").value = "";
-    setImgIsInvalid(false);
     setIsVaccinated("Yes");
     resetCategory();
     resetPetName();
@@ -205,14 +191,8 @@ const NewPostForm = (props) => {
           <AutoComplete
             id="location-input"
             placeholder="Location (location of the vet...)"
-            onCheck={() => setAddrIsInvalid(true)}
             onComplete={setDonorAddress}
           />
-          {addrIsInvalid && (
-            <p className="invalid-feedback">
-              Please Select a correct location!
-            </p>
-          )}
         </div>
         <div className="col-md-4">
           <input
@@ -302,14 +282,7 @@ const NewPostForm = (props) => {
           </div>
         </div>
         <div className="col-12">
-          <ImageUploader
-            id="pet_image"
-            onCheck={() => setImgIsInvalid(true)}
-            onUploaded={setVetImage}
-          />
-          {imgIsInvalid && (
-            <p className="invalid-feedback">Invalid File Name!</p>
-          )}
+          <ImageUploader id="pet_image" onUploaded={setVetImage} />
         </div>
         <div className="col-12">
           <textarea

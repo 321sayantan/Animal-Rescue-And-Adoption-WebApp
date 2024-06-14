@@ -11,21 +11,27 @@ function AddNewVetPost() {
     const navigate = useNavigate();
     const postDataHandler = async (postVetData) => {
         try {
-            const response = await fetch('http://localhost:5000/adopt/post', {
-                method: 'POST',
-                body: JSON.stringify(postVetData),
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            });
+            const response = await toast.promise(
+                fetch('http://localhost:5000/adopt/post', {
+                    method: 'POST',
+                    body: JSON.stringify(postVetData),
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                }),
+                {
+                    pending: 'Saving post...',
+                    success: 'Post for adoption added successfully',
+                    error: 'Failed to add post!'
+                });
 
             const result = await response.json();
 
             if (response.ok) {
-                toast.success(result.message, toasterVariants)
                 setErrors(null);
                 navigate('..');
             } else {
+                toast.error(result.errors, toasterVariants)
                 setErrors(result.errors || {});
             }
         } catch (error) {

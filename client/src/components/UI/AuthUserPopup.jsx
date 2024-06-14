@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
 import { AuthContext } from "../../store/AuthContext";
-import axios from "axios"
-
+import axios from "axios";
 
 const AuthUserPopup = ({ children, onClose, className }) => {
   const authCtx = useContext(AuthContext);
@@ -55,11 +54,10 @@ const AuthUserPopup = ({ children, onClose, className }) => {
   };
 
   async function logoutHandler() {
-     const result = await axios.get("http://localhost:5000/user/logout");
-    console.log(result)
+    const result = await axios.get("http://localhost:5000/user/logout");
+    console.log(result);
     authCtx.logout();
     onClose();
-    // window.addEventListener("load");
   }
 
   return createPortal(

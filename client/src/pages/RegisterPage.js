@@ -1,42 +1,49 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import SignupForm from "../components/SignupForm";
 import { toast } from "react-toastify";
 import Alert from "../components/UI/Alert";
 import { toasterVariants } from "../utils/misc";
+import { AuthContext } from "../store/AuthContext";
 
 
 function RegisterPage() {
   const navigate = useNavigate()
   const [errors, setErrors] = useState()
+  const authCtx = useContext(AuthContext);
 
   const SignUpHandler = async (userData) => {
     try {
-      const response = await fetch("http://localhost:5000/user/register", {
-        method: "POST",
-        body: JSON.stringify(userData),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
+      const response = await toast.promise(
+        fetch("http://localhost:5000/user/register", {
+          method: "POST",
+          body: JSON.stringify(userData),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }),
+        {
+          pending: 'Processing...',
+          // success: 'Registration Successful',
+          // error: 'Failed to register!'
+        }
+      );
       const result = await response.json();
       console.log(response);
-      console.log(result);
 
       if (response.ok) {
-        toast.success('Registration Successful.', toasterVariants);
-        setErrors(null);
+        // console.log(result);
+        authCtx.register()
         navigate("..");
+        toast.success(result.message, toasterVariants)
+        setErrors(null);
       } else {
+        toast.error(`${result.errors[0]}`, toasterVariants)
         setErrors(result.errors || {});
       }
     } catch (error) {
       console.error('Error submitting form:', error);
     }
-
-    // console.log(result);
-    
   }
 
   return (

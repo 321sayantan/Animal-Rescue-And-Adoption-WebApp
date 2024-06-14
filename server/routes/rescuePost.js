@@ -12,8 +12,7 @@ router.post('/post', async (req, res) => {
         lng: req.body.loc_of_found.coords.longitude,
         zip_code: req.body.loc_of_found.zip_code,
         vet_category: req.body.vet_category,
-        image: req.body.image,
-        image_id: req.body.image_id,
+        images: req.body.images,
         vet_gender: req.body.gender,
         description: req.body.description,
         vet_health_status: req.body.health_status,
@@ -23,7 +22,6 @@ router.post('/post', async (req, res) => {
     }).catch((err) => {
         res.status(500).json({ errors: err })
     })
-    // console.log(data)
 });
 
 
@@ -67,3 +65,4 @@ router.get('/filter', async (req, res, next) => {
 });
 
 module.exports = router
+

@@ -13,14 +13,16 @@ router.post("/register", async (req, res) => {
     name: req.body.username,
     email: req.body.email,
     password: req.body.password,
-    street: req.body.address.street,
-    city: req.body.address.city,
+    area: req.body.address.area,
+    lat: req.body.address.coords.latitude,
+    lng: req.body.address.coords.longitude,
     zip_code: req.body.address.zip_code,
+    is_volunteer: req.body.is_volunteer === 'Yes' ? true : false
   });
-console.log("inside register route")
+  console.log("inside register route")
   const existinguser = await User.findOne({ email: data.email });
   if (existinguser) {
-    res.status(401).json({ errors:["This email is already taken"] });
+    res.status(401).json({ errors: ["This email is already taken"] });
   } else {
     bcrypt
       .hash(req.body.password, 10)
@@ -43,7 +45,7 @@ console.log("inside register route")
                     <br><br>
                     Best,<br>
                     The Adopet Team`,
-              };
+            };
 
             mailTransporter.sendMail(mailDetails, function (err, data) {
               if (err) {
@@ -53,7 +55,9 @@ console.log("inside register route")
               }
             });
 
-            res.status(200).json({ message: ["User created successfully"], result });
+            setTimeout(() => {
+              res.status(200).json({ message: "Registration successfull", result });
+            }, 1500);
             console.log(result);
           })
           .catch((err) => {

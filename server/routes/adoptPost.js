@@ -24,7 +24,9 @@ router.post("/post", async (req, res) => {
   data
     .save()
     .then((result) => {
-      res.status(200).json({ message: "Post added successfully" });
+      setTimeout(() => {
+        res.status(200).json({ message: "Post added successfully" });
+      }, 1500)
     })
     .catch((err) => {
       res.status(500).json({ errors: err });

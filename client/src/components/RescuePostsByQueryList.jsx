@@ -26,7 +26,7 @@ const RescueFilteredList = ({ posts }) => {
                   </div>
                   <p>{post.address}</p>
                 </div>
-                <Link to={`${post._id}`}>More</Link>
+                <Link to={`../${post._id}`}>More</Link>
               </li>
             ))}
           </ul>

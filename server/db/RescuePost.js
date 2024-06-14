@@ -22,12 +22,12 @@ const RescuePostSchema = new mongoose.Schema({
     vet_category: {
         type: String,
     },
-    image: {
-        type: String,
-    },
-    image_id: {
-        type: String,
-    },
+    images: [
+        {
+            image: String,
+            image_id: String
+        }
+    ],
     vet_gender: {
         type: String,
     },

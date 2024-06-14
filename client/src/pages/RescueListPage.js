@@ -60,7 +60,7 @@ function RescueListPage() {
     }
     return (
         <>
-            <section className="pt-5" id="rescue-pet">
+            <section className="pt-5" id="rescue-vet">
                 <div className="container pt-md-5">
                     <div className="position-relative mb-lg-5 mb-4" data-aos="fade-up">
                         <h3 className="title-style mb-2 text-center">

@@ -4,7 +4,6 @@ import useInput from "../../hooks/use-input";
 import { rescueCategList as categories } from "../../utils/misc";
 import RadioButton from "../UI/RadioButton";
 import AutoComplete from "../UI/AutoComplete";
-import { toast } from "react-toastify";
 import CheckBox from "../UI/CheckBox";
 import ImageUploader from "../ImageUploader";
 
@@ -15,9 +14,7 @@ const RescueForm = (props) => {
   const navigation = useNavigation();
   const [rescLoc, setRescLoc] = useState();
   const [selGender, setSelGender] = useState("Unknown");
-  const [imgIsInvalid, setImgIsInvalid] = useState(false);
   const [vetImage, setVetImage] = useState();
-  const [locIsInvalid, setLocIsInvalid] = useState(false);
   const [status, setStatus] = useState({
     statusCons: ["vaccinated"],
     response: ["vaccinated"],
@@ -25,7 +22,6 @@ const RescueForm = (props) => {
 
   let isSubmitting = false;
   if (navigation.state === "submitting") {
-    toast.loading("Saving your Rescue data...");
     isSubmitting = true;
   }
 
@@ -75,15 +71,7 @@ const RescueForm = (props) => {
   } = useInput((value) => pattern2.test(value));
 
   let formIsValid = false;
-  if (
-    typeIsValid &&
-    descrisValid &&
-    !locIsInvalid &&
-    zipisValid &&
-    !imgIsInvalid &&
-    nameisValid &&
-    mobIsValid
-  ) {
+  if (typeIsValid && descrisValid && zipisValid && nameisValid && mobIsValid) {
     formIsValid = true;
   }
 
@@ -121,8 +109,6 @@ const RescueForm = (props) => {
     if (
       typeIsInvalid &&
       descrisInvalid &&
-      locIsInvalid &&
-      imgIsInvalid &&
       zipisInvalid &&
       nameisInvalid &&
       mobIsInvalid
@@ -151,7 +137,6 @@ const RescueForm = (props) => {
     resetDescr();
     document.getElementById("location").value = "";
     document.getElementById("vet_image").value = "";
-    setImgIsInvalid(false);
     setSelGender("Unknown");
     setStatus({
       statusCons: ["vaccinated"],
@@ -254,14 +239,8 @@ const RescueForm = (props) => {
           <AutoComplete
             id="location"
             placeholder="Location of the incident (place where found)"
-            onCheck={() => setLocIsInvalid(true)}
             onComplete={setRescLoc}
           />
-          {locIsInvalid && (
-            <p className="invalid-feedback">
-              Please Select a correct location!
-            </p>
-          )}
         </div>
         <div className="col-md-4">
           <input
@@ -280,13 +259,9 @@ const RescueForm = (props) => {
         <div className="col-12">
           <ImageUploader
             id="vet_image"
-            onCheck={() => setImgIsInvalid(true)}
             onUploaded={setVetImage}
             multiple={true}
           />
-          {imgIsInvalid && (
-            <p className="invalid-feedback">Invalid File Name!</p>
-          )}
         </div>
         <div className="col-12">
           <textarea
