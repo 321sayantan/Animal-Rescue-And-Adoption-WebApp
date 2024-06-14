@@ -440,6 +440,12 @@ legend {
   color: var(--bs-info);
 }
 
+legend#modal-legend {
+  width: 23% !important;
+  color: var(--bs-purple) !important;
+  font-weight: 600;
+}
+
 @media (min-width: 1200px) {
   legend {
     font-size: 1.5rem;
@@ -6825,6 +6831,11 @@ progress {
   color: #6c757d;
 }
 
+.modal-body .form-text {
+  font-size: 0.93rem !important;
+  font-weight: 600 !important;
+}
+
 .form-control {
   display: block;
   position: relative;
@@ -10243,7 +10254,7 @@ fieldset:disabled .btn {
   color: #000;
   background: transparent url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'%3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3e%3c/svg%3e") center/1em auto no-repeat;
   border: 0;
-  border-radius: 0.25rem;
+  border-radius: 50%;
   opacity: 0.5;
 }
 
@@ -12774,6 +12785,7 @@ h3.title-style {
   color: var(--font-color) !important;
   font-size: 2.3rem !important;
 }
+
 .slick-prev::before {
   margin-inline-end: 1rem !important;
 }

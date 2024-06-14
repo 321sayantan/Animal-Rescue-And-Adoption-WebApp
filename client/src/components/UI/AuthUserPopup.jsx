@@ -126,7 +126,7 @@ const AuthUserPopup = ({ children, onClose, className }) => {
                     className="btn btn-style btn-outline-primary"
                     onClick={onClose}
                   >
-                    Edit Profile
+                    View Profile
                   </Link>
                   <div className="seperator">
                     <hr />

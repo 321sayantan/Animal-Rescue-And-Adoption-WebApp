@@ -2,10 +2,10 @@ import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
 
 const Modal = ({ className, children, onClose, title }) => {
-  const modalClasses = className ? className : "";
+  const modalClasses = className ? `modal ${className}` : `modal`;
   return createPortal(
     <>
-      <div className="backdrop" onClick={onClose} />
+      <div className="modal-backdrop" onClick={onClose} />
       <motion.dialog
         variants={{
           hidden: { opacity: 0, y: -58 },
@@ -15,9 +15,12 @@ const Modal = ({ className, children, onClose, title }) => {
         animate="visible"
         exit="hidden"
         open
-        className={"modal " + modalClasses}
+        className={modalClasses}
       >
-        <h2>{title}</h2>
+        <header className="modal-header">
+          <h2 style={{ fontWeight: "700" }}>{title}</h2>
+          <div className="btn-close" onClick={onClose}></div>
+        </header>
         {children}
       </motion.dialog>
     </>,
