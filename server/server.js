@@ -1,6 +1,5 @@
 const express = require("express");
 const passport = require("passport");
-const { Strategy } = require("passport-local");
 const User = require("./db/userModel");
 const bcrypt = require("bcrypt");
 const session = require("express-session");
@@ -11,6 +10,8 @@ const googleStrategy = require("passport-google-oauth20").Strategy;
 const cors = require("cors");
 // const MongoStore = require("connect-mongo");
 const env = require("dotenv");
+const verifyToken = require("./utils/verifyToken");
+const jwt = require("jsonwebtoken");
 
 const app = express();
 
@@ -25,7 +26,6 @@ app.use(cors({
   credentials: true
 }));
 
-// app.set("trust proxy", 1);
 
 app.use(
   session({
@@ -75,53 +75,17 @@ app.get(
 );
 
 
-app.get("/login/success", async (req, res) => {
+app.get("/login/success",verifyToken, async (req, res) => {
   console.log("inside login/seccess");
-  console.log(req.session);
-  console.log(req.user);
-  console.log(req.isAuthenticated());
-  res.send("hi")
-});
-
-passport.use(
-  "local",
-  new Strategy(
-    {
-      usernameField: "email",
-      passwordField: "password",
-    },
-    async function verify(email, password, cb) {
-      try {
-        const logged_user = await User.findOne({ email: email });
-        console.log(2, logged_user);
-        if (logged_user) {
-          console.log(3, "user found");
-          bcrypt.compare(password, logged_user.password, (err, result) => {
-            if (err) {
-              return cb(err);
-            }
-            // else {
-            if (result) {
-              console.log(30, "password matched")
-              return cb(null, logged_user);
-            } else {
-              console.log(30, "password didnot match");
-              return cb(null, false);
-            }
-            // }
-          });
-        } else {
-          console.log(4, "user not found");
-          return cb("User not found");
-        }
-      } catch (err) {
-        console.log(5, "error in finding user");
-        return cb(err);
-      }
+  jwt.verify(req.token, "shhh", (err, data) => {
+    if (err) {
+      res.status(403);
     }
-  )
-);
 
+    console.log(data);
+    res.json({ msg: "hi" });
+  });
+});
 
 
 passport.use(
@@ -155,27 +119,6 @@ passport.use(
     }
   )
 );
-
-// app.get("/login/success", async (req, res) => {
-//   console.log("server:", req.user);
-//   if(req.user){
-//   res.status(200).json({
-//         success: true,
-//         message: "User Authenticated Successfully",
-//       })
-//     }
-//     else{
-//       res.status(401).json({
-//         success: false,
-//         message: "Invalid User",
-//       });
-//     }
-// });
-
-
-app.get("/", (req, res) => {
-  res.send("Hello from server");
-});
 
 
 passport.serializeUser((user, cb) => {

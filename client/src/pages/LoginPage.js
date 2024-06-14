@@ -1,18 +1,18 @@
 import { useState, 
-  // useContext 
+  useContext 
 } from "react";
 import { useNavigate } from "react-router-dom";
 import LoginForm from "../components/LoginForm";
 import { toast } from "react-toastify";
 import Alert from "../components/UI/Alert";
 import { toasterVariants } from "../utils/misc";
-// import { AuthContext } from "../store/AuthContext";
+import { AuthContext } from "../store/AuthContext";
 import { motion } from "framer-motion";
 // import axios from "axios"
 
 function LoginPage() {
   const navigate = useNavigate()
-  // const authCtx = useContext(AuthContext);
+  const authCtx = useContext(AuthContext);
   const [errors, setErrors] = useState();
 
 
@@ -57,11 +57,11 @@ function LoginPage() {
       console.log(result)
 
       if (response.ok) {
-        // authCtx.login(result.token) // authCtx.login(result.token)
-        // authCtx.setIsAuthenticated(true);
         toast.success('Welcome back..!', toasterVariants);
         setErrors(null);
         navigate("..");
+        authCtx.login(result.token) // authCtx.login(result.token)
+        authCtx.setIsAuthenticated(true);
       } else {
         setErrors(result.errors);
       }

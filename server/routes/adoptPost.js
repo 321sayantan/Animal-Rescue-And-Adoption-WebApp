@@ -85,17 +85,18 @@ router.get("/adoptionRequest", (req, res) => {
   let mailDetails = {
     from: "AdoPet2024@gmail.com",
     // to: data.email,
-    // to: "dsnehodipto@gmail.com",
-    to: "123sayantandas@gmail.com",
+    to: "dsnehodipto@gmail.com",
+    // to: "123sayantandas@gmail.com",
     subject: "Welcome to Adopet! Your Registration is Complete! 🐾",
-    html: `Hi <strong>Snehodipto Das</strong>, <br><br>
-        Welcome to  <strong>Adopet</strong>! Your registration is successful. 🎉 <br><br>
-        Start exploring adoptable pets <a href="http:localhost:3000">here</a>. If you need help, contact us at AdoPet2024@gmail.com.
-        <br><br>
-        Happy adopting and rescue!
-        <br><br>
-        Best,<br>
-        The Adopet Team`,
+    html:`<H1>Test Mail</H1>`
+    // html: `Hi <strong>Snehodipto Das</strong>, <br><br>
+    //     Welcome to  <strong>Adopet</strong>! Your registration is successful. 🎉 <br><br>
+    //     Start exploring adoptable pets <a href="http:localhost:3000">here</a>. If you need help, contact us at AdoPet2024@gmail.com.
+    //     <br><br>
+    //     Happy adopting and rescue!
+    //     <br><br>
+    //     Best,<br>
+    //     The Adopet Team`,
   };
 
   mailTransporter.sendMail(mailDetails, function (err, data) {

@@ -19,7 +19,6 @@ import { loader as loadPetPosts } from './pages/AdoptPet';
 import { loader as loadRescuePosts } from './pages/RescueListPage';
 import { loader as loadPostDetails } from './pages/PetDetailsPage';
 
-
 const router = createBrowserRouter([
   {
     path: '/',
