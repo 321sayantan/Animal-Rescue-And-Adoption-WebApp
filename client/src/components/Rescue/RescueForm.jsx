@@ -6,12 +6,15 @@ import RadioButton from "../UI/RadioButton";
 import AutoComplete from "../UI/AutoComplete";
 import CheckBox from "../UI/CheckBox";
 import ImageUploader from "../ImageUploader";
+import { toast } from "react-toastify";
+import Alert from "../UI/Alert";
 
 const pattern1 = /^\+?\d[\d -]{8,12}\d$/; //for phone no
 const pattern2 = /^\d{5,8}(?:[-\s]\d{4})?$/; //for zip-code
 
 const RescueForm = (props) => {
   const navigation = useNavigation();
+  const [errors, setErrors] = useState(null);
   const [rescLoc, setRescLoc] = useState();
   const [selGender, setSelGender] = useState("Unknown");
   const [vetImage, setVetImage] = useState();
@@ -106,43 +109,48 @@ const RescueForm = (props) => {
   const submitHandler = (event) => {
     event.preventDefault();
 
-    if (
-      typeIsInvalid &&
-      descrisInvalid &&
-      zipisInvalid &&
-      nameisInvalid &&
-      mobIsInvalid
-    ) {
-      return;
+    try {
+      if (
+        typeIsInvalid &&
+        descrisInvalid &&
+        zipisInvalid &&
+        nameisInvalid &&
+        mobIsInvalid
+      ) {
+        return;
+      }
+
+      const rescueData = {
+        vet_category: selectedType,
+        gender: selGender,
+        health_status: status.response,
+        description: enteredDescription,
+        rescuer_name: enteredName,
+        rescuer_mob: enteredMob,
+        images: [...vetImage],
+        loc_of_found: {
+          ...rescLoc,
+          zip_code: enteredZip,
+        },
+      };
+
+      props.onSubmit(rescueData);
+      resetType();
+      resetName();
+      resetMob();
+      resetDescr();
+      document.getElementById("location").value = "";
+      document.getElementById("vet_image").value = "";
+      setSelGender("Unknown");
+      setStatus({
+        statusCons: ["vaccinated"],
+        response: ["vaccinated"],
+      });
+      resetZip();
+    } catch (error) {
+      setErrors(error);
+      console.error(error);
     }
-
-    const rescueData = {
-      vet_category: selectedType,
-      gender: selGender,
-      health_status: status.response,
-      description: enteredDescription,
-      rescuer_name: enteredName,
-      rescuer_mob: enteredMob,
-      images: [...vetImage],
-      loc_of_found: {
-        ...rescLoc,
-        zip_code: enteredZip,
-      },
-    };
-
-    props.onSubmit(rescueData);
-    resetType();
-    resetName();
-    resetMob();
-    resetDescr();
-    document.getElementById("location").value = "";
-    document.getElementById("vet_image").value = "";
-    setSelGender("Unknown");
-    setStatus({
-      statusCons: ["vaccinated"],
-      response: ["vaccinated"],
-    });
-    resetZip();
   };
 
   const nameClasses = nameisInvalid ? "is-invalid" : "",
@@ -153,6 +161,13 @@ const RescueForm = (props) => {
 
   return (
     <>
+      {errors && (
+        <Alert>
+          {Object.keys(errors).map((err, i) => (
+            <li key={i}>{err}</li>
+          ))}
+        </Alert>
+      )}
       <form className="row mt-4 rescue-form" onSubmit={submitHandler}>
         <div className="col-md-4">
           <select

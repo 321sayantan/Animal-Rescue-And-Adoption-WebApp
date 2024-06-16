@@ -7,6 +7,9 @@ const AdoptPostSchema = new mongoose.Schema({
   donor_phone: {
     type: String,
   },
+  donor_email: {
+    type: String,
+  },
   address: {
     type: String,
   },

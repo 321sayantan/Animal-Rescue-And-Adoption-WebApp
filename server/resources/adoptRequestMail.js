@@ -305,7 +305,7 @@ function adoptReqMail(resData) {
                                 <tr>
                                     <td>
                                         <h2 style="font-size: 2rem; color: #333; font-weight: 700;">Hi, <span
-                                                style="color: #d7cc00; text-transform: uppercase;font-size: 2rem !important;">${resData.donor_name}</span></h2>
+                                                style="color: #d7cc00; text-transform: uppercase;font-size: 2rem !important;">${resData._doc.donor_name}</span></h2>
 
                                         <p
                                             style="margin-top: -1rem !important; font-size: 1.2rem; font-weight: 400; line-height: 1.5rem;">
@@ -337,7 +337,7 @@ function adoptReqMail(resData) {
                                                                         style="color: #043b64; font-size: 1.3rem; font-weight: 600;">
                                                                         <strong
                                                                             style="color: #d5075d;margin-right: 0.3rem;">Name:</strong>
-                                                                        ${resData.vet_name}
+                                                                        ${resData._doc.vet_name}
                                                                     </p>
                                                                 </td>
                                                             </tr><br>
@@ -347,7 +347,7 @@ function adoptReqMail(resData) {
                                                                         style="color: #043b64; font-size: 1.3rem; font-weight: 600;">
                                                                         <strong
                                                                             style="color: #d5075d;margin-right: 0.3rem;">Category:</strong>
-                                                                        ${resData.vet_category}
+                                                                        ${resData._doc.vet_category}
                                                                     </p>
                                                                 </td>
                                                             </tr><br>
@@ -357,7 +357,7 @@ function adoptReqMail(resData) {
                                                                         style="color: #043b64; font-size: 1.3rem; font-weight: 600;">
                                                                         <strong
                                                                             style="color: #d5075d;margin-right: 0.3rem;">Breed:</strong>
-                                                                        ${resData.vet_breed}
+                                                                        ${resData._doc.vet_breed}
                                                                     </p>
                                                                 </td>
                                                             </tr><br>
@@ -371,7 +371,7 @@ function adoptReqMail(resData) {
                                             style="margin-top: 2rem !important; font-size: 1.2rem; font-weight: 400; line-height: 1.5rem;">
                                             I am willing to fix an
                                             appointment with you on
-                                            <span style="font-weight: 600; color: #00c1f2;">${resData.dtOfApntmnt}</span>
+                                            <span style="font-weight: 600; color: #00c1f2;">${resData._doc.dtOfApntmnt}</span>
                                             if you are okay with it.
                                             Please inform me about our
                                             deal by accepting this
@@ -447,7 +447,7 @@ function adoptReqMail(resData) {
     </table>
 </body>
 
-</html>`
+</html>`;
 }
 
 module.exports = adoptReqMail

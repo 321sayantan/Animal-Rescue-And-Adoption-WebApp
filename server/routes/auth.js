@@ -115,7 +115,8 @@ router.post("/login",async (req, res) => {
             }
             // else {
             if (!result) {
-              console.log(30, "password didnot match");        
+              console.log(30, "password didnot match");
+              res.status(400).json({ msg: "Invalid Email or Password"})        
             } 
               
             console.log(30, "password matched");
@@ -134,10 +135,11 @@ router.post("/login",async (req, res) => {
           );
         } else {
           console.log(4, "user not found");
-          // return cb("User not found");
+          res.status(400).json({ msg: "Invalid Email or Password" })
         }
       } catch (err) {
         console.log(5, "error in finding user");
+        res.status(400).json({ msg: "Unexpected Error Occured" });
         // return cb(err);
       }
 });
