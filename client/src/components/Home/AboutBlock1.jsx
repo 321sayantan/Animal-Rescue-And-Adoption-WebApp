@@ -1,6 +1,10 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../store/AuthContext";
 
 const AboutBlock1 = () => {
+  const { isAuthenticated } = useContext(AuthContext);
+
   return (
     <>
       <section className="home-about-w3l py-5">
@@ -31,9 +35,14 @@ const AboutBlock1 = () => {
                 <Link to="adopt" className="btn btn-style ">
                   Adopt a pet
                 </Link>
-                <Link to="rescue" className="btn btn-style btn-outline-primary">
-                  Rescue a stray
-                </Link>
+                {isAuthenticated && (
+                  <Link
+                    to="rescue"
+                    className="btn btn-style btn-outline-primary"
+                  >
+                    Rescue a stray
+                  </Link>
+                )}
               </div>
             </div>
             <div className="col-lg-6 mt-lg-0 mt-5" data-aos="fade-up">

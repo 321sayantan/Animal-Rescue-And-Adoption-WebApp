@@ -1,16 +1,69 @@
-import { useLoaderData, defer, Await } from 'react-router-dom';
-import { Suspense } from 'react';
+import { useLoaderData, defer, Await, useParams, useNavigate } from 'react-router-dom';
+import { Suspense, useState, useContext } from 'react';
+import { AuthContext } from '../store/AuthContext';
+import { AnimatePresence } from 'framer-motion';
 import DonorDetailSkeleton from "../components/Adopts/DonorDetailSkeleton"
 import DonorDetailsSection from "../components/Adopts/DonorDetailsSection"
 import PetDetailSection from "../components/Adopts/PetDetailSection"
 import PetDetailSkeleton from "../components/Adopts/PetDetailSkeleton"
+import AdoptConfirmPrompt from '../components/AdoptConfirmPrompt';
+import { toast } from 'react-toastify';
+import { toasterVariants } from '../utils/misc';
+import axios from 'axios';
 
 
 function PetDetailsPage() {
     const { postData } = useLoaderData();
+    const navigate = useNavigate()
+    const params = useParams()
+    const { isAuthenticated, jwt } = useContext(AuthContext)
+    const [showModal, setShowModal] = useState()
 
     const fallback1 = <PetDetailSkeleton />,
         fallback2 = <DonorDetailSkeleton />
+
+    const showModalHandler = () => {
+        if (isAuthenticated) {
+            setShowModal(true)
+        } else {
+            toast.info('Please sign in to get this pet')
+            navigate('../../login')
+        }
+    }
+    const closeModalHandler = () => {
+        setShowModal(false)
+    }
+
+    const confirmationHandler = async (selectedDate) => {
+        // const res = await postData.then(result => result)
+        try {
+            const dataObj = { id: params.id, selDate: selectedDate }
+            const response = await toast.promise(
+                fetch("http://localhost:5000/adopt/adoptionRequest", {
+                    method: "POST",
+                    body: JSON.stringify(dataObj),
+                    headers: {
+                        "Content-Type": "application/json",
+                        "authorization": `Bearer ${jwt}`,
+                    },
+                }), {
+                pending: 'Sending Mail...',
+            });
+
+            const result = await response.json();
+            console.log(response)
+
+            if (response.ok) {
+                toast.success(result.message, toasterVariants)
+                navigate("..");
+            } else {
+                toast.error(result.error, toasterVariants)
+            }
+            setShowModal(false)
+        } catch (error) {
+            console.error('Error Sending Mail!', error);
+        }
+    }
 
     return (
         <>
@@ -75,7 +128,7 @@ function PetDetailsPage() {
                                 </Await>
                             </Suspense>
                             <div className="text-center mt-5">
-                                <button type="button" className="btn btn-style btn-primary">
+                                <button type="button" className="btn btn-style btn-primary" onClick={showModalHandler}>
                                     Get this Pet
                                 </button>
                             </div>
@@ -85,6 +138,16 @@ function PetDetailsPage() {
                 {/* ///donor-details */}
             </section>
             {/* //pet and owner details */}
+
+            <AnimatePresence>
+                {showModal && <Await resolve={postData}>
+                    {postData => <AdoptConfirmPrompt
+                        onClose={closeModalHandler}
+                        onConfirm={confirmationHandler}
+                        vetData={postData}
+                    />}
+                </Await>}
+            </AnimatePresence>
         </>
     )
 }

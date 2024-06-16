@@ -1,10 +1,11 @@
 const express = require("express");
 const Post = require("../db/AdoptPost");
-const nodemailer = require("nodemailer");
+const User = require('../db/userModel')
 const mailTransporter = require("../utils/mailServer");
 const User = require("../db/userModel");
 const verifyToken = require("../utils/verifyToken");
 const jwt = require("jsonwebtoken");
+const adoptReqMail = require("../resources/adoptRequestMail");
 
 const router = express.Router();
 
@@ -49,51 +50,62 @@ router.post("/post", verifyToken, async (req, res) => {
 });
 
 router.get("/getallpost", async (req, res) => {
-  try {
-    const allposts = await Post.find();
-    setTimeout(() => {
-      res.status(200).json(allposts);
-    }, 3000);
-  } catch (error) {
-    res.status(400).json(error);
-  }
+	try {
+		const allposts = await Post.find();
+		setTimeout(() => {
+			res.status(200).json(allposts);
+		}, 3000);
+	} catch (error) {
+		res.status(400).json(error);
+	}
 });
 
 router.get("/getpost/:id", async (req, res) => {
-  try {
-    const posts = await Post.findOne({ _id: req.params.id });
-    setTimeout(() => {
-      res.status(200).json(posts);
-    }, 3000);
-  } catch (error) {
-    res.status(400).json(error);
-  }
+	try {
+		const posts = await Post.findOne({ _id: req.params.id });
+		setTimeout(() => {
+			res.status(200).json(posts);
+		}, 3000);
+	} catch (error) {
+		res.status(400).json(error);
+	}
 });
 
 router.get("/filter", async (req, res, next) => {
-  try {
-    const query = req.query.search;
-    let posts = await Post.find({ address: { $regex: query, $options: "i" } });
-    setTimeout(() => {
-      res.status(200).json(posts);
-    }, 3000);
-  } catch (error) {
-    next(error);
-  }
+	try {
+		const query = req.query.search;
+		let posts = await Post.find({ address: { $regex: query, $options: "i" } });
+		setTimeout(() => {
+			res.status(200).json(posts);
+		}, 3000);
+	} catch (error) {
+		next(error);
+	}
 });
 
 router.post("/adoptionRequest", verifyToken, (req, res) => {
-  jwt.verify(req.token, "shhh", async (err, data) => {
-    if (err) {
-      res.status(403);
-    }
-    console.log(1, req.body);
+	try {
+		let recieverEmail, senderEmail, resData;
+		jwt.verify(req.token, 'shhh', async (err, data) => {
+			if (err) {
+        res.status(403);
+      }
+      console.log(1, req.body);
 
-    const sender = await User.findOne({ _id: data.id });
-    console.log(11, sender.email);
+      const sender = await User.findOne({ _id: data.id });
+      console.log(11, sender.email);
 
-    const reciver = await Post.findOne({ _id: req.body.id });
-    console.log(12, reciver.donor_email);
+      const reciver = await Post.findOne({ _id: req.body.id });
+      console.log(12, reciver.donor_email);
+
+
+			// resData = await Post.find({ _id: req.body.id })
+			// recieverEmail = resData.donor_email
+			// const sender = await User.find({ _id: data.id })
+			// senderEmail = sender.email
+		})
+
+		resData = {...resData, dtOfApntmnt: req.body.selDate}
 
     let mailDetails = {
       // from: sender.email,
@@ -101,20 +113,24 @@ router.post("/adoptionRequest", verifyToken, (req, res) => {
       to: reciver.donor_email,
       // to: "dsnehodipto@gmail.com",
       // to: "123sayantandas@gmail.com",
-      subject: "Testing email",
-      html: `<H1>Test Mail</H1>`,
+      subject: "Request for adoption",
+      html: adoptReqMail(resData),
     };
 
-    mailTransporter.sendMail(mailDetails, function (err, data) {
-      console.log(data);
-      if (err) {
-        console.log("Error Occurs");
-      } else {
-        console.log("Email sent successfully");
-      }
-    });
-    res.json("mail send");
-  });
+		mailTransporter.sendMail(mailDetails, function (err, data) {
+			if (err) {
+				console.log("Error Occurs");
+			} else {
+				console.log("Email sent successfully");
+			}
+		});
+		setTimeout(() => {
+			res.status(200).json({ message: "Mail sent successfully" })
+		}, 1000)
+	} catch (error) {
+		res.status(402).json(error)
+	}
+
 });
 
 module.exports = router;
