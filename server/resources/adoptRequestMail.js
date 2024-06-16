@@ -309,7 +309,7 @@ function adoptReqMail(resData) {
 
                                         <p
                                             style="margin-top: -1rem !important; font-size: 1.2rem; font-weight: 400; line-height: 1.5rem;">
-                                            I'm <span style="font-weight: 600; color: #00c1f2;">Snehodipto
+                                            I'm <span style="font-weight: 600; color: #00c1f2;text-transform:capitalise">Snehodipto
                                                 das</span> and
                                             I'm
                                             interested in
