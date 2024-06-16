@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigation } from "react-router-dom";
 import Modal from "./UI/Modal";
 import CheckBox from "./UI/CheckBox";
 import { maxDateFinder } from "../utils/misc";
@@ -7,6 +8,12 @@ const AdoptConfirmPrompt = ({ onClose, onConfirm, vetData }) => {
   const maxDate = maxDateFinder();
   const [btnDisabled, setBtnDisabled] = useState(true);
   const [selectedDate, setSelectedDate] = useState("");
+  const navigation = useNavigation();
+
+  const isSubmitting = false;
+  if (navigation.state === "submitting") {
+    isSubmitting = true;
+  }
 
   return (
     <Modal
@@ -71,7 +78,7 @@ const AdoptConfirmPrompt = ({ onClose, onConfirm, vetData }) => {
           onClick={() => onConfirm(selectedDate)}
           disabled={btnDisabled}
         >
-          Request Owner
+          {isSubmitting ? "Sending Request" : "Request Owner"}
         </button>
       </div>
     </Modal>

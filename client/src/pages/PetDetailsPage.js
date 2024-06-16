@@ -8,13 +8,15 @@ import PetDetailSection from "../components/Adopts/PetDetailSection"
 import PetDetailSkeleton from "../components/Adopts/PetDetailSkeleton"
 import AdoptConfirmPrompt from '../components/AdoptConfirmPrompt';
 import { toast } from 'react-toastify';
+import { toasterVariants } from '../utils/misc';
+import axios from 'axios';
 
 
 function PetDetailsPage() {
     const { postData } = useLoaderData();
     const navigate = useNavigate()
     const params = useParams()
-    const { isAuthenticated } = useContext(AuthContext)
+    const { isAuthenticated, jwt } = useContext(AuthContext)
     const [showModal, setShowModal] = useState()
 
     const fallback1 = <PetDetailSkeleton />,
@@ -33,10 +35,34 @@ function PetDetailsPage() {
     }
 
     const confirmationHandler = async (selectedDate) => {
-        const res = await postData.then(result => result)
-        console.log(`Request for pet adoption with id: ${params.id} has been sent to ${res.donor_name} for the date of ${selectedDate}`)
-        setShowModal(false)
-        navigate('..')
+        // const res = await postData.then(result => result)
+        try {
+            const dataObj = { id: params.id, selDate: selectedDate }
+            const response = await toast.promise(
+                fetch("http://localhost:5000/adopt/adoptionRequest", {
+                    method: "POST",
+                    body: JSON.stringify(dataObj),
+                    headers: {
+                        "Content-Type": "application/json",
+                        "authorization": `Bearer ${jwt}`,
+                    },
+                }), {
+                pending: 'Sending Mail...',
+            });
+
+            const result = await response.json();
+            console.log(response)
+
+            if (response.ok) {
+                toast.success(result.message, toasterVariants)
+                navigate("..");
+            } else {
+                toast.error(result.error, toasterVariants)
+            }
+            setShowModal(false)
+        } catch (error) {
+            console.error('Error Sending Mail!', error);
+        }
     }
 
     return (

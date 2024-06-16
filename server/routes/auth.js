@@ -3,6 +3,8 @@ const User = require("../db/userModel");
 const bcrypt = require("bcrypt");
 const passport = require("passport");
 const mailTransporter = require("../utils/mailServer");
+const verifyToken = require("../utils/verifyToken");
+const jwt = require("jsonwebtoken")
 
 const router = express.Router();
 
@@ -101,9 +103,43 @@ router.post("/register", async (req, res) => {
 
 
 
-router.post("/login", (req, res) => {
-  const token = Math.random().toString(16).substring(4, 12)
-  res.status(200).json({ message: "Login successful", token });
+router.post("/login",async (req, res) => {
+  try {
+        const logged_user = await User.findOne({ email: req.body.email });
+        console.log(2, logged_user);
+        if (logged_user) {
+          console.log(3, "user found");
+          bcrypt.compare(req.body.password, logged_user.password, (err, result) => {
+            if (err) {
+              console.log(err)
+            }
+            // else {
+            if (!result) {
+              console.log(30, "password didnot match");        
+            } 
+              
+            console.log(30, "password matched");
+
+            const payload = {
+              id: logged_user.id
+            }
+
+            jwt.sign(payload, "shhh", {expiresIn: '10h'}, (err, token)=>{
+              res.status(200).json({
+                token: token
+              })
+            })
+
+            }
+          );
+        } else {
+          console.log(4, "user not found");
+          // return cb("User not found");
+        }
+      } catch (err) {
+        console.log(5, "error in finding user");
+        // return cb(err);
+      }
 });
 
 
@@ -117,20 +153,22 @@ router.get("/logout", (req, res) => {
   });
 });
 
-router.get("/getuser", async (req, res) => {
-  try {
-    console.log(20, req.headers);
-    console.log(21, req.isAuthenticated());
-    if (req.isAuthenticated()) {
-      const users = await User.find();
-      res.status(200).json(users);
-    } else {
-      res.status(403).json("Access denied");
-    }
-  }
-  catch (err) {
-    res.send(err);
-  }
+router.get("/getuser",verifyToken, async (req, res) => {
+  try{
+  console.log(20,req.headers);
+  
+  jwt.verify(req.token, "shhh", async(err, data)=>{
+    if(err){res.status(403);}
+    // console.log(data);
+    const users = await User.find({})
+    // console.log(users)
+    res.json(users)
+  })
+  
+}
+catch(err){
+  res.send(err);
+}
 });
 
 module.exports = router;

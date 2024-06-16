@@ -21,7 +21,6 @@ import { loader as loadRescuePosts } from './pages/RescueListPage';
 import { loader as loadPostDetails } from './pages/PetDetailsPage';
 import { loader as loadRescueDetalis } from './pages/RescueDetailsPage';
 
-
 const router = createBrowserRouter([
   {
     path: '/',
