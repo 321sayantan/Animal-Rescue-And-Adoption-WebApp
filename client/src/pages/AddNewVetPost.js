@@ -11,29 +11,32 @@ function AddNewVetPost() {
     const navigate = useNavigate();
     const postDataHandler = async (postVetData) => {
         try {
-            const response = await toast.promise(
-                fetch('http://localhost:5000/adopt/post', {
-                    method: 'POST',
-                    body: JSON.stringify(postVetData),
-                    headers: {
-                        'Content-Type': 'application/json',
-                    }
-                }),
-                {
-                    pending: 'Saving post...',
-                    success: 'Post for adoption added successfully',
-                    error: 'Failed to add post!'
-                });
-
-            const result = await response.json();
-
-            if (response.ok) {
-                setErrors(null);
-                navigate('..');
-            } else {
-                toast.error(result.errors, toasterVariants)
-                setErrors(result.errors || {});
+          const token = "Bearer " + localStorage.getItem("jwt");
+          const response = await toast.promise(
+            fetch("http://localhost:5000/adopt/post", {
+              method: "POST",
+              body: JSON.stringify(postVetData),
+              headers: {
+                "Content-Type": "application/json",
+                "authorization": token,
+              },
+            }),
+            {
+              pending: "Saving post...",
+              success: "Post for adoption added successfully",
+              error: "Failed to add post!",
             }
+          );
+
+          const result = await response.json();
+
+          if (response.ok) {
+            setErrors(null);
+            navigate("..");
+          } else {
+            toast.error(result.errors, toasterVariants);
+            setErrors(result.errors || {});
+          }
         } catch (error) {
             console.error('Failed to post:', error);
         }
