@@ -35,7 +35,7 @@ router.post("/post", async (req, res) => {
 		.catch((err) => {
 			res.status(500).json({ errors: err });
 		});
-	// console.log(data)
+	console.log(data)
 });
 
 router.get("/getallpost", async (req, res) => {
