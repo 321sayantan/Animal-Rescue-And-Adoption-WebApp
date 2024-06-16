@@ -2,7 +2,6 @@ const express = require("express");
 const Post = require("../db/AdoptPost");
 const User = require('../db/userModel')
 const mailTransporter = require("../utils/mailServer");
-const User = require("../db/userModel");
 const verifyToken = require("../utils/verifyToken");
 const jwt = require("jsonwebtoken");
 const adoptReqMail = require("../resources/adoptRequestMail");
@@ -74,7 +73,7 @@ router.get("/getpost/:id", async (req, res) => {
 router.get("/filter", async (req, res, next) => {
 	try {
 		const query = req.query.search;
-		let posts = await Post.find({ address: { $regex: query, $options: "i" } });
+		let posts = await Post.find({ address: { $regex: `${query}`, $options: "i" } });
 		setTimeout(() => {
 			res.status(200).json(posts);
 		}, 3000);
@@ -85,49 +84,54 @@ router.get("/filter", async (req, res, next) => {
 
 router.post("/adoptionRequest", verifyToken, (req, res) => {
 	try {
-		let recieverEmail, senderEmail, resData;
+		// var recieverEmail="", senderEmail;
+    // let resData;
 		jwt.verify(req.token, 'shhh', async (err, data) => {
 			if (err) {
         res.status(403);
       }
       console.log(1, req.body);
 
-      const sender = await User.findOne({ _id: data.id });
-      console.log(11, sender.email);
+      // const currentUser = await User.findOne({ _id: data.id });
+      // console.log(11, currentUser.email);
 
-      const reciver = await Post.findOne({ _id: req.body.id });
-      console.log(12, reciver.donor_email);
+      // const Donor1 = await Post.findOne({ _id: req.body.id });
+      // Donor = Donor1.donor_email;
+      // console.log(12, Donor1);
+      // console.log(14, Donor);
 
 
-			// resData = await Post.find({ _id: req.body.id })
-			// recieverEmail = resData.donor_email
-			// const sender = await User.find({ _id: data.id })
+			var resData = await Post.findOne({ _id: req.body.id })
+			const recieverEmail = resData.donor_email
+			// const sender = await User.findOne({ _id: data.id })
 			// senderEmail = sender.email
+
+      resData = {...resData, dtOfApntmnt: req.body.selDate}
+      console.log(resData)
+  
+      let mailDetails = {
+        from: "AdoPet2024@gmail.com",
+        to: recieverEmail,
+        // to: "dsnehodipto@gmail.com",
+        // to: "123sayantandas@gmail.com",
+        subject: "Request for adoption",
+        html: adoptReqMail(resData),
+      };
+  
+      mailTransporter.sendMail(mailDetails, function (err, data) {
+        if (err) {
+          console.log("Error Occurs");
+        } else {
+          console.log("Email sent successfully");
+        }
+      });
+      setTimeout(() => {
+        res.status(200).json({ message: "Mail sent successfully" })
+      },10)
 		})
 
-		resData = {...resData, dtOfApntmnt: req.body.selDate}
-
-    let mailDetails = {
-      // from: sender.email,
-      from: "AdoPet2024@gmail.com",
-      to: reciver.donor_email,
-      // to: "dsnehodipto@gmail.com",
-      // to: "123sayantandas@gmail.com",
-      subject: "Request for adoption",
-      html: adoptReqMail(resData),
-    };
-
-		mailTransporter.sendMail(mailDetails, function (err, data) {
-			if (err) {
-				console.log("Error Occurs");
-			} else {
-				console.log("Email sent successfully");
-			}
-		});
-		setTimeout(() => {
-			res.status(200).json({ message: "Mail sent successfully" })
-		}, 1000)
 	} catch (error) {
+    console.log(13,error)
 		res.status(402).json(error)
 	}
 
