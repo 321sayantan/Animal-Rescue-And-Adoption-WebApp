@@ -127,7 +127,7 @@ router.post("/adoptionRequest", verifyToken, (req, res) => {
 			});
 			setTimeout(() => {
 				res.status(200).json({ message: "Mail sent successfully" })
-			}, 10)
+			}, 100)
 		})
 
 	} catch (error) {

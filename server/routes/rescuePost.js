@@ -1,5 +1,7 @@
 const express = require('express')
 const Rescue = require('../db/RescuePost')
+const mailTransporter = require("../utils/mailServer");
+const rescueNotification = require('../resources/rescueNotifyMail')
 
 const router = express.Router()
 
@@ -63,6 +65,32 @@ router.get('/filter', async (req, res, next) => {
         next(error)
     }
 });
+
+
+
+// test route for email viewing
+router.get('/default-rescue-mail', (req, res, next) => {
+    try {
+        const mailDetails = {
+            from: "AdoPet2024@gmail.com",
+            to: "crossorigenes@gmail.com",
+            subject: "NEED YOUR HELP!",
+            html: rescueNotification(),
+        }
+        mailTransporter.sendMail(mailDetails, function (err, data) {
+            if (err) {
+                console.log("Error Occurs");
+            } else {
+                console.log("Email sent successfully");
+            }
+        });
+        setTimeout(() => {
+            res.status(200).json({ message: "Mail sent successfully" })
+        }, 100)
+    } catch (error) {
+        next(error)
+    }
+})
 
 module.exports = router
 
