@@ -91,9 +91,9 @@ router.post("/adoptionRequest", verifyToken, (req, res) => {
         res.status(403);
       }
       console.log(1, req.body);
-
-      // const currentUser = await User.findOne({ _id: data.id });
-      // console.log(11, currentUser.email);
+      // console.log(data)
+      const currentUser = await User.findOne({ _id: data.id });
+      console.log(11, currentUser);
 
       // const Donor1 = await Post.findOne({ _id: req.body.id });
       // Donor = Donor1.donor_email;
@@ -106,7 +106,7 @@ router.post("/adoptionRequest", verifyToken, (req, res) => {
 			// const sender = await User.findOne({ _id: data.id })
 			// senderEmail = sender.email
 
-      resData = {...resData, dtOfApntmnt: req.body.selDate}
+      resData = {...resData, dtOfApntmnt: req.body.selDate, currentuser: currentUser.name}
       console.log(resData)
   
       let mailDetails = {

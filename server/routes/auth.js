@@ -13,11 +13,18 @@ router.post("/register", async (req, res) => {
     name: req.body.username,
     email: req.body.email,
     password: req.body.password,
-    area: req.body.address.area,
-    lat: req.body.address.coords.latitude,
-    lng: req.body.address.coords.longitude,
+    address: req.body.address.area,
+    // lat: req.body.address.coords.latitude,
+    // lng: req.body.address.coords.longitude,
+    loc: {
+      type: "Point",
+      coordinates: [
+        req.body.address.coords.latitude,
+        req.body.address.coords.longitude,
+      ],
+    },
     zip_code: req.body.address.zip_code,
-    is_volunteer: req.body.is_volunteer === 'Yes' ? true : false
+    is_volunteer: req.body.is_volunteer === "Yes" ? true : false,
   });
   console.log("inside register route")
   const existinguser = await User.findOne({ email: data.email });

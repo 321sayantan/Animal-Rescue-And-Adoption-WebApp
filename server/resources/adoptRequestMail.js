@@ -309,8 +309,8 @@ function adoptReqMail(resData) {
 
                                         <p
                                             style="margin-top: -1rem !important; font-size: 1.2rem; font-weight: 400; line-height: 1.5rem;">
-                                            I'm <span style="font-weight: 600; color: #00c1f2;">Snehodipto
-                                                das</span> and
+                                            I'm <span style="font-weight: 600; color: #00c1f2; text-transform: capitalize;">${resData.currentuser}
+                                            </span> and
                                             I'm
                                             interested in
                                             adopting
@@ -371,14 +371,14 @@ function adoptReqMail(resData) {
                                             style="margin-top: 2rem !important; font-size: 1.2rem; font-weight: 400; line-height: 1.5rem;">
                                             I am willing to fix an
                                             appointment with you on
-                                            <span style="font-weight: 600; color: #00c1f2;">${resData._doc.dtOfApntmnt}</span>
+                                            <span style="font-weight: 600; color: #00c1f2;">${resData.dtOfApntmnt}</span>
                                             if you are okay with it.
                                             Please inform me about our
                                             deal by accepting this
                                             request.
                                             <br><br><br>
                                             with Regards,<br>
-                                            <span style="font-size: 1.3rem;font-weight: 600;">Snehodipto Das</span>
+                                            <span style="font-size: 1.3rem;font-weight: 600; text-transform: capitalize;">${resData.currentuser}</span>
                                         </p>
                                         <table role="presentation" border="0" cellpadding="0" cellspacing="0"
                                             style="margin-top: 4rem !important;">

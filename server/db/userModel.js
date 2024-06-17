@@ -1,5 +1,25 @@
 const mongoose = require("mongoose");
 
+
+const LocationSchema = new mongoose.Schema({
+  type: {
+    type: String,
+    enum: ["Point"],
+    required: true,
+  },
+  coordinates: {
+    type: [Number], // Array of Numbers
+    required: true,
+    validate: {
+      validator: function (arr) {
+        return arr.length === 2; // Must be an array of 2 numbers (latitude, longitude)
+      },
+      message: "Coordinates must contain exactly 2 elements.",
+    },
+  },
+},{ _id: false });
+
+
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -13,11 +33,15 @@ const userSchema = new mongoose.Schema({
   address: {
     type: String,
   },
-  lat: {
-    type: Number,
-  },
-  lng: {
-    type: Number,
+  // lat: {
+  //   type: Number,
+  // },
+  // lng: {
+  //   type: Number,
+  // },
+  loc: {
+    type: LocationSchema,
+    required: true
   },
   zip_code: {
     type: Number,
@@ -29,5 +53,7 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
   }
 });
+
+userSchema.index({ loc: "2dsphere" });
 
 module.exports = mongoose.model("Users", userSchema);

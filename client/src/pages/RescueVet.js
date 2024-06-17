@@ -12,29 +12,29 @@ function RescueVet() {
   const navigate = useNavigate();
   const rescueVetDataHandler = async (rescueData) => {
     console.log(rescueData)
-    // try {
-    //   const response = await fetch('http://localhost:5000/rescue/post', {
-    //     method: 'POST',
-    //     body: JSON.stringify(rescueData),
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     }
-    //   });
+    try {
+      const response = await fetch('http://localhost:5000/rescue/post', {
+        method: 'POST',
+        body: JSON.stringify(rescueData),
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
 
-    //   const result = await response.json();
+      const result = await response.json();
 
-    //   if (response.ok) {
-    //     toast.success(result.message, toasterVariants)
-    //     setErrors(null);
-    //     navigate('rescue-list');
-    //   } else {
-    //     setErrors(result.errors || {});
-    //   }
-    // } catch (error) {
-    //   console.error('Failed to post:', error);
-    // }
+      if (response.ok) {
+        toast.success(result.message, toasterVariants)
+        setErrors(null);
+        navigate('rescue-list');
+      } else {
+        setErrors(result.errors || {});
+      }
+    } catch (error) {
+      console.error('Failed to post:', error);
+    }
 
-    // toast.dismiss()
+    toast.dismiss()
     // console.log(69,postVetData);
   }
 
