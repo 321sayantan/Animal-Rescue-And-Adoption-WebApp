@@ -1,9 +1,20 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../store/AuthContext";
+import { toast } from "react-toastify";
 
 const AboutBlock1 = () => {
   const { isAuthenticated } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const restrictRedirectHandler = () => {
+    if (isAuthenticated) {
+      navigate('../rescue');
+    } else {
+      toast.info("Please sign in to rescue");
+      navigate("../login");
+    }
+  };
 
   return (
     <>
@@ -35,14 +46,13 @@ const AboutBlock1 = () => {
                 <Link to="adopt" className="btn btn-style ">
                   Adopt a pet
                 </Link>
-                {isAuthenticated && (
-                  <Link
-                    to="rescue"
-                    className="btn btn-style btn-outline-primary"
-                  >
-                    Rescue a stray
-                  </Link>
-                )}
+                <button
+                  // to="rescue"
+                  className="btn btn-style btn-outline-primary"
+                  onClick={restrictRedirectHandler}
+                >
+                  Rescue a stray
+                </button>
               </div>
             </div>
             <div className="col-lg-6 mt-lg-0 mt-5" data-aos="fade-up">

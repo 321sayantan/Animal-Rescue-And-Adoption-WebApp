@@ -11,14 +11,16 @@ function RescueVet() {
 
   const navigate = useNavigate();
   const rescueVetDataHandler = async (rescueData) => {
-    console.log(rescueData)
     try {
-      const response = await fetch('http://localhost:5000/rescue/post', {
-        method: 'POST',
-        body: JSON.stringify(rescueData),
-        headers: {
-          'Content-Type': 'application/json',
-        }
+      const response = await toast.promise(
+        fetch('http://localhost:5000/rescue/post', {
+          method: 'POST',
+          body: JSON.stringify(rescueData),
+          headers: {
+            'Content-Type': 'application/json',
+          }
+        }), {
+        pending: 'Uploading Request...'
       });
 
       const result = await response.json();
@@ -28,14 +30,15 @@ function RescueVet() {
         setErrors(null);
         navigate('rescue-list');
       } else {
+        toast.error(result.errors[0], toasterVariants)
         setErrors(result.errors || {});
       }
     } catch (error) {
       console.error('Failed to post:', error);
     }
 
-    toast.dismiss()
-    // console.log(69,postVetData);
+    // toast.dismiss()
+    console.log(rescueData)
   }
 
   return (
