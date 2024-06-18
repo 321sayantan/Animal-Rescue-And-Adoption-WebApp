@@ -88,12 +88,12 @@ router.post("/adoptionRequest", verifyToken, (req, res) => {
 		// let resData;
 		jwt.verify(req.token, 'shhh', async (err, data) => {
 			if (err) {
-				res.status(403);
-			}
-			console.log(1, req.body);
-
-			// const currentUser = await User.findOne({ _id: data.id });
-			// console.log(11, currentUser.email);
+        res.status(403);
+      }
+      console.log(1, req.body);
+      // console.log(data)
+      const currentUser = await User.findOne({ _id: data.id });
+      console.log(11, currentUser);
 
 			// const Donor1 = await Post.findOne({ _id: req.body.id });
 			// Donor = Donor1.donor_email;
@@ -106,28 +106,28 @@ router.post("/adoptionRequest", verifyToken, (req, res) => {
 			// const sender = await User.findOne({ _id: data.id })
 			// senderEmail = sender.email
 
-			resData = { ...resData, dtOfApntmnt: req.body.selDate }
-			console.log(resData)
-
-			let mailDetails = {
-				from: "AdoPet2024@gmail.com",
-				to: recieverEmail,
-				// to: "dsnehodipto@gmail.com",
-				// to: "123sayantandas@gmail.com",
-				subject: "Request for adoption",
-				html: adoptReqMail(resData),
-			};
-
-			mailTransporter.sendMail(mailDetails, function (err, data) {
-				if (err) {
-					console.log("Error Occurs");
-				} else {
-					console.log("Email sent successfully");
-				}
-			});
-			setTimeout(() => {
-				res.status(200).json({ message: "Mail sent successfully" })
-			}, 100)
+      resData = {...resData, dtOfApntmnt: req.body.selDate, currentuser: currentUser.name}
+      console.log(resData)
+  
+      let mailDetails = {
+        from: "AdoPet2024@gmail.com",
+        to: recieverEmail,
+        // to: "dsnehodipto@gmail.com",
+        // to: "123sayantandas@gmail.com",
+        subject: "Request for adoption",
+        html: adoptReqMail(resData),
+      };
+  
+      mailTransporter.sendMail(mailDetails, function (err, data) {
+        if (err) {
+          console.log("Error Occurs");
+        } else {
+          console.log("Email sent successfully");
+        }
+      });
+      setTimeout(() => {
+        res.status(200).json({ message: "Mail sent successfully" })
+      },10)
 		})
 
 	} catch (error) {

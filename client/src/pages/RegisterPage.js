@@ -13,6 +13,7 @@ function RegisterPage() {
   const authCtx = useContext(AuthContext);
 
   const SignUpHandler = async (userData) => {
+    // console.log(userData)
     try {
       const response = await toast.promise(
         fetch("http://localhost:5000/user/register", {
@@ -24,21 +25,19 @@ function RegisterPage() {
         }),
         {
           pending: 'Processing...',
-          // success: 'Registration Successful',
-          // error: 'Failed to register!'
         }
       );
       const result = await response.json();
-      console.log(response);
+      console.log(result);
 
       if (response.ok) {
-        // console.log(result);
+        console.log(result);
         authCtx.register()
         navigate("..");
         toast.success(result.message, toasterVariants)
         setErrors(null);
       } else {
-        toast.error(`${result.errors[0]}`, toasterVariants)
+        toast.error(result.errors[0], toasterVariants)
         setErrors(result.errors || {});
       }
     } catch (error) {

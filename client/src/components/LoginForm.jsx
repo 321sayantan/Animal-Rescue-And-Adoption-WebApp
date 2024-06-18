@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigation } from "react-router-dom";
+import { Link, useNavigation } from "react-router-dom";
 import useInput from "../hooks/use-input";
 
 const LoginForm = (props) => {
@@ -86,6 +86,9 @@ const LoginForm = (props) => {
             onClick={() => setShowPswrd((prev) => !prev)}
           />
           {pswrdIsInvalid && <p className="invalid-feedback">Invalid Password!</p>}
+        </div>
+        <div className="col-12">
+            <Link className="form-label fw-bold forgot-pswrd-link">Forgot Password?</Link>
         </div>
         <div className="login-btn d-flex justify-content-center align-items-center">
           <button

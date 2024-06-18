@@ -13,11 +13,18 @@ router.post("/register", async (req, res) => {
     name: req.body.username,
     email: req.body.email,
     password: req.body.password,
-    area: req.body.address.area,
-    lat: req.body.address.coords.latitude,
-    lng: req.body.address.coords.longitude,
+    address: req.body.address.area,
+    loc: {
+      type: "Point",
+      coordinates: [
+        req.body.address.coords.latitude,
+        req.body.address.coords.longitude,
+      ],
+    },
+    image: req.body.image,
+    imageID: req.body.image_id,
     zip_code: req.body.address.zip_code,
-    is_volunteer: req.body.is_volunteer === 'Yes' ? true : false
+    is_volunteer: req.body.is_volunteer === "Yes" ? true : false,
   });
   console.log("inside register route")
   const existinguser = await User.findOne({ email: data.email });
@@ -70,78 +77,48 @@ router.post("/register", async (req, res) => {
   }
 });
 
-// router.post("/login", (req, res, next) => {
-//   console.log(1, "login route")
-//   passport.authenticate("local", (err, user) => {
-//     console.log(6, user);
-//     if(err) {
-//       console.log(7,"error inside route")
-//       res.status(401).json({ errors: [err] });
-//     }
-//     else if (!user) {
-//       res.status(401).json({ errors:["Wrong Password"]});
-//     } else {
-//       console.log(8,"login")
-
-//       req.logIn(user, (err) => {
-//         console.log(9,"inside login")
-//         console.log(9,user)
-//         if (err) {
-//           console.log(10,"inside login error")
-//           return next(err);
-//         }
-
-//         // res.cookie("sayantan", "sdkfhskfhksf")
-//         console.log(req.session)
-//         console.log(req.user)
-
-//         res.status(200).json("authentication successful");
-//       });
-//     }
-//   })(req, res, next);
-// });
-
-
-
-router.post("/login",async (req, res) => {
+router.post("/login", async (req, res) => {
   try {
-        const logged_user = await User.findOne({ email: req.body.email });
-        console.log(2, logged_user);
-        if (logged_user) {
-          console.log(3, "user found");
-          bcrypt.compare(req.body.password, logged_user.password, (err, result) => {
-            if (err) {
-              console.log(err)
-            }
-            // else {
-            if (!result) {
-              console.log(30, "password didnot match");
-              res.status(400).json({ msg: "Invalid Email or Password"})        
-            } 
-              
-            console.log(30, "password matched");
-
-            const payload = {
-              id: logged_user.id
-            }
-
-            jwt.sign(payload, "shhh", {expiresIn: '10h'}, (err, token)=>{
-              res.status(200).json({
-                token: token
-              })
-            })
-
-            }
-          );
-        } else {
-          console.log(4, "user not found");
+    const logged_user = await User.findOne({ email: req.body.email });
+    console.log(2, logged_user);
+    if (logged_user) {
+      console.log(3, "user found");
+      bcrypt.compare(req.body.password, logged_user.password, (err, result) => {
+        if (err) {
+          console.log(err)
+        }
+        // else {
+        if (!result) {
+          console.log(30, "password didnot match");
           res.status(400).json({ msg: "Invalid Email or Password" })
         }
-      } catch (err) {
-        console.log(5, "error in finding user");
-        res.status(400).json({ msg: "Unexpected Error Occured" });
-        // return cb(err);
+
+        console.log(30, "password matched");
+
+        const payload = {
+          id: logged_user.id
+        }
+
+        jwt.sign(payload, "shhh", { expiresIn: '10h' }, (err, token) => {
+          setTimeout(() => {
+            res.status(200).json({
+              message: "Welcome Back...",
+              token: token
+            })
+          }, 1000)
+        })
+
       }
+      );
+    } else {
+      console.log(4, "user not found");
+      res.status(400).json({ msg: "Invalid Email or Password" })
+    }
+  } catch (err) {
+    console.log(5, "error in finding user");
+    res.status(400).json({ msg: "Unexpected Error Occured" });
+    // return cb(err);
+  }
 });
 
 
@@ -155,22 +132,22 @@ router.get("/logout", (req, res) => {
   });
 });
 
-router.get("/getuser",verifyToken, async (req, res) => {
-  try{
-  console.log(20,req.headers);
-  
-  jwt.verify(req.token, "shhh", async(err, data)=>{
-    if(err){res.status(403);}
-    // console.log(data);
-    const users = await User.find({})
-    // console.log(users)
-    res.json(users)
-  })
-  
-}
-catch(err){
-  res.send(err);
-}
+router.get("/getuser", verifyToken, async (req, res) => {
+  try {
+    console.log(20, req.headers);
+
+    jwt.verify(req.token, "shhh", async (err, data) => {
+      if (err) { res.status(403); }
+      // console.log(data);
+      const users = await User.find({})
+      // console.log(users)
+      res.json(users)
+    })
+
+  }
+  catch (err) {
+    res.send(err);
+  }
 });
 
 module.exports = router;

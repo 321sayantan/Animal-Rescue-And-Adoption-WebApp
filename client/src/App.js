@@ -15,6 +15,8 @@ import AddNewVetPost from './pages/AddNewVetPost';
 import RescueVet from './pages/RescueVet';
 import RescueListPage from './pages/RescueListPage';
 import RescueDetailsPage from './pages/RescueDetailsPage';
+import ChangePassword from './pages/ResetPasswordMail';
+import ResetPswrdFinalPage from './pages/ResetPasswordPswrd';
 import { loader as rootLoader } from './pages/Root';
 import { loader as loadPetPosts } from './pages/AdoptPet';
 import { loader as loadRescuePosts } from './pages/RescueListPage';
@@ -50,8 +52,16 @@ const router = createBrowserRouter([
           { path: ':id', element: <RescueDetailsPage />, loader: loadRescueDetalis }
         ]
       },
-    ]
-  }
+    ],
+  },
+  {
+    path: 'forgot-password',
+    element: <ChangePassword />
+  },
+  {
+    path: 'reset-password',
+    element: <ResetPswrdFinalPage />
+  },
 ])
 
 function App() {

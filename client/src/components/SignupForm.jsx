@@ -4,12 +4,14 @@ import useInput from "../hooks/use-input";
 import Alert from "./UI/Alert";
 import AutoComplete from "./UI/AutoComplete";
 import RadioButton from "./UI/RadioButton";
+import ImageUploader from "./ImageUploader";
 
 const pattern = /^(?=.*\d.*)(?=.*[a-zA-Z].*)(?=.*[\W]).{8,}$/;
 const pattern2 = /^\d{5,8}(?:[-\s]\d{4})?$/;
 
 const SignupForm = (props) => {
   const [showPswrd, setShowPswrd] = useState(false);
+  const [userImage, setUserImage] = useState();
   const [showConfPswrd, setShowConfPswrd] = useState(false);
   const [userAddress, setUserAddress] = useState();
   const [isVolunteer, setIsVolunteer] = useState("No");
@@ -96,6 +98,7 @@ const SignupForm = (props) => {
     const userData = {
       username: enteredName,
       email: enteredMail,
+      ...userImage[0],
       password: enteredPswrd,
       is_volunteer: isVolunteer,
       address: {
@@ -197,6 +200,13 @@ const SignupForm = (props) => {
           {confpswrdNotMatched && (
             <p className="invalid-feedback">Passwords didn't match!</p>
           )}
+        </div>
+        <div className="col-12">
+          <ImageUploader
+            id="user-profile-pic"
+            onUploaded={setUserImage}
+            label="Choose your profile picture"
+          />
         </div>
         <div className="col-12">
           <AutoComplete

@@ -6802,7 +6802,9 @@ progress {
 }
 
 .form-label {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.2rem;
+  margin-left: 0.5rem;
+  font-weight: 300;
 }
 
 .col-form-label {
@@ -16693,6 +16695,7 @@ ul.page-pagination li a.next:hover {
 
 .w3l-footer-16 .subscribe button:hover {
   background: var(--secondary-color);
+  color: #000;
 }
 
 .w3l-footer-16 ul.social li,
@@ -17226,6 +17229,7 @@ h4.inner-text-title {
 .add-new-post select,
 .rescue-section input,
 .rescue-section textarea,
+.password-change-form input,
 .register-section input,
 .register-section textarea,
 .w3l-contact-info .form-inner-cont input,

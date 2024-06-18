@@ -44,12 +44,12 @@ function ImageUploader({ id, multiple, onUploaded, label }) {
 
   return (
     <>
+      <label htmlFor={id} className="form-label">{label}</label>
       <input
         // className={"form-control " + fileSelectClasses}
         className="form-control"
         type="file"
         id={id}
-        text="Photo of your vet"
         onChange={handleImageUpload}
         multiple={multiple}
       />

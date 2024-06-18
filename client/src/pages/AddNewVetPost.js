@@ -11,37 +11,34 @@ function AddNewVetPost() {
     const navigate = useNavigate();
     const postDataHandler = async (postVetData) => {
         try {
-          const token = "Bearer " + localStorage.getItem("jwt");
-          const response = await toast.promise(
-            fetch("http://localhost:5000/adopt/post", {
-              method: "POST",
-              body: JSON.stringify(postVetData),
-              headers: {
-                "Content-Type": "application/json",
-                "authorization": token,
-              },
-            }),
-            {
-              pending: "Saving post...",
-              success: "Post for adoption added successfully",
-              error: "Failed to add post!",
+            const token = "Bearer " + localStorage.getItem("jwt");
+            const response = await toast.promise(
+                fetch("http://localhost:5000/adopt/post", {
+                    method: "POST",
+                    body: JSON.stringify(postVetData),
+                    headers: {
+                        "Content-Type": "application/json",
+                        "authorization": token,
+                    },
+                }),
+                {
+                    pending: "Saving post...",
+                }
+            );
+
+            const result = await response.json();
+
+            if (response.ok) {
+                toast.success(result.message, toasterVariants)
+                setErrors(null);
+                navigate("..");
+            } else {
+                toast.error(result.errors, toasterVariants);
+                setErrors(result.errors || {});
             }
-          );
-
-          const result = await response.json();
-
-          if (response.ok) {
-            setErrors(null);
-            navigate("..");
-          } else {
-            toast.error(result.errors, toasterVariants);
-            setErrors(result.errors || {});
-          }
         } catch (error) {
             console.error('Failed to post:', error);
         }
-
-        toast.dismiss()
         // console.log(69,postVetData);
     }
 
@@ -78,11 +75,12 @@ function AddNewVetPost() {
                     <div className="row align-items-start" data-aos="fade-up">
                         <div className="container col-lg-12 mt-4 px-4">
                             {errors && <Alert className="alert-danger">
-                                <ul>
+                                <p>{errors}</p>
+                                {/* <ul>
                                     {Object.values(errors).map((err, i) => (
                                         <li key={i}>{err}</li>
                                     ))}
-                                </ul>
+                                </ul> */}
                             </Alert>}
                             <NewPostForm onSubmit={postDataHandler} />
                         </div>

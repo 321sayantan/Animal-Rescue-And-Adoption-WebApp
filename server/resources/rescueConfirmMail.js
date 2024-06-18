@@ -1,4 +1,4 @@
-function rescueNotification(id) {
+function rescueConfirmationMail(resData) {
     return `<!doctype html>
 <html>
 
@@ -15,7 +15,7 @@ function rescueNotification(id) {
 
         body {
             background-color: #161f33;
-            font-family: sans-serif;
+            font-family: Georgia, 'Times New Roman', Times, serif;
             -webkit-font-smoothing: antialiased;
             font-size: 14px;
             line-height: 1.4;
@@ -281,8 +281,6 @@ function rescueNotification(id) {
 <body class="">
     <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="body">
         <tr>
-            <td>&nbsp;</td>
-
             <div class="header">
                 <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                     <tr>
@@ -301,29 +299,36 @@ function rescueNotification(id) {
                             <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                                 <tr>
                                     <td>
-                                        <h2 style="font-size: 2rem; color: #333; font-weight: 700;">Hi, </h2>
-
+                                        <h2 style="font-size: 2rem; color: #333; font-weight: 700;">Hi, <span
+                                                style="color: #d7cc00; text-transform: uppercase;font-size: 2rem !important;">Anup
+                                                Kumar Paswan</span>
+                                        </h2>
                                         <p
                                             style="font-size: 1.4rem; font-weight: 400; line-height: 1.5rem;margin-top: -1rem;">
-                                            This is a message from team <a href="https://localhost:3000" target="_blank"
-                                                style="font-weight: 600; color: #00c1f2;text-decoration: none;">AdoPet.</a>
-                                            This mail is a notification against an injured vet found near your locality.
-                                            Since you are registered as a volunteer, we request you to help this needy
-                                            little fellow at your best. You can reach both the detailed overview and the
-                                            rescuer by hitting the button below.
+                                            We are so happy to see you raise your hand for the helpless little fellows
+                                            and team <a href="https://localhost:3000" target="_blank"
+                                                style="font-weight: 600; color: #00c1f2;text-decoration: none;">AdoPet</a>
+                                            is so thankful to have you as a true, generous volunteer🤗. We have recieved
+                                            your request and are processing with the transportation of
+                                            your requested vet. We will keep you posted with our current status and
+                                            other feeds.<br><br>
+                                            Hope you cooperate with us. Support us by saving more vets or adopting one
+                                            from below:
                                         </p>
-                                        <table role="presentation" border="0" cellpadding="0" cellspacing="0"
-                                            style="padding-inline: 2rem;margin-top: 2rem;">
+                                        <table style="margin-top: 0.5rem;">
                                             <tbody>
-                                                <tr>
-                                                    <td class="btn btn-primary">
-                                                        <a
-                                                            href="https://localhost:3000/rescue/66668642173344cf7c8b8980">Help
-                                                            them</a>
-                                                    </td>
-                                                </tr>
+                                                <td style="line-height: 1.5rem;font-size: 1rem;">
+                                                    <a href="http://localhost:3000/adopt" target="_blank"
+                                                        style="font-weight: 400; margin-left: 1rem;">All
+                                                        Adoptable pets available</a><br>
+                                                    <a href="http://localhost:3000/rescue/rescue-vet-list" target="_blank"
+                                                        style="font-weight: 400; margin-left: 1rem;">Vets
+                                                        those needs your help</a>
+                                                </td>
                                             </tbody>
                                         </table>
+
+                                        </p>
                                         <hr width="100%" size="3px" color="#aaa" style="margin-block: 1.5rem;" />
                                         <p
                                             style="margin-top: 2rem !important; font-size: 1.5rem; font-weight: 500; line-height: 1.5rem;">
@@ -366,4 +371,4 @@ function rescueNotification(id) {
 </html>`
 }
 
-module.exports = rescueNotification
+module.exports = rescueConfirmationMail

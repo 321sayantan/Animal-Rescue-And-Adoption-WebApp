@@ -1,4 +1,4 @@
-function rescueNotification(id) {
+function resetPswrdMail() {
     return `<!doctype html>
 <html>
 
@@ -135,7 +135,7 @@ function rescueNotification(id) {
         }
 
         a {
-            color: #ec0867;
+            color: #0c6714;
             text-decoration: underline;
         }
 
@@ -147,10 +147,12 @@ function rescueNotification(id) {
 
         .btn a {
             background-color: #ffffff;
-            border: solid 1px #ec0867;
+            /* border: solid 1px #ec0867; */
+            border: solid 1px #0c6714;
             border-radius: 5px;
             box-sizing: border-box;
-            color: #ec0867;
+            /* color: #ec0867; */
+            color: #0c6714;
             cursor: pointer;
             display: inline-block;
             font-size: 1rem;
@@ -162,14 +164,16 @@ function rescueNotification(id) {
         }
 
         .btn-primary a {
-            background-color: #ec0867;
-            border-color: #ec0867;
+            /* background-color: #ec0867;
+            border-color: #ec0867; */
+            background-color: #0c6714;
+            border-color: #0c6714;
             color: #ffffff;
         }
 
         .btn-primary a:hover {
-            background-color: #d5075d !important;
-            border-color: #d5075d !important;
+            background-color: #064d0c !important;
+            border-color: #064d0c !important;
         }
 
         .preheader {
@@ -301,33 +305,37 @@ function rescueNotification(id) {
                             <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                                 <tr>
                                     <td>
-                                        <h2 style="font-size: 2rem; color: #333; font-weight: 700;">Hi, </h2>
+                                        <h2 style="font-size: 2rem; color: #333; font-weight: 700; text-align: center;">
+                                            AdoPet Password Reset </h2>
 
                                         <p
-                                            style="font-size: 1.4rem; font-weight: 400; line-height: 1.5rem;margin-top: -1rem;">
-                                            This is a message from team <a href="https://localhost:3000" target="_blank"
-                                                style="font-weight: 600; color: #00c1f2;text-decoration: none;">AdoPet.</a>
-                                            This mail is a notification against an injured vet found near your locality.
-                                            Since you are registered as a volunteer, we request you to help this needy
-                                            little fellow at your best. You can reach both the detailed overview and the
-                                            rescuer by hitting the button below.
+                                            style="font-size: 1.4rem; font-weight: 400; line-height: 1.5rem;margin-top: 1rem;">
+                                            We heard that you lost your <a href="http://localhost:3000" target="_blank"
+                                                style="font-weight: 600; color: #00c1f2;text-decoration: none;">AdoPet</a>
+                                            password?
+                                            So sorry about that!😢<br>
+                                            But don't worry, You can use the underprovided button to reset your password:
                                         </p>
                                         <table role="presentation" border="0" cellpadding="0" cellspacing="0"
-                                            style="padding-inline: 2rem;margin-top: 2rem;">
+                                            style="padding-inline: 2rem;margin-top: 2rem;text-align: center;">
                                             <tbody>
                                                 <tr>
                                                     <td class="btn btn-primary">
-                                                        <a
-                                                            href="https://localhost:3000/rescue/66668642173344cf7c8b8980">Help
-                                                            them</a>
+                                                        <a href="http://localhost:3000/reset-password" target="_blank">Reset
+                                                            your password</a>
                                                     </td>
                                                 </tr>
                                             </tbody>
                                         </table>
                                         <hr width="100%" size="3px" color="#aaa" style="margin-block: 1.5rem;" />
                                         <p
-                                            style="margin-top: 2rem !important; font-size: 1.5rem; font-weight: 500; line-height: 1.5rem;">
-                                            Happy Rescuing...!! 🐾
+                                            style="margin-top: 2rem !important; font-size: 1.5rem; font-weight: 400; line-height: 1.5rem;">
+                                            This link is valid for <strong style="font-weight: 700;color: #f20051;">10
+                                                mins</strong> only! If you don't use it within that time it will expire.
+                                            To
+                                            re-generate a new link, visit:<br>
+                                            <a href="http://localhost:3000/forgot-password" target="_blank"
+                                                style="font-weight: 400;color: blue;text-decoration: none;">http://localhost:3000/forgot-password</a><br>
                                             <br><br><br>
                                             with Regards,<br>
                                             <span style="font-size: 1.3rem;font-weight: 600;color: #333;">team <strong
@@ -346,12 +354,12 @@ function rescueNotification(id) {
                             <td class="content-block">
                                 <span class="apple-link">GP Block, Sector-V, SaltLake, Kolkata-12</span>
                                 <br> Don't like these emails? <a
-                                    href="https://localhost:3000/unsubscribe">Unsubscribe</a>.
+                                    href="http://localhost:3000/unsubscribe">Unsubscribe</a>.
                             </td>
                         </tr>
                         <tr>
                             <td class="content-block powered-by">
-                                Powered by <a href="https://localhost:3000">AdoPet</a>.
+                                Powered by <a href="http://localhost:3000">AdoPet</a>.
                             </td>
                         </tr>
                     </table>
@@ -366,4 +374,4 @@ function rescueNotification(id) {
 </html>`
 }
 
-module.exports = rescueNotification
+module.exports = resetPswrdMail

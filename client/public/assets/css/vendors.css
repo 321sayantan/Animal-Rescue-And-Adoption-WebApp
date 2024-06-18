@@ -7193,3 +7193,85 @@ hr:not([size]) {
   color: #6c757d;
   opacity: 1;
 }
+
+
+
+/* password change section */
+.password-change-form {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  max-width: 40rem;
+  margin: 4rem auto;
+  justify-content: center;
+  align-items: center;
+}
+
+.password-change-form .heading {
+  text-transform: uppercase;
+  font-weight: 900 !important;
+  color: #212529 !important;
+}
+
+.password-change-form h3 {
+  font-size: 1.3rem !important;
+  font-weight: 600 !important;
+  color: #666 !important;
+}
+
+.password-change-form .mail-changer__wrapper {
+  background: linear-gradient(45deg, #085655, #b1fbdf);
+  border-radius: var(--border-radius);
+  box-shadow: 0 0 6px 7px rgba(0, 0, 0, 0.2);
+}
+
+.password-change-form label {
+  margin: -0.5rem auto 0.8rem 0.2rem;
+}
+
+.password-change-form input {
+  color: #fff !important;
+}
+
+.password-change-form input::placeholder {
+  color: #ccc !important;
+}
+
+.password-change-form input.form-control.is-invalid {
+  background-color: #e7867e !important;
+}
+
+.password-change-form .invalid-feedback {
+  color: #ff939d !important;
+}
+
+.password-change-form .btn-style {
+  background: #212529;
+}
+
+.password-change-form .btn-style:hover {
+  background: #363b41;
+}
+
+.password-change-form .toggle-password {
+  float: none !important;
+  right: 2rem !important;
+}
+
+/* .logo-wrapper {
+  position: relative;
+  width: 100%;
+  height: 4rem;
+  overflow: hidden;
+}
+
+.logo-wrapper img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+} */
+
+/* //password change section */
