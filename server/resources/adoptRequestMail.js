@@ -407,7 +407,7 @@ function adoptReqMail(resData) {
                                                                 <tr>
                                                                     <td class="btn btn-primary accept"
                                                                         style="text-align: center;font-size: 1.5rem;">
-                                                                        <a href="https://localhost:3000/acceptReq"
+                                                                        <a href="http://localhost:3000/adopt/${resData._doc._id}"
                                                                             style="background-color: #006815 !important;border-color: #006815;"
                                                                             target="_blank">Accept</a>
                                                                     </td>

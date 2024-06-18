@@ -33,12 +33,6 @@ const userSchema = new mongoose.Schema({
   address: {
     type: String,
   },
-  // lat: {
-  //   type: Number,
-  // },
-  // lng: {
-  //   type: Number,
-  // },
   loc: {
     type: LocationSchema,
     required: true
@@ -47,6 +41,9 @@ const userSchema = new mongoose.Schema({
     type: Number,
   },
   image: {
+    type: String,
+  },
+  imageID: {
     type: String,
   },
   is_volunteer: {

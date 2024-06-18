@@ -65,10 +65,10 @@ app.get(
 
 app.get(
   "/auth/google/callback",
-  passport.authenticate("google", {
-    successRedirect: "http://localhost:3000/",
-    failureRedirect: "http://localhost:3000/login",
-  }),
+  // passport.authenticate("google", {
+  //   successRedirect: "http://localhost:3000/",
+  //   failureRedirect: "http://localhost:3000/login",
+  // }),
   (req, res) => {
     res.status(200).json("login successful")
   }
