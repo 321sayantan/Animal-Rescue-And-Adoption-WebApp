@@ -1,13 +1,15 @@
-import { useState } from "react"
+import { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom"
 import Alert from "../components/UI/Alert"
 import RescWorksSection from "../components/Rescue/RescWorksSection"
 import RescueForm from "../components/Rescue/RescueForm"
 import { toast } from "react-toastify"
 import { toasterVariants } from "../utils/misc"
+import { AuthContext } from "../store/AuthContext";
 
 function RescueVet() {
   const [errors, setErrors] = useState(null)
+  const { isAuthenticated, jwt } = useContext(AuthContext);
 
   const navigate = useNavigate();
   const rescueVetDataHandler = async (rescueData) => {
@@ -18,6 +20,7 @@ function RescueVet() {
           body: JSON.stringify(rescueData),
           headers: {
             'Content-Type': 'application/json',
+            'authorization': `Bearer ${jwt}`
           }
         }), {
         pending: 'Uploading Request...'

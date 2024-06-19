@@ -1,16 +1,57 @@
-import { useLoaderData, defer, Await } from 'react-router-dom';
-import { Suspense } from 'react';
+import { useLoaderData, defer, Await, useNavigate, useParams } from 'react-router-dom';
+import { Suspense, useContext, useState } from 'react';
+import { AuthContext } from '../store/AuthContext';
+import { AnimatePresence } from "framer-motion";
 import RescuedVetDetailsSection from '../components/Rescue/RescuedVetDetailsSection';
 import RescuerDetailsSection from '../components/Rescue/RescuerDetailsSection';
 import RescVetDetSkeleton from '../components/Rescue/RescVetDetSkeleton';
 import RescuerDetailSkeleton from '../components/Rescue/RescuerDetailSkeleton';
+import RescueConfirmPrompt from '../components/RescueConfirmPrompt';
+import { toast } from 'react-toastify';
+import { toasterVariants } from '../utils/misc';
 
 function RescueDetailsPage() {
-    const { rescuePostData } = useLoaderData();
+    const { rescuePostData } = useLoaderData()
+    const { jwt } = useContext(AuthContext)
+    const navigate = useNavigate()
+    const [showModal, setShowModal] = useState()
+    const params = useParams()
+
+    const confirmationHandler = async (selectedDate) => {
+      // const res = await postData.then(result => result)
+      try {
+        const dataObj = { id: params.id, selDate: selectedDate };
+        const response = await toast.promise(
+          fetch("http://localhost:5000/rescue/rescueRequest", {
+            method: "POST",
+            body: JSON.stringify(dataObj),
+            headers: {
+              "Content-Type": "application/json",
+              authorization: `Bearer ${jwt}`,
+            },
+          }),
+          {
+            pending: "Sending Mail...",
+          }
+        );
+
+        const result = await response.json();
+        console.log(response);
+
+        if (response.ok) {
+          toast.success(result.message, toasterVariants);
+          navigate("..");
+        } else {
+          toast.error(result.error, toasterVariants);
+        }
+        setShowModal(false);
+      } catch (error) {
+        console.error("Error Sending Mail!", error);
+      }
+    };
 
     const fallback1 = <RescVetDetSkeleton />,
         fallback2 = <RescuerDetailSkeleton />
-
 
     return (
         <>
@@ -57,7 +98,7 @@ function RescueDetailsPage() {
                     </div>
                 </div>
                 {/* //pet-details */}
-                {/* donor-details */}
+                {/* saver-details */}
                 <div className="container">
                     <div className="row align-items-center mt-5 py-4 py-md-5">
                         <div className="position-relative mt-5">
@@ -75,16 +116,26 @@ function RescueDetailsPage() {
                                 </Await>
                             </Suspense>
                             <div className="text-center mt-5">
-                                <button type="button" className="btn btn-style btn-primary">
+                                <button type="button" className="btn btn-style btn-primary" onClick={() => setShowModal(true)}>
                                     Save this Vet
                                 </button>
                             </div>
                         </div>
                     </div>
                 </div>
-                {/* ///donor-details */}
+                {/* ///saver-details */}
             </section>
             {/* //pet and owner details */}
+
+            <AnimatePresence>
+                {showModal && <Await resolve={rescuePostData}>
+                    {resPostData => <RescueConfirmPrompt
+                        onClose={() => setShowModal(false)}
+                        onConfirm={confirmationHandler}
+                        vetData={resPostData}
+                    />}
+                </Await>}
+            </AnimatePresence>
         </>
     )
 }

@@ -300,8 +300,7 @@ function rescueConfirmationMail(resData) {
                                 <tr>
                                     <td>
                                         <h2 style="font-size: 2rem; color: #333; font-weight: 700;">Hi, <span
-                                                style="color: #d7cc00; text-transform: uppercase;font-size: 2rem !important;">Anup
-                                                Kumar Paswan</span>
+                                                style="color: #d7cc00; text-transform: uppercase;font-size: 2rem !important;">${resData.currentuser}</span>
                                         </h2>
                                         <p
                                             style="font-size: 1.4rem; font-weight: 400; line-height: 1.5rem;margin-top: -1rem;">

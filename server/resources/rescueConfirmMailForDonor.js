@@ -1,4 +1,4 @@
-function rescueConfMailForDonor() {
+function rescueConfMailForDonor(resData) {
     return `<!doctype html>
 <html>
 
@@ -299,19 +299,19 @@ function rescueConfMailForDonor() {
                             <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                                 <tr>
                                     <td>
-                                        <h2 style="font-size: 2rem; color: #333; font-weight: 700;">Hi,<span
-                                                style="color: #d7cc00; text-transform: uppercase;font-size: 2rem !important;">${resData.name}</span></h2>
+                                        <h2 style="font-size: 2rem; color: #333; font-weight: 700;">Hi, <span
+                                                style="color: #d7cc00; text-transform: uppercase;font-size: 2rem !important;">${resData._doc.rescuer_name}</span></h2>
                                         <p
                                             style="font-size: 1.4rem; font-weight: 400; line-height: 1.5rem;margin-top: -1rem;">
                                             We are so happy to say that we have a rescue volunteer <span
-                                                style="font-weight: 700;color: #d5075d;">Anil Kapoor</span> coming up to
+                                                style="font-weight: 700;color: #d5075d; text-transform: capitalize;">${resData.currentuser}</span> coming up to
                                             save the
-                                            vet <strong>(Turtle)</strong> you requested for, vide Vet-ID(<a
-                                                href="https://localhost:3000/rescue/666f39189c597cbc1589302c"
+                                            vet <strong>(${resData._doc.vet_category})</strong> you requested for, vide Vet-ID(<a
+                                                href="http://localhost:3000/rescue/${resData._doc._id}"
                                                 target="_blank"
-                                                style="font-weight: 600; color: #00c1f2;text-decoration: none;">666f39189c597cbc1589302c</a>)
+                                                style="font-weight: 600; color: #00c1f2;text-decoration: none;">${resData._doc._id}</a>)
                                             on
-                                            <span style="font-weight: 700;color: #d5075d;">26-06-2024</span>.
+                                            <span style="font-weight: 700;color: #d5075d;">${resData.dtOfApntmnt}</span>.
                                             <br>We have recieved the request and are processing with the official
                                             verifications. We'll keep you posted with our current status and
                                             furthur details on time once we finish up.<br><br>

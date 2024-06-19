@@ -2,10 +2,8 @@ import { Outlet, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import { GoogleApiWrapper } from 'google-map-react'
 import Footer from '../components/UI/Footer';
 import Navbar from '../components/UI/Navbar';
-import $ from "jquery";
 
 const Root = () => {
     const { pathname } = useLocation();
@@ -17,6 +15,12 @@ const Root = () => {
     }
 
     useEffect(() => {
+        // const apiKey = process.env.REACT_APP_GMAP_API_KEY;
+        // try {
+        //     loadGoogleMapsScript(apiKey);
+        // } catch (error) {
+        //     console.error(error)
+        // }
         // <!-- AOS initialisation -->
         AOS.init({
             offset: 100,
