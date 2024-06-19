@@ -57,15 +57,6 @@ const NewPostForm = (props) => {
   } = useInput((value) => value.trim().length >= 3);
 
   const {
-    value: enteredMail,
-    isValid: mailIsValid,
-    hasError: mailIsInvalid,
-    valueInputBlurHandler: mailBlurHandler,
-    valueChangeHandler: mailChangeHandler,
-    resetHandler: resetMail,
-  } = useInput((value) => value.includes("@"));
-
-  const {
     value: selectedCategory,
     isValid: categoryIsValid,
     hasError: categoryIsInvalid,
@@ -96,7 +87,6 @@ const NewPostForm = (props) => {
   if (
     donorNameisValid &&
     mobIsValid &&
-    mailIsValid &&
     petNameIsValid &&
     categoryIsValid &&
     breedIsValid &&
@@ -116,7 +106,6 @@ const NewPostForm = (props) => {
     if (
       donorNameisInvalid &&
       mobIsInvalid &&
-      mailIsInvalid &&
       petNameIsInvalid &&
       categoryIsInvalid &&
       breedInvalid &&
@@ -130,7 +119,6 @@ const NewPostForm = (props) => {
       donor: {
         donor_name: enteredDonorName,
         phone: enteredMob,
-        mail: enteredMail,
         address: {
           ...donorAddress,
           zip_code: enteredZip,
@@ -163,7 +151,6 @@ const NewPostForm = (props) => {
     petNameClasses = petNameIsInvalid ? "is-invalid" : "",
     petCategClasses = categoryIsInvalid ? "is-invalid" : "",
     mobileNumClasses = mobIsInvalid ? "is-invalid" : "",
-    mailClasses = mailIsInvalid ? "is-invalid" : "",
     breedClasses = breedInvalid ? "is-invalid" : "",
     descrClasses = descrisInvalid ? "is-invalid" : "",
     zipClasses = zipisInvalid ? "is-invalid" : "";
@@ -172,7 +159,7 @@ const NewPostForm = (props) => {
     <form className="row mt-4 add-new-post" onSubmit={submitHandler}>
       <fieldset className="row mb-4">
         <legend>Donor Info</legend>
-        <div className="col-md-4">
+        <div className="col-md-6">
           <input
             type="text"
             className={"form-control " + donorNameClasses}
@@ -186,19 +173,7 @@ const NewPostForm = (props) => {
             <p className="invalid-feedback">Invalid Name!</p>
           )}
         </div>
-        <div className="col-md-4">
-          <input
-            type="email"
-            className={"form-control " + mailClasses}
-            autoComplete="false"
-            placeholder="Your email address"
-            onChange={mailChangeHandler}
-            onBlur={mailBlurHandler}
-            value={enteredMail}
-          />
-          {mailIsInvalid && <p className="invalid-feedback">Invalid Email!</p>}
-        </div>
-        <div className="col-md-4">
+        <div className="col-md-6">
           <input
             type="number"
             className={"form-control " + mobileNumClasses}
@@ -307,7 +282,7 @@ const NewPostForm = (props) => {
           </div>
         </div>
         <div className="col-12">
-          <ImageUploader id="pet_image" onUploaded={setVetImage} />
+          <ImageUploader id="pet_image" onUploaded={setVetImage} label="Choose an image of your pet" />
         </div>
         <div className="col-12">
           <textarea

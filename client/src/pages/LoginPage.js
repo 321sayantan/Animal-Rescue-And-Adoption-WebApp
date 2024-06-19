@@ -57,15 +57,19 @@ function LoginPage() {
       });
 
       const result = await response.json();
-      console.log(response)
+      console.log(result)
 
       if (response.ok) {
-        toast.success(result.message, toasterVariants)
         authCtx.login(result.token)
         navigate("..");
+        toast.success(result.message, toasterVariants)
         setErrors(null);
-      } else {
-        toast.error(result.errors[0], toasterVariants)
+      } else if (response.status === 400) {
+        toast.error(result.msg, toasterVariants)
+        setErrors(result.msg || {});
+      }
+      else {
+        toast.error(result.errors, toasterVariants)
         setErrors(result.errors || {});
       }
     } catch (error) {
@@ -107,11 +111,12 @@ function LoginPage() {
             <div className="col-lg-6 mt-4" data-aos="fade-right">
               {/* login form */}
               {errors && <Alert className="alert-danger">
-                <ul>
-                  {Object.values(errors).map((err, i) => (
+                <p>{errors}</p>
+                {/* <ul>
+                  {Object.values(errors[0]).map((err, i) => (
                     <li key={i}>{err}</li>
                   ))}
-                </ul>
+                </ul> */}
               </Alert>}
 
               <LoginForm onSubmit={LogInFormHandler} />

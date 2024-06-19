@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigation } from "react-router-dom";
 import Modal from "./UI/Modal";
 import CheckBox from "./UI/CheckBox";
@@ -10,7 +10,7 @@ const AdoptConfirmPrompt = ({ onClose, onConfirm, vetData }) => {
   const [selectedDate, setSelectedDate] = useState("");
   const navigation = useNavigation();
 
-  const isSubmitting = false;
+  let isSubmitting = false;
   if (navigation.state === "submitting") {
     isSubmitting = true;
   }

@@ -4,7 +4,8 @@ const User = require("../db/userModel");
 const mailTransporter = require("../utils/mailServer");
 const verifyToken = require("../utils/verifyToken");
 const jwt = require("jsonwebtoken");
-const adoptReqMail = require("../resources/adoptRequestMail");
+const rescueConfirmMail = require("../resources/rescueConfirmMail");
+const rescueConfirmMailForDonor = require("../resources/rescueConfirmMailForDonor");
 
 const router = express.Router();
 
@@ -39,7 +40,25 @@ router.post("/post", async (req, res) => {
           },
         },
       });
-      console.log(nearbyvolunteer)
+      // console.log(nearbyvolunteer)
+      
+      nearbyvolunteer.map((vol)=>{
+        // console.log(result.id, vol.name)
+        let mailDetails = {
+          from: "AdoPet2024@gmail.com",
+          to: vol.email,
+          subject: "Request for Animal Rescue: Injured Animal in Your Locality",
+          html: rescueNotifyMail({ id: result.id, name: vol.name }),
+        };
+
+        mailTransporter.sendMail(mailDetails, function (err, data) {
+          if (err) {
+            console.log("Error Occurs");
+          } else {
+            console.log("Email sent successfully");
+          }
+        });
+      })
 
 
       res.status(200).json({ message: "Post added successfully" });
@@ -49,24 +68,43 @@ router.post("/post", async (req, res) => {
     });
 });
 
-router.post("/test", async (req, res) => {
-  console.log("inside test");
-  const nearbyvolunteer = await User.find({
-    loc: {
-      $near: {
-        $geometry: {
-          type: "Point",
-          coordinates: [22.90039, 88.396459999999],
-        },
-        $maxDistance: 5000,
-      },
-    },
-  });
-  console.log(nearbyvolunteer);
-  res.send(nearbyvolunteer);
-});
+// router.post("/test", async (req, res) => {
+//   console.log("inside test");
+//   // const nearbyvolunteer = await User.find({
+//   //   loc: {
+//   //     $near: {
+//   //       $geometry: {
+//   //         type: "Point",
+//   //         coordinates: [22.90039, 88.396459999999],
+//   //       },
+//   //       $maxDistance: 5000,
+//   //     },
+//   //   },
+//   // });
+//   // console.log(nearbyvolunteer);
+//   // res.send(nearbyvolunteer);
+
+//   let mailDetails = {
+//     from: "AdoPet2024@gmail.com",
+//     // to: recieverEmail,
+//     // to: "dsnehodipto@gmail.com",
+//     to: "123sayantandas@gmail.com",
+//     subject: "rescueConfirmMail",
+//     html: rescueNotifyMail(),
+//   };
+
+//   mailTransporter.sendMail(mailDetails, function (err, data) {
+//     if (err) {
+//       console.log("Error Occurs");
+//     } else {
+//       console.log("Email sent successfully");
+//     }
+//   });
+// });
 
 // get all rescue posts
+
+
 router.get("/getallrescues", async (req, res, next) => {
   try {
     const allposts = await Rescue.find();
@@ -107,9 +145,8 @@ router.get("/filter", async (req, res, next) => {
 
 router.post("/rescueRequest", verifyToken, (req, res) => {
   try {
-    // var recieverEmail="", senderEmail;
-    // let resData;
     jwt.verify(req.token, "shhh", async (err, data) => {
+      
       if (err) {
         res.status(403);
       }
@@ -118,15 +155,8 @@ router.post("/rescueRequest", verifyToken, (req, res) => {
       const currentUser = await User.findOne({ _id: data.id });
       console.log(11, currentUser);
 
-      // const Donor1 = await Post.findOne({ _id: req.body.id });
-      // Donor = Donor1.donor_email;
-      // console.log(12, Donor1);
-      // console.log(14, Donor);
-
       var resData = await Post.findOne({ _id: req.body.id });
       const recieverEmail = resData.donor_email;
-      // const sender = await User.findOne({ _id: data.id })
-      // senderEmail = sender.email
 
       resData = {
         ...resData,
@@ -135,13 +165,32 @@ router.post("/rescueRequest", verifyToken, (req, res) => {
       };
       console.log(resData);
 
+      //Mail goes to Sender
       let mailDetails = {
         from: "AdoPet2024@gmail.com",
         to: recieverEmail,
         // to: "dsnehodipto@gmail.com",
         // to: "123sayantandas@gmail.com",
         subject: "Request for adoption",
-        html: adoptReqMail(resData),
+        html: rescueConfirmMail(resData),
+      };
+
+      mailTransporter.sendMail(mailDetails, function (err, data) {
+        if (err) {
+          console.log("Error Occurs");
+        } else {
+          console.log("Email sent successfully");
+        }
+      });
+
+      //Mail goes to donor
+      mailDetails = {
+        from: "AdoPet2024@gmail.com",
+        to: recieverEmail,
+        // to: "dsnehodipto@gmail.com",
+        // to: "123sayantandas@gmail.com",
+        subject: "Request for adoption",
+        html: rescueConfirmMailForDonor(resData),
       };
 
       mailTransporter.sendMail(mailDetails, function (err, data) {

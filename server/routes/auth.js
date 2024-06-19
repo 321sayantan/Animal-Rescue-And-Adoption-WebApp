@@ -5,6 +5,7 @@ const passport = require("passport");
 const mailTransporter = require("../utils/mailServer");
 const verifyToken = require("../utils/verifyToken");
 const jwt = require("jsonwebtoken");
+const resetPasswordMail = require("../resources/resetPswrdMail");
 
 const router = express.Router();
 
@@ -82,49 +83,50 @@ router.post("/register", async (req, res) => {
 
 router.post("/login", async (req, res) => {
   try {
-    const logged_user = await User.findOne({ email: req.body.email });
-    console.log(2, logged_user);
-    if (logged_user) {
-      console.log(3, "user found");
-      bcrypt.compare(req.body.password, logged_user.password, (err, result) => {
-        if (err) {
-          console.log(err);
+        const logged_user = await User.findOne({ email: req.body.email });
+        console.log(2, logged_user);
+        if (logged_user) {
+          console.log(3, "user found");
+          bcrypt.compare(req.body.password, logged_user.password, (err, result) => {
+            if (err) {
+              console.log(err)
+            }
+            // else {
+            if (!result) {
+              console.log(30, "password didnot match");
+              res.status(400).json({ msg: "Invalid Email or Password"})        
+            } 
+              
+            console.log(30, "password matched");
+
+            const payload = {
+              id: logged_user.id
+            }
+
+            jwt.sign(payload, "shhh", {expiresIn: '10h'}, (err, token)=>{
+              res.status(200).json({
+                token: token
+              })
+            })
+
+            }
+          );
+        } else {
+          console.log(4, "user not found");
+          res.status(400).json({ msg: "Invalid Email or Password" })
         }
-        // else {
-        if (!result) {
-          console.log(30, "password didnot match");
-          res.status(400).json({ msg: "Invalid Email or Password" });
-        }
-
-        console.log(30, "password matched");
-
-        const payload = {
-          id: logged_user.id,
-        };
-
-        jwt.sign(payload, "shhh", { expiresIn: "10h" }, (err, token) => {
-          // setTimeout(()=>{
-          res.status(200).json({
-            token: token,
-            // },1000)
-          });
-        });
-      });
-    } else {
-      console.log(4, "user not found");
-      res.status(400).json({ msg: "Invalid Email or Password" });
-    }
-  } catch (err) {
-    console.log(5, "error in finding user");
-    res.status(400).json({ msg: "Unexpected Error Occured" });
-    // return cb(err);
-  }
+      } catch (err) {
+        console.log(5, "error in finding user");
+        res.status(400).json({ msg: "Unexpected Error Occured" });
+        // return cb(err);
+      }
 });
 
-router.post("/forget-password", async (req, res) => {
+router.post("/forgot-password", async (req, res) => {
   try {
     // Find the user by email
-    const user = await User.findOne({ mail: req.body.email });
+    const user = await User.findOne({ email: req.body.email });
+    console.log(user)
 
     // If user not found, send error message
     if (!user) {
@@ -136,16 +138,19 @@ router.post("/forget-password", async (req, res) => {
       expiresIn: "10m",
     });
 
+    const resData = {token: token}
+
     let mailDetails = {
       from: "AdoPet2024@gmail.com",
       to: user.email,
       // to: "123sayantandas@gmail.com",
-      subject: "Reset Password",
-      html: `<h1>Reset Your Password</h1>
-    <p>Click on the following link to reset your password:</p>
-    <a href="http://localhost:5173/reset-password/${token}">http://localhost:5173/reset-password/${token}</a>
-    <p>The link will expire in 10 minutes.</p>
-    <p>If you didn't request a password reset, please ignore this email.</p>`,
+      subject: "Reset Your Password",
+      html: resetPasswordMail(resData),
+      //   html: `<h1>Reset Your Password</h1>
+      // <p>Click on the following link to reset your password:</p>
+      // <a href="http://localhost:3000/reset-password/${token}">http://localhost:3000/reset-password/${token}</a>
+      // <p>The link will expire in 10 minutes.</p>
+      // <p>If you didn't request a password reset, please ignore this email.</p>`,
     };
 
     mailTransporter.sendMail(mailDetails, function (err, data) {
@@ -155,6 +160,7 @@ router.post("/forget-password", async (req, res) => {
         console.log("Email sent successfully");
       }
     });
+    res.status(200).json({msg: "Email Sent Successfully"})
   } catch (err) {
     console.log(err);
     res.status(500).send({ message: err.message });
@@ -163,19 +169,21 @@ router.post("/forget-password", async (req, res) => {
 
 router.post('/reset-password/:token', async(req,res)=>{
   try{
+    console.log("inside resetpassword")
     // Verify the token sent by the user
     const decodedToken = jwt.verify(
       req.params.token,
       "shhh"
     );
-
+    
     // If the token is invalid, return an error
     if (!decodedToken) {
       return res.status(401).send({ message: "Invalid token" });
     }
-
+    
     // find the user with the id from the token
     const user = await User.findOne({ _id: decodedToken.userId });
+    console.log(user)
     if (!user) {
       return res.status(401).send({ message: "no user found" });
     }
@@ -185,6 +193,7 @@ router.post('/reset-password/:token', async(req,res)=>{
     await user.save();
 
     // Send success response
+    console.log("password updated")
     res.status(200).send({ message: "Password updated" });
   }catch(err){
     console.log(err)

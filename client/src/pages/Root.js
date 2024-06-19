@@ -5,6 +5,7 @@ import 'aos/dist/aos.css';
 import { GoogleApiWrapper } from 'google-map-react'
 import Footer from '../components/UI/Footer';
 import Navbar from '../components/UI/Navbar';
+import $ from "jquery";
 
 const Root = () => {
     const { pathname } = useLocation();

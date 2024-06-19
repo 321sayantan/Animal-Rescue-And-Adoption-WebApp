@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
 import { AuthContext } from "../../store/AuthContext";
@@ -7,6 +7,8 @@ import axios from "axios";
 
 const AuthUserPopup = ({ children, onClose, className }) => {
   const authCtx = useContext(AuthContext);
+  const navigate = useNavigate();
+
   const menuClasses = className
     ? "auth-user-menu " + className
     : "auth-user-menu";
@@ -58,6 +60,7 @@ const AuthUserPopup = ({ children, onClose, className }) => {
     console.log(result);
     authCtx.logout();
     onClose();
+    navigate("..");
   }
 
   return createPortal(
@@ -122,7 +125,7 @@ const AuthUserPopup = ({ children, onClose, className }) => {
               ) : (
                 <>
                   <Link
-                    to="edit"
+                    to="profile"
                     className="btn btn-style btn-outline-primary"
                     onClick={onClose}
                   >
