@@ -1,40 +1,31 @@
-import { useRef, useEffect, useState } from "react";
+import { useRef, useState } from "react";
+import { usePlacesWidget } from "react-google-autocomplete";
 
-const AutoComplete = ({ id, placeholder, onComplete, onCheck }) => {
+const options = {
+  componentRestrictions: { country: "IN" }, //for limiting places only in the specified country
+  fields: ["geometry", "name"],
+  // fields: ["address_components", "geometry", "icon", "name"],
+  types: ["establishment"],
+};
+
+const AutoComplete = ({ id, placeholder, onComplete }) => {
   const [isInvalid, setIsInvalid] = useState(false);
-  const autoCompleteRef = useRef();
-  const inputRef = useRef();
   const address = useRef();
-  const options = {
-    componentRestrictions: { country: "IN" }, //for limiting places only in the specified country
-    fields: ["geometry"],
-    // fields: ["address_components", "geometry", "icon", "name"],
-    types: ["establishment"],
+  const placeChangeHandler = (place) => {
+    address.current = {
+      area: ref.current.value,
+      coords: {
+        latitude: place.geometry.location.lat(),
+        longitude: place.geometry.location.lng(),
+      },
+    };
+    onComplete(address.current);
+    console.log(address.current);
   };
-
-  useEffect(() => {
-    autoCompleteRef.current = new window.google.maps.places.Autocomplete(
-      inputRef.current,
-      options
-    );
-    autoCompleteRef.current.addListener("place_changed", async function () {
-      try {
-        const place = await autoCompleteRef.current.getPlace();
-        const res = place;
-        const latitude = res.geometry.location.lat();
-        const longitude = res.geometry.location.lng();
-        address.current = {
-          area: inputRef.current.value,
-          coords: {
-            latitude,
-            longitude,
-          },
-        };
-        onComplete(address.current);
-      } catch (err) {
-        console.error(err);
-      }
-    });
+  const { ref } = usePlacesWidget({
+    apiKey: process.env.REACT_APP_GMAP_API_KEY,
+    onPlaceSelected: placeChangeHandler,
+    options: options,
   });
 
   const addrChangeHandler = (e) => {
@@ -52,11 +43,11 @@ const AutoComplete = ({ id, placeholder, onComplete, onCheck }) => {
       <input
         id={id}
         type="text"
-        ref={inputRef}
+        ref={ref}
         className={"form-control " + addrClasses}
         placeholder={placeholder}
         onChange={addrChangeHandler}
-        // value={value}
+        defaultValue=""
       />
       {isInvalid && <p className="invalid-feedback">Improper Location!</p>}
     </>

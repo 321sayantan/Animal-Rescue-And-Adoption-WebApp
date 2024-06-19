@@ -276,6 +276,7 @@ const RescueForm = (props) => {
             id="vet_image"
             onUploaded={setVetImage}
             multiple={true}
+            label="Choose some photos of the injured vet"
           />
         </div>
         <div className="col-12">

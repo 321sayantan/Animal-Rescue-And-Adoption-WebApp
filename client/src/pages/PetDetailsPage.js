@@ -9,7 +9,6 @@ import PetDetailSkeleton from "../components/Adopts/PetDetailSkeleton"
 import AdoptConfirmPrompt from '../components/AdoptConfirmPrompt';
 import { toast } from 'react-toastify';
 import { toasterVariants } from '../utils/misc';
-import axios from 'axios';
 
 
 function PetDetailsPage() {
