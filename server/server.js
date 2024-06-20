@@ -6,6 +6,7 @@ const session = require("express-session");
 const user_route = require("./routes/auth.js");
 const adoptPost_route = require("./routes/adoptPost.js");
 const rescue_route = require('./routes/rescuePost.js')
+const user_profile = require('./routes/userProfile.js')
 const googleStrategy = require("passport-google-oauth20").Strategy;
 const cors = require("cors");
 // const MongoStore = require("connect-mongo");
@@ -54,6 +55,7 @@ app.use(passport.session());
 app.use("/user", user_route);
 app.use("/adopt", adoptPost_route);
 app.use("/rescue", rescue_route);
+app.use("/profile", user_profile);
 
 
 app.get(
@@ -134,6 +136,6 @@ passport.deserializeUser((user, cb) => {
   // })
 });
 
-app.listen(process.env.PORT || 5500, () => {
+app.listen(process.env.PORT || 5000, () => {
   console.log(`Listening on Port 5000`);
 });
