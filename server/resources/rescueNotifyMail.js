@@ -1,4 +1,4 @@
-function rescueNotification(id) {
+function rescueNotification(resData) {
     return `<!doctype html>
 <html>
 
@@ -301,11 +301,12 @@ function rescueNotification(id) {
                             <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                                 <tr>
                                     <td>
-                                        <h2 style="font-size: 2rem; color: #333; font-weight: 700;">Hi, </h2>
+                                        <h2 style="font-size: 2rem; color: #333; font-weight: 700;">Hi, <span
+                                                style="color: #d7cc00; text-transform: uppercase;font-size: 2rem !important;">${resData.name}</span> </h2>
 
                                         <p
                                             style="font-size: 1.4rem; font-weight: 400; line-height: 1.5rem;margin-top: -1rem;">
-                                            This is a message from team <a href="https://localhost:3000" target="_blank"
+                                            This is a message from team <a href="http://localhost:3000" target="_blank"
                                                 style="font-weight: 600; color: #00c1f2;text-decoration: none;">AdoPet.</a>
                                             This mail is a notification against an injured vet found near your locality.
                                             Since you are registered as a volunteer, we request you to help this needy
@@ -318,7 +319,7 @@ function rescueNotification(id) {
                                                 <tr>
                                                     <td class="btn btn-primary">
                                                         <a
-                                                            href="https://localhost:3000/rescue/66668642173344cf7c8b8980">Help
+                                                            href="http://localhost:3000/rescue/${resData.id}">Help
                                                             them</a>
                                                     </td>
                                                 </tr>
@@ -351,7 +352,7 @@ function rescueNotification(id) {
                         </tr>
                         <tr>
                             <td class="content-block powered-by">
-                                Powered by <a href="https://localhost:3000">AdoPet</a>.
+                                Powered by <a href="http://localhost:3000">AdoPet</a>.
                             </td>
                         </tr>
                     </table>
@@ -363,7 +364,7 @@ function rescueNotification(id) {
     </table>
 </body>
 
-</html>`
+</html>`;
 }
 
 module.exports = rescueNotification

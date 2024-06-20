@@ -4,15 +4,26 @@ const User = require("../db/userModel");
 const mailTransporter = require("../utils/mailServer");
 const verifyToken = require("../utils/verifyToken");
 const jwt = require("jsonwebtoken");
-const adoptReqMail = require("../resources/adoptRequestMail");
+const rescueConfirmMail = require("../resources/rescueConfirmMail");
+const rescueConfirmMailForDonor = require("../resources/rescueConfirmMailForDonor");
+const rescueNotifyMail = require("../resources/rescueNotifyMail");
 
 const router = express.Router();
 
-router.post("/post", async (req, res) => {
+router.post("/post",verifyToken, async (req, res) => {
+  try{
+    jwt.verify(req.token, "shhh", async (err, dataa) => {
+		if (err) {
+			res.status(403);
+		}
+    const user = await User.findOne({ _id: dataa.id });
+		console.log(11, user);
+
   const data = new Rescue({
     rescuer_name: req.body.rescuer_name,
     rescuer_phone: req.body.rescuer_mob,
     address: req.body.loc_of_found.area,
+    rescuer_email: user.email,
     lat: req.body.loc_of_found.coords.latitude,
     lng: req.body.loc_of_found.coords.longitude,
     zip_code: req.body.loc_of_found.zip_code,
@@ -26,7 +37,7 @@ router.post("/post", async (req, res) => {
   data
     .save()
     .then(async (result) => {
-      // console.log(1,result);
+      console.log(1,result);
 
       const nearbyvolunteer = await User.find({
         loc: {
@@ -39,34 +50,77 @@ router.post("/post", async (req, res) => {
           },
         },
       });
-      console.log(nearbyvolunteer)
+      // console.log(nearbyvolunteer)
+      
+      nearbyvolunteer.map((vol)=>{
+        // console.log(result.id, vol.name)
+        let mailDetails = {
+          from: "AdoPet2024@gmail.com",
+          to: vol.email,
+          subject: "Request for Animal Rescue: Injured Animal in Your Locality",
+          html: rescueNotifyMail({ id: result.id, name: vol.name }),
+        };
 
+        mailTransporter.sendMail(mailDetails, function (err, data) {
+          if (err) {
+            console.log("Error Occurs");
+          } else {
+            console.log("Email sent successfully");
+          }
+        });
+      })
 
       res.status(200).json({ message: "Post added successfully" });
     })
     .catch((err) => {
+      console.log(err);
       res.status(500).json({ errors: err });
     });
+
+  });
+}catch(err){
+  console.log(err);
+  res.status(500).json({ errors: err });
+}
 });
 
-router.post("/test", async (req, res) => {
-  console.log("inside test");
-  const nearbyvolunteer = await User.find({
-    loc: {
-      $near: {
-        $geometry: {
-          type: "Point",
-          coordinates: [22.90039, 88.396459999999],
-        },
-        $maxDistance: 5000,
-      },
-    },
-  });
-  console.log(nearbyvolunteer);
-  res.send(nearbyvolunteer);
-});
+// router.post("/test", async (req, res) => {
+//   console.log("inside test");
+//   // const nearbyvolunteer = await User.find({
+//   //   loc: {
+//   //     $near: {
+//   //       $geometry: {
+//   //         type: "Point",
+//   //         coordinates: [22.90039, 88.396459999999],
+//   //       },
+//   //       $maxDistance: 5000,
+//   //     },
+//   //   },
+//   // });
+//   // console.log(nearbyvolunteer);
+//   // res.send(nearbyvolunteer);
+
+//   let mailDetails = {
+//     from: "AdoPet2024@gmail.com",
+//     // to: recieverEmail,
+//     // to: "dsnehodipto@gmail.com",
+//     to: "123sayantandas@gmail.com",
+//     subject: "rescueConfirmMail",
+//     html: rescueNotifyMail(),
+//   };
+
+//   mailTransporter.sendMail(mailDetails, function (err, data) {
+//     if (err) {
+//       console.log("Error Occurs");
+//     } else {
+//       console.log("Email sent successfully");
+//     }
+//   });
+// });
 
 // get all rescue posts
+
+
 router.get("/getallrescues", async (req, res, next) => {
   try {
     const allposts = await Rescue.find();
@@ -105,11 +159,10 @@ router.get("/filter", async (req, res, next) => {
   }
 });
 
-router.post("/rescueRequest", verifyToken, (req, res) => {
+router.post("/rescueRequest", verifyToken, async (req, res) => {
   try {
-    // var recieverEmail="", senderEmail;
-    // let resData;
     jwt.verify(req.token, "shhh", async (err, data) => {
+      
       if (err) {
         res.status(403);
       }
@@ -118,15 +171,8 @@ router.post("/rescueRequest", verifyToken, (req, res) => {
       const currentUser = await User.findOne({ _id: data.id });
       console.log(11, currentUser);
 
-      // const Donor1 = await Post.findOne({ _id: req.body.id });
-      // Donor = Donor1.donor_email;
-      // console.log(12, Donor1);
-      // console.log(14, Donor);
-
-      var resData = await Post.findOne({ _id: req.body.id });
-      const recieverEmail = resData.donor_email;
-      // const sender = await User.findOne({ _id: data.id })
-      // senderEmail = sender.email
+      var resData = await Rescue.findOne({ _id: req.body.id });
+      const recieverEmail = resData.rescuer_email;
 
       resData = {
         ...resData,
@@ -135,18 +181,38 @@ router.post("/rescueRequest", verifyToken, (req, res) => {
       };
       console.log(resData);
 
+      //Mail goes to Sender
       let mailDetails = {
         from: "AdoPet2024@gmail.com",
-        to: recieverEmail,
+        to: currentUser.email,
         // to: "dsnehodipto@gmail.com",
         // to: "123sayantandas@gmail.com",
-        subject: "Request for adoption",
-        html: adoptReqMail(resData),
+        subject: "Thanks For Rescue",
+        html: rescueConfirmMail(resData),
       };
 
       mailTransporter.sendMail(mailDetails, function (err, data) {
         if (err) {
           console.log("Error Occurs");
+        } else {
+          console.log("Email sent successfully");
+        }
+      });
+
+      //Mail goes to donor
+      mailDetails = {
+        from: "AdoPet2024@gmail.com",
+        to: recieverEmail,
+        // to: "dsnehodipto@gmail.com",
+        // to: "123sayantandas@gmail.com",
+        subject: "Request For Rescue Granted",
+        html: rescueConfirmMailForDonor(resData),
+      };
+
+      mailTransporter.sendMail(mailDetails, function (err, data) {
+        if (err) {
+          console.log("Error Occurs");
+          console.log(err);
         } else {
           console.log("Email sent successfully");
         }

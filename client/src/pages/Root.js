@@ -4,7 +4,6 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import Footer from '../components/UI/Footer';
 import Navbar from '../components/UI/Navbar';
-// import { loadGoogleMapsScript } from "../utils/misc";
 
 const Root = () => {
     const { pathname } = useLocation();

@@ -21,7 +21,7 @@ function LoginPage() {
   // const [password, setPassword] = useState("");
 
   const googleLoginHandler = async () => {
-    window.open("http://localhost:5000/auth/google", "_self");
+    window.open("https://adopet-backend.onrender.com/auth/google", "_self");
   };
 
   // const loginn = async (event) => {
@@ -46,15 +46,17 @@ function LoginPage() {
   const LogInFormHandler = async (userLoginData) => {
     try {
       const response = await toast.promise(
-        fetch("http://localhost:5000/user/login", {
+        fetch("https://adopet-backend.onrender.com/user/login", {
           method: "POST",
           body: JSON.stringify(userLoginData),
           headers: {
             "Content-Type": "application/json",
           },
-        }), {
-        pending: 'Signing in...',
-      });
+        }),
+        {
+          pending: "Signing in...",
+        }
+      );
 
       const result = await response.json();
       console.log(result)

@@ -12,9 +12,9 @@ function ChangePassword() {
         // console.log(enteredMail)
         try {
             const response = await toast.promise(
-                fetch("http://localhost:5000/forgot-pswrd", {
+                fetch("http://localhost:5000/user/forgot-password", {
                     method: "POST",
-                    body: JSON.stringify({ mail: enteredMail }),
+                    body: JSON.stringify({ email: enteredMail }),
                     headers: {
                         "Content-Type": "application/json",
                     },

@@ -38,16 +38,18 @@ function PetDetailsPage() {
         try {
             const dataObj = { id: params.id, selDate: selectedDate }
             const response = await toast.promise(
-                fetch("http://localhost:5000/adopt/adoptionRequest", {
-                    method: "POST",
-                    body: JSON.stringify(dataObj),
-                    headers: {
-                        "Content-Type": "application/json",
-                        "authorization": `Bearer ${jwt}`,
-                    },
-                }), {
-                pending: 'Sending Mail...',
-            });
+              fetch("https://adopet-backend.onrender.com/adoptionRequest", {
+                method: "POST",
+                body: JSON.stringify(dataObj),
+                headers: {
+                  "Content-Type": "application/json",
+                  authorization: `Bearer ${jwt}`,
+                },
+              }),
+              {
+                pending: "Sending Mail...",
+              }
+            );
 
             const result = await response.json();
             console.log(response)
@@ -156,7 +158,9 @@ export default PetDetailsPage
 
 async function postDetailsLoader(params) {
     const id = params.id;
-    const response = await fetch(`http://localhost:5000/adopt/getpost/${id}`);
+    const response = await fetch(
+      `https://adopet-backend.onrender.com/adopt/getpost/${id}`
+    );
     if (!response.ok) {
         throw new Error('Failed to load post detalis!');
     } else {

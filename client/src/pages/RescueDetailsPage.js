@@ -1,4 +1,4 @@
-import { useLoaderData, defer, Await, useNavigate } from 'react-router-dom';
+import { useLoaderData, defer, Await, useNavigate, useParams } from 'react-router-dom';
 import { Suspense, useContext, useState } from 'react';
 import { AuthContext } from '../store/AuthContext';
 import { AnimatePresence } from "framer-motion";
@@ -15,12 +15,40 @@ function RescueDetailsPage() {
     const { jwt } = useContext(AuthContext)
     const navigate = useNavigate()
     const [showModal, setShowModal] = useState()
+    const params = useParams()
 
-    const confirmationHandler = (selectedDate) => {
-        console.log(selectedDate)
-        setShowModal(false)
-        // navigate('confirm')
-    }
+    const confirmationHandler = async (selectedDate) => {
+      // const res = await postData.then(result => result)
+      try {
+        const dataObj = { id: params.id, selDate: selectedDate };
+        const response = await toast.promise(
+          fetch("http://localhost:5000/rescue/rescueRequest", {
+            method: "POST",
+            body: JSON.stringify(dataObj),
+            headers: {
+              "Content-Type": "application/json",
+              authorization: `Bearer ${jwt}`,
+            },
+          }),
+          {
+            pending: "Sending Mail...",
+          }
+        );
+
+        const result = await response.json();
+        console.log(response);
+
+        if (response.ok) {
+          toast.success(result.message, toasterVariants);
+          navigate("..");
+        } else {
+          toast.error(result.error, toasterVariants);
+        }
+        setShowModal(false);
+      } catch (error) {
+        console.error("Error Sending Mail!", error);
+      }
+    };
 
     const fallback1 = <RescVetDetSkeleton />,
         fallback2 = <RescuerDetailSkeleton />

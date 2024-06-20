@@ -27,7 +27,7 @@ const RescueConfirmPrompt = ({ onClose, onConfirm, vetData }) => {
             <legend id="modal-legend">Vet Info</legend>
             <div className="d-flex px-4 justify-content-between align-items-center px-2 py-2">
               <div className="vet-image-thumbnail">
-                <img src={vetData.image} alt="" />
+                <img src={vetData.images[0].image} alt="" />
               </div>
               <ul className="vet-info-list">
                 <li className="status-list">
@@ -53,7 +53,7 @@ const RescueConfirmPrompt = ({ onClose, onConfirm, vetData }) => {
               </label>
               <input
                 id="date-picker"
-                type="datetime"
+                type="date"
                 min={maxDate}
                 className="form-control form-control-date"
                 onChange={(e) => setSelectedDate(e.target.value)}

@@ -13,17 +13,17 @@ function AddNewVetPost() {
         try {
             const token = "Bearer " + localStorage.getItem("jwt");
             const response = await toast.promise(
-                fetch("http://localhost:5000/adopt/post", {
-                    method: "POST",
-                    body: JSON.stringify(postVetData),
-                    headers: {
-                        "Content-Type": "application/json",
-                        "authorization": token,
-                    },
-                }),
-                {
-                    pending: "Saving post...",
-                }
+              fetch("https://adopet-backend.onrender.com/adopt/post", {
+                method: "POST",
+                body: JSON.stringify(postVetData),
+                headers: {
+                  "Content-Type": "application/json",
+                  authorization: token,
+                },
+              }),
+              {
+                pending: "Saving post...",
+              }
             );
 
             const result = await response.json();

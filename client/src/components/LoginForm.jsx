@@ -85,10 +85,17 @@ const LoginForm = (props) => {
             }`}
             onClick={() => setShowPswrd((prev) => !prev)}
           />
-          {pswrdIsInvalid && <p className="invalid-feedback">Invalid Password!</p>}
+          {pswrdIsInvalid && (
+            <p className="invalid-feedback">Invalid Password!</p>
+          )}
         </div>
         <div className="col-12">
-            <Link className="form-label fw-bold forgot-pswrd-link">Forgot Password?</Link>
+          <Link
+            to={"../forgot-password"}
+            className="form-label fw-bold forgot-pswrd-link"
+          >
+            Forgot Password?
+          </Link>
         </div>
         <div className="login-btn d-flex justify-content-center align-items-center">
           <button

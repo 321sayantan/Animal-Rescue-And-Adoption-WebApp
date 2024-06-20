@@ -1,4 +1,4 @@
-function resetPswrdMail() {
+function resetPswrdMail(resData) {
     return `<!doctype html>
 <html>
 
@@ -321,7 +321,7 @@ function resetPswrdMail() {
                                             <tbody>
                                                 <tr>
                                                     <td class="btn btn-primary">
-                                                        <a href="http://localhost:3000/reset-password" target="_blank">Reset
+                                                        <a href="http://localhost:3000/reset-password/${resData.token}" target="_blank">Reset
                                                             your password</a>
                                                     </td>
                                                 </tr>

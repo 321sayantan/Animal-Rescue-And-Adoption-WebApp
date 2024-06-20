@@ -7,6 +7,9 @@ const RescuePostSchema = new mongoose.Schema({
     rescuer_phone: {
         type: String,
     },
+    rescuer_email: {
+        type: String,
+    },
     address: {
         type: String,
     },
