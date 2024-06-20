@@ -24,6 +24,7 @@ import { loader as loadPetPosts } from './pages/AdoptPet';
 import { loader as loadRescuePosts } from './pages/RescueListPage';
 import { loader as loadPostDetails } from './pages/PetDetailsPage';
 import { loader as loadRescueDetalis } from './pages/RescueDetailsPage';
+import { loader as userProfileLoader } from './pages/UserProfile';
 
 const router = createBrowserRouter([
   {
@@ -57,6 +58,7 @@ const router = createBrowserRouter([
       {
         path: 'profile',
         element: <UserProfile />,
+        loader: userProfileLoader,
       },
       { path: 'profile/edit', element: <EditProfile /> },
     ],

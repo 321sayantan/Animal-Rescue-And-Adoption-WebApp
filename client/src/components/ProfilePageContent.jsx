@@ -16,16 +16,13 @@ const ProfilePageContent = ({ userData }) => {
             data-aos="fade-right"
           >
             <div className="profile-img">
-              <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog"
-                alt=""
-              />
+              <img src={userData.user.image} alt="" />
             </div>
           </div>
           <div className="col-md-8" data-aos="fade-left">
             <div className="profile-head">
-              <h5 className="fw-bold fs-1">Kshiti Ghelani</h5>
-              <h6>Web Developer and Designer</h6>
+              <h5 className="fw-bold fs-1">{userData.user.name}</h5>
+              <h6>{userData.user.is_volunteer ? "Volunteer" : "User"}</h6>
               <p className="proile-rating">
                 RANKINGS : <span>8/10</span>
               </p>
@@ -66,13 +63,16 @@ const ProfilePageContent = ({ userData }) => {
             <div className="tab-content profile-tab" id="myTabContent">
               <TabPanel className="tab-pane show active" id="home">
                 <div data-aos="fade-up">
-                  <ProfileInfo />
+                  <ProfileInfo user={userData.user} />
                 </div>
               </TabPanel>
               <TabPanel className="tab-pane show active" id="posts">
                 {/* <UsersPosts /> */}
                 <div style={{ marginTop: "-4.5rem" }}>
-                  <PostsFilteredList posts={adoptPosts} headingText="Adopts" />
+                  <PostsFilteredList
+                    posts={userData.adopt}
+                    headingText="Adopts"
+                  />
                 </div>
               </TabPanel>
             </div>

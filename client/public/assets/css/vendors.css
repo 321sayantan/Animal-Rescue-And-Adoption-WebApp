@@ -6988,6 +6988,7 @@ hr:not([size]) {
   font-weight: 400;
 }
 
+button#del-btn,
 .list-item a {
   font-size: 1rem;
   color: var(--bs-info);
@@ -7150,10 +7151,18 @@ hr:not([size]) {
   overflow: hidden;
 }
 
-
+.deletePost-confirm-modal,
 .adopt-confirm-modal {
   width: 35rem !important;
   height: auto !important;
+}
+
+.deletePost-confirm-modal .modal-header {
+  background: var(--bs-danger) !important;
+}
+
+.deletePost-confirm-modal .modal-header h2 {
+  color: #fff !important;
 }
 
 .vet-info-list {

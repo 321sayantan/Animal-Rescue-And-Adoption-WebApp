@@ -5,17 +5,17 @@ import ProfilepageSkeletons from "../components/ProfilepageSkeletons"
 
 
 function UserProfile() {
-    // const { userData } = useLoaderData()
+    const { userData } = useLoaderData()
     const fallback = <ProfilepageSkeletons />
 
     return (
         <>
-            {/* <Suspense fallback={fallback}>
+            <Suspense fallback={fallback}>
                 <Await resolve={userData}>
                     {data => <ProfilePageContent userData={data} />}
                 </Await>
-            </Suspense> */}
-            <ProfilePageContent />
+            </Suspense>
+            {/* <ProfilePageContent /> */}
         </>
     )
 }
@@ -23,19 +23,24 @@ function UserProfile() {
 export default UserProfile
 
 
-// async function loadUserData(params) {
-//     const id = params.id;
-//     const response = await fetch(`http://localhost:5000/user/`);
-//     if (!response.ok) {
-//         throw new Error('Failed to load post detalis!');
-//     } else {
-//         const data = await response.json();
-//         return data;
-//     }
-// }
+async function loadUserData(params) {
+    const jwt = localStorage.getItem("jwt");
+    const response = await fetch('http://localhost:5000/profile/getuser', {
+        headers: {
+            'Content-Type': 'application/json',
+            'authorization': `Bearer ${jwt}`
+        }
+    });
+    if (!response.ok) {
+        throw new Error('Failed to fetch User details!');
+    } else {
+        const data = await response.json();
+        return data;
+    }
+}
 
-// export function loader({ params }) {
-//     return defer({
-//         postData: loadUserData(params)
-//     })
-// }
+export function loader() {
+    return defer({
+        userData: loadUserData()
+    })
+}

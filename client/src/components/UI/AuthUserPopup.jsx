@@ -56,8 +56,6 @@ const AuthUserPopup = ({ children, onClose, className }) => {
   };
 
   async function logoutHandler() {
-    const result = await axios.get("http://localhost:5000/user/logout");
-    console.log(result);
     authCtx.logout();
     onClose();
     navigate("..");
