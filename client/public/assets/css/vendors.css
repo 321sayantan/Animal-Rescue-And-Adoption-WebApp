@@ -7271,7 +7271,161 @@ hr:not([size]) {
   left: 0;
   width: 100%;
   height: 100%;
-  overflow: hidden;
+  object-fit: cover;
 } */
 
 /* //password change section */
+
+
+/* profile section */
+.emp-profile {
+  padding: 3%;
+  margin-top: 3%;
+  margin-bottom: 3%;
+  border-radius: 0.5rem;
+  background: #fff;
+}
+
+.profile-img {
+  position: relative;
+  width: 15rem;
+  height: 15rem;
+  overflow: hidden;
+  border: 3px solid #212529;
+  padding: 3px;
+  border-radius: 50%;
+}
+
+.profile-img.edit-image {
+  width: 20rem;
+  height: 20rem;
+}
+
+.profile-img img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  padding: 4px;
+  border-radius: inherit;
+}
+
+/* .emp-profile .file {
+  bottom: 0 !important;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  border: none;
+  border-radius: 50%;
+  background: var(--bs-gray);
+}
+/*
+
+.emp-profile .file input {
+  position: absolute;
+  opacity: 0;
+  right: 0;
+  top: 0;
+} */
+
+.image-edit-btn {
+  bottom: -1rem !important;
+  padding: 0.4rem 1rem;
+}
+
+.image-edit-btn i {
+  color: var(--bs-dark);
+  font-size: 1.1rem;
+}
+
+.image-edit-btn span {
+  color: var(--bs-light);
+  font-size: 1.1rem;
+  margin-left: 0.5rem;
+}
+
+.profile-head h5 {
+  color: var(--heading-color);
+}
+
+.profile-head h6 {
+  color: var(--bs-blue);
+}
+
+.profile-edit-btn {
+  border-radius: var(--border-radius) !important;
+  background: var(--bs-danger);
+}
+
+.btn-ghost {
+  font-weight: 700 !important;
+  color: var(--bs-danger);
+}
+
+.proile-rating {
+  font-size: 12px;
+  color: #818182;
+  margin-top: 5%;
+}
+
+.proile-rating span {
+  color: #495057;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.profile-head .nav-tabs {
+  margin-top: 1rem;
+}
+
+.profile-head .nav-tabs .nav-link {
+  font-weight: 600;
+  border: none;
+  color: var(--bs-gray);
+  cursor: pointer;
+}
+
+.profile-head .nav-tabs .nav-link.active {
+  border: none;
+  border-bottom: 2px solid var(--bs-pink);
+  color: #000;
+}
+
+.profile-work {
+  padding: 14%;
+  margin-top: -15%;
+}
+
+.profile-work p {
+  font-size: 12px;
+  color: var(--bs-gray);
+  font-weight: 800;
+  margin-top: 10%;
+}
+
+.profile-work a {
+  text-decoration: none;
+  color: var(--heading-color);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.profile-work ul {
+  list-style: none;
+}
+
+.profile-tab label {
+  font-weight: 600;
+  color: var(--heading-color);
+}
+
+.profile-tab p {
+  font-weight: 600;
+  color: var(--bs-pink);
+}
+
+/* //profile section */

@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 
-const RescueFilteredList = ({ posts }) => {
+const RescueFilteredList = ({ posts, headingText }) => {
   return (
     <>
       {posts.length > 0 ? (
         <div className="container py-4 mt-4 filtered-posts_list">
-          <h4>Related Searches</h4>
+          <h4>{headingText}</h4>
           <ul className="py-3 list-wrapper">
             {posts.map((post) => (
               <li

@@ -1,15 +1,15 @@
 import { useState } from "react";
 import axios from "axios";
 
-function ImageUploader({ id, multiple, onUploaded, label }) {
+function ImageUploader({ id, multiple, onUploaded, label, style }) {
   const [images, setImages] = useState([]);
 
   // let file = [];
   const handleImageUpload = async (e) => {
     const files = e.target.files;
-    
+
     setImages(images, []);
-    
+
     for (const file of files) {
       const formData = new FormData();
 
@@ -44,7 +44,11 @@ function ImageUploader({ id, multiple, onUploaded, label }) {
 
   return (
     <>
-      <label htmlFor={id} className="form-label">{label}</label>
+      {label && (
+        <label htmlFor={id} className="form-label">
+          {label}
+        </label>
+      )}
       <input
         // className={"form-control " + fileSelectClasses}
         className="form-control"
@@ -52,10 +56,10 @@ function ImageUploader({ id, multiple, onUploaded, label }) {
         id={id}
         onChange={handleImageUpload}
         multiple={multiple}
+        style={style}
       />
     </>
   );
 }
 
 export default ImageUploader;
-

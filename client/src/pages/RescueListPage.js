@@ -56,7 +56,7 @@ function RescueListPage() {
 
     if (data) {
         content = <MapContainer filteredPosts={data} />;
-        postcontent = <RescueFilteredList posts={data} />;
+        postcontent = <RescueFilteredList posts={data} headingText="Related Searches" />;
     }
     return (
         <>
