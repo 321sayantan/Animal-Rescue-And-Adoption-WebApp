@@ -25,7 +25,7 @@ const RescueConfirmPrompt = ({ onClose, onConfirm, vetData }) => {
         <div className="column col-12">
           <fieldset className="row">
             <legend id="modal-legend">Vet Info</legend>
-            <div className="d-flex px-4 justify-content-around align-items-center px-2 py-2">
+            <div className="d-flex px-4 justify-content-between align-items-center px-2 py-2">
               <div className="vet-image-thumbnail">
                 <img src={vetData.images[0].image} alt="" />
               </div>

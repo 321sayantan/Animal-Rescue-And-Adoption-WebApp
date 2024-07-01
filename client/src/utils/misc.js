@@ -155,6 +155,30 @@ export const rescuePosts = [
   }
 ]
 
+export const adoptPosts = [
+  {
+    _id: '1',
+    vet_name: 'Jimmy',
+    vet_category: 'Dog',
+    image: 'https://images.pexels.com/photos/16209069/pexels-photo-16209069/free-photo-of-rescue-dog-on-footpath.jpeg?auto=compress&cs=tinysrgb&w=650&h=400&dpr=1',
+    address: '321/4/E, ABC Street, Alinagar, Noida, Delhi',
+  },
+  {
+    _id: '2',
+    vet_name: 'Poppy',
+    vet_category: 'Rabbit',
+    image: 'https://images.pexels.com/photos/7945944/pexels-photo-7945944.jpeg?auto=compress&cs=tinysrgb&w=650&h=400&dpr=1',
+    address: '12, Ballygaunge Palace, Park Street, Kolkata',
+  },
+  {
+    _id: '3',
+    vet_name: 'Moly',
+    vet_category: 'Rodent',
+    image: 'https://images.pexels.com/photos/20499824/pexels-photo-20499824/free-photo-of-little-rodent-on-a-rock.jpeg?auto=compress&cs=tinysrgb&w=650&h=400&dpr=1',
+    address: '41/S, Camac Street, Kakurgachi, Kolkata',
+  },
+]
+
 export function maxDateFinder() {
   var dtToday = new Date();
 

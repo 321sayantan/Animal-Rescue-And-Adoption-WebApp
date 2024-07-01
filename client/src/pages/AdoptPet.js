@@ -59,7 +59,7 @@ function AdoptPet() {
 
     if (data) {
         content = <MapContainer filteredPosts={data} />;
-        postcontent = <PostsFilteredList posts={data} />;
+        postcontent = <PostsFilteredList posts={data} headingText="Related Searches" />;
     }
 
     return (

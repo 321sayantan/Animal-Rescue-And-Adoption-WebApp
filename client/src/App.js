@@ -17,11 +17,14 @@ import RescueListPage from './pages/RescueListPage';
 import RescueDetailsPage from './pages/RescueDetailsPage';
 import ChangePassword from './pages/ResetPasswordMail';
 import ResetPswrdFinalPage from './pages/ResetPasswordPswrd';
+import UserProfile from './pages/UserProfile';
+import EditProfile from './pages/EditProfile';
 import { loader as rootLoader } from './pages/Root';
 import { loader as loadPetPosts } from './pages/AdoptPet';
 import { loader as loadRescuePosts } from './pages/RescueListPage';
 import { loader as loadPostDetails } from './pages/PetDetailsPage';
 import { loader as loadRescueDetalis } from './pages/RescueDetailsPage';
+import { loader as userProfileLoader } from './pages/UserProfile';
 import { gapi } from "gapi-script";
 import React, { useEffect } from "react";
 
@@ -54,6 +57,12 @@ const router = createBrowserRouter([
           { path: ':id', element: <RescueDetailsPage />, loader: loadRescueDetalis }
         ]
       },
+      {
+        path: 'profile',
+        element: <UserProfile />,
+        loader: userProfileLoader,
+      },
+      { path: 'profile/edit', element: <EditProfile /> },
     ],
   },
   {
