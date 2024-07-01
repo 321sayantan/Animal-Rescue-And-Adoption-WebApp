@@ -5,7 +5,7 @@ const LocationSchema = new mongoose.Schema({
   type: {
     type: String,
     enum: ["Point"],
-    required: true,
+    // required: true,
   },
   coordinates: {
     type: [Number], // Array of Numbers
@@ -35,7 +35,7 @@ const userSchema = new mongoose.Schema({
   },
   loc: {
     type: LocationSchema,
-    required: true
+    // required: true
   },
   zip_code: {
     type: Number,

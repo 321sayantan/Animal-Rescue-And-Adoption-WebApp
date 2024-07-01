@@ -22,6 +22,8 @@ import { loader as loadPetPosts } from './pages/AdoptPet';
 import { loader as loadRescuePosts } from './pages/RescueListPage';
 import { loader as loadPostDetails } from './pages/PetDetailsPage';
 import { loader as loadRescueDetalis } from './pages/RescueDetailsPage';
+import { gapi } from "gapi-script";
+import React, { useEffect } from "react";
 
 const router = createBrowserRouter([
   {
@@ -66,6 +68,20 @@ const router = createBrowserRouter([
 ])
 
 function App() {
+
+   const initializeGapi = () => {
+     gapi.client.init({
+       clientId: process.env.GOOGLE_CLIENT_ID,
+       scope: "",
+     });
+   };
+
+   useEffect(() => {
+     // load and init google api scripts
+     gapi.load("client:auth2", initializeGapi);
+   });
+
+
   return (
     <QueryClientProvider client={queryClient}>
       <RouterProvider router={router} />

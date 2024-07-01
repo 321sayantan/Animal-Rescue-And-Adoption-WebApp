@@ -9,6 +9,31 @@ const resetPasswordMail = require("../resources/resetPswrdMail");
 
 const router = express.Router();
 
+const sendMail = (data)=>{
+  let mailDetails = {
+    from: "AdoPet2024@gmail.com",
+    to: data.email,
+    // to: "123sayantandas@gmail.com",
+    subject: "Welcome to Adopet! Your Registration is Complete! 🐾",
+    html: `Hi ${data.name}, <br><br>
+                    Welcome to Adopet! Your registration is successful. 🎉 <br><br>
+                    Start exploring adoptable pets <a href="http:localhost:3000">here</a>. If you need help, contact us at AdoPet2024@gmail.com.
+                    <br><br>
+                    Happy adopting and rescue!
+                    <br><br>
+                    Best,<br>
+                    The Adopet Team`,
+  };
+
+  mailTransporter.sendMail(mailDetails, function (err, data) {
+    if (err) {
+      console.log("Error Occurs");
+    } else {
+      console.log("Email sent successfully");
+    }
+  });
+}
+
 router.post("/register", async (req, res) => {
   const data = new User({
     name: req.body.username,
@@ -83,50 +108,84 @@ router.post("/register", async (req, res) => {
 
 router.post("/login", async (req, res) => {
   try {
-        const logged_user = await User.findOne({ email: req.body.email });
-        console.log(2, logged_user);
-        if (logged_user) {
-          console.log(3, "user found");
-          bcrypt.compare(req.body.password, logged_user.password, (err, result) => {
-            if (err) {
-              console.log(err)
-            }
-            // else {
-            if (!result) {
-              console.log(30, "password didnot match");
-              res.status(400).json({ msg: "Invalid Email or Password"})        
-            } 
-              
-            console.log(30, "password matched");
-
-            const payload = {
-              id: logged_user.id
-            }
-
-            jwt.sign(payload, "shhh", {expiresIn: '10h'}, (err, token)=>{
-              res.status(200).json({
-                token: token
-              })
-            })
-
-            }
-          );
-        } else {
-          console.log(4, "user not found");
-          res.status(400).json({ msg: "Invalid Email or Password" })
+    const logged_user = await User.findOne({ email: req.body.email });
+    console.log(2, logged_user);
+    if (logged_user) {
+      console.log(3, "user found");
+      bcrypt.compare(req.body.password, logged_user.password, (err, result) => {
+        if (err) {
+          console.log(err);
         }
-      } catch (err) {
-        console.log(5, "error in finding user");
-        res.status(400).json({ msg: "Unexpected Error Occured" });
-        // return cb(err);
-      }
+        // else {
+        if (!result) {
+          console.log(30, "password didnot match");
+          res.status(400).json({ msg: "Invalid Email or Password" });
+        }
+
+        console.log(30, "password matched");
+
+        const payload = {
+          id: logged_user.id,
+        };
+
+        jwt.sign(payload, "shhh", { expiresIn: "10h" }, (err, token) => {
+          res.status(200).json({
+            token: token,
+          });
+        });
+      });
+    } else {
+      console.log(4, "user not found");
+      res.status(400).json({ msg: "Invalid Email or Password" });
+    }
+  } catch (err) {
+    console.log(5, "error in finding user");
+    res.status(400).json({ msg: "Unexpected Error Occured" });
+  }
+});
+
+router.post("/googleLogin", async (req, res) => {
+  try {
+    console.log(req.body);
+    let user = await User.findOne({ email: req.body.email });
+    console.log(1,user)
+
+    if (!user) {
+      console.log(2,"no user")
+      const data = new User({
+        name: req.body.name,
+        email: req.body.email,
+        image: req.body.imageUrl,
+        is_volunteer: false,
+      });
+      user = data.save();
+      // sendMail(data);
+    }
+
+    const payload = {
+      id: user._id,
+    };
+
+    jwt.sign(payload, "shhh", { expiresIn: "10h" }, (err, token) => {
+      res.status(200).json({
+        token: token,
+        message: "Login Successfull"
+      });
+
+    });
+    console.log("logged in");
+
+  } catch (err) {
+    console.log("googleLogin failed");
+    console.log(err);
+  }
 });
 
 router.post("/forgot-password", async (req, res) => {
   try {
     // Find the user by email
     const user = await User.findOne({ email: req.body.email });
-    console.log(user)
+    console.log(user);
 
     // If user not found, send error message
     if (!user) {
@@ -138,7 +197,7 @@ router.post("/forgot-password", async (req, res) => {
       expiresIn: "10m",
     });
 
-    const resData = {token: token}
+    const resData = { token: token };
 
     let mailDetails = {
       from: "AdoPet2024@gmail.com",
@@ -160,30 +219,27 @@ router.post("/forgot-password", async (req, res) => {
         console.log("Email sent successfully");
       }
     });
-    res.status(200).json({msg: "Email Sent Successfully"})
+    res.status(200).json({ msg: "Email Sent Successfully" });
   } catch (err) {
     console.log(err);
     res.status(500).send({ message: err.message });
   }
 });
 
-router.post('/reset-password/:token', async(req,res)=>{
-  try{
-    console.log("inside resetpassword")
+router.post("/reset-password/:token", async (req, res) => {
+  try {
+    console.log("inside resetpassword");
     // Verify the token sent by the user
-    const decodedToken = jwt.verify(
-      req.params.token,
-      "shhh"
-    );
-    
+    const decodedToken = jwt.verify(req.params.token, "shhh");
+
     // If the token is invalid, return an error
     if (!decodedToken) {
       return res.status(401).send({ message: "Invalid token" });
     }
-    
+
     // find the user with the id from the token
     const user = await User.findOne({ _id: decodedToken.userId });
-    console.log(user)
+    console.log(user);
     if (!user) {
       return res.status(401).send({ message: "no user found" });
     }
@@ -193,22 +249,12 @@ router.post('/reset-password/:token', async(req,res)=>{
     await user.save();
 
     // Send success response
-    console.log("password updated")
+    console.log("password updated");
     res.status(200).send({ message: "Password updated" });
-  }catch(err){
-    console.log(err)
+  } catch (err) {
+    console.log(err);
     res.status(500).send({ message: err.message });
   }
-})
-
-router.get("/logout", (req, res) => {
-  console.log("inside logout function");
-  req.logout((err) => {
-    if (err) {
-      console.log(err);
-    }
-    res.json("logout");
-  });
 });
 
 // router.get("/getuser",verifyToken, async (req, res) => {
