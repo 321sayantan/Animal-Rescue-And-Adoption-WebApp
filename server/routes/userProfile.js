@@ -4,33 +4,44 @@ const adoptPost = require("../db/AdoptPost");
 const verifyToken = require("../utils/verifyToken");
 const jwt = require("jsonwebtoken");
 const cloudinary = require("cloudinary");
+const env = require("dotenv");
+
+env.config();
 
 const router = express.Router();
 
 cloudinary.config({
-  cloud_name: "dkf5lwjqr",
-  api_key: "217799987144445",
-  api_secret: "dr6vZEhZ4uU07PxCayir2ZbSFz4",
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
 
 router.get("/getuser", verifyToken, (req, res) => {
   try {
     jwt.verify(req.token, "shhh", async (err, dataa) => {
+
+      if(dataa === undefined){
+        console.log("token expired")
+      }
+
       if (err) {
         res.status(403);
       }
+
       const user = await User.findOne({ _id: dataa.id });
       if (!user) {
         console.log("user not found");
         res.status(400).json("Invalid User");
       }
-      // console.log(user);
-
-      const alladoptPosts = await adoptPost.find({ donor_email: user.email });
-      console.log(alladoptPosts)
-
-      res.status(200).json({user: user, adopt: alladoptPosts});
+      else{
+        // console.log(user);
+  
+        const alladoptPosts = await adoptPost.find({ donor_email: user.email });
+        // console.log(alladoptPosts)
+  
+        res.status(200).json({user: user, adopt: alladoptPosts});
+      }
     });
   } catch (err) {
     // console.log(err);

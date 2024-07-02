@@ -35,6 +35,7 @@ async function loadUserData(params) {
         throw new Error('Failed to fetch User details!');
     } else {
         const data = await response.json();
+        console.log(data)
         return data;
     }
 }

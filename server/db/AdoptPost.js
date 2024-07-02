@@ -43,6 +43,13 @@ const AdoptPostSchema = new mongoose.Schema({
   vet_description: {
     type: String,
   },
+  adopted: {
+    type: Boolean,
+  },
+  timestamp: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 module.exports = mongoose.model("AdoptPost", AdoptPostSchema);

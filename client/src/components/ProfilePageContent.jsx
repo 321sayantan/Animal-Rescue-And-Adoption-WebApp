@@ -15,8 +15,15 @@ const ProfilePageContent = ({ userData }) => {
             className="col-md-4 d-flex justify-content-center"
             data-aos="fade-right"
           >
-            <div className="profile-img">
-              <img src={userData.user.image} alt="" />
+            <div
+              className="profile-img"
+              style={{
+                background: `url(${userData.user.image}) center center/cover`,
+                backgroundRepeat: "no-repeat",
+              }}
+            >
+              {/* <img src={userData.user.image} alt="" /> */}$
+              {/* {userData.user.image} */}
             </div>
           </div>
           <div className="col-md-8" data-aos="fade-left">
