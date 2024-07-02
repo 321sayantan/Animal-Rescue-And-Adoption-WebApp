@@ -6,10 +6,11 @@ const mailTransporter = require("../utils/mailServer");
 const verifyToken = require("../utils/verifyToken");
 const jwt = require("jsonwebtoken");
 const resetPasswordMail = require("../resources/resetPswrdMail");
+const regnSuccessMail = require('../resources/regnSuccessMail');
 
 const router = express.Router();
 
-const sendMail = (data)=>{
+const sendMail = (data) => {
   let mailDetails = {
     from: "AdoPet2024@gmail.com",
     to: data.email,
@@ -69,14 +70,7 @@ router.post("/register", async (req, res) => {
               to: data.email,
               // to: "123sayantandas@gmail.com",
               subject: "Welcome to Adopet! Your Registration is Complete! 🐾",
-              html: `Hi ${data.name}, <br><br>
-                    Welcome to Adopet! Your registration is successful. 🎉 <br><br>
-                    Start exploring adoptable pets <a href="http:localhost:3000">here</a>. If you need help, contact us at AdoPet2024@gmail.com.
-                    <br><br>
-                    Happy adopting and rescue!
-                    <br><br>
-                    Best,<br>
-                    The Adopet Team`,
+              html: regnSuccessMail(data.name),
             };
 
             mailTransporter.sendMail(mailDetails, function (err, data) {
@@ -148,10 +142,10 @@ router.post("/googleLogin", async (req, res) => {
   try {
     console.log(req.body);
     let user = await User.findOne({ email: req.body.email });
-    console.log(1,user)
+    console.log(1, user)
 
     if (!user) {
-      console.log(2,"no user")
+      console.log(2, "no user")
       const data = new User({
         name: req.body.name,
         email: req.body.email,
@@ -205,11 +199,6 @@ router.post("/forgot-password", async (req, res) => {
       // to: "123sayantandas@gmail.com",
       subject: "Reset Your Password",
       html: resetPasswordMail(resData),
-      //   html: `<h1>Reset Your Password</h1>
-      // <p>Click on the following link to reset your password:</p>
-      // <a href="http://localhost:3000/reset-password/${token}">http://localhost:3000/reset-password/${token}</a>
-      // <p>The link will expire in 10 minutes.</p>
-      // <p>If you didn't request a password reset, please ignore this email.</p>`,
     };
 
     mailTransporter.sendMail(mailDetails, function (err, data) {

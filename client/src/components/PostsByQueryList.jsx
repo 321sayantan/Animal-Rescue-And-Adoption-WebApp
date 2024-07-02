@@ -8,7 +8,7 @@ const PostsFilteredList = ({ posts, headingText }) => {
 
   const onConfirm = (id) => {
     console.log(id);
-    setShowModal(false);
+    setShowModal(null);
   };
 
   return (
@@ -32,7 +32,6 @@ const PostsFilteredList = ({ posts, headingText }) => {
                 <button id="del-btn" onClick={() => setShowModal(post._id)}>
                   Delete
                 </button>
-                {/* <Link to={`${post._id}`}>More</Link> */}
               </li>
             ))}
           </ul>

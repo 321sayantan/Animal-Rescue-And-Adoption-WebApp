@@ -1,5 +1,6 @@
-function rescueConfMailForDonor(resData) {
-    return `<!doctype html>
+function regnSuccessMail(username) {
+    return `
+    <!doctype html>
 <html>
 
 <head>
@@ -300,45 +301,25 @@ function rescueConfMailForDonor(resData) {
                                 <tr>
                                     <td>
                                         <h2 style="font-size: 2rem; color: #333; font-weight: 700;">Hi, <span
-                                                style="color: #d7cc00; text-transform: uppercase;font-size: 2rem !important;">${resData._doc.rescuer_name}</span></h2>
+                                                style="color: #d7cc00; text-transform: uppercase;font-size: 2rem !important;">${username}</span>
+                                        </h2>
                                         <p
                                             style="font-size: 1.4rem; font-weight: 400; line-height: 1.5rem;margin-top: -1rem;">
-                                            We are so happy to say that we have a rescue volunteer <span
-                                                style="font-weight: 700;color: #d5075d; text-transform: capitalize;">${resData.currentuser}</span> coming up to
-                                            save the
-                                            vet <strong>(${resData._doc.vet_category})</strong> you requested for, vide Vet-ID(<a
-                                                href="https://adopet244.netlify.app/rescue/${resData._doc._id}"
-                                                target="_blank"
-                                                style="font-weight: 600; color: #00c1f2;text-decoration: none;">${resData._doc._id}</a>)
-                                            on
-                                            <span style="font-weight: 700;color: #d5075d;">${resData.dtOfApntmnt}</span>.
-                                            <br>We have recieved the request and are processing with the official
-                                            verifications. We'll keep you posted with our current status and
-                                            furthur details on time once we finish up.<br><br>
-                                            Hope you cooperate with us. Support us by saving more vets or adopting one
-                                            from below:
-                                        </p>
-                                        <table style="margin-top: 0.5rem;">
-                                            <tbody>
-                                                <td style="line-height: 1.5rem;font-size: 1rem;">
-                                                    <a href="https://adopet244.netlify.app/adopt" target="_blank"
-                                                        style="font-weight: 400; margin-left: 1rem;">All
-                                                        Adoptable pets available</a><br>
-                                                    <a href="https://adopet244.netlify.app/rescue/rescue-vet-list"
-                                                        target="_blank"
-                                                        style="font-weight: 400; margin-left: 1rem;">Vets
-                                                        those needs your help</a>
-                                                </td>
-                                            </tbody>
-                                        </table>
-
+                                            <strong style="font-size: 1.25rem; font-weight: 500;">Welcome to Adopet!
+                                                Your registration is successful. 🎉</strong>
+                                            <br>We are so happy to have you as a new member of our vast
+                                            community... Start exploring adoptable pets and more <a
+                                                href="https://adopet244.netlify.app" target="_blank"
+                                                style="font-weight: 600; color: #00c1f2;text-decoration: none;">here</a>
+                                            <br><br>
+                                            <span style="font-size: 1.1rem;font-weight: 500;color: #d5075d;">Happy adopting and rescue!🤗</span>
                                         </p>
                                         <hr width="100%" size="3px" color="#aaa" style="margin-block: 1.5rem;" />
                                         <p
                                             style="margin-top: 2rem !important; font-size: 1.5rem; font-weight: 500; line-height: 1.5rem;">
-                                            To know more contact us <a href="https://adopet244.netlify.app/contact"
+                                            To know more contact us at <a href="mailto:adoPet2024@gmail.com"
                                                 target="_blank"
-                                                style="font-weight: 400;color: blue;text-decoration: none;">here</a><br>
+                                                style="font-weight: 400;color: blue;text-decoration: none;">adoPet2024@gmail.com</a><br>
 
                                             <br><br><br>
                                             with Regards,<br>
@@ -375,7 +356,6 @@ function rescueConfMailForDonor(resData) {
     </table>
 </body>
 
-</html>`;
+</html>
+    `;
 }
-
-module.exports = rescueConfMailForDonor

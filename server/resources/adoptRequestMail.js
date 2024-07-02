@@ -291,7 +291,7 @@ function adoptReqMail(resData) {
                 <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                     <tr>
                         <td style="text-align: center;">
-                            <a href="https://localhost:3000"><img src="https://res.cloudinary.com/dkf5lwjqr/image/upload/v1718507922/adopet/ztzbsifnvyimgetwadxt.png" height="70"
+                            <a href="https://adopet244.netlify.app"><img src="https://res.cloudinary.com/dkf5lwjqr/image/upload/v1718507922/adopet/ztzbsifnvyimgetwadxt.png" height="70"
                                     alt="AdoPet"></a>
                         </td>
                     </tr>
@@ -392,7 +392,7 @@ function adoptReqMail(resData) {
                                                                 <tr>
                                                                     <td class="btn btn-primary reject"
                                                                         style="text-align: center;font-size: 1.5rem;">
-                                                                        <a href="https://localhost:3000/rejectReq"
+                                                                        <a href="https://adopet244.netlify.app/rejectReq"
                                                                             style=" background-color: #f00 !important;border-color: #f00;"
                                                                             target="_blank">Reject</a>
                                                                     </td>
@@ -407,7 +407,7 @@ function adoptReqMail(resData) {
                                                                 <tr>
                                                                     <td class="btn btn-primary accept"
                                                                         style="text-align: center;font-size: 1.5rem;">
-                                                                        <a href="http://localhost:3000/adopt/${resData._doc._id}"
+                                                                        <a href="https://adopet244.netlify.app/adopt/${resData._doc._id}"
                                                                             style="background-color: #006815 !important;border-color: #006815;"
                                                                             target="_blank">Accept</a>
                                                                     </td>
@@ -430,12 +430,12 @@ function adoptReqMail(resData) {
                         <tr>
                             <td class="content-block">
                                 <span class="apple-link">GP Block, Sector-V, SaltLake, Kolkata-12</span>
-                                <br> Don't like these emails? <a href="https://localhost:3000/unsubscribe">Unsubscribe</a>.
+                                <br> Don't like these emails? <a href="https://adopet244.netlify.app/unsubscribe">Unsubscribe</a>.
                             </td>
                         </tr>
                         <tr>
                             <td class="content-block powered-by">
-                                Powered by <a href="https://localhost:3000">AdoPet</a>.
+                                Powered by <a href="https://adopet244.netlify.app">AdoPet</a>.
                             </td>
                         </tr>
                     </table>

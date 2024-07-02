@@ -14,7 +14,6 @@ function ResetPswrdFinalPage() {
 
     const emailSubmitHandler = async (enteredPswrd) => {
         console.log(enteredPswrd)
-        // const token = window.location.pathname.split("/").pop();
         try {
             const response = await toast.promise(
                 fetch(`http://localhost:5000/user/reset-password/${token}`, {
@@ -45,19 +44,19 @@ function ResetPswrdFinalPage() {
         }
     }
 
-    const loadStyle = (src) => {
-      return new Promise((resolve) => {
-        const script = document.createElement("link");
-        script.href = src;
-        script.onload = () => {
-          resolve(true);
-        };
-        script.onerror = () => {
-          resolve(false);
-        };
-        document.head.appendChild(script);
-      });
-    };
+    // const loadStyle = (src) => {
+    //   return new Promise((resolve) => {
+    //     const script = document.createElement("link");
+    //     script.href = src;
+    //     script.onload = () => {
+    //       resolve(true);
+    //     };
+    //     script.onerror = () => {
+    //       resolve(false);
+    //     };
+    //     document.head.appendChild(script);
+    //   });
+    // };
 
     const loadScript = (src) => {
       return new Promise((resolve) => {

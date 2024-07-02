@@ -30,7 +30,7 @@ router.get("/getuser", verifyToken, (req, res) => {
       const alladoptPosts = await adoptPost.find({ donor_email: user.email });
       console.log(alladoptPosts)
 
-      res.status(200).json({user: user, adopt: alladoptPosts});
+      res.status(200).json({ user: user, adopt: alladoptPosts });
     });
   } catch (err) {
     // console.log(err);
@@ -81,8 +81,8 @@ router.patch("/edit", verifyToken, (req, res) => {
   }
 });
 
-router.delete('/deleteUser', verifyToken, (req, res)=>{
-  try{
+router.delete('/deleteUser', verifyToken, (req, res) => {
+  try {
     jwt.verify(req.token, "shhh", async (err, dataa) => {
       if (err) {
         res.status(403);
@@ -110,10 +110,11 @@ router.delete('/deleteUser', verifyToken, (req, res)=>{
 
       const data = await User.findByIdAndDelete(user._id);
       console.log(data)
-      res.status(200).json("image and account deleted successfully")
-
+      setTimeout(() => {
+        res.status(200).json("Account deleted successfully")
+      }, 500);
     })
-  }catch(err){
+  } catch (err) {
     console.log(err)
     res.status(400).json(err)
   }

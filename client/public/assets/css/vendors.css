@@ -7157,6 +7157,10 @@ button#del-btn,
   height: auto !important;
 }
 
+.deletePost-confirm-modal span {
+  color: #000;
+}
+
 .deletePost-confirm-modal .modal-header {
   background: var(--bs-danger) !important;
 }
@@ -7373,6 +7377,10 @@ button#del-btn,
 .btn-ghost {
   font-weight: 700 !important;
   color: var(--bs-danger);
+}
+
+[data-theme="dark"].btn-ghost:hover {
+  color: var(--font-color) !important;
 }
 
 .proile-rating {

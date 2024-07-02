@@ -9,7 +9,7 @@ import { AuthContext } from "../store/AuthContext";
 
 function RescueVet() {
   const [errors, setErrors] = useState(null)
-  const { isAuthenticated, jwt } = useContext(AuthContext);
+  const { jwt } = useContext(AuthContext);
 
   const navigate = useNavigate();
   const rescueVetDataHandler = async (rescueData) => {

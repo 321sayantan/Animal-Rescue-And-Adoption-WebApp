@@ -65,7 +65,6 @@ function EditProfile({ userData }) {
                                     <i className="fas fa-pencil" />
                                     <span>Change</span>
                                 </label>
-                                {/* <input type="file" id="profile-pic" name="file" style={{ display: 'none' }} /> */}
                                 <ImageUploader id="profile-pic" onUploaded={setNewProfilePic} style={{ display: 'none' }} />
                             </div>
                         </div>
