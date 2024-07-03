@@ -5,8 +5,8 @@ const bcrypt = require("bcrypt");
 // const session = require("express-session");
 const user_route = require("./routes/auth.js");
 const adoptPost_route = require("./routes/adoptPost.js");
-const rescue_route = require('./routes/rescuePost.js')
-const user_profile = require('./routes/userProfile.js')
+const rescue_route = require("./routes/rescuePost.js");
+const user_profile = require("./routes/userProfile.js");
 // const googleStrategy = require("passport-google-oauth20").Strategy;
 const cors = require("cors");
 const env = require("dotenv");
@@ -20,12 +20,13 @@ dbConnect();
 
 env.config();
 
-app.use(cors({
-  origin: "http://localhost:3000",
-  methods: "GET,POST,PUT,PATCH,DELETE",
-  credentials: true
-}));
-
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    methods: "GET,POST,PUT,PATCH,DELETE",
+    credentials: true,
+  })
+);
 
 // app.use(
 //   session({
@@ -56,7 +57,6 @@ app.use("/adopt", adoptPost_route);
 app.use("/rescue", rescue_route);
 app.use("/profile", user_profile);
 
-
 // app.get(
 //   "/auth/google",
 //   passport.authenticate("google", {
@@ -75,8 +75,7 @@ app.use("/profile", user_profile);
 //   }
 // );
 
-
-app.get("/login/success",verifyToken, async (req, res) => {
+app.get("/login/success", verifyToken, async (req, res) => {
   console.log("inside login/seccess");
   jwt.verify(req.token, "shhh", (err, data) => {
     if (err) {
@@ -87,7 +86,6 @@ app.get("/login/success",verifyToken, async (req, res) => {
     res.json({ msg: "hi" });
   });
 });
-
 
 // passport.use(
 //   "google",
@@ -120,7 +118,6 @@ app.get("/login/success",verifyToken, async (req, res) => {
 //     }
 //   )
 // );
-
 
 // passport.serializeUser((user, cb) => {
 //   console.log(11, "serializing user" + JSON.stringify(user));

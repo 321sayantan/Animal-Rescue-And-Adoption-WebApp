@@ -153,9 +153,10 @@ router.post("/googleLogin", async (req, res) => {
         image: req.body.imageUrl,
         is_volunteer: false,
       });
-      user = data.save();
+      user = await data.save();
       // sendMail(data);
     }
+    console.log(2, user);
 
     const payload = {
       id: user._id,
