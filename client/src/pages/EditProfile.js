@@ -1,5 +1,5 @@
-import { useState, useContext, Suspense } from "react";
-import { Await, useNavigate } from "react-router-dom";
+import { useState, useContext, Suspense, useEffect } from "react";
+import { Await, useLoaderData, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Alert from "../components/UI/Alert";
 import { toasterVariants } from "../utils/misc";
@@ -8,16 +8,18 @@ import EditProfileForm from "../components/EditProfileForm";
 import ImageUploader from "../components/ImageUploader";
 import MapPreLoader from "../components/UI/MapPreLoader";
 
-function EditProfile({ userData }) {
+function EditProfile() {
+    const { userData } = useLoaderData()
+    const navigate = useNavigate()
     const [newProfilePic, setNewProfilePic] = useState()
     const [errors, setErrors] = useState()
     //   const authCtx = useContext(AuthContext);
 
     const updateInfoHandler = (userData) => {
-        console.log(userData)
+        console.log(userData);
+        navigate('../profile')
     }
     const fallback = <MapPreLoader msg="Loading Info..." />
-
 
     return (
         <>
@@ -55,10 +57,14 @@ function EditProfile({ userData }) {
                             data-aos="fade-right"
                         >
                             <div className="profile-img edit-image">
-                                <img
-                                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog"
-                                    alt=""
-                                />
+                                <Suspense>
+                                    <Await resolve={userData}>
+                                        {userImage => <img
+                                            src={userImage.user.image}
+                                            alt=""
+                                        />}
+                                    </Await>
+                                </Suspense>
                             </div>
                             <div className="btn btn-style btn-primary position-absolute image-edit-btn">
                                 <label htmlFor="profile-pic">
@@ -76,12 +82,11 @@ function EditProfile({ userData }) {
                                     ))}
                                 </ul>
                             </Alert>} */}
-                            {/* <Suspense fallback={fallback}>
+                            <Suspense fallback={fallback}>
                                 <Await resolve={userData}>
-                                    {data => <EditProfileForm userData={data} />}
+                                    {data => <EditProfileForm userData={data.user} onSubmit={updateInfoHandler} />}
                                 </Await>
-                            </Suspense> */}
-                            <EditProfileForm onSubmit={updateInfoHandler} />
+                            </Suspense>
                         </div>
                     </div>
                 </div>

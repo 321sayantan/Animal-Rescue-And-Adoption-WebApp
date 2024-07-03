@@ -62,7 +62,7 @@ const router = createBrowserRouter([
         element: <UserProfile />,
         loader: userProfileLoader,
       },
-      { path: 'profile/edit', element: <EditProfile /> },
+      { path: 'profile/edit', element: <EditProfile />, loader: userProfileLoader },
     ],
   },
   {
@@ -78,17 +78,17 @@ const router = createBrowserRouter([
 
 function App() {
 
-   const initializeGapi = () => {
-     gapi.client.init({
-       clientId: process.env.GOOGLE_CLIENT_ID,
-       scope: "",
-     });
-   };
+  const initializeGapi = () => {
+    gapi.client.init({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      scope: "",
+    });
+  };
 
-   useEffect(() => {
-     // load and init google api scripts
-     gapi.load("client:auth2", initializeGapi);
-   });
+  useEffect(() => {
+    // load and init google api scripts
+    gapi.load("client:auth2", initializeGapi);
+  });
 
 
   return (

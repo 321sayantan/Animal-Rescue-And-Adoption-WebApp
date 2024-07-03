@@ -54,9 +54,9 @@ function ChangePassword() {
         <div className='col-12'>
             <div className='container password-change-form'>
                 <div className="mt-4">
-                    <h1 className="fs-1 fw-bolder text-dark text-center heading">Forgot your password?</h1>
+                    <h1 className="fs-1 fw-bolder text-center heading">Forgot your password?</h1>
                     <div className="d-flex justify-content-center">
-                        <hr style={{ width: '8rem', color: '#00f', height: '3px' }} />
+                        <hr style={{ width: '8rem', color: 'var(--bs-primary)', height: '3px' }} />
                     </div>
                     {notificationAlert}
                     <div className="container px-3 py-4 mt-4 mail-changer__wrapper">

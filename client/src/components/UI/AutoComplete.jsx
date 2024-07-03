@@ -8,7 +8,7 @@ const options = {
   types: ["establishment"],
 };
 
-const AutoComplete = ({ id, placeholder, onComplete, value }) => {
+const AutoComplete = ({ id, placeholder, onComplete, defaultValue }) => {
   const [isInvalid, setIsInvalid] = useState(false);
   const address = useRef();
   const placeChangeHandler = (place) => {
@@ -47,8 +47,7 @@ const AutoComplete = ({ id, placeholder, onComplete, value }) => {
         className={"form-control " + addrClasses}
         placeholder={placeholder}
         onChange={addrChangeHandler}
-        defaultValue=""
-        value={value}
+        defaultValue={defaultValue || ""}
       />
       {isInvalid && <p className="invalid-feedback">Improper Location!</p>}
     </>

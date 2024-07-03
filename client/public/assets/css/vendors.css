@@ -7223,7 +7223,7 @@ button#del-btn,
 .password-change-form .heading {
   text-transform: uppercase;
   font-weight: 900 !important;
-  color: #212529 !important;
+  color: var(--heading-color);
 }
 
 .password-change-form h3 {
@@ -7240,6 +7240,7 @@ button#del-btn,
 
 .password-change-form label {
   margin: -0.5rem auto 0.8rem 0.2rem;
+  color: var(--bs-dark);
 }
 
 .password-change-form input {
@@ -7379,7 +7380,7 @@ button#del-btn,
   color: var(--bs-danger);
 }
 
-[data-theme="dark"].btn-ghost:hover {
+[data-theme="dark"] .btn-ghost:hover {
   color: var(--font-color) !important;
 }
 
@@ -7443,6 +7444,11 @@ button#del-btn,
 .profile-tab p {
   font-weight: 600;
   color: var(--bs-pink);
+}
+
+.profile-tab .no-result_div p {
+  line-height: 3rem;
+  color: var(--bs-warning);
 }
 
 /* //profile section */

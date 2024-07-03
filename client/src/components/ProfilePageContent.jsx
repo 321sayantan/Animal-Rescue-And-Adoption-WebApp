@@ -48,27 +48,20 @@ const ProfilePageContent = ({ userData }) => {
               </div>
             </div>
           </div>
-          <div className="row">
+          <div className="row mb-5 pb-5">
             <div className="col-md-4" data-aos="fade-right">
-              {/* <div className="profile-work">
-              <p>WORK LINK</p>
-              <Link>Website Link</Link>
-              <br />
-              <Link>Bootsnipp Profile</Link>
-              <br />
-              <Link>Bootply Profile</Link>
-              <p>SKILLS</p>
-              <Link>Web Designer</Link>
-              <br />
-              <Link>Web Developer</Link>
-              <br />
-              <Link>WordPress</Link>
-              <br />
-              <Link>WooCommerce</Link>
-              <br />
-              <Link>PHP, .Net</Link>
-              <br />
-            </div> */}
+              <div className="profile-work">
+                <p>BIO</p>
+                <span> ---- </span>
+                {/* <Link>Website Link</Link>
+                <br />
+                <Link>Bootsnipp Profile</Link> */}
+                <p>SKILLS</p>
+                <span style={{ color: "var(--heading-color)" }}>
+                  {userData.user.is_volunteer ? "Volunteer" : "User"}
+                </span>
+                <br />
+              </div>
             </div>
             <div className="col-md-8" data-aos="fade-up">
               <div className="tab-content profile-tab" id="myTabContent">

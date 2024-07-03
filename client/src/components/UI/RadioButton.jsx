@@ -16,7 +16,7 @@ const RadioButton = ({
         id={id}
         value={value}
         onChange={onChange}
-        checked={checked}
+        checked={checked ? checked : null}
         defaultChecked={setDefault}
       />
       <span className="custom-radio" />

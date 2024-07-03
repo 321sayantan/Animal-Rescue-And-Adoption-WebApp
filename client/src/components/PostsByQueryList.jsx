@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
-import Modal from "./UI/Modal";
 import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
+import Modal from "./UI/Modal";
+import NoResult from "./UI/NoResult";
 
 const PostsFilteredList = ({ posts, headingText }) => {
   const [showModal, setShowModal] = useState(null);
@@ -36,7 +37,9 @@ const PostsFilteredList = ({ posts, headingText }) => {
             ))}
           </ul>
         </div>
-      ) : null}
+      ) : (
+        <NoResult />
+      )}
 
       <AnimatePresence>
         {showModal && (

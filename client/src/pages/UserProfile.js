@@ -33,10 +33,10 @@ async function loadUserData(params) {
     });
     if (!response.ok) {
         throw new Error('Failed to fetch User details!');
-    } else {
-        const data = await response.json();
-        return data;
     }
+    const data = await response.json();
+    // console.log(data)
+    return data;
 }
 
 export function loader() {

@@ -123,11 +123,6 @@ function LoginPage() {
               {errors && (
                 <Alert className="alert-danger">
                   <p>{errors}</p>
-                  {/* <ul>
-                  {Object.values(errors[0]).map((err, i) => (
-                    <li key={i}>{err}</li>
-                    ))}
-                    </ul> */}
                 </Alert>
               )}
 

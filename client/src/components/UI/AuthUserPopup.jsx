@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
@@ -6,6 +6,7 @@ import { AuthContext } from "../../store/AuthContext";
 import axios from "axios";
 
 const AuthUserPopup = ({ children, onClose, className }) => {
+  const [userData, setUserData] = useState({});
   const authCtx = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -61,6 +62,27 @@ const AuthUserPopup = ({ children, onClose, className }) => {
     navigate("..");
   }
 
+  const getuser = async (jwt) => {
+    const response = await fetch("http://localhost:5000/profile/getuser", {
+      headers: {
+        "Content-Type": "application/json",
+        "authorization": `Bearer ${jwt}`,
+      },
+    });
+    if (!response.ok) {
+      throw new Error("Failed to fetch User details!");
+    }
+    const data = await response.json();
+    // console.log(data);
+    setUserData(data.user);
+  };
+
+  useEffect(() => {
+    if (authCtx.jwt) {
+      getuser(authCtx.jwt);
+    }
+  });
+
   return createPortal(
     <>
       <div className="menu-backdrop" onClick={onClose}></div>
@@ -91,10 +113,15 @@ const AuthUserPopup = ({ children, onClose, className }) => {
               ) : (
                 <>
                   <div className="thumbnail-icon authenticated d-flex justify-content-center align-items-center">
-                    <img src="assets/images/testi1.jpg" alt="" />
+                    <img src={userData.image} alt="" />
+                    {/* <img src="assets/images/testi1.jpg" alt="" /> */}
                   </div>
                   <p>
-                    Hi, <strong>Milly Jhonson</strong>..
+                    Hi,{" "}
+                    <strong className="text-uppercase text-warning">
+                      {userData.name}
+                    </strong>
+                    {/* Hi, <strong className="text-uppercase text-warning">Milly Jhonson</strong> */}
                   </p>
                 </>
               )}
