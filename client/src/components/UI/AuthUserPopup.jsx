@@ -85,7 +85,7 @@ const AuthUserPopup = ({ children, onClose, className }) => {
     if (authCtx.jwt) {
       getuser(authCtx.jwt);
     }
-  },[]);
+  }, [authCtx.jwt]);
 
   return createPortal(
     <>

@@ -1,10 +1,22 @@
-import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import ContactUsForm from '../components/ContactUsForm';
+import { toast } from 'react-toastify';
+import Alert from '../components/UI/Alert';
 
 function ContactUs() {
-  const [name, setName] = useState('');
-  const [subject, setSubject] = useState('');
-  const [body, setBody] = useState('');
+  const [errors, setErrors] = useState()
+
+  const openMailHandler = (contactMailData) => {
+    try {
+      window.location.href = `mailto:AdoPet2024@gmail.com?subject=${contactMailData.subject}&body=I am ${contactMailData.username}, ${contactMailData.body}`;
+      console.log(contactMailData)
+    } catch (err) {
+      toast.error(err[0]);
+      setErrors(err || {});
+      console.error(err)
+    }
+  }
 
   return (
     <>
@@ -111,7 +123,16 @@ function ContactUs() {
               className="col-lg-6 form-inner-cont order-lg-2 order-1 mb-lg-0 mb-5 ps-lg-4"
               data-aos="fade-left"
             >
-              
+              {errors && (
+                <Alert className="alert-danger">
+                  <ul>
+                    {Object.values(errors[0]).map((err, i) => (
+                      <li key={i}>{err}</li>
+                    ))}
+                  </ul>
+                </Alert>
+              )}
+              <ContactUsForm onSubmit={openMailHandler} />
             </div>
           </div>
         </div>
