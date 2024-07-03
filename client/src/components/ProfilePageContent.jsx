@@ -1,24 +1,64 @@
 import { useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import { AnimatePresence } from "framer-motion";
 import ProfileInfo from "./ProfileInfo";
 import PostsFilteredList from "./PostsByQueryList";
 import Modal from "./UI/Modal";
+import Alert from "./UI/Alert";
 import { AuthContext } from "../store/AuthContext";
+import { toast } from "react-toastify";
 
 const ProfilePageContent = ({ userData }) => {
+  const [errors, setErrors] = useState(null);
   const [showModal, setShowModal] = useState(null);
-  const { jwt } = useContext(AuthContext);
+  const { jwt,logout } = useContext(AuthContext);
+  const navigate = useNavigate();
 
-  const onConfirm = (id) => {
-    console.log(id);
-    setShowModal(false);
+  const onConfirm = async (token) => {
+    try {
+      const response = await toast.promise(
+        fetch("http://localhost:5000/profile/deleteUser", {
+          method: "DELETE",
+          headers: {
+            'authorization': `Bearer ${token}`,
+          },
+        }),
+        {
+          pending: "Processing...",
+        }
+      );
+      const result = await response.json();
+      console.log(result);
+
+      if (response.ok) {
+        setShowModal(null);
+        logout()
+        navigate("..");
+        toast.success(result.msg);
+        setErrors(null);
+      } else {
+        toast.error(result.errors[0]);
+        setErrors(result.errors || {});
+      }
+    } catch (err) {
+      console.err(err);
+    }
+    // console.log(token);
   };
 
   return (
     <>
+      {errors && (
+        <Alert className="alert-danger">
+          <ul>
+            {Object.values(errors[0]).map((err, i) => (
+              <li key={i}>{err}</li>
+            ))}
+          </ul>
+        </Alert>
+      )}
       <section className="py-4 px-3 mt-5 mb-3 mx-4" id="user-profile">
         <Tabs defaultIndex={0} className="col-12 mt-5 pt-6 column container">
           <div className="row">
@@ -26,9 +66,13 @@ const ProfilePageContent = ({ userData }) => {
               className="col-md-4 d-flex justify-content-center"
               data-aos="fade-right"
             >
-              <div className="profile-img">
-                <img src={userData.user.image} alt="" />
-              </div>
+              <div
+                className="profile-img"
+                style={{
+                  background: `url(${userData.user.image}) center center/cover`,
+                  backgroundRepeat: "no-repeat",
+                }}
+              />
             </div>
             <div className="col-md-8" data-aos="fade-left">
               <div className="profile-head">

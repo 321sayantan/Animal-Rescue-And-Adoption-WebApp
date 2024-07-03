@@ -33,6 +33,7 @@ router.post("/post", verifyToken, async (req, res) => {
 			image_id: req.body.vet.image_id,
 			is_vaccinated: req.body.vet.is_vaccinated,
 			vet_description: req.body.vet.description,
+			adopted: false,
 		});
 		data
 			.save()

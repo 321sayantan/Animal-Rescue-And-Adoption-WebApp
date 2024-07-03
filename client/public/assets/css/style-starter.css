@@ -17591,11 +17591,8 @@ h4.inner-text-title {
 }
 
 #pet-details .pet-pic {
-  min-width: 26rem;
   min-height: 28rem;
   overflow: hidden !important;
-  /* background: var(--bs-light) !important; */
-  margin-left: 1.5rem;
 }
 
 #pet-details .pet-pic img {

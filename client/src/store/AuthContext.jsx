@@ -33,12 +33,6 @@ const AuthContextProvider = ({ children }) => {
     localStorage.removeItem("jwt");
   }
 
-  function register() {
-    const token = Math.random().toString(32).substring(2, 15);
-    setIsRegistered(token);
-    localStorage.setItem("reg-token", token);
-  }
-
   // function getCookie(cname) {
   //   console.log(47,document.cookie)
   //   let name = cname + "=";
@@ -62,7 +56,6 @@ const AuthContextProvider = ({ children }) => {
     jwt,
     login,
     logout,
-    register,
   };
 
   return (

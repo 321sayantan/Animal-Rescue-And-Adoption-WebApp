@@ -1,24 +1,25 @@
 const mongoose = require("mongoose");
 
-
-const LocationSchema = new mongoose.Schema({
-  type: {
-    type: String,
-    enum: ["Point"],
-    // required: true,
-  },
-  coordinates: {
-    type: [Number], // Array of Numbers
-    required: true,
-    validate: {
-      validator: function (arr) {
-        return arr.length === 2; // Must be an array of 2 numbers (latitude, longitude)
+const LocationSchema = new mongoose.Schema(
+  {
+    type: {
+      type: String,
+      enum: ["Point"],
+      // required: true,
+    },
+    coordinates: {
+      type: [Number], // Array of Numbers
+      required: true,
+      validate: {
+        validator: function (arr) {
+          return arr.length === 2; // Must be an array of 2 numbers (latitude, longitude)
+        },
+        message: "Coordinates must contain exactly 2 elements.",
       },
-      message: "Coordinates must contain exactly 2 elements.",
     },
   },
-},{ _id: false });
-
+  { _id: false }
+);
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -48,7 +49,11 @@ const userSchema = new mongoose.Schema({
   },
   is_volunteer: {
     type: Boolean,
-  }
+  },
+  timestamp: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 userSchema.index({ loc: "2dsphere" });

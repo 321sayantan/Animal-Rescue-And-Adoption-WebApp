@@ -359,3 +359,5 @@ function regnSuccessMail(username) {
 </html>
     `;
 }
+
+module.exports = regnSuccessMail

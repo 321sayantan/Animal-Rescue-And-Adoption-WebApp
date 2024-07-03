@@ -24,19 +24,23 @@ export default UserProfile
 
 
 async function loadUserData(params) {
-    const jwt = localStorage.getItem("jwt");
-    const response = await fetch('http://localhost:5000/profile/getuser', {
+    try {
+        const jwt = localStorage.getItem("jwt");
+        const response = await fetch('http://localhost:5000/profile/getuser', {
         headers: {
             'Content-Type': 'application/json',
             'authorization': `Bearer ${jwt}`
         }
-    });
-    if (!response.ok) {
-        throw new Error('Failed to fetch User details!');
+        });
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data || 'Failed to fetch');
+        }
+        // console.log(data)
+        return data;
+    } catch (error) {
+        console.error(error)
     }
-    const data = await response.json();
-    // console.log(data)
-    return data;
 }
 
 export function loader() {

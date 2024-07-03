@@ -30,7 +30,7 @@ function ProfileInfo({ user }) {
           <label>Address</label>
         </div>
         <div className="col-md-6">
-          <p>{user.address}</p>
+          <p>{user?.address || "-----"}</p>
         </div>
       </div>
       <div className="row">
@@ -38,7 +38,7 @@ function ProfileInfo({ user }) {
           <label>Postal Code</label>
         </div>
         <div className="col-md-6">
-          <p>{user.zip_code}</p>
+          <p>{user?.zip_code || "-----"}</p>
         </div>
       </div>
     </>

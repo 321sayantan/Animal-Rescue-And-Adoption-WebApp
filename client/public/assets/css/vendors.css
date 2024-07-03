@@ -7305,7 +7305,7 @@ button#del-btn,
   width: 15rem;
   height: 15rem;
   overflow: hidden;
-  border: 3px solid #212529;
+  border: 3px solid var(--bs-secondary);
   padding: 3px;
   border-radius: 50%;
 }

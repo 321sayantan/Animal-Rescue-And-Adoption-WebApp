@@ -73,7 +73,7 @@ function LoginPage() {
       if (response.ok) {
         authCtx.login(result.token);
         navigate("..");
-        toast.success(result.message, toasterVariants);
+        toast.success(result.Message, toasterVariants);
         setErrors(null);
       } else if (response.status === 400) {
         toast.error(result.msg, toasterVariants);

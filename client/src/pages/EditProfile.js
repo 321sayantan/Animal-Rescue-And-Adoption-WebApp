@@ -13,11 +13,39 @@ function EditProfile() {
     const navigate = useNavigate()
     const [newProfilePic, setNewProfilePic] = useState()
     const [errors, setErrors] = useState()
-    //   const authCtx = useContext(AuthContext);
+    const { jwt } = useContext(AuthContext);
 
-    const updateInfoHandler = (userData) => {
-        console.log(userData);
-        navigate('../profile')
+    const updateInfoHandler = async (userData) => {
+        console.log(userData)
+        // try {
+        //     const response = await toast.promise(
+        //         fetch("http://localhost:5000/profile/edit", {
+        //             method: "PATCH",
+        //             body: JSON.stringify(userData),
+        //             headers: {
+        //                 "Content-Type": "application/json",
+        //                 'authorization': `Bearer ${jwt}`
+        //             },
+        //         }),
+        //         {
+        //             pending: 'Processing...',
+        //         }
+        //     );
+        //     const result = await response.json();
+        //     console.log(result);
+
+        //     if (response.ok) {
+        //         console.log(result);
+        //         navigate('../profile');
+        //         toast.success(result.message, toasterVariants)
+        //         setErrors(null);
+        //     } else {
+        //         toast.error(result.errors[0], toasterVariants)
+        //         setErrors(result.errors || {});
+        //     }
+        // } catch (error) {
+        //     console.error('Error submitting form:', error);
+        // }
     }
     const fallback = <MapPreLoader msg="Loading Info..." />
 
@@ -75,13 +103,13 @@ function EditProfile() {
                             </div>
                         </div>
                         <div className="col-md-7 mt-4 px-4" data-aos="fade-left">
-                            {/* {errors && <Alert className="alert-danger">
+                            {errors && <Alert className="alert-danger">
                                 <ul>
-                                    {Object.values(errors).map((err, i) => (
+                                    {Object.values(errors[0]).map((err, i) => (
                                         <li key={i}>{err}</li>
                                     ))}
                                 </ul>
-                            </Alert>} */}
+                            </Alert>}
                             <Suspense fallback={fallback}>
                                 <Await resolve={userData}>
                                     {data => <EditProfileForm userData={data.user} onSubmit={updateInfoHandler} />}

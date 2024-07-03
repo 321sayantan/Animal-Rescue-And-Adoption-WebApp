@@ -103,9 +103,9 @@ router.post("/register", async (req, res) => {
 router.post("/login", async (req, res) => {
   try {
     const logged_user = await User.findOne({ email: req.body.email });
-    console.log(2, logged_user);
+    // console.log(2, logged_user);
     if (logged_user) {
-      console.log(3, "user found");
+      // console.log(3, "user found");
       bcrypt.compare(req.body.password, logged_user.password, (err, result) => {
         if (err) {
           console.log(err);
@@ -116,7 +116,7 @@ router.post("/login", async (req, res) => {
           res.status(400).json({ msg: "Invalid Email or Password" });
         }
 
-        console.log(30, "password matched");
+        // console.log(30, "password matched");
 
         const payload = {
           id: logged_user.id,
@@ -125,6 +125,7 @@ router.post("/login", async (req, res) => {
         jwt.sign(payload, "shhh", { expiresIn: "10h" }, (err, token) => {
           res.status(200).json({
             token: token,
+            Message: "Login successful"
           });
         });
       });
@@ -246,13 +247,25 @@ router.post("/reset-password/:token", async (req, res) => {
   }
 });
 
+router.get('/validateUser', verifyToken, async(req, res)=>{
+  try{
+    const verified = jwt.verify(req.token, "shhh");
+    console.log(verified)
+    res.status(200).json({ msg: "Valid Token", verified: true });
+  }catch(err){
+    console.log(10,err)
+    res.status(400).json({ msg: "Invalid Token", verified: false})
+  }
+})
+
 // router.get("/getuser",verifyToken, async (req, res) => {
 //   try{
-//   console.log(20,req.headers);
+//   // console.log(20,req.headers);
 //   jwt.verify(req.token, "shhh", async(err, data)=>{
 //     if(err){res.status(403);}
 //     // console.log(data);
-//     const users = await User.find({})
+//     // const users = await User.find({}).sort({ createdAt: -1 }).limit(10);
+//     const users = await User.find({}).sort({ timestamp: -1 }).limit(10);
 //     // console.log(users)
 //     res.json(users)
 //   })

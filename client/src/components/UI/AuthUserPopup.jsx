@@ -63,18 +63,22 @@ const AuthUserPopup = ({ children, onClose, className }) => {
   }
 
   const getuser = async (jwt) => {
-    const response = await fetch("http://localhost:5000/profile/getuser", {
-      headers: {
-        "Content-Type": "application/json",
-        "authorization": `Bearer ${jwt}`,
-      },
-    });
-    if (!response.ok) {
-      throw new Error("Failed to fetch User details!");
+    try {
+      const response = await fetch("http://localhost:5000/profile/getuser", {
+        headers: {
+          "Content-Type": "application/json",
+          'authorization': `Bearer ${jwt}`,
+        },
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data || "Failed to fetch User details!");
+      }
+      // console.log(data);
+      setUserData(data.user);
+    } catch (error) {
+      console.log(error);
     }
-    const data = await response.json();
-    // console.log(data);
-    setUserData(data.user);
   };
 
   useEffect(() => {
@@ -112,14 +116,19 @@ const AuthUserPopup = ({ children, onClose, className }) => {
                 </>
               ) : (
                 <>
-                  <div className="thumbnail-icon authenticated d-flex justify-content-center align-items-center">
-                    <img src={userData.image} alt="" />
-                    {/* <img src="assets/images/testi1.jpg" alt="" /> */}
+                  <div
+                    className="thumbnail-icon authenticated d-flex justify-content-center align-items-center"
+                    style={{
+                      background: `url(${userData.image}) center center/cover`,
+                      backgroundRepeat: "no-repeat",
+                    }}
+                  >
+                    {/* <img src={userData.image} alt="" /> */}
                   </div>
                   <p>
                     Hi,{" "}
                     <strong className="text-uppercase text-warning">
-                      {userData.name}
+                      {userData?.name || '....'}
                     </strong>
                     {/* Hi, <strong className="text-uppercase text-warning">Milly Jhonson</strong> */}
                   </p>

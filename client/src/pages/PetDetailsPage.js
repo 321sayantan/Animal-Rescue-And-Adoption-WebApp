@@ -99,14 +99,12 @@ function PetDetailsPage() {
                         </div>
                     </div>
                     <div className="container py-md-1">
-                        <div className="row align-items-center">
-                            <div className="container">
+                        <div className="row align-items-center justify-content-around">
                                 <Suspense fallback={fallback1}>
                                     <Await resolve={postData}>
                                         {postData => <PetDetailSection postDetails={postData} />}
                                     </Await>
                                 </Suspense>
-                            </div>
                         </div>
                     </div>
                 </div>

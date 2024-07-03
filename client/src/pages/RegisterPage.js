@@ -1,16 +1,14 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import SignupForm from "../components/SignupForm";
 import { toast } from "react-toastify";
 import Alert from "../components/UI/Alert";
 import { toasterVariants } from "../utils/misc";
-import { AuthContext } from "../store/AuthContext";
 
 
 function RegisterPage() {
   const navigate = useNavigate()
   const [errors, setErrors] = useState()
-  const authCtx = useContext(AuthContext);
 
   const SignUpHandler = async (userData) => {
     // console.log(userData)
@@ -32,8 +30,7 @@ function RegisterPage() {
 
       if (response.ok) {
         console.log(result);
-        authCtx.register()
-        navigate("..");
+        navigate("../login");
         toast.success(result.message, toasterVariants)
         setErrors(null);
       } else {
