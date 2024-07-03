@@ -82,10 +82,11 @@ const AuthUserPopup = ({ children, onClose, className }) => {
   };
 
   useEffect(() => {
+    console.log(authCtx.jwt);
     if (authCtx.jwt) {
       getuser(authCtx.jwt);
     }
-  });
+  },[]);
 
   return createPortal(
     <>
