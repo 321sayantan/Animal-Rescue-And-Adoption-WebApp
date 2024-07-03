@@ -26,7 +26,7 @@ router.get("/getuser", verifyToken, (req, res) => {
         if (err) {
           res.status(403);
         }
-        console.log(dataa)
+        console.log(dataa);
         const user = await User.findOne({ _id: dataa.id });
         if (!user) {
           console.log("user not found");
@@ -54,8 +54,8 @@ router.patch("/edit", verifyToken, (req, res) => {
     jwt.verify(req.token, "shhh", async (err, dataa) => {
       if (dataa === undefined) {
         res.status(200).json({ message: "Login Session Expired" });
-      } else {
         console.log("token expired");
+      } else {
         if (err) {
           res.status(403);
         }
@@ -65,16 +65,22 @@ router.patch("/edit", verifyToken, (req, res) => {
           console.log("user not found");
           res.status(400).json("Invalid User");
         }
-        console.log(user);
+        console.log(user.loc);
 
         const lat =
           req.body.address.coords === undefined
-            ? undefined
+            ? user.loc === undefined
+              ? 0.0
+              : undefined
             : req.body.address.coords.latitude;
+
+        console.log(lat);
 
         const long =
           req.body.address.coords == undefined
-            ? undefined
+            ? user.loc === undefined
+              ? 0.0
+              : undefined
             : req.body.address.coords.longitude;
 
         const data = {

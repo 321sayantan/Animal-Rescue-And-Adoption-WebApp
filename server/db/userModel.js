@@ -9,7 +9,7 @@ const LocationSchema = new mongoose.Schema(
     },
     coordinates: {
       type: [Number], // Array of Numbers
-      required: true,
+      // required: true,
       validate: {
         validator: function (arr) {
           return arr.length === 2; // Must be an array of 2 numbers (latitude, longitude)
