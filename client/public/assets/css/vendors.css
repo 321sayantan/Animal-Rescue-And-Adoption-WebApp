@@ -7033,6 +7033,12 @@ button#del-btn,
   width: 100%;
 }
 
+.no-result_div .fallback-image-box {
+  max-width: 30rem;
+  height: 30rem;
+  overflow: hidden;
+}
+
 .no-result_div p {
   color: var(--bs-warning);
   font-size: 3rem;

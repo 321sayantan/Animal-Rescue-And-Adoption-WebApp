@@ -4,7 +4,8 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import { AnimatePresence } from "framer-motion";
 import ProfileInfo from "./ProfileInfo";
-import PostsFilteredList from "./PostsByQueryList";
+import UserAdoptPostsList from "./UserAdoptPostsList";
+import UserRescuePostsList from "./UserRescuePostsList";
 import Modal from "./UI/Modal";
 import Alert from "./UI/Alert";
 import { AuthContext } from "../store/AuthContext";
@@ -13,7 +14,7 @@ import { toast } from "react-toastify";
 const ProfilePageContent = ({ userData }) => {
   const [errors, setErrors] = useState(null);
   const [showModal, setShowModal] = useState(null);
-  const { jwt,logout } = useContext(AuthContext);
+  const { jwt, logout } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const onConfirm = async (token) => {
@@ -117,11 +118,19 @@ const ProfilePageContent = ({ userData }) => {
                     <ProfileInfo user={userData.user} />
                   </div>
                 </TabPanel>
-                <TabPanel className="tab-pane show active" id="posts">
+                <TabPanel className="tab-pane show active" id="adopts">
                   <div style={{ marginTop: "-4.5rem" }}>
-                    <PostsFilteredList
+                    <UserAdoptPostsList
                       posts={userData.adopt}
                       headingText="Adopts"
+                    />
+                  </div>
+                </TabPanel>
+                <TabPanel className="tab-pane show active" id="rescues">
+                  <div style={{ marginTop: "-4.5rem" }}>
+                    <UserRescuePostsList
+                      posts={userData.rescue}
+                      headingText="Rescues"
                     />
                   </div>
                 </TabPanel>

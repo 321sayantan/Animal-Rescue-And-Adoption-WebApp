@@ -19,11 +19,11 @@ const AuthContextProvider = ({ children }) => {
     setIsRegistered(storedRegToken);
   }, []);
 
-  // useEffect(() => {
-  //   if (isTokenExpired()) {
-  //     logout()
-  //   }
-  // });
+  useEffect(() => {
+    if (!isTokenVerified()) {
+      logout();
+    }
+  });
 
   function login(token) {
     if (token) {
@@ -39,21 +39,21 @@ const AuthContextProvider = ({ children }) => {
     localStorage.removeItem("jwt");
   }
 
-  // async function isTokenExpired() {
-  //   try {
-  //     const response = await fetch("http://localhost:5000/user/validateUser", {
-  //       headers: {
-  //         'authorization': `Bearer ${jwt}`,
-  //       },
-  //     });
-  //     const result = await response.json();
-  //     console.log(result);
+  async function isTokenVerified() {
+    try {
+      const response = await fetch("http://localhost:5000/user/validateUser", {
+        headers: {
+          authorization: `Bearer ${jwt}`,
+        },
+      });
+      const result = await response.json();
+      console.log(result.msg);
 
-  //     return result.verified === false ? true : false;
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
+      return result.verified;
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   const authValue = {
     isAuthenticated,
