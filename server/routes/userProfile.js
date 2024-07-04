@@ -1,6 +1,7 @@
 const express = require("express");
 const User = require("../db/userModel");
 const adoptPost = require("../db/AdoptPost");
+const Rescue = require("../db/RescuePost");
 const verifyToken = require("../utils/verifyToken");
 const jwt = require("jsonwebtoken");
 const cloudinary = require("cloudinary");
@@ -38,8 +39,12 @@ router.get("/getuser", verifyToken, (req, res) => {
             donor_email: user.email,
           });
           // console.log(alladoptPosts)
+          
+          const allRescuePosts = await Rescue.find({
+            rescuer_email: user.email,
+          });
 
-          res.status(200).json({ user: user, adopt: alladoptPosts });
+          res.status(200).json({ user: user, adopt: alladoptPosts, rescue: allRescuePosts });
         }
       }
     });
