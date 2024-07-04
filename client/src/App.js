@@ -27,6 +27,7 @@ import { loader as loadRescueDetalis } from './pages/RescueDetailsPage';
 import { loader as userProfileLoader } from './pages/UserProfile';
 import { gapi } from "gapi-script";
 import React, { useEffect } from "react";
+import $ from "jquery"; 
 
 const router = createBrowserRouter([
   {

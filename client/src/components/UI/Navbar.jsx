@@ -31,7 +31,7 @@ const Navbar = (props) => {
               to=""
             >
               <div className="icon">
-                <img src="assets/images/logo.png" alt="" />
+                <img src="/assets/images/logo.png" alt="" />
               </div>
               Ado<span>Pet</span>
             </Link>

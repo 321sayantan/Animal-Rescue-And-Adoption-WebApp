@@ -1,6 +1,7 @@
 const express = require("express");
 const User = require("../db/userModel");
 const adoptPost = require("../db/AdoptPost");
+const Rescue = require("../db/RescuePost");
 const verifyToken = require("../utils/verifyToken");
 const jwt = require("jsonwebtoken");
 const cloudinary = require("cloudinary");
@@ -26,7 +27,7 @@ router.get("/getuser", verifyToken, (req, res) => {
         if (err) {
           res.status(403);
         }
-        console.log(dataa);
+        // console.log(dataa);
         const user = await User.findOne({ _id: dataa.id });
         if (!user) {
           console.log("user not found");
@@ -38,8 +39,12 @@ router.get("/getuser", verifyToken, (req, res) => {
             donor_email: user.email,
           });
           // console.log(alladoptPosts)
+          
+          const allRescuePosts = await Rescue.find({
+            rescuer_email: user.email,
+          });
 
-          res.status(200).json({ user: user, adopt: alladoptPosts });
+          res.status(200).json({ user: user, adopt: alladoptPosts, rescue: allRescuePosts });
         }
       }
     });
@@ -65,7 +70,8 @@ router.patch("/edit", verifyToken, (req, res) => {
           console.log("user not found");
           res.status(400).json("Invalid User");
         }
-        console.log(user.loc);
+        // console.log(user.loc);
+        console.log(req.body);
 
         const lat =
           req.body.address.coords === undefined
