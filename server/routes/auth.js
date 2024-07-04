@@ -6,7 +6,7 @@ const mailTransporter = require("../utils/mailServer");
 const verifyToken = require("../utils/verifyToken");
 const jwt = require("jsonwebtoken");
 const resetPasswordMail = require("../resources/resetPswrdMail");
-const regnSuccessMail = require('../resources/regnSuccessMail');
+const regnSuccessMail = require("../resources/regnSuccessMail");
 
 const router = express.Router();
 
@@ -33,7 +33,7 @@ const sendMail = (data) => {
       console.log("Email sent successfully");
     }
   });
-}
+};
 
 router.post("/register", async (req, res) => {
   const data = new User({
@@ -125,7 +125,7 @@ router.post("/login", async (req, res) => {
         jwt.sign(payload, "shhh", { expiresIn: "10h" }, (err, token) => {
           res.status(200).json({
             token: token,
-            Message: "Login successful"
+            Message: "Login successful",
           });
         });
       });
@@ -143,10 +143,10 @@ router.post("/googleLogin", async (req, res) => {
   try {
     console.log(req.body);
     let user = await User.findOne({ email: req.body.email });
-    console.log(1, user)
+    console.log(1, user);
 
     if (!user) {
-      console.log(2, "no user")
+      console.log(2, "no user");
       const data = new User({
         name: req.body.name,
         email: req.body.email,
@@ -165,12 +165,10 @@ router.post("/googleLogin", async (req, res) => {
     jwt.sign(payload, "shhh", { expiresIn: "10h" }, (err, token) => {
       res.status(200).json({
         token: token,
-        message: "Login Successfull"
+        message: "Login Successfull",
       });
-
     });
     console.log("logged in");
-
   } catch (err) {
     console.log("googleLogin failed");
     console.log(err);
@@ -185,7 +183,7 @@ router.post("/forgot-password", async (req, res) => {
 
     // If user not found, send error message
     if (!user) {
-      return res.status(404).json({errors:["User Not Found"]})
+      return res.status(404).json({ errors: ["User Not Found"] });
     }
 
     // Generate a unique JWT token for the user that contains the user's id
@@ -248,16 +246,20 @@ router.post("/reset-password/:token", async (req, res) => {
   }
 });
 
-router.get('/validateUser', verifyToken, async(req, res)=>{
-  try{
-    const verified = jwt.verify(req.token, "shhh");
-    console.log(verified)
-    res.status(200).json({ msg: "Valid Token", verified: true });
-  }catch(err){
-    console.log(10,err)
-    res.status(400).json({ msg: "Invalid Token", verified: false})
+router.get("/validateUser", verifyToken, async (req, res) => {
+  try {
+    jwt.verify(req.token, "shhh", (err, data) => {
+      if (!data)
+        res.status(400).json({ msg: "Invalid Token", verified: false });
+      else {
+        res.status(200).json({ msg: "Valid Token", verified: true });
+      }
+    });
+  } catch (err) {
+    console.log(10, err);
+    res.status(400).json({ msg: "Invalid Token", verified: false });
   }
-})
+});
 
 // router.get("/getuser",verifyToken, async (req, res) => {
 //   try{
