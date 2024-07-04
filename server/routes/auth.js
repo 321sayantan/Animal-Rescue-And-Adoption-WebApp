@@ -185,7 +185,7 @@ router.post("/forgot-password", async (req, res) => {
 
     // If user not found, send error message
     if (!user) {
-      return res.status(404).send({ message: "User not found" });
+      return res.status(404).json({errors:["User Not Found"]})
     }
 
     // Generate a unique JWT token for the user that contains the user's id

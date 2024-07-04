@@ -38,9 +38,9 @@ router.post("/post", verifyToken, async (req, res) => {
 		data
 			.save()
 			.then((result) => {
-				setTimeout(() => {
+				// setTimeout(() => {
 					res.status(200).json({ message: "Post added successfully" });
-				}, 1500);
+				// }, 1500);
 			})
 			.catch((err) => {
 				res.status(500).json({ errors: err });
@@ -52,9 +52,9 @@ router.post("/post", verifyToken, async (req, res) => {
 router.get("/getallpost", async (req, res) => {
 	try {
 		const allposts = await Post.find();
-		setTimeout(() => {
+		// setTimeout(() => {
 			res.status(200).json(allposts);
-		}, 3000);
+		// }, 3000);
 	} catch (error) {
 		res.status(400).json(error);
 	}
@@ -63,9 +63,9 @@ router.get("/getallpost", async (req, res) => {
 router.get("/getpost/:id", async (req, res) => {
 	try {
 		const posts = await Post.findOne({ _id: req.params.id });
-		setTimeout(() => {
+		// setTimeout(() => {
 			res.status(200).json(posts);
-		}, 3000);
+		// }, 3000);
 	} catch (error) {
 		res.status(400).json(error);
 	}
@@ -75,9 +75,9 @@ router.get("/filter", async (req, res, next) => {
 	try {
 		const query = req.query.search;
 		let posts = await Post.find({ address: { $regex: `${query}`, $options: "i" } });
-		setTimeout(() => {
+		// setTimeout(() => {
 			res.status(200).json(posts);
-		}, 3000);
+		// }, 3000);
 	} catch (error) {
 		next(error);
 	}
@@ -126,9 +126,9 @@ router.post("/adoptionRequest", verifyToken, (req, res) => {
           console.log("Email sent successfully");
         }
       });
-      setTimeout(() => {
+    //   setTimeout(() => {
         res.status(200).json({ message: "Mail sent successfully" })
-      },10)
+    //   },10)
 		})
 
 	} catch (error) {

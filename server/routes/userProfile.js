@@ -26,7 +26,7 @@ router.get("/getuser", verifyToken, (req, res) => {
         if (err) {
           res.status(403);
         }
-        console.log(dataa);
+        // console.log(dataa);
         const user = await User.findOne({ _id: dataa.id });
         if (!user) {
           console.log("user not found");
@@ -65,7 +65,8 @@ router.patch("/edit", verifyToken, (req, res) => {
           console.log("user not found");
           res.status(400).json("Invalid User");
         }
-        console.log(user.loc);
+        // console.log(user.loc);
+        console.log(req.body);
 
         const lat =
           req.body.address.coords === undefined
