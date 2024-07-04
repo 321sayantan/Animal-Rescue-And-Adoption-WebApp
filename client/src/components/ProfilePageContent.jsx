@@ -86,7 +86,10 @@ const ProfilePageContent = ({ userData }) => {
                     <strong>About</strong>
                   </Tab>
                   <Tab className="nav-link" selectedClassName="active">
-                    <strong>My Posts</strong>
+                    <strong>Adopt Posts</strong>
+                  </Tab>
+                  <Tab className="nav-link" selectedClassName="active">
+                    <strong>Rescue Posts</strong>
                   </Tab>
                 </TabList>
               </div>
