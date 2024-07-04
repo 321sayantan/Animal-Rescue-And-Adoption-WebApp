@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
 import { AuthContext } from "../../store/AuthContext";
-import axios from "axios";
 
 const AuthUserPopup = ({ children, onClose, className }) => {
   const [userData, setUserData] = useState({});
@@ -86,7 +85,7 @@ const AuthUserPopup = ({ children, onClose, className }) => {
     if (authCtx.jwt) {
       getuser(authCtx.jwt);
     }
-  },[]);
+  }, [authCtx.jwt]);
 
   return createPortal(
     <>
@@ -123,15 +122,12 @@ const AuthUserPopup = ({ children, onClose, className }) => {
                       background: `url(${userData.image}) center center/cover`,
                       backgroundRepeat: "no-repeat",
                     }}
-                  >
-                    {/* <img src={userData.image} alt="" /> */}
-                  </div>
+                  />
                   <p>
                     Hi,{" "}
                     <strong className="text-uppercase text-warning">
-                      {userData?.name || '....'}
+                      {userData?.name || "...."}
                     </strong>
-                    {/* Hi, <strong className="text-uppercase text-warning">Milly Jhonson</strong> */}
                   </p>
                 </>
               )}

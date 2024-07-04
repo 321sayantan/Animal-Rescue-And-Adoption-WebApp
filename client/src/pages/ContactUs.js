@@ -1,11 +1,22 @@
-import { Link } from 'react-router-dom';
 import { useState } from 'react';
-// import { use } from '../../../server/utils/mailServer';
+import { Link } from 'react-router-dom';
+import ContactUsForm from '../components/ContactUsForm';
+import { toast } from 'react-toastify';
+import Alert from '../components/UI/Alert';
 
 function ContactUs() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [body, setBody] = useState('');
+  const [errors, setErrors] = useState()
+
+  const openMailHandler = (contactMailData) => {
+    try {
+      window.location.href = `mailto:AdoPet2024@gmail.com?subject=${contactMailData.subject}&body=I am ${contactMailData.username}, ${contactMailData.body}`;
+      console.log(contactMailData)
+    } catch (err) {
+      toast.error(err[0]);
+      setErrors(err || {});
+      console.error(err)
+    }
+  }
 
   return (
     <>
@@ -98,65 +109,30 @@ function ContactUs() {
               className="col-lg-6 map order-lg-1 order-2"
               data-aos="fade-right"
             >
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3001161.424489281!2d-78.01909140705047!3d42.72866436845163!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4ccc4bf0f123a5a9%3A0xddcfc6c1de189567!2sNew%20York%2C%20USA!5e0!3m2!1sen!2sin!4v1570786994395!5m2!1sen!2sin"
-                title="store-location"
-                frameBorder={0}
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3684.254029528622!2d88.43120307507763!3d22.56960042949383!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a0275ac3aff1117%3A0xfc347e3347be6ac3!2sGP%20Block%2C%20Sector%20V%2C%20Bidhannagar%2C%20Kolkata%2C%20West%20Bengal!5e0!3m2!1sen!2sin!4v1720023738392!5m2!1sen!2sin"
+                title='our-location'
+                width={600}
+                height={450}
+                style={{ border: 0 }}
                 allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
               />
             </div>
             <div
               className="col-lg-6 form-inner-cont order-lg-2 order-1 mb-lg-0 mb-5 ps-lg-4"
               data-aos="fade-left"
             >
-              <form
-                action="https://sendmail.w3layouts.com/submitForm"
-                method="post"
-                className="signin-form"
-              >
-                <div className="form-input">
-                  <input
-                    type="text"
-                    name="w3lName"
-                    id="w3lName"
-                    placeholder="Your name"
-                    onChange={(e) => {
-                      setName(e.target.value);
-                    }}
-                  />
-                </div>
-                <div className="form-input">
-                  <input
-                    type="email"
-                    name="w3lSender"
-                    id="w3lSender"
-                    placeholder="Your email address"
-                    onChange={(e) => {
-                      setEmail(e.target.value);
-                    }}
-                    required
-                  />
-                </div>
-                <div className="form-input">
-                  <textarea
-                    name="w3lMessage"
-                    id="w3lMessage"
-                    placeholder="Your message"
-                    required
-                    defaultValue={""}
-                    onChange={(e) => {
-                      setBody(e.target.value);
-                    }}
-                  />
-                </div>
-                <div className="text-right">
-                  <Link
-                    to={`mailto:AdoPet2024@gmail.com?subject=Info request: Help needed&body=I am ${name}, ${body}`}
-                  >
-                    <div className="btn btn-style btn-primary">Submit</div>
-                  </Link>
-                </div>
-              </form>
+              {errors && (
+                <Alert className="alert-danger">
+                  <ul>
+                    {Object.values(errors[0]).map((err, i) => (
+                      <li key={i}>{err}</li>
+                    ))}
+                  </ul>
+                </Alert>
+              )}
+              <ContactUsForm onSubmit={openMailHandler} />
             </div>
           </div>
         </div>

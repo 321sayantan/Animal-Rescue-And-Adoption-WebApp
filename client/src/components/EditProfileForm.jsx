@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { useNavigation } from "react-router-dom";
+import { useState, useRef } from "react";
 import useInput from "../hooks/use-input";
 import AutoComplete from "./UI/AutoComplete";
 import RadioButton from "./UI/RadioButton";
@@ -7,19 +6,21 @@ import RadioButton from "./UI/RadioButton";
 const pattern2 = /^\d{5,8}(?:[-\s]\d{4})?$/;
 
 const EditProfileForm = ({ onSubmit, userData }) => {
-  const [userAddress, setUserAddress] = useState();
+  const [userAddress, setUserAddress] = useState({
+    area: userData.address || "",
+    coords: {
+      latitude: userData.loc?.coordinates[0] || 0,
+      longitude: userData.loc?.coordinates[1] || 0,
+    },
+  });
   const [isVolunteer, setIsVolunteer] = useState(
     userData.is_volunteer ? "Yes" : "No"
   );
-  const navigation = useNavigation();
-
-  let isSubmitting = false;
-  if (navigation.state === "submitting") {
-    isSubmitting = true;
-  }
+  const nameRef = useRef();
+  const mailRef = useRef();
+  const zipCodeRef = useRef();
 
   let {
-    value: enteredName,
     isValid: nameisValid,
     hasError: nameisInvalid,
     valueInputBlurHandler: nameBlurHandler,
@@ -27,7 +28,6 @@ const EditProfileForm = ({ onSubmit, userData }) => {
   } = useInput((value) => value.trim().length >= 3);
 
   let {
-    value: enteredMail,
     isValid: mailIsValid,
     hasError: mailIsInvalid,
     valueInputBlurHandler: mailBlurHandler,
@@ -35,7 +35,6 @@ const EditProfileForm = ({ onSubmit, userData }) => {
   } = useInput((value) => value.includes("@"));
 
   let {
-    value: enteredZip,
     isValid: zipisValid,
     hasError: zipisInvalid,
     valueInputBlurHandler: zipBlurHandler,
@@ -47,11 +46,7 @@ const EditProfileForm = ({ onSubmit, userData }) => {
   };
 
   let formIsValid = false;
-  if (
-    nameisValid &&
-    mailIsValid &&
-    zipisValid
-  ) {
+  if (nameisValid || mailIsValid || zipisValid || userAddress.area.trim().length >= 1) {
     formIsValid = true;
   }
 
@@ -67,12 +62,12 @@ const EditProfileForm = ({ onSubmit, userData }) => {
     }
 
     const newUserData = {
-      username: enteredName,
-      email: enteredMail,
+      username: nameRef.current.value,
+      email: mailRef.current.value,
       is_volunteer: isVolunteer,
       address: {
         ...userAddress,
-        zip_code: enteredZip,
+        zip_code: zipCodeRef.current.value,
       },
     };
 
@@ -93,6 +88,7 @@ const EditProfileForm = ({ onSubmit, userData }) => {
       <form className="row mt-4 signup-form" onSubmit={submitHandler}>
         <div className="col-12">
           <input
+            ref={nameRef}
             type="text"
             className={"form-control " + nameClasses}
             id="username"
@@ -107,6 +103,7 @@ const EditProfileForm = ({ onSubmit, userData }) => {
         </div>
         <div className="col-12">
           <input
+            ref={mailRef}
             type="email"
             className={"form-control " + mailClasses}
             id="email"
@@ -127,6 +124,7 @@ const EditProfileForm = ({ onSubmit, userData }) => {
         </div>
         <div className="col-md-4">
           <input
+            ref={zipCodeRef}
             type="text"
             className={"form-control " + zipClasses}
             id="zip"
@@ -166,7 +164,7 @@ const EditProfileForm = ({ onSubmit, userData }) => {
             className="btn btn-style btn-primary"
             disabled={!formIsValid}
           >
-            {isSubmitting ? "Submitting..." : "Modify"}
+            Modify
           </button>
         </div>
       </form>
