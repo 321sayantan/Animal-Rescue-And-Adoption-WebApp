@@ -7,6 +7,7 @@ const user_route = require("./routes/auth.js");
 const adoptPost_route = require("./routes/adoptPost.js");
 const rescue_route = require("./routes/rescuePost.js");
 const user_profile = require("./routes/userProfile.js");
+const admin = require("./routes/admin.js");
 // const googleStrategy = require("passport-google-oauth20").Strategy;
 const cors = require("cors");
 const env = require("dotenv");
@@ -56,6 +57,7 @@ app.use("/user", user_route);
 app.use("/adopt", adoptPost_route);
 app.use("/rescue", rescue_route);
 app.use("/profile", user_profile);
+app.use("/admin", admin);
 
 // app.get(
 //   "/auth/google",

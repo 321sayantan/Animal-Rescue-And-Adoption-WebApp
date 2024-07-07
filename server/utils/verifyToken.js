@@ -1,8 +1,8 @@
 function verifyToken(req, res, next){
     const bearerheader = req.headers["authorization"];
-    // console.log(bearerheader);
+    console.log(bearerheader);
     if (typeof bearerheader === "undefined") {
-        console.log("not verified")
+        // console.log("not verified");
       res.status(403).json({msg: "invalid user"});
     }
     else{
