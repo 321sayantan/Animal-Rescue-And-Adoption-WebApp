@@ -37,7 +37,7 @@ const RescueList = ({ posts }) => {
           </ul>
         </div>
       ) : (
-        <NoResult />
+        <NoResult message="No Related matches found..! :(" />
       )}
     </>
   );

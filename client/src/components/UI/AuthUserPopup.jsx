@@ -81,7 +81,6 @@ const AuthUserPopup = ({ children, onClose, className }) => {
   };
 
   useEffect(() => {
-    console.log(authCtx.jwt);
     if (authCtx.jwt) {
       getuser(authCtx.jwt);
     }
@@ -120,7 +119,7 @@ const AuthUserPopup = ({ children, onClose, className }) => {
                     className="thumbnail-icon authenticated d-flex justify-content-center align-items-center"
                     style={{
                       background: `url(${userData.image}) center center/cover`,
-                      backgroundRepeat: "no-repeat",
+                      // backgroundRepeat: "no-repeat",
                     }}
                   />
                   <p>

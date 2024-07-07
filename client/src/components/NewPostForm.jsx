@@ -129,7 +129,7 @@ const NewPostForm = (props) => {
         category: selectedCategory,
         breed: enteredBreed,
         is_vaccinated: isVaccinated,
-        ...vetImage,
+        ...vetImage[0],
         description: enteredDescription,
       },
     };
@@ -164,7 +164,7 @@ const NewPostForm = (props) => {
             type="text"
             className={"form-control " + donorNameClasses}
             autoComplete="false"
-            placeholder="Donor's Name"
+            placeholder="Your Name"
             onChange={donorNameChangeHandler}
             onBlur={donorNameBlurHandler}
             value={enteredDonorName}

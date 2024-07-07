@@ -35,7 +35,7 @@ const PostsList = ({ posts }) => {
           ))}
         </div>
       ) : (
-        <NoResult />
+        <NoResult message="No Related matches found..! :("  />
       )}
     </>
   );

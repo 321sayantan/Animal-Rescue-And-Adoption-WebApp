@@ -54,7 +54,7 @@ const MapContainer = ({ filteredPosts }) => {
           ))}
         </GoogleMapReact>
       ) : (
-        <NoResult />
+        <NoResult message="No matches found..! :(" />
       )}
     </>
   );

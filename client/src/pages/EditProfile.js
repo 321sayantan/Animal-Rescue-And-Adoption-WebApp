@@ -24,7 +24,7 @@ function EditProfile() {
           body: JSON.stringify(userData),
           headers: {
             "Content-Type": "application/json",
-            authorization: `Bearer ${jwt}`,
+            'authorization': `Bearer ${jwt}`,
           },
         }),
         {
