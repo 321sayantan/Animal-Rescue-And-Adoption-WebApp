@@ -131,7 +131,9 @@ export default RescueListPage
 
 
 async function loadRescuePosts() {
-    const response = await fetch("http://localhost:5000/rescue/getallrescues");
+    const response = await fetch(
+      "https://adopet-backend.onrender.com/rescue/getallrescues"
+    );
 
     if (!response.ok) {
         throw new Error("Failed to fetch available posts!");

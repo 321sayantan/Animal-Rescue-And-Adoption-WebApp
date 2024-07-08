@@ -15,17 +15,23 @@ const AuthContextProvider = ({ children }) => {
     } else {
       setIsAuthenticated(true);
     }
+    // console.log("storedJWT", storedJwt);
     setJwt(storedJwt);
+    // console.log("JWT", jwt);
     setIsRegistered(storedRegToken);
   }, []);
 
   useEffect(() => {
-    if (!isTokenVerified()) {
-      logout();
-    }
-  });
+    isTokenVerified().then((data) => {
+      console.log(data);
+      if (!data) {
+        logout();
+      }
+    });
+  }, []);
 
   function login(token) {
+    console.log("inside login");
     if (token) {
       setIsAuthenticated(true);
       setJwt(token);
@@ -34,6 +40,7 @@ const AuthContextProvider = ({ children }) => {
   }
 
   function logout() {
+    console.log("inside logout");
     setIsAuthenticated(false);
     setJwt(null);
     localStorage.removeItem("jwt");
@@ -41,6 +48,8 @@ const AuthContextProvider = ({ children }) => {
 
   async function isTokenVerified() {
     try {
+      const jwt = localStorage.getItem("jwt");
+      // console.log(jwt)
       const response = await fetch("http://localhost:5000/user/validateUser", {
         headers: {
           authorization: `Bearer ${jwt}`,

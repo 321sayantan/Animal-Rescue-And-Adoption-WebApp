@@ -19,12 +19,12 @@ function EditProfile() {
     console.log(userData);
     try {
       const response = await toast.promise(
-        fetch("http://localhost:5000/profile/edit", {
+        fetch("https://adopet-backend.onrender.com/profile/edit", {
           method: "PATCH",
           body: JSON.stringify(userData),
           headers: {
             "Content-Type": "application/json",
-            'authorization': `Bearer ${jwt}`,
+            authorization: `Bearer ${jwt}`,
           },
         }),
         {

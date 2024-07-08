@@ -22,7 +22,7 @@ function RescueDetailsPage() {
       try {
         const dataObj = { id: params.id, selDate: selectedDate };
         const response = await toast.promise(
-          fetch("http://localhost:5000/rescue/rescueRequest", {
+          fetch("https://adopet-backend.onrender.com/rescue/rescueRequest", {
             method: "POST",
             body: JSON.stringify(dataObj),
             headers: {
@@ -144,7 +144,9 @@ export default RescueDetailsPage
 
 async function rescueDetailsLoader(params) {
     const id = params.id;
-    const response = await fetch(`http://localhost:5000/rescue/getrescue/${id}`);
+    const response = await fetch(
+      `https://adopet-backend.onrender.com/rescue/getrescue/${id}`
+    );
     if (!response.ok) {
         throw new Error('Failed to load post detalis!');
     } else {

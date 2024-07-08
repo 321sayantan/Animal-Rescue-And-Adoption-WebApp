@@ -47,30 +47,31 @@ router.post("/post", verifyToken, async (req, res) => {
                   type: "Point",
                   coordinates: [result.lat, result.lng],
                 },
-                $maxDistance: 25000,
+                $maxDistance: 10000,
               },
             },
+            is_volunteer: true,
           });
-          // console.log(nearbyvolunteer)
+          console.log(nearbyvolunteer)
 
-          nearbyvolunteer.map((vol) => {
-            // console.log(result.id, vol.name)
-            let mailDetails = {
-              from: "AdoPet2024@gmail.com",
-              to: vol.email,
-              subject:
-                "Request for Animal Rescue: Injured Animal in Your Locality",
-              html: rescueNotifyMail({ id: result.id, name: vol.name }),
-            };
+          // nearbyvolunteer.map((vol) => {
+          //   // console.log(result.id, vol.name)
+          //   let mailDetails = {
+          //     from: "AdoPet2024@gmail.com",
+          //     to: vol.email,
+          //     subject:
+          //       "Request for Animal Rescue: Injured Animal in Your Locality",
+          //     html: rescueNotifyMail({ id: result.id, name: vol.name }),
+          //   };
 
-            mailTransporter.sendMail(mailDetails, function (err, data) {
-              if (err) {
-                console.log("Error Occurs");
-              } else {
-                console.log("Email sent successfully");
-              }
-            });
-          });
+          //   mailTransporter.sendMail(mailDetails, function (err, data) {
+          //     if (err) {
+          //       console.log("Error Occurs");
+          //     } else {
+          //       console.log("Email sent successfully");
+          //     }
+          //   });
+          // });
 
           res.status(200).json({ message: "Post added successfully" });
         })

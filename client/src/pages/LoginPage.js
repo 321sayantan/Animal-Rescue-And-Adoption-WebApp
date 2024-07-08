@@ -15,19 +15,22 @@ function LoginPage() {
   const [errors, setErrors] = useState();
 
   const googleSuccess = async (res) => {
-    console.log(res);
-    console.log(res.profileObj);
+    // console.log(res);
+    // console.log(res.profileObj);
     try {
-      const response = await fetch("http://localhost:5000/user/googleLogin", {
-        method: "POST",
-        body: JSON.stringify(res.profileObj),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        "https://adopet-backend.onrender.com/user/googleLogin",
+        {
+          method: "POST",
+          body: JSON.stringify(res.profileObj),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       const result = await response.json();
-      console.log(result);
+      // console.log(result);
 
       if (response.ok) {
         authCtx.login(result.token);
@@ -68,7 +71,7 @@ function LoginPage() {
       );
 
       const result = await response.json();
-      console.log(result);
+      // console.log(result);
 
       if (response.ok) {
         authCtx.login(result.token);
