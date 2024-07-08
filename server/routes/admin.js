@@ -120,14 +120,16 @@ router.get("/dashboard", verifyToken, (req, res) => {
           .sort({ timestamp: -1 })
           .limit(10);
 
-        res.status(200).json({
-          total_user: total_users,
-          total_volunteers: total_volunteers,
-          total_Adopt_Post: total_Adopt_Post,
-          total_Rescue_Post: total_Rescue_Post,
-          adopt_list: adopt_list,
-          rescue_list: rescue_list,
-        });
+        setTimeout(() => {
+          res.status(200).json({
+            total_user: total_users,
+            total_volunteers: total_volunteers,
+            total_Adopt_Post: total_Adopt_Post,
+            total_Rescue_Post: total_Rescue_Post,
+            adopt_list: adopt_list,
+            rescue_list: rescue_list,
+          });
+        }, 2500)
       }
     });
   } catch (err) {
