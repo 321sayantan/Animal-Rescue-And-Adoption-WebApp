@@ -53,7 +53,7 @@ router.post("/register", async (req, res) => {
     zip_code: req.body.address.zip_code,
     is_volunteer: req.body.is_volunteer === "Yes" ? true : false,
   });
-  console.log("inside register route");
+  // console.log("inside register route");
   const existinguser = await User.findOne({ email: data.email });
   if (existinguser) {
     res.status(401).json({ errors: ["This email is already taken"] });
@@ -81,12 +81,12 @@ router.post("/register", async (req, res) => {
               }
             });
 
-            setTimeout(() => {
+            // setTimeout(() => {
               res
                 .status(200)
                 .json({ message: "Registration successfull", result });
-            }, 1500);
-            console.log(result);
+            // }, 1500);
+            // console.log(result);
           })
           .catch((err) => {
             res.status(401).json({ errors: ["Error!! Try after some time"] });
@@ -112,7 +112,7 @@ router.post("/login", async (req, res) => {
         }
         // else {
         if (!result) {
-          console.log(30, "password didnot match");
+          // console.log(30, "password didnot match");
           res.status(400).json({ msg: "Invalid Email or Password" });
         }
 
@@ -141,12 +141,12 @@ router.post("/login", async (req, res) => {
 
 router.post("/googleLogin", async (req, res) => {
   try {
-    console.log(req.body);
+    // console.log(req.body);
     let user = await User.findOne({ email: req.body.email });
-    console.log(1, user);
+    // console.log(1, user);
 
     if (!user) {
-      console.log(2, "no user");
+      // console.log(2, "no user");
       const data = new User({
         name: req.body.name,
         email: req.body.email,
@@ -156,7 +156,7 @@ router.post("/googleLogin", async (req, res) => {
       user = await data.save();
       // sendMail(data);
     }
-    console.log(2, user);
+    // console.log(2, user);
 
     const payload = {
       id: user._id,

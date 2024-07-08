@@ -14,7 +14,7 @@ function RegisterPage() {
     // console.log(userData)
     try {
       const response = await toast.promise(
-        fetch("http://localhost:5000/user/register", {
+        fetch("https://adopet-backend.onrender.com/user/register", {
           method: "POST",
           body: JSON.stringify(userData),
           headers: {
@@ -22,7 +22,7 @@ function RegisterPage() {
           },
         }),
         {
-          pending: 'Processing...',
+          pending: "Processing...",
         }
       );
       const result = await response.json();
