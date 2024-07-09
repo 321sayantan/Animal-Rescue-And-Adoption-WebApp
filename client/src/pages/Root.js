@@ -15,12 +15,6 @@ const Root = () => {
     }
 
     useEffect(() => {
-        // const apiKey = process.env.REACT_APP_GMAP_API_KEY;
-        // try {
-        //     loadGoogleMapsScript(apiKey);
-        // } catch (error) {
-        //     console.error(error)
-        // }
         // <!-- AOS initialisation -->
         AOS.init({
             offset: 100,
@@ -59,9 +53,6 @@ const Root = () => {
 }
 
 
-// export default GoogleApiWrapper({
-//     apiKey: process.env.REACT_APP_AUTOCOMPLETE_API_KEY
-// })(Root)
 export default Root
 
 export function loader() {

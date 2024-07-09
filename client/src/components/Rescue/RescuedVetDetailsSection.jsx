@@ -15,13 +15,13 @@ const RescuedVetDetailsSection = ({ postDetails }) => {
     <div className="row d-flex justify-content-center">
       <div className="col-12 py-md-4 py-2" data-aos="fade-up">
         <div
-          className="position-relative container"
+          className="position-relative container overflow-hidden"
           style={{ height: "27rem", width: "40rem" }}
         >
           <Slider {...settings}>
             {postDetails.images.map((item) => (
               <div
-                className="position-relative d-flex justify-content-center vet-images"
+                className="position-relative d-flex justify-content-center vet-images overflow-hidden"
                 key={item.image_id}
               >
                 <img src={item.image} alt="" />
