@@ -142,15 +142,17 @@ router.get("/allUser", verifyToken, (req, res) => {
   try {
     jwt.verify(req.token, "shhh", async (err, data) => {
       if (data == undefined) {
-        console.log("token expired");
-        res.status(200).json({ message: "Login Session Expired" });
+        // console.log("token expired");
+        res.status(201).json({ message: "Login Session Expired" });
       } else {
         if (err) {
           console.log(err);
         }
 
         const allUser = await User.find().sort({ timestamp: -1 });
-        res.status(200).json({ allUser: allUser });
+        setTimeout(() => {
+          res.status(200).json({ allUser: allUser });
+        }, 3000)
       }
     });
   } catch (err) {
@@ -163,15 +165,17 @@ router.get("/allAdoptPost", verifyToken, async (req, res) => {
   try {
     jwt.verify(req.token, "shhh", async (err, data) => {
       if (data == undefined) {
-        console.log("token expired");
-        res.status(200).json({ message: "Login Session Expired" });
+        // console.log("token expired");
+        res.status(201).json({ message: "Login Session Expired" });
       } else {
         if (err) {
           console.log(err);
         }
 
         const allAdoptPost = await AdoptPost.find().sort({ timestamp: -1 });
-        res.status(200).json({ allAdoptPost: allAdoptPost });
+        setTimeout(() => {
+          res.status(200).json({ allAdoptPost: allAdoptPost });
+        }, 3000)
       }
     });
   } catch (err) {
@@ -184,15 +188,17 @@ router.get("/allRescuePost", verifyToken, async (req, res) => {
   try {
     jwt.verify(req.token, "shhh", async (err, data) => {
       if (data == undefined) {
-        console.log("token expired");
-        res.status(200).json({ message: "Login Session Expired" });
+        // console.log("token expired");
+        res.status(201).json({ message: "Login Session Expired" });
       } else {
         if (err) {
           console.log(err);
         }
 
         const allRescuePost = await RescuePost.find().sort({ timestamp: -1 });
-        res.status(200).json({ allRescuePost: allRescuePost });
+        setTimeout(() => {
+          res.status(200).json({ allRescuePost: allRescuePost });
+        }, 3000)
       }
     });
   } catch (err) {
@@ -320,9 +326,9 @@ router.delete("/deleteRescuePost/:id", verifyToken, async (req, res) => {
 
           const result = await RescuePost.findByIdAndDelete(post._id);
           // console.log(result);
-          res.status(200).json({ msg: "Post deleted successfully" });
-          // setTimeout(() => {
-          // }, 500);
+          setTimeout(() => {
+            res.status(200).json({ msg: "Post deleted successfully" });
+          }, 1000);
         }
       }
     });
