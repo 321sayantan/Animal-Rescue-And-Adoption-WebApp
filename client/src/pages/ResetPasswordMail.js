@@ -12,16 +12,20 @@ function ChangePassword() {
         // console.log(enteredMail)
         try {
             const response = await toast.promise(
-                fetch("http://localhost:5000/user/forgot-password", {
-                    method: "POST",
-                    body: JSON.stringify({ email: enteredMail }),
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                }),
+              // fetch("http://localhost:5000/user/forgot-password", {
+              fetch(
+                "https://adopet-backend.onrender.com/user/forgot-password",
                 {
-                    pending: 'Processing...',
+                  method: "POST",
+                  body: JSON.stringify({ email: enteredMail }),
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
                 }
+              ),
+              {
+                pending: "Processing...",
+              }
             );
             const result = await response.json();
             console.log(result);

@@ -18,6 +18,7 @@ function EditProfile() {
   const updateInfoHandler = async (userData) => {
     console.log(userData);
     try {
+      // const response = await toast.promise(fetch("http://localhoost:5000/profile/edit", {
       const response = await toast.promise(
         fetch("https://adopet-backend.onrender.com/profile/edit", {
           method: "PATCH",

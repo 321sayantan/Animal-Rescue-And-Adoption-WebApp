@@ -12,6 +12,8 @@ function AddNewVetPost() {
     const postDataHandler = async (postVetData) => {
         try {
             const token = "Bearer " + localStorage.getItem("jwt");
+            // const response = await toast.promise(
+            //   fetch("http://localhost:5000/adopt/post", {
             const response = await toast.promise(
               fetch("https://adopet-backend.onrender.com/adopt/post", {
                 method: "POST",

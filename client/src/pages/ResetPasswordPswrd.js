@@ -16,16 +16,20 @@ function ResetPswrdFinalPage() {
         console.log(enteredPswrd)
         try {
             const response = await toast.promise(
-                fetch(`http://localhost:5000/user/reset-password/${token}`, {
-                    method: "POST",
-                    body: JSON.stringify({ newPassword: enteredPswrd }),
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                }),
+              // fetch(`http://localhost:5000/user/reset-password/${token}`, {
+              fetch(
+                `https://adopet-backend.onrender.com/user/reset-password/${token}`,
                 {
-                    pending: 'Processing...',
+                  method: "POST",
+                  body: JSON.stringify({ newPassword: enteredPswrd }),
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
                 }
+              ),
+              {
+                pending: "Processing...",
+              }
             );
             const result = await response.json();
             console.log(result);

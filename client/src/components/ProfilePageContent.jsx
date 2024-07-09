@@ -20,10 +20,11 @@ const ProfilePageContent = ({ userData }) => {
   const onConfirm = async (token) => {
     try {
       const response = await toast.promise(
-        fetch("http://localhost:5000/profile/deleteUser", {
+        // fetch("http://localhost:5000/profile/deleteUser", {
+        fetch("https://adopet-backend.onrender.com/profile/deleteUser", {
           method: "DELETE",
           headers: {
-            'authorization': `Bearer ${token}`,
+            authorization: `Bearer ${token}`,
           },
         }),
         {

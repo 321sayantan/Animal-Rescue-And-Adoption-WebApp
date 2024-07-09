@@ -63,12 +63,16 @@ const AuthUserPopup = ({ children, onClose, className }) => {
 
   const getuser = async (jwt) => {
     try {
-      const response = await fetch("http://localhost:5000/profile/getuser", {
-        headers: {
-          "Content-Type": "application/json",
-          'authorization': `Bearer ${jwt}`,
-        },
-      });
+      // const response = await fetch("http://localhost:5000/profile/getuser", {
+      const response = await fetch(
+        "https://adopet-backend.onrender.com/profile/getuser",
+        {
+          headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${jwt}`,
+          },
+        }
+      );
       const data = await response.json();
       if (!response.ok) {
         throw new Error(data || "Failed to fetch User details!");

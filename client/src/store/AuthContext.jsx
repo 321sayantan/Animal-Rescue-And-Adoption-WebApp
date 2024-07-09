@@ -50,11 +50,15 @@ const AuthContextProvider = ({ children }) => {
     try {
       const jwt = localStorage.getItem("jwt");
       // console.log(jwt)
-      const response = await fetch("http://localhost:5000/user/validateUser", {
-        headers: {
-          authorization: `Bearer ${jwt}`,
-        },
-      });
+      // const response = await fetch("http://localhost:5000/user/validateUser", {
+      const response = await fetch(
+        "https://adopet-backend.onrender.com/user/validateUser",
+        {
+          headers: {
+            authorization: `Bearer ${jwt}`,
+          },
+        }
+      );
       const result = await response.json();
       console.log(result.msg);
 
