@@ -13,6 +13,7 @@ function RegisterPage() {
   const SignUpHandler = async (userData) => {
     // console.log(userData)
     try {
+      // const response = await toast.promise(fetch("http://localhost:5000/user/register", {
       const response = await toast.promise(
         fetch("https://adopet-backend.onrender.com/user/register", {
           method: "POST",

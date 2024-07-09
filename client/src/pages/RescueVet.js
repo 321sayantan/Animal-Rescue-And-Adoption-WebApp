@@ -15,16 +15,19 @@ function RescueVet() {
   const rescueVetDataHandler = async (rescueData) => {
     try {
       const response = await toast.promise(
-        fetch('http://localhost:5000/rescue/post', {
-          method: 'POST',
+        // fetch('http://localhost:5000/rescue/post', {
+        fetch("https://adopet-backend.onrender.com/rescue/post", {
+          method: "POST",
           body: JSON.stringify(rescueData),
           headers: {
-            'Content-Type': 'application/json',
-            'authorization': `Bearer ${jwt}`
-          }
-        }), {
-        pending: 'Uploading Request...'
-      });
+            "Content-Type": "application/json",
+            authorization: `Bearer ${jwt}`,
+          },
+        }),
+        {
+          pending: "Uploading Request...",
+        }
+      );
 
       const result = await response.json();
 

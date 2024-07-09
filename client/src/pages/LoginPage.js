@@ -18,6 +18,7 @@ function LoginPage() {
     // console.log(res);
     // console.log(res.profileObj);
     try {
+      // const response = await fetch("http://localhost:5000/user/googleLogin",{
       const response = await fetch(
         "https://adopet-backend.onrender.com/user/googleLogin",
         {
