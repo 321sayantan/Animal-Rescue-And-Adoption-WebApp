@@ -3,19 +3,30 @@ import { AnimatePresence } from "framer-motion";
 import Modal from "./UI/Modal";
 import NoResult from "./UI/NoResult";
 
-const UserRescuePostsList = ({ posts, headingText }) => {
+const UserRescuePostsList = ({
+  posts,
+  headingText,
+  onDelRescuePost,
+  onChangePostStatus,
+}) => {
   const [showModal, setShowModal] = useState(null);
+  const [showModal2, setShowModal2] = useState(null);
 
   const onConfirm = (id) => {
-    console.log(id);
+    onDelRescuePost(id);
     setShowModal(null);
+  };
+
+  const onStatusChangeConfirm = (id) => {
+    onChangePostStatus(id);
+    setShowModal2(null);
   };
 
   return (
     <>
       {posts.length > 0 ? (
         <div className="container mt-2 mb-2 rescue-posts_list">
-            <h4>{headingText}</h4>
+          <h4>{headingText}</h4>
           <ul className="py-3 list-wrapper">
             {posts.map((post) => (
               <li
@@ -41,17 +52,31 @@ const UserRescuePostsList = ({ posts, headingText }) => {
                     <p>{post.address}</p>
                   </div>
                 </div>
-                <button id="del-btn" onClick={() => setShowModal(post._id)}>
-                  Delete
-                </button>
+                <div
+                  className="d-flex flex-column align-items-end"
+                  style={{ minWidth: "150px" }}
+                >
+                  {!post.rescued && (
+                    <button
+                      id="mark-as-rescued-btn"
+                      onClick={() => setShowModal2(post._id)}
+                    >
+                      Mark as Rescued
+                    </button>
+                  )}
+                  <button id="del-btn" onClick={() => setShowModal(post._id)}>
+                    Delete
+                  </button>
+                </div>
               </li>
             ))}
           </ul>
         </div>
       ) : (
-        <NoResult message="No previous posts..! :(" />
+        <NoResult message="No posts found..! :(" />
       )}
 
+      {/* delete post modal */}
       <AnimatePresence>
         {showModal && (
           <Modal
@@ -72,7 +97,7 @@ const UserRescuePostsList = ({ posts, headingText }) => {
                       }}
                     ></i>
                     <span style={{ fontWeight: "700" }}>
-                    Are you sure to delete the post?
+                      Are you sure to delete the post?
                     </span>
                   </h5>
                   <p style={{ margin: "0 auto 0 3.2rem" }}>
@@ -96,6 +121,60 @@ const UserRescuePostsList = ({ posts, headingText }) => {
                   type="button"
                   className="btn btn-ghost"
                   onClick={() => setShowModal(null)}
+                >
+                  No
+                </button>
+              </div>
+            </div>
+          </Modal>
+        )}
+      </AnimatePresence>
+
+      {/* status change modal */}
+      <AnimatePresence>
+        {showModal2 && (
+          <Modal
+            title="Confirm ?"
+            className="statusChange-confirm-modal"
+            onClose={() => setShowModal2(null)}
+          >
+            <div className="modal-body py-3 px-4 mt-2 mb-2">
+              <div className="row d-flex py-2">
+                <div className="column">
+                  <h5 className="d-flex align-items-center">
+                    <i
+                      className="fa-solid fa-circle-question"
+                      style={{
+                        color: "#4cb4d4",
+                        fontSize: "2.2rem",
+                        marginRight: "1rem",
+                      }}
+                    ></i>
+                    <span style={{ fontWeight: "700" }}>
+                      Mark as Unavailable
+                    </span>
+                  </h5>
+                  <p style={{ margin: "0 auto 0 3.2rem" }}>
+                    Remove this post from pending to be Rescued?
+                  </p>
+                </div>
+              </div>
+              <div className="modal-footer" style={{ marginBottom: "-1rem" }}>
+                <button
+                  type="button"
+                  className="btn btn-style btn-secondary"
+                  style={{
+                    padding: "0.6rem 1.5rem",
+                    borderRadius: "var(--border-radius)",
+                  }}
+                  onClick={() => onStatusChangeConfirm(showModal2)}
+                >
+                  Yes
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-ghost-secondary"
+                  onClick={() => setShowModal2(null)}
                 >
                   No
                 </button>

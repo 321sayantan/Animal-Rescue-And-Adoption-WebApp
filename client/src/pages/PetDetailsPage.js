@@ -37,14 +37,14 @@ function PetDetailsPage() {
         // const res = await postData.then(result => result)
         try {
             const dataObj = { id: params.id, selDate: selectedDate }
-            // const response = await toast.promise(fetch("http://localhost:5000/adoptionRequest", {
+            // const response = await toast.promise(fetch("http://localhost:5000/adopt/adoptionRequest", {
             const response = await toast.promise(
-              fetch("https://adopet-backend.onrender.com/adoptionRequest", {
+              fetch("https://adopet-backend.onrender.com/adopt/adoptionRequest", {
                 method: "POST",
                 body: JSON.stringify(dataObj),
                 headers: {
                   "Content-Type": "application/json",
-                  authorization: `Bearer ${jwt}`,
+                  'authorization': `Bearer ${jwt}`,
                 },
               }),
               {
