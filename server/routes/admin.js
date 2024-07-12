@@ -1,7 +1,6 @@
 const express = require("express");
 const verifyToken = require("../utils/verifyToken");
 const jwt = require("jsonwebtoken");
-const Rescue = require("../db/RescuePost");
 const User = require("../db/userModel");
 const Admin = require("../db/adminModel");
 const bcrypt = require("bcrypt");
@@ -156,6 +155,54 @@ router.get("/allUser", verifyToken, (req, res) => {
       }
     });
   } catch (err) {
+    console.log(err);
+    res.status(400).json("Unexpected Error Occured");
+  }
+});
+
+router.get("/allUserMap", verifyToken, (req, res) => {
+  try {
+    jwt.verify(req.token, "shhh", async (err, data) => {
+      if (data == undefined) {
+        // console.log("token expired");
+        res.status(201).json({ message: "Login Session Expired" });
+      } else {
+        if (err) {
+          console.log(err);
+        }
+
+        const allUser = await User.find({}, { name: 1, is_volunteer: 1, latLng: '$loc.coordinates', user_region: { $arrayElemAt: [{ $split: ['$address', ','] }, -2] } })
+        setTimeout(() => {
+          res.status(200).json(allUser);
+        }, 3000)
+      }
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(400).json("Unexpected Error Occured");
+  }
+});
+
+router.get("/filterUsers", verifyToken, (req, res) => {
+  try {
+    jwt.verify(req.token, "shhh", async (err, data) => {
+      if (data == undefined) {
+        // console.log("token expired");
+        res.status(201).json({ message: "Login Session Expired" });
+      } else {
+        if (err) {
+          console.log(err);
+        }
+
+        const query = req.query.search;
+        const users = await User.find({ name: { $regex: `${query}`, $options: "i" } });
+        const usersCount = users.length;
+        setTimeout(() => {
+          res.status(200).json({ users, usersCount });
+        }, 3000);
+      }
+    })
+  } catch (error) {
     console.log(err);
     res.status(400).json("Unexpected Error Occured");
   }
@@ -336,5 +383,57 @@ router.delete("/deleteRescuePost/:id", verifyToken, async (req, res) => {
     console.log(err);
   }
 });
+
+router.get("/filterAdoptPosts", verifyToken, (req, res) => {
+  try {
+    jwt.verify(req.token, "shhh", async (err, data) => {
+      if (data == undefined) {
+        // console.log("token expired");
+        res.status(201).json({ message: "Login Session Expired" });
+      } else {
+        if (err) {
+          console.log(err);
+        }
+
+        const query = req.query.search;
+        const posts = await AdoptPost.find({ address: { $regex: `${query}`, $options: "i" } });
+        const postsCount = posts.length;
+        setTimeout(() => {
+          res.status(200).json({ posts, postsCount });
+        }, 3000);
+      }
+    })
+  } catch (error) {
+    console.log(err);
+    res.status(400).json("Unexpected Error Occured");
+  }
+});
+
+router.get("/filterRescuePosts", verifyToken, (req, res) => {
+  try {
+    jwt.verify(req.token, "shhh", async (err, data) => {
+      if (data == undefined) {
+        // console.log("token expired");
+        res.status(201).json({ message: "Login Session Expired" });
+      } else {
+        if (err) {
+          console.log(err);
+        }
+
+        const query = req.query.search;
+        const posts = await RescuePost.find({ address: { $regex: `${query}`, $options: "i" } });
+        const postsCount = posts.length;
+        setTimeout(() => {
+          res.status(200).json({ posts, postsCount });
+        }, 3000);
+      }
+    })
+  } catch (error) {
+    console.log(err);
+    res.status(400).json("Unexpected Error Occured");
+  }
+});
+
+
 
 module.exports = router;

@@ -6,6 +6,7 @@ import { AuthContext } from "../../store/AuthContext";
 
 const AuthUserPopup = ({ children, onClose, className }) => {
   const [userData, setUserData] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
   const authCtx = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -63,6 +64,7 @@ const AuthUserPopup = ({ children, onClose, className }) => {
 
   const getuser = async (jwt) => {
     try {
+      setIsLoading(true);
       // const response = await fetch("http://localhost:5000/profile/getuser", {
       const response = await fetch(
         "https://adopet-backend.onrender.com/profile/getuser",
@@ -78,6 +80,7 @@ const AuthUserPopup = ({ children, onClose, className }) => {
         throw new Error(data || "Failed to fetch User details!");
       }
       // console.log(data);
+      setIsLoading(false);
       setUserData(data.user);
     } catch (error) {
       console.log(error);
@@ -123,7 +126,6 @@ const AuthUserPopup = ({ children, onClose, className }) => {
                     className="thumbnail-icon authenticated d-flex justify-content-center align-items-center"
                     style={{
                       background: `url(${userData.image}) center center/cover`,
-                      // backgroundRepeat: "no-repeat",
                     }}
                   />
                   <p>
@@ -158,20 +160,24 @@ const AuthUserPopup = ({ children, onClose, className }) => {
                 </>
               ) : (
                 <>
-                  <Link
-                    to="profile"
-                    className="btn btn-style btn-outline-primary"
-                    onClick={onClose}
-                  >
-                    View Profile
-                  </Link>
-                  <div className="seperator">
-                    <hr />
-                    <span id="or-text">Or</span>
-                  </div>
-                  <button className="btn btn-style" onClick={logoutHandler}>
-                    Logout
-                  </button>
+                  {!isLoading && (
+                    <>
+                      <Link
+                        to="profile"
+                        className="btn btn-style btn-outline-primary"
+                        onClick={onClose}
+                      >
+                        View Profile
+                      </Link>
+                      <div className="seperator">
+                        <hr />
+                        <span id="or-text">Or</span>
+                      </div>
+                      <button className="btn btn-style" onClick={logoutHandler}>
+                        Logout
+                      </button>
+                    </>
+                  )}
                 </>
               )}
             </motion.div>

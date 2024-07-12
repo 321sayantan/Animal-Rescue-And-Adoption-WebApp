@@ -6943,7 +6943,14 @@ hr:not([size]) {
   font-weight: 400;
 }
 
-button#del-btn,
+button#del-btn {
+  font-size: 1rem;
+  color: var(--bs-danger);
+  font-weight: 800;
+}
+
+button#mark-as-adopted-btn,
+button#mark-as-rescued-btn,
 .list-item a {
   font-size: 1rem;
   color: var(--bs-info);
@@ -7118,7 +7125,13 @@ button#del-btn,
   height: auto !important;
 }
 
-.deletePost-confirm-modal span {
+.statusChange-confirm-modal {
+  width: 28rem !important;
+  height: auto !important;
+}
+
+.deletePost-confirm-modal span, 
+.statusChange-confirm-modal span {
   color: #000;
 }
 
@@ -7126,7 +7139,12 @@ button#del-btn,
   background: var(--bs-danger) !important;
 }
 
-.deletePost-confirm-modal .modal-header h2 {
+.statusChange-confirm-modal .modal-header {
+  background: var(--bs-indigo) !important;
+}
+
+.deletePost-confirm-modal .modal-header h2,
+.statusChange-confirm-modal .modal-header h2 {
   color: #fff !important;
 }
 
@@ -7339,6 +7357,11 @@ button#del-btn,
 .btn-ghost {
   font-weight: 700 !important;
   color: var(--bs-danger);
+}
+
+.btn-ghost-secondary {
+  font-weight: 700 !important;
+  color: var(--bs-dark);
 }
 
 [data-theme="dark"] .btn-ghost:hover {

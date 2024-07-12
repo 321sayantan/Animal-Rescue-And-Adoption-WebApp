@@ -17,7 +17,7 @@ const ProfilePageContent = ({ userData }) => {
   const { jwt, logout } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const onConfirm = async (token) => {
+  const deleteUserHandler = async (token) => {
     try {
       const response = await toast.promise(
         // fetch("http://localhost:5000/profile/deleteUser", {
@@ -49,6 +49,76 @@ const ProfilePageContent = ({ userData }) => {
     }
     // console.log(token);
   };
+
+  const adoptPostDeleteHandler = async(id) => {
+    // console.log("deletion request confirmation for id:" + id);
+    try {
+      const response = await toast.promise(
+        fetch(`http://localhost:5000/profile/deleteAdoptPost/${id}`, {
+        // fetch(`https://adopet-backend.onrender.com/profile/deleteAdoptPost/${id}`, {
+          method: "DELETE",
+          headers: {
+            'authorization': `Bearer ${jwt}`,
+          },
+        }),
+        {
+          pending: "Deleting post...",
+        }
+      );
+      const result = await response.json();
+      console.log(result);
+
+      if (response.ok) {
+        navigate("../profile");
+        toast.success(result.msg);
+        setErrors(null);
+      } else {
+        toast.error(result.errors[0]);
+        setErrors(result.errors || {});
+      }
+    } catch (err) {
+      console.err(err);
+    }
+  }
+
+  const rescuePostDeleteHandler = async(id) => {
+    console.log("deletion request confirmation from rescue post for id:" + id);
+    // try {
+    //   const response = await toast.promise(
+    //     fetch(`http://localhost:5000/profile/deleteRescuePost/${id}`, {
+    //     // fetch(`https://adopet-backend.onrender.com/profile/deleteRescuePost/${id}`, {
+    //       method: "DELETE",
+    //       headers: {
+    //         'authorization': `Bearer ${jwt}`,
+    //       },
+    //     }),
+    //     {
+    //       pending: "Deleting post...",
+    //     }
+    //   );
+    //   const result = await response.json();
+    //   console.log(result);
+
+    //   if (response.ok) {
+    //     navigate("../profile");
+    //     toast.success(result.msg);
+    //     setErrors(null);
+    //   } else {
+    //     toast.error(result.errors[0]);
+    //     setErrors(result.errors || {});
+    //   }
+    // } catch (err) {
+    //   console.err(err);
+    // }
+  }
+
+  const adoptPostStatChangeHandler = (id) => {
+    console.log("Status change confirmation for id:" + id);
+  }
+
+  const rescuePostStatChangeHandler = (id) => {
+    console.log("Status change confirmation from rescue for id:" + id);
+  }
 
   return (
     <>
@@ -123,6 +193,8 @@ const ProfilePageContent = ({ userData }) => {
                   <div style={{ marginTop: "-4.5rem" }}>
                     <UserAdoptPostsList
                       posts={userData.adopt}
+                      onDelAdoptPost={adoptPostDeleteHandler}
+                      onChangePostStatus={adoptPostStatChangeHandler}
                       headingText="Adopts"
                     />
                   </div>
@@ -131,6 +203,8 @@ const ProfilePageContent = ({ userData }) => {
                   <div style={{ marginTop: "-4.5rem" }}>
                     <UserRescuePostsList
                       posts={userData.rescue}
+                      onDelRescuePost={rescuePostDeleteHandler}
+                      onChangePostStatus={rescuePostStatChangeHandler}
                       headingText="Rescues"
                     />
                   </div>
@@ -191,7 +265,7 @@ const ProfilePageContent = ({ userData }) => {
                     padding: "0.6rem 1.5rem",
                     borderRadius: "var(--border-radius)",
                   }}
-                  onClick={() => onConfirm(showModal)}
+                  onClick={() => deleteUserHandler(showModal)}
                 >
                   Yes
                 </button>

@@ -291,7 +291,7 @@ function resetPswrdMail(resData) {
                 <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                     <tr>
                         <td style="text-align: center;">
-                            <a href="https://localhost:3000"><img
+                            <a href="https://adopet24.netlify.app/"><img
                                     src="https://res.cloudinary.com/dkf5lwjqr/image/upload/v1718507922/adopet/ztzbsifnvyimgetwadxt.png"
                                     height="70" alt="AdoPet"></a>
                         </td>
@@ -310,7 +310,7 @@ function resetPswrdMail(resData) {
 
                                         <p
                                             style="font-size: 1.4rem; font-weight: 400; line-height: 1.5rem;margin-top: 1rem;">
-                                            We heard that you lost your <a href="https://localhost:3000" target="_blank"
+                                            We heard that you lost your <a href="https://adopet24.netlify.app" target="_blank"
                                                 style="font-weight: 600; color: #00c1f2;text-decoration: none;">AdoPet</a>
                                             password?
                                             So sorry about that!😢<br>
@@ -321,7 +321,7 @@ function resetPswrdMail(resData) {
                                             <tbody>
                                                 <tr>
                                                     <td class="btn btn-primary">
-                                                        <a href="http://localhost:3000/reset-password/${resData.token}" target="_blank">Reset
+                                                        <a href="https://adopet24.netlify.app/reset-password/${resData.token}" target="_blank">Reset
                                                             your password</a>
                                                     </td>
                                                 </tr>
@@ -334,8 +334,8 @@ function resetPswrdMail(resData) {
                                                 mins</strong> only! If you don't use it within that time it will expire.
                                             To
                                             re-generate a new link, visit:<br>
-                                            <a href="https://localhost:3000/forgot-password" target="_blank"
-                                                style="font-weight: 400;color: blue;text-decoration: none;">https://localhost:3000/forgot-password</a><br>
+                                            <a href="https://adopet24.netlify.app/forgot-password" target="_blank"
+                                                style="font-weight: 400;color: blue;text-decoration: none;">https://adopet24.netlify.app/forgot-password</a><br>
                                             <br><br><br>
                                             with Regards,<br>
                                             <span style="font-size: 1.3rem;font-weight: 600;color: #333;">team <strong
@@ -354,12 +354,12 @@ function resetPswrdMail(resData) {
                             <td class="content-block">
                                 <span class="apple-link">GP Block, Sector-V, SaltLake, Kolkata-12</span>
                                 <br> Don't like these emails? <a
-                                    href="https://localhost:3000/unsubscribe">Unsubscribe</a>.
+                                    href="https://adopet24.netlify.app/unsubscribe">Unsubscribe</a>.
                             </td>
                         </tr>
                         <tr>
                             <td class="content-block powered-by">
-                                Powered by <a href="https://localhost:3000">AdoPet</a>.
+                                Powered by <a href="https://adopet24.netlify.app">AdoPet</a>.
                             </td>
                         </tr>
                     </table>

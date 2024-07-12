@@ -39,7 +39,7 @@ router.get("/getuser", verifyToken, (req, res) => {
             donor_email: user.email,
           });
           // console.log(alladoptPosts)
-          
+
           const allRescuePosts = await Rescue.find({
             rescuer_email: user.email,
           });
@@ -190,9 +190,53 @@ router.delete("/deleteAdoptPost/:id", verifyToken, async (req, res) => {
 
         const result = await adoptPost.findByIdAndDelete(post._id);
         // console.log(result);
-        res.status(200).json({ msg: "Post deleted successfully" });
-        // setTimeout(() => {
-        // }, 500);
+        setTimeout(() => {
+          res.status(200).json({ msg: "Post deleted successfully" });
+        }, 500);
+      }
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+router.delete("/deleteRescuePost/:id", verifyToken, async (req, res) => {
+  try {
+    jwt.verify(req.token, "shhh", async (err, dataa) => {
+      if (dataa === undefined) {
+        res.status(200).json({ message: "Login Session Expired" });
+      } else {
+        if (err) {
+          res.status(403);
+        }
+
+        const id = req.params.id;
+        const post = await Rescue.findOne({ _id: id });
+        if (!post) {
+          console.log("Post Not Found");
+          res.status(400).json("Post Not Found");
+        }
+        console.log(post);
+
+        const image_id = post.image_id;
+
+        try {
+          cloudinary.v2.uploader.destroy(image_id).then((result) => {
+            if (result) {
+              // console.log(result);
+              // console.log("image deleted from cloudinary");
+            }
+          });
+        } catch (error) {
+          console.log(error);
+          return res.send({ error: "error" });
+        }
+
+        const result = await Rescue.findByIdAndDelete(post._id);
+        // console.log(result);
+        setTimeout(() => {
+          res.status(200).json({ msg: "Post deleted successfully" });
+        }, 500);
       }
     });
   } catch (err) {
