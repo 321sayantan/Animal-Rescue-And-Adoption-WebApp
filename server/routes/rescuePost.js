@@ -126,10 +126,10 @@ router.post("/post", verifyToken, async (req, res) => {
 
 router.get("/getallrescues", async (req, res, next) => {
   try {
-    const allposts = await Rescue.find();
-    setTimeout(() => {
+    const allposts = await Rescue.find().sort({ timestamp: -1 });
+    // setTimeout(() => {
       res.status(200).json(allposts);
-    }, 3000);
+    // }, 3000);
   } catch (error) {
     res.status(400).json(error);
   }
@@ -153,7 +153,7 @@ router.get("/filter", async (req, res, next) => {
     const query = req.query.search;
     let posts = await Rescue.find({
       address: { $regex: `${query}`, $options: "i" },
-    });
+    }).sort({ timestamp: -1 });
     setTimeout(() => {
       res.status(200).json(posts);
     }, 3000);

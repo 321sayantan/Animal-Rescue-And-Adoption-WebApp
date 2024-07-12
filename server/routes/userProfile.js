@@ -145,9 +145,9 @@ router.delete("/deleteUser", verifyToken, (req, res) => {
 
         const data = await User.findByIdAndDelete(user._id);
         console.log(data);
-        setTimeout(() => {
+        // setTimeout(() => {
           res.status(200).json({ msg: "Account deleted successfully" });
-        }, 500);
+        // }, 500);
       }
     });
   } catch (err) {

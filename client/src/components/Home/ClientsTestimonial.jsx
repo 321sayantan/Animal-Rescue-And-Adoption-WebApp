@@ -53,11 +53,11 @@ const ClientsTestimonial = () => {
                     <div className="testimonial">
                       <blockquote>
                         <q>
-                          Lorem ipsum dolor sit amet consectetur adipisicing
-                          elit. Velit beatae laudantium voluptate rem ullam
-                          dolore nisi voluptatibus esse quasi, doloribus
-                          tempora. Dolores molestias adipisci dolor sit amet! by
-                          the Desire to achieve Success.
+                          I adopted my sweet Labrador, Max, through AdoPet, and
+                          I couldn't be happier. The process was
+                          straightforward, and the team was incredibly
+                          supportive. Max has filled my home with love and
+                          laughter. Thank you!
                         </q>
                       </blockquote>
                       <div className="testi-des">
@@ -69,8 +69,8 @@ const ClientsTestimonial = () => {
                           />
                         </div>
                         <div className="peopl align-self">
-                          <h3>John wilson</h3>
-                          <p className="indentity">Subtitle goes here</p>
+                          <h3>Rahul Sharma</h3>
+                          <p className="indentity">Active User</p>
                         </div>
                       </div>
                     </div>
@@ -81,11 +81,11 @@ const ClientsTestimonial = () => {
                     <div className="testimonial">
                       <blockquote>
                         <q>
-                          Lorem ipsum dolor sit amet consectetur adipisicing
-                          elit. Velit beatae laudantium voluptate rem ullam
-                          dolore nisi voluptatibus esse quasi, doloribus
-                          tempora. Dolores molestias adipisci dolor sit amet! by
-                          the Desire to achieve Success.
+                          After months of searching for the right companion, I
+                          found Luna on your website. The adoption process was
+                          efficient, and the staff was compassionate. Luna has
+                          become my best friend, and I'm grateful to have her in
+                          my life. Thank you, AdoPet!
                         </q>
                       </blockquote>
                       <div className="testi-des">
@@ -97,8 +97,8 @@ const ClientsTestimonial = () => {
                           />
                         </div>
                         <div className="peopl align-self">
-                          <h3>Julia sakura</h3>
-                          <p className="indentity">Subtitle goes here</p>
+                          <h3>Priya Reddy</h3>
+                          <p className="indentity">Active User</p>
                         </div>
                       </div>
                     </div>
@@ -109,11 +109,12 @@ const ClientsTestimonial = () => {
                     <div className="testimonial">
                       <blockquote>
                         <q>
-                          Lorem ipsum dolor sit amet consectetur adipisicing
-                          elit. Velit beatae laudantium voluptate rem ullam
-                          dolore nisi voluptatibus esse quasi, doloribus
-                          tempora. Dolores molestias adipisci dolor sit amet! by
-                          the Desire to achieve Success.
+                          Adopting Rocky from your website was a wonderful
+                          experience. The website was user-friendly, and the
+                          adoption coordinators were helpful every step of the
+                          way. Rocky has brought so much joy into our family.
+                          Thank you, AdoPet, for matching us with our perfect
+                          furry friend!
                         </q>
                       </blockquote>
                       <div className="testi-des">
@@ -125,8 +126,8 @@ const ClientsTestimonial = () => {
                           />
                         </div>
                         <div className="peopl align-self">
-                          <h3>Roy Mmdson</h3>
-                          <p className="indentity">Subtitle goes here</p>
+                          <h3>Sumit Roy</h3>
+                          <p className="indentity">Active User</p>
                         </div>
                       </div>
                     </div>
@@ -137,24 +138,24 @@ const ClientsTestimonial = () => {
                     <div className="testimonial">
                       <blockquote>
                         <q>
-                          Lorem ipsum dolor sit amet consectetur adipisicing
-                          elit. Velit beatae laudantium voluptate rem ullam
-                          dolore nisi voluptatibus esse quasi, doloribus
-                          tempora. Dolores molestias adipisci dolor sit amet! by
-                          the Desire to achieve Success.
+                          I decided to adopt a kitten from AdoPet, and I'm so
+                          glad I did. The website provided detailed profiles and
+                          photos, making it easy to find a pet that fit my
+                          lifestyle. Kiki has settled in beautifully, and I
+                          couldn't imagine life without her. Thank you, AdoPet.
                         </q>
                       </blockquote>
                       <div className="testi-des">
                         <div className="test-img">
                           <img
-                            src="assets/images/testi2.jpg"
+                            src="assets/images/testi4.jpg"
                             className="img-fluid"
                             alt=""
                           />
                         </div>
                         <div className="peopl align-self">
-                          <h3>Mike Thyson</h3>
-                          <p className="indentity">Subtitle goes here</p>
+                          <h3>Deepika Patel</h3>
+                          <p className="indentity">Active User</p>
                         </div>
                       </div>
                     </div>

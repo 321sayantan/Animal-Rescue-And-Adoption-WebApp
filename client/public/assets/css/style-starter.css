@@ -11200,7 +11200,9 @@ fieldset:disabled .btn {
   --disable-color: #d8d6d6;
   --box-shadow: 0 1rem 3rem rgb(0 0 0 / 12%);
   --box-shadow-2: 0 25px 98px 0 rgb(0 0 0 / 3%);
-  --layer: rgb(19 25 23 / 58%);
+  /* --layer: rgb(19 25 23 / 58%); */
+  --layer: rgb(19 25 23 / 50%);
+  --layer1: rgb(19 25 23 / 40%);
   --color-1: #6168ff;
   --color-2: #0abf53;
   --color-3: #ff4f81;
@@ -12536,7 +12538,8 @@ h3.title-style {
 }
 
 .bg1 {
-  background: url(../images/b1.jpg) no-repeat top;
+  /* background: url(../images/b1.jpg) no-repeat top; */
+  background: url(../images/banner1920x639.webp) no-repeat top;
   background-size: cover;
 }
 
@@ -12554,7 +12557,7 @@ h3.title-style {
 }
 
 .hero-overlay {
-  background: var(--layer);
+  background: var(--layer1);
   position: absolute;
   left: 0;
   top: 0;
@@ -16821,11 +16824,12 @@ ul.page-pagination li a.next:hover {
   left: 0;
   right: 0;
   z-index: -1;
-  background: var(--layer);
+  background: var(--layer1);
 }
 
 #rescue.inner-banner {
-  background: url(../images/rescue-banner.jpg) no-repeat top !important;
+  /* background: url(../images/rescue-banner.jpg) no-repeat top !important; */
+  background: url(../images/rescue9.jpg) no-repeat top center/cover !important;
 }
 
 h4.inner-text-title {
