@@ -39,7 +39,7 @@ router.post("/post", verifyToken, async (req, res) => {
 			.save()
 			.then((result) => {
 				// setTimeout(() => {
-					res.status(200).json({ message: "Post added successfully" });
+				res.status(200).json({ message: "Post added successfully" });
 				// }, 1500);
 			})
 			.catch((err) => {
@@ -53,7 +53,7 @@ router.get("/getallpost", async (req, res) => {
 	try {
 		const allposts = await Post.find().sort({ timestamp: -1 });
 		// setTimeout(() => {
-			res.status(200).json(allposts);
+		res.status(200).json(allposts);
 		// }, 3000);
 	} catch (error) {
 		res.status(400).json(error);
@@ -64,7 +64,7 @@ router.get("/getpost/:id", async (req, res) => {
 	try {
 		const posts = await Post.findOne({ _id: req.params.id });
 		// setTimeout(() => {
-			res.status(200).json(posts);
+		res.status(200).json(posts);
 		// }, 3000);
 	} catch (error) {
 		res.status(400).json(error);
@@ -76,7 +76,7 @@ router.get("/filter", async (req, res, next) => {
 		const query = req.query.search;
 		let posts = await Post.find({ address: { $regex: `${query}`, $options: "i" } }).sort({ timestamp: -1 });
 		// setTimeout(() => {
-			res.status(200).json(posts);
+		res.status(200).json(posts);
 		// }, 3000);
 	} catch (error) {
 		next(error);
@@ -89,12 +89,12 @@ router.post("/adoptionRequest", verifyToken, (req, res) => {
 		// let resData;
 		jwt.verify(req.token, 'shhh', async (err, data) => {
 			if (err) {
-        res.status(403);
-      }
-      console.log(1, req.body);
-      // console.log(data)
-      const currentUser = await User.findOne({ _id: data.id });
-      console.log(11, currentUser);
+				res.status(403);
+			}
+			console.log(1, req.body);
+			// console.log(data)
+			const currentUser = await User.findOne({ _id: data.id });
+			console.log(11, currentUser);
 
 			// const Donor1 = await Post.findOne({ _id: req.body.id });
 			// Donor = Donor1.donor_email;
@@ -107,28 +107,28 @@ router.post("/adoptionRequest", verifyToken, (req, res) => {
 			// const sender = await User.findOne({ _id: data.id })
 			// senderEmail = sender.email
 
-      resData = {...resData, dtOfApntmnt: req.body.selDate, currentuser: currentUser.name}
-      console.log(resData)
-  
-      let mailDetails = {
-        from: "AdoPet2024@gmail.com",
-        to: recieverEmail,
-        // to: "dsnehodipto@gmail.com",
-        // to: "123sayantandas@gmail.com",
-        subject: "Request for adoption",
-        html: adoptReqMail(resData),
-      };
-  
-      mailTransporter.sendMail(mailDetails, function (err, data) {
-        if (err) {
-          console.log("Error Occurs");
-        } else {
-          console.log("Email sent successfully");
-        }
-      });
-    //   setTimeout(() => {
-        res.status(200).json({ message: "Mail sent successfully" })
-    //   },10)
+			resData = { ...resData, dtOfApntmnt: req.body.selDate, currentuser: currentUser.name }
+			console.log(resData)
+
+			let mailDetails = {
+				from: "AdoPet2024@gmail.com",
+				to: recieverEmail,
+				// to: "dsnehodipto@gmail.com",
+				// to: "123sayantandas@gmail.com",
+				subject: "Request for adoption",
+				html: adoptReqMail(resData),
+			};
+
+			mailTransporter.sendMail(mailDetails, function (err, data) {
+				if (err) {
+					console.log("Error Occurs");
+				} else {
+					console.log("Email sent successfully");
+				}
+			});
+			//   setTimeout(() => {
+			res.status(200).json({ message: "Mail sent successfully" })
+			//   },10)
 		})
 
 	} catch (error) {
