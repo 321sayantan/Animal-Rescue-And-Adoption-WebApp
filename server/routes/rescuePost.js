@@ -52,7 +52,7 @@ router.post("/post", verifyToken, async (req, res) => {
             },
             is_volunteer: true,
           });
-          console.log(nearbyvolunteer)
+          console.log(nearbyvolunteer);
 
           // nearbyvolunteer.map((vol) => {
           //   // console.log(result.id, vol.name)
@@ -123,12 +123,36 @@ router.post("/post", verifyToken, async (req, res) => {
 
 // get all rescue posts
 
+router.get("/markRescue/:id", verifyToken, async (req, res) => {
+  try {
+    jwt.verify(req.token, "shhh", async (err, dataa) => {
+      if (dataa === undefined) {
+        console.log("token expired");
+        res.status(200).json({ message: "Login Session Expired" });
+      } else {
+        if (err) {
+          res.status(403);
+        }
+
+        const result = await Rescue.findByIdAndUpdate(
+          { _id: req.params.id },
+          { rescued: true }
+        );
+        // console.log(result);
+        res.status(200).json("Animal Rescued");
+      }
+    });
+  } catch (err) {
+    // console.log(err);
+    res.status(400).json("Post Not Found");
+  }
+});
 
 router.get("/getallrescues", async (req, res, next) => {
   try {
     const allposts = await Rescue.find().sort({ timestamp: -1 });
     // setTimeout(() => {
-      res.status(200).json(allposts);
+    res.status(200).json(allposts);
     // }, 3000);
   } catch (error) {
     res.status(400).json(error);

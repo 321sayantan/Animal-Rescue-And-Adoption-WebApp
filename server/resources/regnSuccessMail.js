@@ -286,7 +286,7 @@ function regnSuccessMail(username) {
                 <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                     <tr>
                         <td style="text-align: center;">
-                            <a href="https://adopet244.netlify.app"><img
+                            <a href="https://adopet24.netlify.app/"><img
                                     src="https://res.cloudinary.com/dkf5lwjqr/image/upload/v1718507922/adopet/ztzbsifnvyimgetwadxt.png"
                                     height="70" alt="AdoPet"></a>
                         </td>
@@ -309,7 +309,7 @@ function regnSuccessMail(username) {
                                                 Your registration is successful. 🎉</strong>
                                             <br>We are so happy to have you as a new member of our vast
                                             community... Start exploring adoptable pets and more <a
-                                                href="https://adopet244.netlify.app" target="_blank"
+                                                href="https://adopet24.netlify.app/" target="_blank"
                                                 style="font-weight: 600; color: #00c1f2;text-decoration: none;">here</a>
                                             <br><br>
                                             <span style="font-size: 1.1rem;font-weight: 500;color: #d5075d;">Happy adopting and rescue!🤗</span>
@@ -339,12 +339,12 @@ function regnSuccessMail(username) {
                             <td class="content-block">
                                 <span class="apple-link">GP Block, Sector-V, SaltLake, Kolkata-12</span>
                                 <br> Don't like these emails? <a
-                                    href="https://adopet244.netlify.app/unsubscribe">Unsubscribe</a>.
+                                    href="https://adopet24.netlify.app/unsubscribe">Unsubscribe</a>.
                             </td>
                         </tr>
                         <tr>
                             <td class="content-block powered-by">
-                                Powered by <a href="https://adopet244.netlify.app">AdoPet</a>.
+                                Powered by <a href="https://adopet24.netlify.app">AdoPet</a>.
                             </td>
                         </tr>
                     </table>

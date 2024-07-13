@@ -285,7 +285,7 @@ function rescueConfMailForDonor(resData) {
                 <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                     <tr>
                         <td style="text-align: center;">
-                            <a href="https://adopet244.netlify.app"><img
+                            <a href="https://adopet24.netlify.app"><img
                                     src="https://res.cloudinary.com/dkf5lwjqr/image/upload/v1718507922/adopet/ztzbsifnvyimgetwadxt.png"
                                     height="70" alt="AdoPet"></a>
                         </td>
@@ -307,7 +307,7 @@ function rescueConfMailForDonor(resData) {
                                                 style="font-weight: 700;color: #d5075d; text-transform: capitalize;">${resData.currentuser}</span> coming up to
                                             save the
                                             vet <strong>(${resData._doc.vet_category})</strong> you requested for, vide Vet-ID(<a
-                                                href="https://adopet244.netlify.app/rescue/${resData._doc._id}"
+                                                href="https://adopet24.netlify.app/rescue/${resData._doc._id}"
                                                 target="_blank"
                                                 style="font-weight: 600; color: #00c1f2;text-decoration: none;">${resData._doc._id}</a>)
                                             on
@@ -321,10 +321,10 @@ function rescueConfMailForDonor(resData) {
                                         <table style="margin-top: 0.5rem;">
                                             <tbody>
                                                 <td style="line-height: 1.5rem;font-size: 1rem;">
-                                                    <a href="https://adopet244.netlify.app/adopt" target="_blank"
+                                                    <a href="https://adopet24.netlify.app/adopt" target="_blank"
                                                         style="font-weight: 400; margin-left: 1rem;">All
                                                         Adoptable pets available</a><br>
-                                                    <a href="https://adopet244.netlify.app/rescue/rescue-vet-list"
+                                                    <a href="https://adopet24.netlify.app/rescue/rescue-vet-list"
                                                         target="_blank"
                                                         style="font-weight: 400; margin-left: 1rem;">Vets
                                                         those needs your help</a>
@@ -336,7 +336,7 @@ function rescueConfMailForDonor(resData) {
                                         <hr width="100%" size="3px" color="#aaa" style="margin-block: 1.5rem;" />
                                         <p
                                             style="margin-top: 2rem !important; font-size: 1.5rem; font-weight: 500; line-height: 1.5rem;">
-                                            To know more contact us <a href="https://adopet244.netlify.app/contact"
+                                            To know more contact us <a href="https://adopet24.netlify.app/contact"
                                                 target="_blank"
                                                 style="font-weight: 400;color: blue;text-decoration: none;">here</a><br>
 
@@ -358,12 +358,12 @@ function rescueConfMailForDonor(resData) {
                             <td class="content-block">
                                 <span class="apple-link">GP Block, Sector-V, SaltLake, Kolkata-12</span>
                                 <br> Don't like these emails? <a
-                                    href="https://adopet244.netlify.app/unsubscribe">Unsubscribe</a>.
+                                    href="https://adopet24.netlify.app/unsubscribe">Unsubscribe</a>.
                             </td>
                         </tr>
                         <tr>
                             <td class="content-block powered-by">
-                                Powered by <a href="https://adopet244.netlify.app">AdoPet</a>.
+                                Powered by <a href="https://adopet24.netlify.app">AdoPet</a>.
                             </td>
                         </tr>
                     </table>

@@ -50,7 +50,7 @@ function RescueVet() {
   return (
     <>
       {/* inner banner */}
-      <section className="inner-banner py-5" id="rescue">
+      <section className="inner-banner py-5" id="rescue" style={{ paddingBottom: '14em !important' }}>
         <div className="w3l-breadcrumb mt-5 py-lg-5" data-aos="fade-up">
           <div className="container pt-4 pb-sm-4">
             <div className="hero-content" data-aos="fade-up">

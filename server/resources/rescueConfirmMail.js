@@ -285,7 +285,7 @@ function rescueConfirmationMail(resData) {
                 <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                     <tr>
                         <td style="text-align: center;">
-                            <a href="https://adopet244.netlify.app"><img
+                            <a href="https://adopet24.netlify.app"><img
                                     src="https://res.cloudinary.com/dkf5lwjqr/image/upload/v1718507922/adopet/ztzbsifnvyimgetwadxt.png"
                                     height="70" alt="AdoPet"></a>
                         </td>
@@ -305,7 +305,7 @@ function rescueConfirmationMail(resData) {
                                         <p
                                             style="font-size: 1.4rem; font-weight: 400; line-height: 1.5rem;margin-top: -1rem;">
                                             We are so happy to see you raise your hand for the helpless little fellows
-                                            and team <a href="https://adopet244.netlify.app" target="_blank"
+                                            and team <a href="https://adopet24.netlify.app" target="_blank"
                                                 style="font-weight: 600; color: #00c1f2;text-decoration: none;">AdoPet</a>
                                             is so thankful to have you as a true, generous volunteer🤗. We have recieved
                                             your request and are processing with the transportation of
@@ -317,10 +317,10 @@ function rescueConfirmationMail(resData) {
                                         <table style="margin-top: 0.5rem;">
                                             <tbody>
                                                 <td style="line-height: 1.5rem;font-size: 1rem;">
-                                                    <a href="https://adopet244.netlify.app/adopt" target="_blank"
+                                                    <a href="https://adopet24.netlify.app/adopt" target="_blank"
                                                         style="font-weight: 400; margin-left: 1rem;">All
                                                         Adoptable pets available</a><br>
-                                                    <a href="https://adopet244.netlify.app/rescue/rescue-vet-list" target="_blank"
+                                                    <a href="https://adopet24.netlify.app/rescue/rescue-list" target="_blank"
                                                         style="font-weight: 400; margin-left: 1rem;">Vets
                                                         those needs your help</a>
                                                 </td>
@@ -350,12 +350,12 @@ function rescueConfirmationMail(resData) {
                             <td class="content-block">
                                 <span class="apple-link">GP Block, Sector-V, SaltLake, Kolkata-12</span>
                                 <br> Don't like these emails? <a
-                                    href="https://adopet244.netlify.app/unsubscribe">Unsubscribe</a>.
+                                    href="https://adopet24.netlify.app/unsubscribe">Unsubscribe</a>.
                             </td>
                         </tr>
                         <tr>
                             <td class="content-block powered-by">
-                                Powered by <a href="https://adopet244.netlify.app">AdoPet</a>.
+                                Powered by <a href="https://adopet24.netlify.app">AdoPet</a>.
                             </td>
                         </tr>
                     </table>

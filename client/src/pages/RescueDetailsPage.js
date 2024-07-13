@@ -21,9 +21,9 @@ function RescueDetailsPage() {
       // const res = await postData.then(result => result)
       try {
         const dataObj = { id: params.id, selDate: selectedDate };
-        // const response = await toast.promise(fetch("http://localhost:5000/rescue/rescueRequest", {
-        const response = await toast.promise(
-          fetch("https://adopet-backend.onrender.com/rescue/rescueRequest", {
+        const response = await toast.promise(fetch("http://localhost:5000/rescue/rescueRequest", {
+        // const response = await toast.promise(
+        //   fetch("https://adopet-backend.onrender.com/rescue/rescueRequest", {
             method: "POST",
             body: JSON.stringify(dataObj),
             headers: {

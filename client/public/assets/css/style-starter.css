@@ -16813,7 +16813,8 @@ ul.page-pagination li a.next:hover {
   background-size: cover;
   position: relative;
   z-index: 0;
-  padding-bottom: 8em !important;
+  /* padding-bottom: 8em !important; */
+  padding-bottom: 14em !important;
 }
 
 .inner-banner::before {
@@ -16829,7 +16830,7 @@ ul.page-pagination li a.next:hover {
 
 #rescue.inner-banner {
   /* background: url(../images/rescue-banner.jpg) no-repeat top !important; */
-  background: url(../images/rescue9.jpg) no-repeat top center/cover !important;
+  background: url(../images/rescue9copy.jpg) no-repeat top center/cover !important;
 }
 
 h4.inner-text-title {

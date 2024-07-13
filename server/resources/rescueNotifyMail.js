@@ -287,7 +287,7 @@ function rescueNotification(resData) {
                 <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                     <tr>
                         <td style="text-align: center;">
-                            <a href="https://adopet244.netlify.app"><img
+                            <a href="https://adopet24.netlify.app"><img
                                     src="https://res.cloudinary.com/dkf5lwjqr/image/upload/v1718507922/adopet/ztzbsifnvyimgetwadxt.png"
                                     height="70" alt="AdoPet"></a>
                         </td>
@@ -306,7 +306,7 @@ function rescueNotification(resData) {
 
                                         <p
                                             style="font-size: 1.4rem; font-weight: 400; line-height: 1.5rem;margin-top: -1rem;">
-                                            This is a message from team <a href="https://adopet244.netlify.app" target="_blank"
+                                            This is a message from team <a href="https://adopet24.netlify.app" target="_blank"
                                                 style="font-weight: 600; color: #00c1f2;text-decoration: none;">AdoPet.</a>
                                             This mail is a notification against an injured vet found near your locality.
                                             Since you are registered as a volunteer, we request you to help this needy
@@ -319,7 +319,7 @@ function rescueNotification(resData) {
                                                 <tr>
                                                     <td class="btn btn-primary">
                                                         <a
-                                                            href="https://adopet244.netlify.app/rescue/${resData.id}">Help
+                                                            href="https://adopet24.netlify.app/rescue/${resData.id}">Help
                                                             them</a>
                                                     </td>
                                                 </tr>
@@ -347,12 +347,12 @@ function rescueNotification(resData) {
                             <td class="content-block">
                                 <span class="apple-link">GP Block, Sector-V, SaltLake, Kolkata-12</span>
                                 <br> Don't like these emails? <a
-                                    href="https://adopet244.netlify.app/unsubscribe">Unsubscribe</a>.
+                                    href="https://adopet24.netlify.app/unsubscribe">Unsubscribe</a>.
                             </td>
                         </tr>
                         <tr>
                             <td class="content-block powered-by">
-                                Powered by <a href="https://adopet244.netlify.app">AdoPet</a>.
+                                Powered by <a href="https://adopet24.netlify.app">AdoPet</a>.
                             </td>
                         </tr>
                     </table>

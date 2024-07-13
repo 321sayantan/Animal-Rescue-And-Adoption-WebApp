@@ -172,9 +172,9 @@ router.get("/allUserMap", verifyToken, (req, res) => {
         }
 
         const allUser = await User.find({}, { name: 1, is_volunteer: 1, latLng: '$loc.coordinates', user_region: { $arrayElemAt: [{ $split: ['$address', ','] }, -2] } })
-        setTimeout(() => {
+        // setTimeout(() => {
           res.status(200).json(allUser);
-        }, 3000)
+        // }, 3000)
       }
     });
   } catch (err) {
@@ -195,11 +195,13 @@ router.get("/filterUsers", verifyToken, (req, res) => {
         }
 
         const query = req.query.search;
-        const users = await User.find({ name: { $regex: `${query}`, $options: "i" } });
+        const users = await User.find({
+          name: { $regex: `${query}`, $options: "i" },
+        }).sort({ timestamp: -1 });
         const usersCount = users.length;
-        setTimeout(() => {
+        // setTimeout(() => {
           res.status(200).json({ users, usersCount });
-        }, 3000);
+        // }, 3000);
       }
     })
   } catch (error) {
@@ -396,11 +398,11 @@ router.get("/filterAdoptPosts", verifyToken, (req, res) => {
         }
 
         const query = req.query.search;
-        const posts = await AdoptPost.find({ address: { $regex: `${query}`, $options: "i" } });
+        const posts = await AdoptPost.find({ address: { $regex: `${query}`, $options: "i" } }).sort({ timestamp: -1 });
         const postsCount = posts.length;
-        setTimeout(() => {
+        // setTimeout(() => {
           res.status(200).json({ posts, postsCount });
-        }, 3000);
+        // }, 3000);
       }
     })
   } catch (error) {
@@ -421,11 +423,13 @@ router.get("/filterRescuePosts", verifyToken, (req, res) => {
         }
 
         const query = req.query.search;
-        const posts = await RescuePost.find({ address: { $regex: `${query}`, $options: "i" } });
+        const posts = await RescuePost.find({
+          address: { $regex: `${query}`, $options: "i" },
+        }).sort({ timestamp: -1 });
         const postsCount = posts.length;
-        setTimeout(() => {
+        // setTimeout(() => {
           res.status(200).json({ posts, postsCount });
-        }, 3000);
+        // }, 3000);
       }
     })
   } catch (error) {
