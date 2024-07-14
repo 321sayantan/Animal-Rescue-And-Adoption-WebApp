@@ -150,7 +150,7 @@ function EditProfile() {
       {/* profile pic priview dialog */}
       <AnimatePresence>
         {show &&
-          <Modal className='confirm-profile-pic__dialog' onClose={() => setShow(null)} title='Set as Profile pic?'>
+          <Modal className='confirm-profile-pic__dialog' onClose={() => setShow(prev => !prev)} title='Set as Profile pic?'>
             <div className="modal-body py-3 px-4 mt-2 mb-2">
               <div className="d-flex container mb-3">
                 <div className="profile-pic__wrapper" style={{ border: '8px solid #ECD078' }}>
@@ -171,7 +171,7 @@ function EditProfile() {
                   style={{
                     width: '100%'
                   }}
-                  onClick={() => setShow(null)}
+                  onClick={() => setShow(prev => !prev)}
                 >
                   Cancel
                 </button>
