@@ -7678,6 +7678,7 @@ button#mark-as-rescued-btn,
   height: 100%;
   object-fit: cover;
   border-radius: 50%;
+  cursor: crosshair;
 }
 
 .confirm-profile-pic__dialog .modal-header .btn-close {
