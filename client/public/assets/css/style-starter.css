@@ -3315,6 +3315,9 @@ progress {
   /* color: #ffc107 !important; */
   color: #fffa00 !important;
 }
+.profile-text {
+  color: #ffc107 !important;
+}
 
 .text-danger {
   color: #dc3545 !important;

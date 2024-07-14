@@ -130,7 +130,7 @@ const AuthUserPopup = ({ children, onClose, className }) => {
                   />
                   <p>
                     Hi,{" "}
-                    <strong className="text-uppercase text-warning">
+                    <strong className="text-uppercase profile-text">
                       {userData?.name || "...."}
                     </strong>
                   </p>

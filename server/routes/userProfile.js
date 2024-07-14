@@ -113,6 +113,54 @@ router.patch("/edit", verifyToken, (req, res) => {
   }
 });
 
+router.post("/updateProfilePic", verifyToken, async(req,res)=>{
+  try {
+    jwt.verify(req.token, "shhh", async (err, dataa) => {
+      if (dataa === undefined) {
+        res.status(200).json({ message: "Login Session Expired" });
+        console.log("token expired");
+      } else {
+        if (err) {
+          res.status(403);
+        }
+
+        const user = await User.findOne({ _id: dataa.id });
+        if (!user) {
+          console.log("user not found");
+          res.status(400).json("Invalid User");
+        }
+
+        console.log(req.body);
+        console.log(user);
+
+        const image_id = user.imageID;
+
+        // try {
+        //   cloudinary.v2.uploader.destroy(image_id).then((result) => {
+        //     if (result) {
+        //       console.log(result);
+        //       console.log("image deleted from cloudinary");
+        //       //return res.status(201).json({message:'Image Deleted From Cloudinary'});
+        //     }
+        //   });
+        // } catch (error) {
+        //   console.log(error);
+        //   return res.send({ error: "error" });
+        // }
+
+        
+        // const result = await User.findByIdAndUpdate({ _id: user._id }, data);
+        // console.log(result);
+
+        res.status(200).json({ message: "Profile Updated Successfully" });
+      }
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(400).json(err);
+  }
+})
+
 router.delete("/deleteUser", verifyToken, (req, res) => {
   try {
     jwt.verify(req.token, "shhh", async (err, dataa) => {

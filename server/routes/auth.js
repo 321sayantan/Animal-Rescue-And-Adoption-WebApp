@@ -136,10 +136,10 @@ router.post("/googleLogin", async (req, res) => {
   try {
     // console.log(req.body);
     let user = await User.findOne({ email: req.body.email });
-    console.log(1, user);
+    // console.log(1, user);
 
     if (!user) {
-      console.log(2, "no user");
+      // console.log(2, "no user");
       const data = new User({
         name: req.body.name,
         email: req.body.email,
