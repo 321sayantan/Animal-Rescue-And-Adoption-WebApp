@@ -7,13 +7,24 @@ import { AuthContext } from "../store/AuthContext";
 import EditProfileForm from "../components/EditProfileForm";
 import ImageUploader from "../components/ImageUploader";
 import MapPreLoader from "../components/UI/MapPreLoader";
+import Modal from "../components/UI/Modal";
+import { AnimatePresence } from "framer-motion";
 
 function EditProfile() {
   const { userData } = useLoaderData();
   const navigate = useNavigate();
-  const [newProfilePic, setNewProfilePic] = useState();
+  const [show, setShow] = useState(false)
+  const [newProfilePic, setNewProfilePic] = useState({});
   const [errors, setErrors] = useState();
   const { jwt } = useContext(AuthContext);
+
+  const updateProfilePicHandler = (imgData) => {
+    console.log({
+      msg: 'Image updated successfully',
+      userImage: imgData
+    })
+    setShow(prev => !prev)
+  }
 
   const updateInfoHandler = async (userData) => {
     console.log(userData);
@@ -48,6 +59,11 @@ function EditProfile() {
       console.error("Error submitting form:", error);
     }
   };
+
+  const toggleModal = (imgData) => {
+    setNewProfilePic(imgData[0])
+    setShow(prev => !prev)
+  }
   const fallback = <MapPreLoader msg="Loading Info..." />;
 
   return (
@@ -92,14 +108,14 @@ function EditProfile() {
                   </Await>
                 </Suspense>
               </div>
-              <div className="btn btn-style btn-primary position-absolute image-edit-btn">
+              <div className="btn btn-style btn-secondary position-absolute image-edit-btn">
                 <label htmlFor="profile-pic">
                   <i className="fas fa-pencil" />
                   <span>Change</span>
                 </label>
                 <ImageUploader
                   id="profile-pic"
-                  onUploaded={setNewProfilePic}
+                  onUploaded={toggleModal}
                   style={{ display: "none" }}
                 />
               </div>
@@ -129,6 +145,41 @@ function EditProfile() {
         </div>
       </section>
       {/* //edit profile section */}
+
+      
+      {/* profile pic priview dialog */}
+      <AnimatePresence>
+        {show &&
+          <Modal className='confirm-profile-pic__dialog' onClose={() => setShow(prev => !prev)} title='Set as Profile pic?'>
+            <div className="modal-body py-3 px-4 mt-2 mb-2">
+              <div className="d-flex container mb-3">
+                <div className="profile-pic__wrapper" style={{ border: '8px solid #ECD078' }}>
+                  <img src={newProfilePic.image} alt="" />
+                </div>
+              </div>
+              <div className="modal-footer d-flex flex-column" style={{ marginBottom: "-1rem", borderTop: 0 }}>
+                <button
+                  type="button"
+                  className="btn btn-style"
+                  onClick={() => updateProfilePicHandler(newProfilePic)}
+                >
+                  Save
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-ghost-secondary"
+                  style={{
+                    width: '100%'
+                  }}
+                  onClick={() => setShow(prev => !prev)}
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </Modal>
+        }
+      </AnimatePresence>
     </>
   );
 }

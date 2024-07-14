@@ -117,7 +117,7 @@ function PrivateRoute({ children }) {
     if(!isAuthenticated){
       toast.warning('Please Authenticate to proceed!')
     }
-  }, [])
+  })
   return isAuthenticated ? children : <Navigate to={"../../login"} />;
 }
 
