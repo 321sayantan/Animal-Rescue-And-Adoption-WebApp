@@ -18,7 +18,10 @@ function AdoptPostIsConfirmed() {
                             'authorization': `Bearer ${jwt}`
                         }
                     }
-                )
+                ),
+                {
+                    pending: 'Changing status...'
+                }
             );
             const result = await response.json()
             console.log(result)

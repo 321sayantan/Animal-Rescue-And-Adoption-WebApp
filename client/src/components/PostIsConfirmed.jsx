@@ -28,10 +28,10 @@ const PostIsConfirmed = ({ children }) => {
   return (
     <>
       <div
-        className="row container d-flex flex-column justify-content-center align-items-center"
+        className="container d-flex flex-column justify-content-center align-items-center"
         style={{
           marginBlock: "6rem",
-          marginInline: "4rem",
+          marginInline: "auto",
           background: "var(--border-color-light)",
           padding: "1rem",
         }}

@@ -56,13 +56,7 @@ const router = createBrowserRouter([
               </PrivateRoute>
             )
           },
-          {
-            path: 'accept-adopt-confirmation', element: (
-              <PrivateRoute>
-                <AdoptPostIsConfirmed />
-              </PrivateRoute>
-            )
-          }
+          { path: 'accept-adopt-confirmation', element: <AdoptPostIsConfirmed /> }
         ]
       },
       {
@@ -84,13 +78,7 @@ const router = createBrowserRouter([
             ),
             loader: loadRescueDetalis
           },
-          {
-            path: 'accept-rescue-confirmation', element: (
-              <PrivateRoute>
-                <RescuePostIsConfirmed />
-              </PrivateRoute>
-            )
-          }
+          { path: 'accept-rescue-confirmation', element: <RescuePostIsConfirmed /> }
         ]
       },
       {
