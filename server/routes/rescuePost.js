@@ -139,7 +139,9 @@ router.get("/markRescue/:id", verifyToken, async (req, res) => {
           { rescued: true }
         );
         // console.log(result);
-        res.status(200).json("Animal Rescued");
+        setTimeout(() => {
+          res.status(200).json({msg: "Vet Rescued"});
+        },1000)
       }
     });
   } catch (err) {

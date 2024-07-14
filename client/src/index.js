@@ -12,7 +12,7 @@ root.render(
     <ToastContainer
       position="top-right"
       autoClose={4000}
-      hideProgressBar={false}
+      hideProgressBar
       newestOnTop={false}
       closeOnClick
       draggable

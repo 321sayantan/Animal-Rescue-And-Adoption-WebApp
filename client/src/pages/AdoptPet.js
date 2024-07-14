@@ -1,4 +1,4 @@
-import { useState, Suspense, useContext } from "react";
+import { useState, Suspense } from "react";
 import { Await, Link, defer, useLoaderData } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import PostsSkeleton from "../components/Adopts/PostsSkeleton"
@@ -10,14 +10,11 @@ import { fetchFilteredPosts } from "../utils/httpRequests";
 import ErrorToFetch from "../components/UI/ErrorToFetch";
 import MapPreLoader from "../components/UI/MapPreLoader";
 import PostsFilteredList from "../components/PostsByQueryList";
-import { AuthContext } from '../store/AuthContext';
-// import { location } from "../utils/misc";
-
-
+// import { AuthContext } from '../store/AuthContext';
 
 function AdoptPet() {
+    // const { isAuthenticated } = useContext(AuthContext);
     const { posts } = useLoaderData()
-    const { isAuthenticated } = useContext(AuthContext);
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedVal, setSelectedVal] = useState('')
     const [postsData, setPostsData] = useState(posts)
@@ -103,12 +100,12 @@ function AdoptPet() {
                                         ))}
                                     </select>
                                 </div>
-                                {isAuthenticated && <Link
+                                <Link
                                     to="register-new-vet"
                                     className="btn btn-style btn-secondary"
                                 >
                                     Donate a vet
-                                </Link>}
+                                </Link>
                             </div>
                             {/* list of available pets */}
                             {posts && !searchTerm && (
@@ -144,7 +141,7 @@ async function loadPosts() {
     // const response = await fetch(
     //   "http://localhost:5000/adopt/getallpost"
     const response = await fetch(
-      "https://adopet-backend.onrender.com/adopt/getallpost"
+        "https://adopet-backend.onrender.com/adopt/getallpost"
     );
 
     if (!response.ok) {

@@ -172,9 +172,9 @@ router.get("/allUserMap", verifyToken, (req, res) => {
         }
 
         const allUser = await User.find({}, { name: 1, is_volunteer: 1, latLng: '$loc.coordinates', user_region: { $arrayElemAt: [{ $split: ['$address', ','] }, -2] } })
-        // setTimeout(() => {
+        setTimeout(() => {
           res.status(200).json(allUser);
-        // }, 3000)
+        }, 2500)
       }
     });
   } catch (err) {

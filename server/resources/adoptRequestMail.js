@@ -340,7 +340,7 @@ function adoptReqMail(resData) {
                                                                         ${resData._doc.vet_name}
                                                                     </p>
                                                                 </td>
-                                                            </tr><br>
+                                                            </tr>
                                                             <tr>
                                                                 <td>
                                                                     <p
@@ -350,7 +350,7 @@ function adoptReqMail(resData) {
                                                                         ${resData._doc.vet_category}
                                                                     </p>
                                                                 </td>
-                                                            </tr><br>
+                                                            </tr>
                                                             <tr>
                                                                 <td>
                                                                     <p
@@ -392,7 +392,7 @@ function adoptReqMail(resData) {
                                                                 <tr>
                                                                     <td class="btn btn-primary reject"
                                                                         style="text-align: center;font-size: 1.5rem;">
-                                                                        <a href="https://adopet24.netlify.app//rejectReq"
+                                                                        <a href="https://adopet24.netlify.app/rejectReq"
                                                                             style=" background-color: #f00 !important;border-color: #f00;"
                                                                             target="_blank">Reject</a>
                                                                     </td>

@@ -1,4 +1,5 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import React, { useEffect } from "react";
+import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from './utils/httpRequests';
 import Root from './pages/Root';
@@ -19,6 +20,8 @@ import ChangePassword from './pages/ResetPasswordMail';
 import ResetPswrdFinalPage from './pages/ResetPasswordPswrd';
 import UserProfile from './pages/UserProfile';
 import EditProfile from './pages/EditProfile';
+import AdoptPostIsConfirmed from './pages/AdoptPostIsConfirmed';
+import RescuePostIsConfirmed from './pages/RescuePostIsConfirmed';
 import { loader as rootLoader } from './pages/Root';
 import { loader as loadPetPosts } from './pages/AdoptPet';
 import { loader as loadRescuePosts } from './pages/RescueListPage';
@@ -26,7 +29,7 @@ import { loader as loadPostDetails } from './pages/PetDetailsPage';
 import { loader as loadRescueDetalis } from './pages/RescueDetailsPage';
 import { loader as userProfileLoader } from './pages/UserProfile';
 import { gapi } from "gapi-script";
-import React, { useEffect } from "react";
+import { toast } from 'react-toastify';
 
 const router = createBrowserRouter([
   {
@@ -46,23 +49,68 @@ const router = createBrowserRouter([
         children: [
           { index: true, element: <AdoptPet />, loader: loadPetPosts },
           { path: ':id', element: <PetDetailsPage />, loader: loadPostDetails },
-          { path: 'register-new-vet', element: <AddNewVetPost /> }
+          {
+            path: 'register-new-vet', element: (
+              <PrivateRoute>
+                <AddNewVetPost />
+              </PrivateRoute>
+            )
+          },
+          {
+            path: 'accept-adopt-confirmation', element: (
+              <PrivateRoute>
+                <AdoptPostIsConfirmed />
+              </PrivateRoute>
+            )
+          }
         ]
       },
       {
         path: 'rescue',
         children: [
-          { index: true, element: <RescueVet /> },
+          {
+            index: true, element: (
+              <PrivateRoute>
+                <RescueVet />
+              </PrivateRoute>
+            )
+          },
           { path: 'rescue-list', element: <RescueListPage />, loader: loadRescuePosts },
-          { path: ':id', element: <RescueDetailsPage />, loader: loadRescueDetalis }
+          {
+            path: ':id', element: (
+              <PrivateRoute>
+                <RescueDetailsPage />
+              </PrivateRoute>
+            ),
+            loader: loadRescueDetalis
+          },
+          {
+            path: 'accept-rescue-confirmation', element: (
+              <PrivateRoute>
+                <RescuePostIsConfirmed />
+              </PrivateRoute>
+            )
+          }
         ]
       },
       {
         path: 'profile',
-        element: <UserProfile />,
+        element: (
+          <PrivateRoute>
+            <UserProfile />
+          </PrivateRoute>
+        ),
         loader: userProfileLoader,
       },
-      { path: 'profile/edit', element: <EditProfile />, loader: userProfileLoader },
+      {
+        path: 'profile/edit', element: (
+          <PrivateRoute>
+            <EditProfile />
+          </PrivateRoute>
+        ),
+        loader: userProfileLoader
+      },
+
     ],
   },
   {
@@ -71,10 +119,17 @@ const router = createBrowserRouter([
   },
   {
     path: 'reset-password/:token',
-    // path: 'reset-password',
     element: <ResetPswrdFinalPage />
   },
 ])
+
+function PrivateRoute({ children }) {
+  useEffect(() => {
+    toast.warning('Please Authenticate to proceed!')
+  }, [])
+  const isAuthenticated = localStorage.getItem("jwt");
+  return isAuthenticated ? children : <Navigate to={"../../login"} />;
+}
 
 function App() {
 

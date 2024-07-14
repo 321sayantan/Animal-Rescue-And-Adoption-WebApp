@@ -36,7 +36,7 @@ const ProfilePageContent = ({ userData }) => {
 
       if (response.ok) {
         setShowModal(null);
-        logout()
+        logout();
         navigate("..");
         toast.success(result.msg);
         setErrors(null);
@@ -50,15 +50,15 @@ const ProfilePageContent = ({ userData }) => {
     // console.log(token);
   };
 
-  const adoptPostDeleteHandler = async(id) => {
+  const adoptPostDeleteHandler = async (id) => {
     // console.log("deletion request confirmation for id:" + id);
     try {
       const response = await toast.promise(
         fetch(`http://localhost:5000/profile/deleteAdoptPost/${id}`, {
-        // fetch(`https://adopet-backend.onrender.com/profile/deleteAdoptPost/${id}`, {
+          // fetch(`https://adopet-backend.onrender.com/profile/deleteAdoptPost/${id}`, {
           method: "DELETE",
           headers: {
-            'authorization': `Bearer ${jwt}`,
+            authorization: `Bearer ${jwt}`,
           },
         }),
         {
@@ -79,46 +79,48 @@ const ProfilePageContent = ({ userData }) => {
     } catch (err) {
       console.err(err);
     }
-  }
+  };
 
-  const rescuePostDeleteHandler = async(id) => {
-    console.log("deletion request confirmation from rescue post for id:" + id);
-    // try {
-    //   const response = await toast.promise(
-    //     fetch(`http://localhost:5000/profile/deleteRescuePost/${id}`, {
-    //     // fetch(`https://adopet-backend.onrender.com/profile/deleteRescuePost/${id}`, {
-    //       method: "DELETE",
-    //       headers: {
-    //         'authorization': `Bearer ${jwt}`,
-    //       },
-    //     }),
-    //     {
-    //       pending: "Deleting post...",
-    //     }
-    //   );
-    //   const result = await response.json();
-    //   console.log(result);
+  const rescuePostDeleteHandler = async (id) => {
+    // console.log("deletion request confirmation from rescue post for id:" + id);
+    try {
+      const response = await toast.promise(
+        fetch(`http://localhost:5000/profile/deleteRescuePost/${id}`, {
+          // fetch(`https://adopet-backend.onrender.com/profile/deleteRescuePost/${id}`, {
+          method: "DELETE",
+          headers: {
+            authorization: `Bearer ${jwt}`,
+          },
+        }),
+        {
+          pending: "Deleting post...",
+        }
+      );
+      const result = await response.json();
+      console.log(result);
 
-    //   if (response.ok) {
-    //     navigate("../profile");
-    //     toast.success(result.msg);
-    //     setErrors(null);
-    //   } else {
-    //     toast.error(result.errors[0]);
-    //     setErrors(result.errors || {});
-    //   }
-    // } catch (err) {
-    //   console.err(err);
-    // }
-  }
+      if (response.ok) {
+        navigate("../profile");
+        toast.success(result.msg);
+        setErrors(null);
+      } else {
+        toast.error(result.errors[0]);
+        setErrors(result.errors || {});
+      }
+    } catch (err) {
+      console.err(err);
+    }
+  };
 
   const adoptPostStatChangeHandler = (id) => {
-    console.log("Status change confirmation for id:" + id);
-  }
+    navigate(`../adopt/accept-adopt-confirmation?id=${id}`);
+    console.log("Status change http request from adopt for id:" + id);
+  };
 
   const rescuePostStatChangeHandler = (id) => {
-    console.log("Status change confirmation from rescue for id:" + id);
-  }
+    navigate(`../rescue/accept-rescue-confirmation?id=${id}`);
+    console.log("Status change http confirmation from rescue for id:" + id);
+  };
 
   return (
     <>

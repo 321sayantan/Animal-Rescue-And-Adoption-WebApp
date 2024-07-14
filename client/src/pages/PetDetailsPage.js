@@ -25,7 +25,7 @@ function PetDetailsPage() {
         if (isAuthenticated) {
             setShowModal(true)
         } else {
-            toast.info('Please sign in to get this pet')
+            toast.warning('Please Authenticate to proceed!')
             navigate('../../login')
         }
     }
@@ -37,9 +37,9 @@ function PetDetailsPage() {
         // const res = await postData.then(result => result)
         try {
             const dataObj = { id: params.id, selDate: selectedDate }
-            // const response = await toast.promise(fetch("http://localhost:5000/adopt/adoptionRequest", {
-            const response = await toast.promise(
-              fetch("https://adopet-backend.onrender.com/adopt/adoptionRequest", {
+            const response = await toast.promise(fetch("http://localhost:5000/adopt/adoptionRequest", {
+            // const response = await toast.promise(
+            //   fetch("https://adopet-backend.onrender.com/adopt/adoptionRequest", {
                 method: "POST",
                 body: JSON.stringify(dataObj),
                 headers: {

@@ -102,7 +102,9 @@ router.get("/markAdopt/:id", verifyToken, async (req, res) => {
           { adopted: true }
         );
         // console.log(result);
-        res.status(200).json("Animal Adopted");
+        setTimeout(() => {
+          res.status(200).json({ msg: "Vet Adopted" });
+        }, 1000)
       }
     });
   } catch (err) {
@@ -113,6 +115,7 @@ router.get("/markAdopt/:id", verifyToken, async (req, res) => {
 
 router.post("/adoptionRequest", verifyToken, (req, res) => {
   try {
+    // console.log('Inside adoption request api')
     // var recieverEmail="", senderEmail;
     // let resData;
     jwt.verify(req.token, "shhh", async (err, data) => {
