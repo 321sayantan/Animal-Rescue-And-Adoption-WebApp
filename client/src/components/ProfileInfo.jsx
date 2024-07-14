@@ -19,14 +19,6 @@ function ProfileInfo({ user }) {
       </div>
       <div className="row">
         <div className="col-md-6">
-          <label>Phone</label>
-        </div>
-        <div className="col-md-6">
-          <p>123 456 7890</p>
-        </div>
-      </div>
-      <div className="row">
-        <div className="col-md-6">
           <label>Address</label>
         </div>
         <div className="col-md-6">

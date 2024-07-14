@@ -152,7 +152,7 @@ router.get("/markRescue/:id", verifyToken, async (req, res) => {
 
 router.get("/getallrescues", async (req, res, next) => {
   try {
-    const allposts = await Rescue.find().sort({ timestamp: -1 });
+    const allposts = await Rescue.find({ rescued: false }).sort({ timestamp: -1 });
     // setTimeout(() => {
     res.status(200).json(allposts);
     // }, 3000);

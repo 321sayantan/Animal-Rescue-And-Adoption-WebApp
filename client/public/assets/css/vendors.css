@@ -7126,6 +7126,7 @@ button#mark-as-rescued-btn,
   height: auto !important;
 }
 
+.confirm-profile-pic__dialog,
 .statusChange-confirm-modal {
   width: 28rem !important;
   height: auto !important;
@@ -7140,10 +7141,12 @@ button#mark-as-rescued-btn,
   background: var(--bs-danger) !important;
 }
 
+.confirm-profile-pic__dialog .modal-header,
 .statusChange-confirm-modal .modal-header {
   background: var(--bs-indigo) !important;
 }
 
+.confirm-profile-pic__dialog .modal-header h2,
 .deletePost-confirm-modal .modal-header h2,
 .statusChange-confirm-modal .modal-header h2 {
   color: #fff !important;
@@ -7332,12 +7335,13 @@ button#mark-as-rescued-btn,
 }
 
 .image-edit-btn i {
-  color: var(--bs-dark);
+  color: var(--bs-gray);
   font-size: 1.1rem;
 }
 
 .image-edit-btn span {
-  color: var(--bs-light);
+  /* color: var(--font-color); */
+  color: #fff;
   font-size: 1.1rem;
   margin-left: 0.5rem;
 }
@@ -7643,3 +7647,56 @@ button#mark-as-rescued-btn,
 }
 
 /* //confirm page spinner  */
+
+
+/* profile pic edit modal */
+.confirm-profile-pic__dialog {
+  background: var(--bs-light) !important;
+}
+
+.confirm-profile-pic__dialog .modal-body {
+  background: none !important;
+}
+
+.confirm-profile-pic__dialog .profile-pic__wrapper {
+  --s: 80px;
+  border: 8px solid #B38184;
+  -webkit-mask: conic-gradient(at var(--s) var(--s), #0000 75%, #000 0) 0 0 / calc(100% - var(--s)) calc(100% - var(--s)), linear-gradient(#000 0 0) content-box;
+  mask: conic-gradient(at var(--s) var(--s), #0000 75%, #000 0) 0 0 / calc(100% - var(--s)) calc(100% - var(--s)), linear-gradient(#000 0 0) content-box;
+  position: relative;
+  width: 100%;
+  height: 350px;
+  overflow: hidden;
+  padding: 0;
+}
+
+.confirm-profile-pic__dialog .profile-pic__wrapper img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.confirm-profile-pic__dialog .modal-header .btn-close {
+  display: none !important;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.confirm-profile-pic__dialog .modal-footer .btn-style {  
+  padding: 0.7rem 1.5rem;
+  border-radius: var(--border-radius);
+  width: 100%;
+  background: #212529;
+  color: var(--bs-white);
+}
+
+.confirm-profile-pic__dialog .modal-footer .btn-style:hover {
+  background-color: #393e44;
+  color: #fff;
+}
+
+/* //profile-pic edit modal */

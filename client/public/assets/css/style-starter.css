@@ -3312,7 +3312,8 @@ progress {
 }
 
 .text-warning {
-  color: #ffc107 !important;
+  /* color: #ffc107 !important; */
+  color: #fffa00 !important;
 }
 
 .text-danger {
@@ -12576,7 +12577,7 @@ h3.title-style {
   font-size: 22px;
   line-height: 32px;
   color: #fff;
-  font-weight: 300;
+  font-weight: 900;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
