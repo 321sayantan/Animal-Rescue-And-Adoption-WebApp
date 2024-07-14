@@ -21,7 +21,7 @@ function EditProfile() {
   const updateProfilePicHandler = (imgData) => {
     console.log({
       msg: 'Image updated successfully',
-      res: imgData
+      userImage: imgData
     })
     setShow(prev => !prev)
   }
