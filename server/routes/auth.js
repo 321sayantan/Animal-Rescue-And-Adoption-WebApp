@@ -16,14 +16,7 @@ const sendMail = (data) => {
     to: data.email,
     // to: "123sayantandas@gmail.com",
     subject: "Welcome to Adopet! Your Registration is Complete! 🐾",
-    html: `Hi ${data.name}, <br><br>
-                    Welcome to Adopet! Your registration is successful. 🎉 <br><br>
-                    Start exploring adoptable pets <a href="http:localhost:3000">here</a>. If you need help, contact us at AdoPet2024@gmail.com.
-                    <br><br>
-                    Happy adopting and rescue!
-                    <br><br>
-                    Best,<br>
-                    The Adopet Team`,
+    html: regnSuccessMail(data.name),
   };
 
   mailTransporter.sendMail(mailDetails, function (err, data) {
@@ -143,10 +136,10 @@ router.post("/googleLogin", async (req, res) => {
   try {
     // console.log(req.body);
     let user = await User.findOne({ email: req.body.email });
-    // console.log(1, user);
+    console.log(1, user);
 
     if (!user) {
-      // console.log(2, "no user");
+      console.log(2, "no user");
       const data = new User({
         name: req.body.name,
         email: req.body.email,
@@ -154,7 +147,7 @@ router.post("/googleLogin", async (req, res) => {
         is_volunteer: false,
       });
       user = await data.save();
-      // sendMail(data);
+      sendMail(data);
     }
     // console.log(2, user);
 

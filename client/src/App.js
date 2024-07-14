@@ -112,10 +112,12 @@ const router = createBrowserRouter([
 ])
 
 function PrivateRoute({ children }) {
-  useEffect(() => {
-    toast.warning('Please Authenticate to proceed!')
-  }, [])
   const isAuthenticated = localStorage.getItem("jwt");
+  useEffect(() => {
+    if(!isAuthenticated){
+      toast.warning('Please Authenticate to proceed!')
+    }
+  }, [])
   return isAuthenticated ? children : <Navigate to={"../../login"} />;
 }
 

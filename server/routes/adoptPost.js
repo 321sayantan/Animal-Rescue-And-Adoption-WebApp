@@ -52,7 +52,7 @@ router.post("/post", verifyToken, async (req, res) => {
 
 router.get("/getallpost", async (req, res) => {
   try {
-    const allposts = await Post.find().sort({ timestamp: -1 });
+    const allposts = await Post.find({ adopted: false }).sort({ timestamp: -1 });
     // setTimeout(() => {
     res.status(200).json(allposts);
     // }, 3000);
