@@ -20,10 +20,10 @@ function EditProfile() {
 
   const updateProfilePicHandler = async (imgData) => {
     try {
-      const response = await toast.promise(
-        fetch("http://localhost:5000/profile/updateProfilePic", {
-          // const response = await toast.promise(
-          //   fetch("https://adopet-backend.onrender.com/profile/updateProfilePic", {
+      // const response = await toast.promise(
+        // fetch("http://localhost:5000/profile/updateProfilePic", {
+          const response = await toast.promise(
+            fetch("https://adopet-backend.onrender.com/profile/updateProfilePic", {
           method: "POST",
           body: JSON.stringify(imgData),
           headers: {
