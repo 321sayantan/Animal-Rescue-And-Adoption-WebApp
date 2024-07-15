@@ -130,29 +130,29 @@ router.post("/updateProfilePic", verifyToken, async(req,res)=>{
           res.status(400).json("Invalid User");
         }
 
-        console.log(req.body);
-        console.log(user);
+        // console.log(req.body);
+        // console.log(user);
 
         const image_id = user.imageID;
 
-        // try {
-        //   cloudinary.v2.uploader.destroy(image_id).then((result) => {
-        //     if (result) {
-        //       console.log(result);
-        //       console.log("image deleted from cloudinary");
-        //       //return res.status(201).json({message:'Image Deleted From Cloudinary'});
-        //     }
-        //   });
-        // } catch (error) {
-        //   console.log(error);
-        //   return res.send({ error: "error" });
-        // }
+        try {
+          cloudinary.v2.uploader.destroy(image_id).then((result) => {
+            if (result) {
+              console.log(result);
+              console.log("image deleted from cloudinary");
+              //return res.status(201).json({message:'Image Deleted From Cloudinary'});
+            }
+          });
+        } catch (error) {
+          console.log(error);
+          return res.send({ error: "error" });
+        }
 
         
-        // const result = await User.findByIdAndUpdate({ _id: user._id }, data);
+        const result = await User.findByIdAndUpdate({ _id: user._id }, { image: req.body.image, ImageID: req.body.image_id });
         // console.log(result);
 
-        res.status(200).json({ message: "Profile Updated Successfully" });
+        res.status(200).json({ message: "Image Updated Successfully" });
       }
     });
   } catch (err) {

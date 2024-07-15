@@ -138,10 +138,10 @@ export default AdoptPet
 
 
 async function loadPosts() {
-    // const response = await fetch(
-    //   "http://localhost:5000/adopt/getallpost"
     const response = await fetch(
-        "https://adopet-backend.onrender.com/adopt/getallpost"
+      "http://localhost:5000/adopt/getallpost"
+    // const response = await fetch(
+    //     "https://adopet-backend.onrender.com/adopt/getallpost"
     );
 
     if (!response.ok) {

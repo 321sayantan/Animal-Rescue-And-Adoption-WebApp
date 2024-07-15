@@ -18,11 +18,43 @@ function EditProfile() {
   const [errors, setErrors] = useState();
   const { jwt } = useContext(AuthContext);
 
-  const updateProfilePicHandler = (imgData) => {
-    console.log({
-      msg: 'Image updated successfully',
-      userImage: imgData
-    })
+  const updateProfilePicHandler = async (imgData) => {
+    try {
+      const response = await toast.promise(
+        fetch("http://localhost:5000/profile/updateProfilePic", {
+          // const response = await toast.promise(
+          //   fetch("https://adopet-backend.onrender.com/profile/updateProfilePic", {
+          method: "POST",
+          body: JSON.stringify(imgData),
+          headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${jwt}`,
+          },
+        }),
+        {
+          pending: "Updating...",
+        }
+      );
+      const result = await response.json();
+      console.log(result);
+
+      if (response.ok) {
+        console.log(result);
+        navigate("../profile");
+        toast.success(result.message)
+        setErrors(null);
+      } else {
+        toast.error(result.errors[0])
+        setErrors(result.errors || {});
+      }
+    } catch (error) {
+      console.error('Error Updating Image', error);
+    }
+
+    // console.log({
+    //   msg: 'Image updated successfully',
+    //   userImage: imgData
+    // })
     setShow(prev => !prev)
   }
 
