@@ -54,8 +54,8 @@ const ProfilePageContent = ({ userData }) => {
     // console.log("deletion request confirmation for id:" + id);
     try {
       const response = await toast.promise(
-        fetch(`http://localhost:5000/profile/deleteAdoptPost/${id}`, {
-          // fetch(`https://adopet-backend.onrender.com/profile/deleteAdoptPost/${id}`, {
+        // fetch(`http://localhost:5000/profile/deleteAdoptPost/${id}`, {
+          fetch(`https://adopet-backend.onrender.com/profile/deleteAdoptPost/${id}`, {
           method: "DELETE",
           headers: {
             authorization: `Bearer ${jwt}`,
@@ -85,8 +85,8 @@ const ProfilePageContent = ({ userData }) => {
     // console.log("deletion request confirmation from rescue post for id:" + id);
     try {
       const response = await toast.promise(
-        fetch(`http://localhost:5000/profile/deleteRescuePost/${id}`, {
-          // fetch(`https://adopet-backend.onrender.com/profile/deleteRescuePost/${id}`, {
+        // fetch(`http://localhost:5000/profile/deleteRescuePost/${id}`, {
+          fetch(`https://adopet-backend.onrender.com/profile/deleteRescuePost/${id}`, {
           method: "DELETE",
           headers: {
             authorization: `Bearer ${jwt}`,
