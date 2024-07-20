@@ -441,7 +441,7 @@ legend {
 }
 
 legend#modal-legend {
-  width: 23% !important;
+  width: 25% !important;
   color: var(--bs-purple) !important;
   font-weight: 600;
 }
@@ -12580,7 +12580,7 @@ h3.title-style {
   font-size: 22px;
   line-height: 32px;
   color: #fff;
-  font-weight: 900;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
 }

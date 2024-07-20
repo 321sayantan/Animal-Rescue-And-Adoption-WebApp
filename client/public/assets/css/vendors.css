@@ -7094,7 +7094,7 @@ button#mark-as-rescued-btn,
   content: '\f6d3';
   font-family: fontAwesome;
   color: var(--font-color);
-  font-size: 1rem;
+  font-size: 0.85rem;
 }
 
 .vet-images {
@@ -7154,13 +7154,14 @@ button#mark-as-rescued-btn,
 
 .vet-info-list {
   position: relative;
-  margin-left: -2rem;
 }
 
 .vet-info-list .status-list {
   font-size: 1.1rem;
   padding-left: 0.3rem;
   color: var(--bs-pink);
+  line-height: 1.3rem;
+  margin-bottom: 0.5rem;
 }
 
 .vet-info-list .status-list strong {
@@ -7687,7 +7688,7 @@ button#mark-as-rescued-btn,
   opacity: 0;
 }
 
-.confirm-profile-pic__dialog .modal-footer .btn-style {  
+.confirm-profile-pic__dialog .modal-footer .btn-style {
   padding: 0.7rem 1.5rem;
   border-radius: var(--border-radius);
   width: 100%;
@@ -7701,4 +7702,3 @@ button#mark-as-rescued-btn,
 }
 
 /* //profile-pic edit modal */
-

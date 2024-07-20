@@ -12,43 +12,51 @@ import { toasterVariants } from '../utils/misc';
 
 function RescueDetailsPage() {
     const { rescuePostData } = useLoaderData()
-    const { jwt } = useContext(AuthContext)
+    const { isAuthenticated, jwt } = useContext(AuthContext)
     const navigate = useNavigate()
     const [showModal, setShowModal] = useState()
     const params = useParams()
 
-    const confirmationHandler = async (selectedDate) => {
-      // const res = await postData.then(result => result)
-      try {
-        const dataObj = { id: params.id, selDate: selectedDate };
-        // const response = await toast.promise(fetch("http://localhost:5000/rescue/rescueRequest", {
-        const response = await toast.promise(
-          fetch("https://adopet-backend.onrender.com/rescue/rescueRequest", {
-            method: "POST",
-            body: JSON.stringify(dataObj),
-            headers: {
-              "Content-Type": "application/json",
-              'authorization': `Bearer ${jwt}`,
-            },
-          }),
-          {
-            pending: "Sending Mail...",
-          }
-        );
-
-        const result = await response.json();
-        console.log(response);
-
-        if (response.ok) {
-          toast.success(result.message, toasterVariants);
-          navigate("..");
+    const showModalHandler = () => {
+        if (isAuthenticated) {
+            setShowModal(true)
         } else {
-          toast.error(result.error, toasterVariants);
+            toast.warning('Please Authenticate to proceed!')
+            navigate('../../login')
         }
-        setShowModal(false);
-      } catch (error) {
-        console.error("Error Sending Mail!", error);
-      }
+    }
+
+    const confirmationHandler = async () => {
+        // const res = await postData.then(result => result)
+        try {
+            // const response = await toast.promise(fetch("http://localhost:5000/rescue/rescueRequest", {
+            const response = await toast.promise(
+                fetch("https://adopet-backend.onrender.com/rescue/rescueRequest", {
+                    method: "POST",
+                    body: JSON.stringify({ id: params.id }),
+                    headers: {
+                        "Content-Type": "application/json",
+                        'authorization': `Bearer ${jwt}`,
+                    },
+                }),
+                {
+                    pending: "Sending Mail...",
+                }
+            );
+
+            const result = await response.json();
+            console.log(response);
+
+            if (response.ok) {
+                toast.success(result.message, toasterVariants);
+                navigate("..");
+            } else {
+                toast.error(result.error, toasterVariants);
+            }
+            setShowModal(false);
+        } catch (error) {
+            console.error("Error Sending Mail!", error);
+        }
     };
 
     const fallback1 = <RescVetDetSkeleton />,
@@ -117,7 +125,7 @@ function RescueDetailsPage() {
                                 </Await>
                             </Suspense>
                             <div className="text-center mt-5">
-                                <button type="button" className="btn btn-style btn-primary" onClick={() => setShowModal(true)}>
+                                <button type="button" className="btn btn-style btn-primary" onClick={showModalHandler}>
                                     Save this Vet
                                 </button>
                             </div>
@@ -148,7 +156,7 @@ async function rescueDetailsLoader(params) {
     // const response = await fetch(
     //   `http://localhost:5000/rescue/getrescue/${id}`
     const response = await fetch(
-      `https://adopet-backend.onrender.com/rescue/getrescue/${id}`
+        `https://adopet-backend.onrender.com/rescue/getrescue/${id}`
     );
     if (!response.ok) {
         throw new Error('Failed to load post detalis!');

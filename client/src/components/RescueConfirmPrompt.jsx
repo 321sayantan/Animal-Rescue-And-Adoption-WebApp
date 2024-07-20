@@ -2,12 +2,9 @@ import { useState } from "react";
 import { useNavigation } from "react-router-dom";
 import Modal from "./UI/Modal";
 import CheckBox from "./UI/CheckBox";
-import { maxDateFinder } from "../utils/misc";
 
 const RescueConfirmPrompt = ({ onClose, onConfirm, vetData }) => {
-  const maxDate = maxDateFinder();
   const [btnDisabled, setBtnDisabled] = useState(true);
-  const [selectedDate, setSelectedDate] = useState("");
   const navigation = useNavigation();
 
   let isSubmitting = false;
@@ -26,42 +23,46 @@ const RescueConfirmPrompt = ({ onClose, onConfirm, vetData }) => {
           <fieldset className="row">
             <legend id="modal-legend">Vet Info</legend>
             <div className="d-flex px-4 justify-content-between align-items-center px-2 py-2">
-              <div className="vet-image-thumbnail">
-                <img src={vetData.images[0].image} alt="" />
+              <div className="col-md-4 d-flex justify-content-center">
+                <div className="vet-image-thumbnail">
+                  <img src={vetData.images[0].image} alt="" />
+                </div>
               </div>
-              <ul className="vet-info-list">
-                <li className="status-list">
-                  <strong>Category:</strong>
-                  {vetData.vet_category}
-                </li>
-                <li className="status-list">
-                  <strong>Health Status:</strong>
-                  {vetData.vet_health_status.map((item, i) => (
-                    <span key={i} className="text-danger">
-                      &nbsp;{item}
-                      {", "}
-                    </span>
-                  ))}
-                </li>
-              </ul>
+              <div className="col-md-8 mx-4">
+                <ul className="container vet-info-list">
+                  <li className="status-list">
+                    <strong>Category:</strong>
+                    {vetData.vet_category}
+                  </li>
+                  <li className="status-list">
+                    <strong>Health Status:</strong>
+                    {vetData.vet_health_status.map((item, i) => (
+                      <span key={i} className="text-danger">
+                        &nbsp;{item}
+                        {", "}
+                      </span>
+                    ))}
+                  </li>
+                </ul>
+              </div>
             </div>
           </fieldset>
           <div className="py-4 col-12">
-            <div className="d-flex align-items-center justify-content-between">
-              <label className="form-text" htmlFor="date-picker">
-                Choose an appointment with the owner
-              </label>
-              <input
-                id="date-picker"
-                type="date"
-                min={maxDate}
-                className="form-control form-control-date"
-                onChange={(e) => setSelectedDate(e.target.value)}
-              />
-            </div>
+            <p className="text-danger fw-bold" style={{ lineHeight: "1.1rem" }}>
+              <span
+                style={{
+                  fontWeight: "900",
+                  color: "var(--bs-dark)",
+                  marginRight: "0.5rem",
+                }}
+              >
+                N.B:-
+              </span>{" "}
+              Please be prompt enough to save this injured vet
+            </p>
           </div>
         </div>
-        <div className="mt-4 d-flex">
+        <div className="mt-2 d-flex">
           <CheckBox
             id="confirm"
             name="confirm"
@@ -76,7 +77,7 @@ const RescueConfirmPrompt = ({ onClose, onConfirm, vetData }) => {
         <button
           className="btn btn-style btn-primary"
           type="button"
-          onClick={() => onConfirm(selectedDate)}
+          onClick={onConfirm}
           disabled={btnDisabled}
         >
           {isSubmitting ? "Sending Request" : "Save Vet"}
