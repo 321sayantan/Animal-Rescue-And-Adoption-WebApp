@@ -53,9 +53,9 @@ router.post("/post", verifyToken, async (req, res) => {
 router.get("/getallpost", async (req, res) => {
   try {
     const allposts = await Post.find({ adopted: false }).sort({ timestamp: -1 });
-    // setTimeout(() => {
+    setTimeout(() => {
     res.status(200).json(allposts);
-    // }, 3000);
+    }, 1000);
   } catch (error) {
     res.status(400).json(error);
   }
@@ -64,9 +64,9 @@ router.get("/getallpost", async (req, res) => {
 router.get("/getpost/:id", async (req, res) => {
   try {
     const posts = await Post.findOne({ _id: req.params.id });
-    // setTimeout(() => {
+    setTimeout(() => {
     res.status(200).json(posts);
-    // }, 3000);
+    }, 1000);
   } catch (error) {
     res.status(400).json(error);
   }
@@ -78,9 +78,9 @@ router.get("/filter", async (req, res, next) => {
     let posts = await Post.find({
       address: { $regex: `${query}`, $options: "i" },
     }).sort({ timestamp: -1 });
-    // setTimeout(() => {
+    setTimeout(() => {
     res.status(200).json(posts);
-    // }, 3000);
+    }, 1000);
   } catch (error) {
     next(error);
   }
@@ -115,27 +115,17 @@ router.get("/markAdopt/:id", verifyToken, async (req, res) => {
 
 router.post("/adoptionRequest", verifyToken, (req, res) => {
   try {
-    // console.log('Inside adoption request api')
-    // var recieverEmail="", senderEmail;
-    // let resData;
     jwt.verify(req.token, "shhh", async (err, data) => {
       if (err) {
         res.status(403);
       }
-      console.log(1, req.body);
+      // console.log(1, req.body);
       // console.log(data)
       const currentUser = await User.findOne({ _id: data.id });
-      console.log(11, currentUser);
-
-      // const Donor1 = await Post.findOne({ _id: req.body.id });
-      // Donor = Donor1.donor_email;
-      // console.log(12, Donor1);
-      // console.log(14, Donor);
+      // console.log(11, currentUser);
 
       var resData = await Post.findOne({ _id: req.body.id });
       const recieverEmail = resData.donor_email;
-      // const sender = await User.findOne({ _id: data.id })
-      // senderEmail = sender.email
 
       resData = {
         ...resData,
@@ -147,8 +137,6 @@ router.post("/adoptionRequest", verifyToken, (req, res) => {
       let mailDetails = {
         from: "AdoPet2024@gmail.com",
         to: recieverEmail,
-        // to: "dsnehodipto@gmail.com",
-        // to: "123sayantandas@gmail.com",
         subject: "Request for adoption",
         html: adoptReqMail(resData),
       };

@@ -11,17 +11,20 @@ function AdoptPostIsConfirmed() {
     const toggleAdoptedRequestHandler = async () => {
         // console.log({ jwt, id })
         try {
+            // const response = await toast.promise(
+            //     fetch(`http://localhost:5000/adopt/markAdopt/${id}`,
             const response = await toast.promise(
-                fetch(`http://localhost:5000/adopt/markAdopt/${id}`,
-                    {
-                        headers: {
-                            'authorization': `Bearer ${jwt}`
-                        }
-                    }
-                ),
+              fetch(
+                `https://adopet-backend.onrender.com/adopt/markAdopt/${id}`,
                 {
-                    pending: 'Changing status...'
+                  headers: {
+                    authorization: `Bearer ${jwt}`,
+                  },
                 }
+              ),
+              {
+                pending: "Changing status...",
+              }
             );
             const result = await response.json()
             console.log(result)
