@@ -54,24 +54,24 @@ router.post("/post", verifyToken, async (req, res) => {
           });
           console.log(nearbyvolunteer);
 
-          // nearbyvolunteer.map((vol) => {
-          //   // console.log(result.id, vol.name)
-          //   let mailDetails = {
-          //     from: "AdoPet2024@gmail.com",
-          //     to: vol.email,
-          //     subject:
-          //       "Request for Animal Rescue: Injured Animal in Your Locality",
-          //     html: rescueNotifyMail({ id: result.id, name: vol.name }),
-          //   };
+          nearbyvolunteer.map((vol) => {
+            // console.log(result.id, vol.name)
+            let mailDetails = {
+              from: "AdoPet2024@gmail.com",
+              to: vol.email,
+              subject:
+                "Request for Animal Rescue: Injured Animal in Your Locality",
+              html: rescueNotifyMail({ id: result.id, name: vol.name }),
+            };
 
-          //   mailTransporter.sendMail(mailDetails, function (err, data) {
-          //     if (err) {
-          //       console.log("Error Occurs");
-          //     } else {
-          //       console.log("Email sent successfully");
-          //     }
-          //   });
-          // });
+            mailTransporter.sendMail(mailDetails, function (err, data) {
+              if (err) {
+                console.log("Error Occurs");
+              } else {
+                console.log("Email sent successfully");
+              }
+            });
+          });
 
           res.status(200).json({ message: "Post added successfully" });
         })
@@ -139,9 +139,9 @@ router.get("/markRescue/:id", verifyToken, async (req, res) => {
           { rescued: true }
         );
         // console.log(result);
-        setTimeout(() => {
+        // setTimeout(() => {
           res.status(200).json({msg: "Vet Rescued"});
-        },1000)
+        // },1000)
       }
     });
   } catch (err) {
@@ -165,9 +165,9 @@ router.get("/getallrescues", async (req, res, next) => {
 router.get("/getrescue/:id", async (req, res, next) => {
   try {
     const rescuePost = await Rescue.findOne({ _id: req.params.id });
-    setTimeout(() => {
+    // setTimeout(() => {
       res.status(200).json(rescuePost);
-    }, 3000);
+    // }, 3000);
   } catch (error) {
     res.status(400).json(error);
   }
@@ -180,9 +180,9 @@ router.get("/filter", async (req, res, next) => {
     let posts = await Rescue.find({
       address: { $regex: `${query}`, $options: "i" },
     }).sort({ timestamp: -1 });
-    setTimeout(() => {
+    // setTimeout(() => {
       res.status(200).json(posts);
-    }, 3000);
+    // }, 3000);
   } catch (error) {
     next(error);
   }

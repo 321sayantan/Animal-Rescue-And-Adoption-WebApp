@@ -306,12 +306,12 @@ function rescueConfMailForDonor(resData) {
                                             We are so happy to say that we have a rescue volunteer <span
                                                 style="font-weight: 700;color: #d5075d; text-transform: capitalize;">${resData.currentuser}</span> coming up to
                                             save the
-                                            vet <strong>(${resData._doc.vet_category})</strong> you requested for, vide Vet-ID(<a
+                                            vet <strong>(${resData._doc.vet_category})</strong> you requested for, and will be rescued as soon as possible, vide Vet-ID(<a
                                                 href="https://adopet24.netlify.app/rescue/${resData._doc._id}"
                                                 target="_blank"
-                                                style="font-weight: 600; color: #00c1f2;text-decoration: none;">${resData._doc._id}</a>)
-                                            on
-                                            <span style="font-weight: 700;color: #d5075d;">${resData.dtOfApntmnt}</span>.
+                                                style="font-weight: 600; color: #00c1f2;text-decoration: none;">${resData._doc._id}</a>).
+                                            
+                                            <br>Rescuer Contact: ${resData._doc.rescuer_email}
                                             <br>We have recieved the request and are processing with the official
                                             verifications. We'll keep you posted with our current status and
                                             furthur details on time once we finish up.<br><br>
@@ -324,7 +324,7 @@ function rescueConfMailForDonor(resData) {
                                                     <a href="https://adopet24.netlify.app/adopt" target="_blank"
                                                         style="font-weight: 400; margin-left: 1rem;">All
                                                         Adoptable pets available</a><br>
-                                                    <a href="https://adopet24.netlify.app/rescue/rescue-vet-list"
+                                                    <a href="https://adopet24.netlify.app/rescue/rescue-list"
                                                         target="_blank"
                                                         style="font-weight: 400; margin-left: 1rem;">Vets
                                                         those needs your help</a>
@@ -379,3 +379,6 @@ function rescueConfMailForDonor(resData) {
 }
 
 module.exports = rescueConfMailForDonor
+
+// on
+//                                             <span style="font-weight: 700;color: #d5075d;">${resData.dtOfApntmnt}</span>.
