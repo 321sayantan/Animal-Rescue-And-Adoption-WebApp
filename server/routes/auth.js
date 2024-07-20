@@ -74,11 +74,11 @@ router.post("/register", async (req, res) => {
               }
             });
 
-            // setTimeout(() => {
+            setTimeout(() => {
               res
                 .status(200)
                 .json({ message: "Registration successfull", result });
-            // }, 1500);
+            }, 1000);
             // console.log(result);
           })
           .catch((err) => {

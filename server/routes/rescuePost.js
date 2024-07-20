@@ -17,7 +17,7 @@ router.post("/post", verifyToken, async (req, res) => {
         res.status(403);
       }
       const user = await User.findOne({ _id: dataa.id });
-      console.log(11, user);
+      // console.log(11, user);
 
       const data = new Rescue({
         rescuer_name: req.body.rescuer_name,
@@ -38,7 +38,7 @@ router.post("/post", verifyToken, async (req, res) => {
       data
         .save()
         .then(async (result) => {
-          console.log(1, result);
+          // console.log(1, result);
 
           const nearbyvolunteer = await User.find({
             loc: {
@@ -139,9 +139,9 @@ router.get("/markRescue/:id", verifyToken, async (req, res) => {
           { rescued: true }
         );
         // console.log(result);
-        // setTimeout(() => {
+        setTimeout(() => {
           res.status(200).json({msg: "Vet Rescued"});
-        // },1000)
+        },1000)
       }
     });
   } catch (err) {
@@ -153,9 +153,9 @@ router.get("/markRescue/:id", verifyToken, async (req, res) => {
 router.get("/getallrescues", async (req, res, next) => {
   try {
     const allposts = await Rescue.find({ rescued: false }).sort({ timestamp: -1 });
-    // setTimeout(() => {
+    setTimeout(() => {
     res.status(200).json(allposts);
-    // }, 3000);
+    }, 1000);
   } catch (error) {
     res.status(400).json(error);
   }
@@ -165,9 +165,9 @@ router.get("/getallrescues", async (req, res, next) => {
 router.get("/getrescue/:id", async (req, res, next) => {
   try {
     const rescuePost = await Rescue.findOne({ _id: req.params.id });
-    // setTimeout(() => {
+    setTimeout(() => {
       res.status(200).json(rescuePost);
-    // }, 3000);
+    }, 1000);
   } catch (error) {
     res.status(400).json(error);
   }
@@ -180,9 +180,9 @@ router.get("/filter", async (req, res, next) => {
     let posts = await Rescue.find({
       address: { $regex: `${query}`, $options: "i" },
     }).sort({ timestamp: -1 });
-    // setTimeout(() => {
+    setTimeout(() => {
       res.status(200).json(posts);
-    // }, 3000);
+    }, 1000);
   } catch (error) {
     next(error);
   }
@@ -197,7 +197,7 @@ router.post("/rescueRequest", verifyToken, async (req, res) => {
       console.log(1, req.body);
 
       const currentUser = await User.findOne({ _id: data.id });
-      console.log(11, currentUser);
+      console.log(11, currentUser);  //gives null
 
       var resData = await Rescue.findOne({ _id: req.body.id });
       const recieverEmail = resData.rescuer_email;
@@ -247,7 +247,7 @@ router.post("/rescueRequest", verifyToken, async (req, res) => {
       });
       setTimeout(() => {
         res.status(200).json({ message: "Mail sent successfully" });
-      }, 10);
+      }, 100);
     });
   } catch (error) {
     console.log(13, error);

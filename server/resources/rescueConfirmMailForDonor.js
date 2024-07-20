@@ -311,7 +311,9 @@ function rescueConfMailForDonor(resData) {
                                                 target="_blank"
                                                 style="font-weight: 600; color: #00c1f2;text-decoration: none;">${resData._doc._id}</a>).
                                             
-                                            <br>Rescuer Contact: ${resData._doc.rescuer_email}
+                                            <br><strong>Rescuer Contact Info:</strong>
+                                            <br>Email: ${resData._doc.rescuer_email}
+                                            <br>Phone No: ${resData._doc.rescuer_phone}
                                             <br>We have recieved the request and are processing with the official
                                             verifications. We'll keep you posted with our current status and
                                             furthur details on time once we finish up.<br><br>

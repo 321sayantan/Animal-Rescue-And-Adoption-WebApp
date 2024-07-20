@@ -11,6 +11,8 @@ function RescuePostIsConfirmed() {
     const toggleRescueRequestHandler = async () => {
         // console.log({ jwt, id })
         try {
+            // const response = await toast.promise(
+            //     fetch(`http://localhost:5000/rescue/markRescue/${id}`,
             const response = await toast.promise(
                 fetch(`http://localhost:5000/rescue/markRescue/${id}`,
                     {
