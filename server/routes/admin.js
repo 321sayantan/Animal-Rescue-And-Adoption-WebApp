@@ -171,10 +171,10 @@ router.get("/allUserMap", verifyToken, (req, res) => {
           console.log(err);
         }
 
-        const allUser = await User.find({}, { name: 1, is_volunteer: 1, latLng: '$loc.coordinates', user_region: { $arrayElemAt: [{ $split: ['$address', ','] }, -2] } })
+        const allUser = await User.find({ loc: { $exists: true } }, { name: 1, is_volunteer: 1, latLng: '$loc.coordinates', user_region: { $arrayElemAt: [{ $split: ['$address', ','] }, -2] } })
         setTimeout(() => {
           res.status(200).json(allUser);
-        }, 2500)
+        }, 1000)
       }
     });
   } catch (err) {
@@ -200,7 +200,7 @@ router.get("/filterUsers", verifyToken, (req, res) => {
         }).sort({ timestamp: -1 });
         const usersCount = users.length;
         // setTimeout(() => {
-          res.status(200).json({ users, usersCount });
+        res.status(200).json({ users, usersCount });
         // }, 3000);
       }
     })
@@ -401,7 +401,7 @@ router.get("/filterAdoptPosts", verifyToken, (req, res) => {
         const posts = await AdoptPost.find({ address: { $regex: `${query}`, $options: "i" } }).sort({ timestamp: -1 });
         const postsCount = posts.length;
         // setTimeout(() => {
-          res.status(200).json({ posts, postsCount });
+        res.status(200).json({ posts, postsCount });
         // }, 3000);
       }
     })
@@ -428,7 +428,7 @@ router.get("/filterRescuePosts", verifyToken, (req, res) => {
         }).sort({ timestamp: -1 });
         const postsCount = posts.length;
         // setTimeout(() => {
-          res.status(200).json({ posts, postsCount });
+        res.status(200).json({ posts, postsCount });
         // }, 3000);
       }
     })

@@ -25,8 +25,7 @@ const UserRescuePostsList = ({
   return (
     <>
       {posts.length > 0 ? (
-        <div className="container mt-2 mb-2 rescue-posts_list">
-          <h4>{headingText}</h4>
+        <div className="container mt-4 py-4 rescue-posts_list">
           <ul className="py-3 list-wrapper">
             {posts.map((post) => (
               <li

@@ -3,7 +3,6 @@ import GoogleMapReact from "google-map-react";
 import { Icon } from "@iconify/react";
 import locationIcon from "@iconify/icons-mdi/map-marker";
 import NoResult from "./UI/NoResult";
-// import { Loader } from "@googlemaps/js-api-loader"
 
 const containerStyle = {
   width: "100%",

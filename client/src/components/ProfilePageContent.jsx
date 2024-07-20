@@ -197,7 +197,6 @@ const ProfilePageContent = ({ userData }) => {
                       posts={userData.adopt}
                       onDelAdoptPost={adoptPostDeleteHandler}
                       onChangePostStatus={adoptPostStatChangeHandler}
-                      headingText="Adopts"
                     />
                   </div>
                 </TabPanel>
@@ -207,7 +206,6 @@ const ProfilePageContent = ({ userData }) => {
                       posts={userData.rescue}
                       onDelRescuePost={rescuePostDeleteHandler}
                       onChangePostStatus={rescuePostStatChangeHandler}
-                      headingText="Rescues"
                     />
                   </div>
                 </TabPanel>
