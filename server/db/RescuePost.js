@@ -43,6 +43,10 @@ const RescuePostSchema = new mongoose.Schema({
   rescued: {
     type: Boolean,
   },
+  restrict: {
+    type: Boolean,
+    default: false
+  },
   timestamp: {
     type: Date,
     default: Date.now,

@@ -46,6 +46,10 @@ const AdoptPostSchema = new mongoose.Schema({
   adopted: {
     type: Boolean,
   },
+  restrict: {
+    type: Boolean,
+    default: false,
+  },
   timestamp: {
     type: Date,
     default: Date.now,

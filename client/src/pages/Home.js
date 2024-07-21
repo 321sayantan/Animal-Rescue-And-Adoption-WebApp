@@ -63,26 +63,34 @@ function Home() {
         </div>
       </div>
       {/* hero slider end */}
+
       {/* about section */}
       <AboutBlock1 />
+
       {/* about section */}
       {/* aboutblock1 section */}
       <AboutBlock2 />
+
       {/* //aboutblock1 section */}
       {/* faq section */}
       <FAQSection />
+
       {/* //faq section */}
       {/* services section */}
       <ServicesSection />
+
       {/* //services section */}
       {/* stats section */}
       <StatsSection />
+
       {/* //stats section */}
       {/* blog section */}
       <BlogsSection />
+
       {/* //blog section */}
       {/* testimonials */}
       <ClientsTestimonial />
+
       {/* //testimonials */}
     </>
   );
