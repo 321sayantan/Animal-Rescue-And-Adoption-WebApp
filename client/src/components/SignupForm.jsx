@@ -229,8 +229,9 @@ const SignupForm = (props) => {
             <p className="invalid-feedback">Invalid Zip-code!</p>
           )}
         </div>
-        <div className="col-md-8 d-flex align-items-center justify-content-between select-volntr">
-          <p>Are you a Caretaker of Vets?</p>
+        <div className="col-md-8 ps-5 d-flex align-items-center justify-content-between select-volntr">
+          {/* <p>Are you a Caretaker of Vets?</p> */}
+          <p>Register as a Volunteer:</p>
           <div className="d-flex gap-4 radio-btn-group">
             <RadioButton
               id="yes"
