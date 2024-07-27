@@ -4,7 +4,6 @@ import axios from "axios";
 function ImageUploader({ id, multiple, onUploaded, label, style }) {
   const [images, setImages] = useState([]);
 
-  // let file = [];
   const handleImageUpload = async (e) => {
     const files = e.target.files;
 
@@ -29,7 +28,7 @@ function ImageUploader({ id, multiple, onUploaded, label, style }) {
           };
 
           images.push(imageData);
-          console.log(69, images);
+          // console.log(69, images);
         } else {
           throw new Error("Error uploading image");
         }
@@ -40,8 +39,6 @@ function ImageUploader({ id, multiple, onUploaded, label, style }) {
     onUploaded(images);
   };
 
-  // const fileSelectClasses = isInvalid ? "is-invalid" : "";
-
   return (
     <>
       {label && (
@@ -50,7 +47,6 @@ function ImageUploader({ id, multiple, onUploaded, label, style }) {
         </label>
       )}
       <input
-        // className={"form-control " + fileSelectClasses}
         className="form-control"
         type="file"
         id={id}

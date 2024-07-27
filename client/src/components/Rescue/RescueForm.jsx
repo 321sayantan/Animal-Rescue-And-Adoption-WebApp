@@ -6,7 +6,6 @@ import RadioButton from "../UI/RadioButton";
 import AutoComplete from "../UI/AutoComplete";
 import CheckBox from "../UI/CheckBox";
 import ImageUploader from "../ImageUploader";
-import { toast } from "react-toastify";
 import Alert from "../UI/Alert";
 
 const pattern1 = /^\+?\d[\d -]{8,12}\d$/; //for phone no
@@ -199,7 +198,6 @@ const RescueForm = (props) => {
               value="Male"
               text="Male"
               onChange={onChangeRadio}
-              // checked={theme.dark}
             />
             <RadioButton
               id="Female"
@@ -207,7 +205,6 @@ const RescueForm = (props) => {
               value="Female"
               text="Female"
               onChange={onChangeRadio}
-              // checked={theme.light}
             />
             <RadioButton
               id="Unknown"
@@ -216,7 +213,6 @@ const RescueForm = (props) => {
               text="Unknown"
               onChange={onChangeRadio}
               setDefault={true}
-              // checked={theme.light}
             />
           </div>
         </div>
@@ -230,7 +226,6 @@ const RescueForm = (props) => {
               text="Vaccinated"
               onChange={onChangeStatus}
               setDefault={true}
-              // checked={theme.dark}
             />
             <CheckBox
               id="heavily-injured"
@@ -238,7 +233,6 @@ const RescueForm = (props) => {
               value="heavily-injured"
               text="Heavily-injured"
               onChange={onChangeStatus}
-              // checked={theme.light}
             />
             <CheckBox
               id="needs-Medical-attention"
@@ -246,7 +240,6 @@ const RescueForm = (props) => {
               value="needs Medical attention"
               text="Needs Medical attention"
               onChange={onChangeStatus}
-              // checked={theme.light}
             />
           </div>
         </div>

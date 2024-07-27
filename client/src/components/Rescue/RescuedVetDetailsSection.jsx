@@ -33,13 +33,13 @@ const RescuedVetDetailsSection = ({ postDetails }) => {
       <div className="row align-items-start mt-5">
         <div className="col-lg-7 px-4" data-aos="fade-right">
           <div className="column border-right-warning hide-border">
-            <div className="col-6 mb-4 pet-specs">
+            <div className="col-md-6 mb-4 pet-specs">
               <div className="specs-container align-items-center color-bg-1">
                 <p className="specs-text">Category </p>
                 <span>{postDetails.vet_category}</span>{" "}
               </div>
             </div>
-            <div className="col-6 mb-4 pet-specs" id="rescued-vet-specs">
+            <div className="col-md-6 mb-4 pet-specs" id="rescued-vet-specs">
               <div className="specs-container align-items-center color-bg-4">
                 <p className="specs-text">Gender </p>
                 <span>

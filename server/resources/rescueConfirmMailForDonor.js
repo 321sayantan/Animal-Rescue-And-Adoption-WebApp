@@ -300,25 +300,49 @@ function rescueConfMailForDonor(resData) {
                                 <tr>
                                     <td>
                                         <h2 style="font-size: 2rem; color: #333; font-weight: 700;">Hi, <span
-                                                style="color: #d7cc00; text-transform: uppercase;font-size: 2rem !important;">${resData._doc.rescuer_name}</span></h2>
+                                                style="color: #d7cc00; text-transform: uppercase;font-size: 2rem !important;">${resData._doc.rescuer_name}</span>
+                                        </h2>
                                         <p
                                             style="font-size: 1.4rem; font-weight: 400; line-height: 1.5rem;margin-top: -1rem;">
                                             We are so happy to say that we have a rescue volunteer <span
-                                                style="font-weight: 700;color: #d5075d; text-transform: capitalize;">${resData.currentuser}</span> coming up to
+                                                style="font-weight: 700;color: #d5075d; text-transform: capitalize;">${resData.currentuser}</span>
+                                            coming up to
                                             save the
-                                            vet <strong>(${resData._doc.vet_category})</strong> you requested for, and will be rescued as soon as possible, vide Vet-ID(<a
+                                            vet <strong>(${resData._doc.vet_category})</strong> you requested for, and
+                                            will be rescued as soon as possible, vide Vet-ID(<a
                                                 href="https://adopet24.netlify.app/rescue/${resData._doc._id}"
                                                 target="_blank"
                                                 style="font-weight: 600; color: #00c1f2;text-decoration: none;">${resData._doc._id}</a>).
-                                            
-                                            <br><strong>Rescuer Contact Info:</strong>
-                                            <br>Email: ${resData._doc.rescuer_email}
-                                            <br>Phone No: ${resData._doc.rescuer_phone}
-                                            <br>We have recieved the request and are processing with the official
-                                            verifications. We'll keep you posted with our current status and
-                                            furthur details on time once we finish up.<br><br>
-                                            Hope you cooperate with us. Support us by saving more vets or adopting one
-                                            from below:
+                                        </p>
+                                            <br>
+                                        <table style="background: coral; padding: 0.5rem 1rem;">
+                                            <thead>
+                                                <strong
+                                                    style="font-size: 1.1rem; font-family: Georgia, 'Times New Roman', Times, serif; font-weight: 700;">Rescuer
+                                                    Contact Info:</strong>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td style="font-weight: 700; font-size: 1rem; color: #555;">
+                                                        Email: <span
+                                                            style="color: #f6f6f6;">${resData._doc.rescuer_email}</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="font-weight: 700; font-size: 1rem; color: #555;">
+                                                        Phone No: <span
+                                                            style="color: #f6f6f6;">${resData._doc.rescuer_phone}</span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                        <br>
+                                        <p style="margin-top: 0.5rem;">We have recieved the request and are processing with the official
+                                        verifications. We'll keep you posted with our current status and
+                                        furthur details on time once we finish up.<br><br>
+                                        Hope you cooperate with us. Support us by saving more vets or adopting one
+                                        from below:
                                         </p>
                                         <table style="margin-top: 0.5rem;">
                                             <tbody>
@@ -381,6 +405,3 @@ function rescueConfMailForDonor(resData) {
 }
 
 module.exports = rescueConfMailForDonor
-
-// on
-//                                             <span style="font-weight: 700;color: #d5075d;">${resData.dtOfApntmnt}</span>.

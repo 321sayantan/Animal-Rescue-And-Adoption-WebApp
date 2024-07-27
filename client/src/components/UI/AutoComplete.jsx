@@ -20,7 +20,7 @@ const AutoComplete = ({ id, placeholder, onComplete, defaultValue }) => {
       },
     };
     onComplete(address.current);
-    console.log(address.current);
+    // console.log(address.current);
   };
   const { ref } = usePlacesWidget({
     apiKey: process.env.REACT_APP_GMAP_API_KEY,
