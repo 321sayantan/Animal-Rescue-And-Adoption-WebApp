@@ -233,6 +233,31 @@ router.get("/allAdoptPost", verifyToken, async (req, res) => {
   }
 });
 
+router.get("/restrictAdoptPost/:id", verifyToken, async (req, res) => {
+  try {
+    jwt.verify(req.token, "shhh", async (err, data) => {
+      if (data == undefined) {
+        // console.log("token expired");
+        res.status(201).json({ message: "Login Session Expired" });
+      } else {
+        if (err) {
+          console.log(err);
+        }
+        // console.log(req.params.id);
+        const result = await AdoptPost.findByIdAndUpdate(
+          { _id: req.params.id },
+          { restrict: true }
+        );
+
+        res.status(200).json({ message: "Post Restricted"})
+      }
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(400).json("Unexpected Error Occured");
+  }
+});
+
 router.get("/allRescuePost", verifyToken, async (req, res) => {
   try {
     jwt.verify(req.token, "shhh", async (err, data) => {
@@ -248,6 +273,31 @@ router.get("/allRescuePost", verifyToken, async (req, res) => {
         setTimeout(() => {
           res.status(200).json({ allRescuePost: allRescuePost });
         }, 3000)
+      }
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(400).json("Unexpected Error Occured");
+  }
+});
+
+router.get("/restrictResctictPost/:id", verifyToken, async (req, res) => {
+  try {
+    jwt.verify(req.token, "shhh", async (err, data) => {
+      if (data == undefined) {
+        // console.log("token expired");
+        res.status(201).json({ message: "Login Session Expired" });
+      } else {
+        if (err) {
+          console.log(err);
+        }
+        // console.log(req.params.id);
+        const result = await RescuePost.findByIdAndUpdate(
+          { _id: req.params.id },
+          { restrict: true }
+        );
+
+        res.status(200).json({ message: "Post Restricted "});
       }
     });
   } catch (err) {
