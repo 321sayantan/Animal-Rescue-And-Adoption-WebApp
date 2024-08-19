@@ -12,26 +12,20 @@ const AboutBlock2 = () => {
             >
               <div className="position-relative img-border">
                 <img
-                  src="assets/images/video.jpg"
+                  src="assets/images/video.png"
                   className="img-fluid video-popup-image radius-image"
                   alt=""
                 />
                 <a
-                  href="#small-dialog"
+                  href="https://www.youtube.com/watch?v=rMUPeTda69s"
                   className="popup-with-zoom-anim play-view text-center position-absolute"
+                  target="_blank"
+                  rel="noreferrer"
                 >
                   <span className="video-play-icon">
                     <span className="fa fa-play" />
                   </span>
                 </a>
-                {/* dialog itself, mfp-hide class is required to make dialog hidden */}
-                <div id="small-dialog" className="zoom-anim-dialog mfp-hide">
-                  <iframe
-                    title="sample-video"
-                    src="https://player.vimeo.com/video/436935040"
-                    allowFullScreen
-                  />
-                </div>
               </div>
             </div>
             <div
