@@ -49,8 +49,8 @@ const AboutBlock2 = () => {
                 </div>
               </div>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore.{" "}
+                Ensure that every pet is placed in a home where they are
+                genuinely loved, cared for, and treated as a family member.{" "}
               </p>
               <div className="mt-4">
                 <ul className="service-list">

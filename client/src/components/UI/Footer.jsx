@@ -17,14 +17,15 @@ const Footer = () => {
           </path>
         </svg>
       </div>
-      <div className="w3l-footer-16 py-5" >
+      <div className="w3l-footer-16 py-5">
         <div className="container">
           <div className="row footer-p">
             <div className="col-lg-4 pe-lg-5">
               <h3>About Us</h3>
               <p className="mt-3">
-                Nam libero tempore, cum soluta nobis est eligendi optio cumque
-                nihil impedit quo minus id quod maxime placeat facere.
+                We're passionate about giving homeless animals a second chance.
+                Our mission is to rescue, rehabilitate, and find loving forever
+                homes for animals in need.
               </p>
               <div className="columns-2 mt-lg-5 mt-4">
                 <ul className="social">
@@ -81,15 +82,19 @@ const Footer = () => {
                 <div className="col-6 column">
                   <h3>Contact Info</h3>
                   <ul className="footer-contact-list">
-                    <li className="">10001, 5th Avenue, #32841 block, USA</li>
+                    <li className="">10001, 5th Avenue, Kolkata, West Bengal, India</li>
                     <li className="mt-2">
-                      <Link href="tel:+12 23456790">+1223 456 790</Link>
+                      <Link href="tel:+12 23456790">+(91) 945 658 3214</Link>
                     </li>
                     <li className="mt-2">
-                      <Link href="mailto:info@example.com">info@example.com</Link>
+                      <Link to={`mailto:AdoPet2024@gmail.com`}>
+                        adopet2024@gmail.com
+                      </Link>
                     </li>
                     <li className="mt-2">
-                      <Link href="mailto:info@example.com">www.example.com</Link>
+                      <Link href="https://adopet24.netlify.app/">
+                        adopet24.netlify.app
+                      </Link>
                     </li>
                   </ul>
                 </div>
@@ -117,9 +122,7 @@ const Footer = () => {
             </div>
           </div>
           <div className="below-section text-center pt-lg-4 mt-5">
-            <p className="copy-text">
-              © 2023-24 Adopet | All rights reserved. 
-            </p>
+            <p className="copy-text">© 2023-24 Adopet | All rights reserved.</p>
           </div>
         </div>
       </div>

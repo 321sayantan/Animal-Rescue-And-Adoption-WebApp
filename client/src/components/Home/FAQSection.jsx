@@ -31,14 +31,11 @@ const FAQSection = () => {
                     data-bs-parent="#accordionExample"
                   >
                     <div className="accordion-body">
-                      Duis aute irure dolor in reprehenderit in voluptate velit
-                      esse cillum dolore eu fugiat nulla pariatur. Excepteur
-                      sint occaecat cupidatat non proident, sunt in culpa qui
-                      officia deserunt mollit anim id est laborum.Sed ut
-                      perspiciatis unde omnis iste natus error sit voluptatem
-                      accusantium doloremque laudantium, totam rem aperiam,
-                      eaque ipsa quae ab illo inventore veritatis et quasi
-                      architecto beat vitaedicta sunt explicabo.
+                      Pets are our loyal companions, offering unconditional love
+                      and emotional support. They enrich our lives by reducing
+                      stress, promoting physical activity, and fostering a sense
+                      of responsibility. From playful puppies to wise old dogs,
+                      they bring joy and companionship to our homes.
                     </div>
                   </div>
                 </div>
@@ -62,14 +59,12 @@ const FAQSection = () => {
                     data-bs-parent="#accordionExample"
                   >
                     <div className="accordion-body">
-                      Duis aute irure dolor in reprehenderit in voluptate velit
-                      esse cillum dolore eu fugiat nulla pariatur. Excepteur
-                      sint occaecat cupidatat non proident, sunt in culpa qui
-                      officia deserunt mollit anim id est laborum.Sed ut
-                      perspiciatis unde omnis iste natus error sit voluptatem
-                      accusantium doloremque laudantium, totam rem aperiam,
-                      eaque ipsa quae ab illo inventore veritatis et quasi
-                      architecto beat vitaedicta sunt explicabo.
+                      Caring for a pet is a commitment. Provide a safe, clean
+                      environment with fresh water and nutritious food. Regular
+                      exercise is vital for their physical and mental
+                      well-being. Routine vet check-ups prevent health issues.
+                      Shower them with love and attention, and never forget they
+                      rely on you for their happiness and safety.
                     </div>
                   </div>
                 </div>
@@ -93,14 +88,15 @@ const FAQSection = () => {
                     data-bs-parent="#accordionExample"
                   >
                     <div className="accordion-body">
-                      Duis aute irure dolor in reprehenderit in voluptate velit
-                      esse cillum dolore eu fugiat nulla pariatur. Excepteur
-                      sint occaecat cupidatat non proident, sunt in culpa qui
-                      officia deserunt mollit anim id est laborum.Sed ut
-                      perspiciatis unde omnis iste natus error sit voluptatem
-                      accusantium doloremque laudantium, totam rem aperiam,
-                      eaque ipsa quae ab illo inventore veritatis et quasi
-                      architecto beat vitaedicta sunt explicabo.
+                      Choosing a pet depends on lifestyle, living situation, and
+                      personality. Dogs offer unmatched loyalty and
+                      companionship, but require significant time and attention.
+                      Cats are independent yet affectionate, suitable for busier
+                      lifestyles. For those with limited space, small animals
+                      like hamsters or guinea pigs can be low-maintenance
+                      companions. Birds are intelligent and interactive, but
+                      demand specific care. Ultimately, the best pet is one that
+                      complements your life and provides mutual joy.
                     </div>
                   </div>
                 </div>
@@ -121,18 +117,21 @@ const FAQSection = () => {
                 </div>
               </div>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore.{" "}
+                Together, we are building a brighter future for both animals and
+                people, fostering a community that values and protects all
+                living beings. We are dedicated to strengthening our community
+                by promoting responsible pet ownership and encouraging adoption
+                over buying.{" "}
               </p>
               <p className="mt-2 mb-sm-5 mb-4">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore.{" "}
+                Our efforts focus on rescuing stray and abandoned animals,
+                ensuring they find safe and loving homes.{" "}
               </p>
               <a
                 href="tel:+(21) 255 999 8888"
                 className="call-style d-flex align-items-center"
               >
-                <i className="fas fa-phone-volume me-2" /> +(21) 255 999 8888
+                <i className="fas fa-phone-volume me-2" /> +(91) 945 658 3214
               </a>
             </div>
           </div>

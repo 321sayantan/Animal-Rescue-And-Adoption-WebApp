@@ -25,8 +25,9 @@ const StatsSection = () => {
                 </div>
               </div>
               <p>
-                Excepteur sint occaecat cupidatat non proident, sunt in culpa
-                qui officia deserunt mollit anim id est laborum.
+                Dedicated to finding loving homes for animals in need, our
+                organization has been at the forefront of animal adoption,
+                rescue, and rehabilitation.
               </p>
               <div className="row mt-4 pt-2">
                 <div className="col-6">

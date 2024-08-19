@@ -15,8 +15,9 @@ const ServicesSection = () => {
                   </Link>
                 </h4>
                 <p>
-                  Amus a ligula quam tesque et libero ut justo, ultrices in. Ut
-                  eu leo non. Duis sed et dolor amet.
+                  Pet care is a responsibility. Provide nutritious food, clean
+                  water, and regular exercise. Ensure regular vet check-ups for
+                  their health and happiness.
                 </p>
               </div>
             </div>
@@ -29,8 +30,9 @@ const ServicesSection = () => {
                   </Link>
                 </h4>
                 <p>
-                  Amus a ligula quam tesque et libero ut justo, ultrices in. Ut
-                  eu leo non. Duis sed dolor et amet.
+                  Dog training builds a strong bond. Positive reinforcement and
+                  patience are key. Consistency and practice lead to a
+                  well-behaved companion.
                 </p>
               </div>
             </div>
@@ -39,12 +41,13 @@ const ServicesSection = () => {
                 <i className="fas fa-dog" />
                 <h4>
                   <Link to="services" className="title-head">
-                    Dog Vacation
+                    Dog vaccinations
                   </Link>
                 </h4>
                 <p>
-                  Amus a ligula quam tesque et libero ut justo, ultrices in. Ut
-                  eu leo non. Duis sed dolor et amet.
+                  Dog vaccinations are essential for their health. They protect
+                  against deadly diseases like parvovirus and
+                  rabies. It safeguard's your dog's health.
                 </p>
               </div>
             </div>
