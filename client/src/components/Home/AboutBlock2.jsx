@@ -28,7 +28,7 @@ const AboutBlock2 = () => {
                 <div id="small-dialog" className="zoom-anim-dialog mfp-hide">
                   <iframe
                     title="sample-video"
-                    src="https://player.vimeo.com/video/436935040"
+                    src="https://www.youtube.com/watch?v=ExXTxI0yWMA"
                     allowFullScreen
                   />
                 </div>
