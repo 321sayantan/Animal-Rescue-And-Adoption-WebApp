@@ -90,26 +90,20 @@ function About() {
             <div className="col-lg-6 homeaboutblock" data-aos="fade-left">
               <div className="position-relative img-border">
                 <img
-                  src="assets/images/about3.jpg"
+                  src="assets/images/video2.png"
                   className="img-fluid video-popup-image radius-image"
                   alt=""
                 />
                 <a
-                  href="#small-dialog"
+                  href="https://www.youtube.com/watch?v=9AoeUZfGbVc"
                   className="popup-with-zoom-anim play-view text-center position-absolute"
+                  target='_blank'
+                  rel='noreferrer'
                 >
                   <span className="video-play-icon">
                     <span className="fa fa-play" />
                   </span>
                 </a>
-                {/* dialog itself, mfp-hide class is required to make dialog hidden */}
-                <div id="small-dialog" className="zoom-anim-dialog mfp-hide">
-                  <iframe
-                    src="https://player.vimeo.com/video/436935040"
-                    title="sample-video"
-                    allowFullScreen
-                  />
-                </div>
               </div>
             </div>
           </div>
@@ -308,9 +302,9 @@ function About() {
               <i className="fas fa-paw paw-3" />
             </div>
           </div>
-          <div className="row text-center">
-            <div className="col-md-3 col-6" data-aos="fade-right">
-              <div className="team-grids text-center">
+          <div className="row justify-content-between">
+            <div className="col-md-4" data-aos="fade-right">
+              <div className="team-grids ">
                 <img
                   src="assets/images/sneho.jpg"
                   className="img-fluid"
@@ -319,21 +313,21 @@ function About() {
                 <div className="team-info">
                   <div className="caption">
                     <div className="social-icons-section text-center">
-                      <a className="fac" href="#url">
+                      <a className="fac" href="https://www.facebook.com/snehodipto.das.37" target='_blank' rel='noreferrer' >
                         <i className="fab fa-facebook-f" />
                       </a>
-                      <a className="twitter" href="#url">
-                        <i className="fab fa-twitter" />
+                      <a className="insta" href="https://www.instagram.com/_.deeptoo._" target='_blank' rel='noreferrer' >
+                        <i className="fab fa-instagram" />
                       </a>
                     </div>
                   </div>
                 </div>
               </div>
-              <h4>Snehodipta Das</h4>
+              <h4>Snehodipto Das</h4>
               <h6>Front-End Engineer</h6>
             </div>
-            <div className="col-md-3 col-6" data-aos="fade-up">
-              <div className="team-grids text-center">
+            <div className="col-md-4 mt-md-0 mt-sm-5 mt-5" data-aos="fade-up">
+              <div className="team-grids">
                 <img
                   src="assets/images/sayantan.jpg"
                   className="img-fluid"
@@ -342,11 +336,11 @@ function About() {
                 <div className="team-info">
                   <div className="caption">
                     <div className="social-icons-section text-center">
-                      <a className="fac" href="#url">
+                      <a className="fac" href="https://www.facebook.com/profile.php?id=100073045481428" target='_blank' rel='noreferrer' >
                         <i className="fab fa-facebook-f" />
                       </a>
-                      <a className="twitter" href="#url">
-                        <i className="fab fa-twitter" />
+                      <a className="insta" href="https://www.instagram.com/123sayantandas" target='_blank' rel='noreferrer' >
+                        <i className="fab fa-instagram" />
                       </a>
                     </div>
                   </div>
@@ -356,10 +350,10 @@ function About() {
               <h6>Back-End Engineer</h6>
             </div>
             <div
-              className="col-md-3 col-6 mt-md-0 mt-sm-5 mt-5"
-              data-aos="fade-down"
+              className="col-md-4 mt-md-0 mt-sm-5 mt-5"
+              data-aos="fade-left"
             >
-              <div className="team-grids text-center">
+              <div className="team-grids">
                 <img
                   src="assets/images/dipankar.jpeg"
                   className="img-fluid"
@@ -368,38 +362,19 @@ function About() {
                 <div className="team-info">
                   <div className="caption">
                     <div className="social-icons-section text-center">
-                      <a className="fac" href="#url">
+                      <a className="fac" href="https://www.facebook.com/profile.php?id=100027581104261" target='_blank' rel='noreferrer' >
                         <i className="fab fa-facebook-f" />
                       </a>
-                      <a className="twitter" href="#url">
-                        <i className="fab fa-twitter" />
+                      <a className="insta" href="https://www.instagram.com/dipankar_mondal111" target='_blank' rel='noreferrer' >
+                        <i className="fab fa-instagram" />
                       </a>
                     </div>
                   </div>
                 </div>
               </div>
               <h4> Dipankar Mondal</h4>
-              <h6>Front-End Engineer</h6>
+              <h6>Document Analyzer</h6>
             </div>
-            {/* <div className="col-md-3 col-6 mt-md-0 mt-sm-5 mt-5" data-aos="fade-left">
-              <div className="team-grids text-center">
-                <img src="assets/images/team4.jpg" className="img-fluid" alt="" />
-                <div className="team-info">
-                  <div className="caption">
-                    <div className="social-icons-section text-center">
-                      <a className="fac" href="#url">
-                        <i className="fab fa-facebook-f" />
-                      </a>
-                      <a className="twitter" href="#url">
-                        <i className="fab fa-twitter" />
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <h4>Elizabeth </h4>
-              <h6>Pet Trainer</h6>
-            </div> */}
           </div>
         </div>
       </section>

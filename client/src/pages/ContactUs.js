@@ -72,9 +72,7 @@ function ContactUs() {
                 </div>
                 <div className="text-box">
                   <h3 className="mb-3">Address info</h3>
-                  <p>
-                    Coffee bean, 343 cafe coffee lane, #2214 cravel street, NY.
-                  </p>
+                  <p>10001, 5th Avenue, Kolkata, West Bengal, India</p>
                 </div>
               </div>
               <div className="single-contact-infos" data-aos="fade-down">
@@ -109,8 +107,9 @@ function ContactUs() {
               className="col-lg-6 map order-lg-1 order-2"
               data-aos="fade-right"
             >
-              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3684.254029528622!2d88.43120307507763!3d22.56960042949383!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a0275ac3aff1117%3A0xfc347e3347be6ac3!2sGP%20Block%2C%20Sector%20V%2C%20Bidhannagar%2C%20Kolkata%2C%20West%20Bengal!5e0!3m2!1sen!2sin!4v1720023738392!5m2!1sen!2sin"
-                title='our-location'
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3684.254029528622!2d88.43120307507763!3d22.56960042949383!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a0275ac3aff1117%3A0xfc347e3347be6ac3!2sGP%20Block%2C%20Sector%20V%2C%20Bidhannagar%2C%20Kolkata%2C%20West%20Bengal!5e0!3m2!1sen!2sin!4v1720023738392!5m2!1sen!2sin"
+                title="our-location"
                 width={600}
                 height={450}
                 style={{ border: 0 }}

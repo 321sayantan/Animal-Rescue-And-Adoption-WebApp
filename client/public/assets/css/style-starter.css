@@ -16916,6 +16916,7 @@ h4.inner-text-title {
   height: 19rem !important;
 }
 
+.w3l-team .team-grids .img-fluid,
 .posts-list .posts-grids .img-fluid {
   position: absolute;
   top: 0;
@@ -16928,6 +16929,8 @@ h4.inner-text-title {
 .w3l-team .team-grids {
   position: relative;
   overflow: hidden;
+  width: 100% !important;
+  height: 25rem !important;
   z-index: 1;
 }
 
@@ -16939,18 +16942,18 @@ h4.inner-text-title {
 
 .posts-grids h4,
 .w3l-team h4 {
-  font-size: 22px;
+  font-size: 2rem;
   line-height: 32px;
-  font-weight: 700;
+  font-weight: 800;
   text-transform: capitalize;
   margin-top: 20px;
 }
 
 .posts-grids h6,
 .w3l-team h6 {
-  font-size: 15px;
-  line-height: 28px;
-  color: var(--font-color);
+  font-size: 1rem;
+  line-height: 30px;
+  color: var(--bs-gray);
 }
 
 .posts-grids h4 {
@@ -16989,8 +16992,8 @@ h4.inner-text-title {
   background: #3b5998;
 }
 
-.w3l-team .social-icons-section a.twitter {
-  background: #1da1f2;
+.w3l-team .social-icons-section a.insta {
+  background: #c32aa3;
 }
 
 .w3l-team .social-icons-section a span.fa {

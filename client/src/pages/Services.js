@@ -60,8 +60,11 @@ const Services = () => {
                   </Link>
                 </h4>
                 <p>
-                  Amus a ligula quam tesque et libero ut justo, ultrices in. Ut
-                  eu leo non. Duis sed et dolor amet.
+                  Our expert pet nutritionists provide tailored dietary plans to
+                  optimize your pet's health. We offer personalized nutrition
+                  advice to ensure your furry friend thrives. We offer
+                  personalized nutrition advice to ensure your furry friend
+                  thrives.
                 </p>
               </div>
             </div>
@@ -77,8 +80,10 @@ const Services = () => {
                   </Link>
                 </h4>
                 <p>
-                  Amus a ligula quam tesque et libero ut justo, ultrices in. Ut
-                  eu leo non. Duis sed dolor et amet.
+                  We prioritize the well-being of every animal. Our services are
+                  designed with the highest quality standards, ensuring safe and
+                  comfortable environments for all. Your pet's happiness and
+                  health are our top priorities.
                 </p>
               </div>
             </div>
@@ -94,8 +99,10 @@ const Services = () => {
                   </Link>
                 </h4>
                 <p>
-                  Amus a ligula quam tesque et libero ut justo, ultrices in. Ut
-                  eu leo non. Duis sed dolor et amet.
+                  Our comprehensive health services ensure your pet thrives.
+                  From regular check-ups to vaccinations and dental care, we
+                  prioritize their well-being. Experience peace of mind knowing
+                  your furry friend is in expert hands..
                 </p>
               </div>
             </div>
@@ -107,12 +114,14 @@ const Services = () => {
                 <i className="fas fa-shopping-bag color-4" />
                 <h4>
                   <Link to="../about" className="title-head">
-                    ocean fish meal
+                    Packaged Food Items
                   </Link>
                 </h4>
                 <p>
-                  Amus a ligula quam tesque et libero ut justo, ultrices in. Ut
-                  eu leo non. Duis sed et dolor amet.
+                  We offer a wide range of premium pet food options to cater to
+                  diverse dietary needs. Our carefully curated selection ensures
+                  your pet receives optimal nutrition and taste. Trust us to
+                  provide the best meals for your furry friend.
                 </p>
               </div>
             </div>
@@ -128,8 +137,10 @@ const Services = () => {
                   </Link>
                 </h4>
                 <p>
-                  Amus a ligula quam tesque et libero ut justo, ultrices in. Ut
-                  eu leo non. Duis sed dolor et amet.
+                  Nourish your pet with our premium food options. Tailored for
+                  different breeds and life stages, from puppyhood to senior
+                  years. Our food supports optimal health and happiness.
+                  Experience the difference quality nutrition makes.
                 </p>
               </div>
             </div>
@@ -145,8 +156,10 @@ const Services = () => {
                   </Link>
                 </h4>
                 <p>
-                  Amus a ligula quam tesque et libero ut justo, ultrices in. Ut
-                  eu leo non. Duis sed dolor et amet.
+                  Transform your furry friend into a well-behaved companion. Our
+                  expert trainers use positive reinforcement methods to teach
+                  obedience build confidence and good manners. Enjoy a
+                  harmonious relationship with your dog.
                 </p>
               </div>
             </div>
